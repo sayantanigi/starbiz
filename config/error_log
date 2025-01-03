@@ -1,0 +1,12 @@
+[09-May-2024 11:12:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/techcigiapp/public_html/starbiz/config/cache.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/techcigiapp/public_html/starbiz/config/cache.php on line 21
+[09-May-2024 11:13:00 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/techcigiapp/public_html/starbiz/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/techcigiapp/public_html/starbiz/config/app.php on line 16
+[09-May-2024 11:14:11 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/techcigiapp/public_html/starbiz/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/techcigiapp/public_html/starbiz/config/database.php on line 18

@@ -1,0 +1,6 @@
+[27-May-2024 11:34:15 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home/techcigiapp/public_html/starbiz/app/Http/Middleware/VerifyCsrfToken.php on line 14
+[27-May-2024 12:55:04 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home/techcigiapp/public_html/starbiz/app/Http/Middleware/VerifyCsrfToken.php on line 16
+[29-May-2024 12:40:26 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Api\ApiController::businessDetails_get() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Api/ApiController.php on line 626
+[29-May-2024 12:40:38 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Api\ApiController::businessDetails_get() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Api/ApiController.php on line 626
+[24-Jul-2024 07:50:35 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\MailerController::send_new_mail() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Admin/MailerController.php on line 308
+[24-Jul-2024 07:50:46 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\MailerController::send_new_mail() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Admin/MailerController.php on line 308

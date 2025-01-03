@@ -1,0 +1,2328 @@
+{
+	"info": {
+		"_postman_id": "3ec29771-8613-422a-a6dd-375652e7241d",
+		"name": "starbiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16120926"
+	},
+	"item": [
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"Doe\",\r\n    \"email\" : \"chetanbele1994@gmail.com\",\r\n    \"userType\" : \"8\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/register",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"johndoe@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/login",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/planList?userType=8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/planList?userType=8",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"planList"
+					],
+					"query": [
+						{
+							"key": "userType",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/usertypeList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/usertypeList",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"usertypeList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techbigiapp.com/starbiz/api/getOtp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"johndoe@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/getOtp",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"getOtp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/recoveryUpdatePassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\",\r\n    \"otp\" : \"549277\",\r\n    \"newPassword\" : \"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/recoveryUpdatePassword",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"recoveryUpdatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/profileEdit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"10\",\r\n    \"firstName\" : \"John\",\r\n    \"lastName\" : \"Doe\",\r\n    \"email\" : \"johndoe@gmail.com\",\r\n    \"phone\" : \"9876543210\",\r\n    \"userType\" : \"8\",\r\n    \"address\" : \"United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA\",\r\n    \"country\" : \"United States\",\r\n    \"state\" : \"District of Columbia\",\r\n    \"city\" : \"Washington\",\r\n    \"zipcode\" : \"20024\",\r\n    \"bio\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\",\r\n    \"tags\" : [3,4],\r\n    \"dob\" : \"1994-09-12\",\r\n    \"interest\" : [1,2,3]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/profileEdit",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"profileEdit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/profileInfo?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/profileInfo?userId=10",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"profileInfo"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/indentificationDocument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "documentType",
+							"value": "passport",
+							"type": "text"
+						},
+						{
+							"key": "documentNumber",
+							"value": "MNHJ897U",
+							"type": "text"
+						},
+						{
+							"key": "documentPhoto",
+							"type": "file",
+							"src": "XOU2LDkXf/footer_bg1.jpg"
+						},
+						{
+							"key": "dob",
+							"value": "20-02-1994",
+							"type": "text"
+						},
+						{
+							"key": "profilePhoto",
+							"type": "file",
+							"src": "rIr7bE7Om/footer_bg1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/indentificationDocument",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"indentificationDocument"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/uploadProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePhoto",
+							"type": "file",
+							"src": "y7pZkbiN9/h3_hero_bg.jpg"
+						},
+						{
+							"key": "coverPhoto",
+							"type": "file",
+							"src": "RL439qR6s/footer_bg1.jpg"
+						},
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/uploadProfile",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"uploadProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addBusiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "businessName",
+							"value": "Darwin Travel",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "John Doe",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "231",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "3970",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "46265",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "25",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "U.S. Air Force Recruiting, Veterans Boulevard, Del Rio, Texas, USA",
+							"type": "text"
+						},
+						{
+							"key": "latitude",
+							"value": "29.3794254",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "-100.9032806",
+							"type": "text"
+						},
+						{
+							"key": "onlineBusiness",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "9876543210",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "johndoe@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "website",
+							"value": "https://test.com",
+							"type": "text"
+						},
+						{
+							"key": "listingGallery[]",
+							"type": "file",
+							"src": [
+								"7ImQsLNRt/hero_bg1.jpg",
+								"7ImQsLNRt/hero_bg2.jpg",
+								"7ImQsLNRt/price_bg_h3.jpg",
+								"7ImQsLNRt/price_bg_h4.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addBusiness",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addBusiness"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/businessCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/businessCategory",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"businessCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/uploadProfile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePhoto",
+							"type": "file",
+							"src": "w3xzNjn6h/footer_bg1.jpg"
+						},
+						{
+							"key": "coverPhoto",
+							"type": "file",
+							"src": "NzNYFnsTW/hero_bg1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/uploadProfile",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"uploadProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/eventCategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/eventCategory",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"eventCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"9\",\r\n    \"eventName\": \"testing event\",\r\n    \"description\": \"testing event\",\r\n    \"category\": \"2\",\r\n    \"date\": \"2024-09-07\",\r\n    \"time\": \"10:27 AM\",\r\n    \"location\": \"United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA\",\r\n    \"country\": \"United States\",\r\n    \"state\": \"District of Columbia\",\r\n    \"city\": \"Washington\",\r\n    \"zipcode\": \"20024\",\r\n    \"latitude\": \"38.8867076\",\r\n    \"longitude\": \"-77.0326074\",\r\n    \"phone\" : \"9876543210\",\r\n    \"email\" : \"test@gmail.com\",\r\n    \"website\" : \"https://test.com\",\r\n    \"tags\" : [8,9,13,21]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addEvent",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/changePassword",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\",\r\n    \"oldPassword\" : \"1234567\",\r\n    \"newPassword\" : \"123456\",\r\n    \"confirmPassword\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/changePassword",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"changePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/searchBisuness?location=U.S. Air Force Recruiting, Veterans Boulevard, Del Rio, Texas, USA&latitude=29.3794254&longitude=-100.9032806",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/searchBisuness?location=U.S. Air Force Recruiting, Veterans Boulevard, Del Rio, Texas, USA&latitude=29.3794254&longitude=-100.9032806",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"searchBisuness"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "U.S. Air Force Recruiting, Veterans Boulevard, Del Rio, Texas, USA"
+						},
+						{
+							"key": "latitude",
+							"value": "29.3794254"
+						},
+						{
+							"key": "longitude",
+							"value": "-100.9032806"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/eventDetails?eventId=13",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/eventDetails?eventId=19",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"eventDetails"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "19"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/myEvent?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/myEvent?userId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"myEvent"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/searchEvent?location=United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA&latitude=38.8867076&longitude=-77.0326074",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/searchEvent?location=United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA&latitude=38.8867076&longitude=-77.0326074",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"searchEvent"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA"
+						},
+						{
+							"key": "latitude",
+							"value": "38.8867076"
+						},
+						{
+							"key": "longitude",
+							"value": "-77.0326074"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/resendInvitation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"invitationId\" : \"2\",\r\n    \"senderId\" : \"1\",\r\n    \"receiverId\" : \"9\",\r\n    \"hour\" : \"4\",\r\n    \"amount\" : \"30\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/resendInvitation",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"resendInvitation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/counterOfferList?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/counterOfferList?userId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"counterOfferList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/allAdsList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/allAdsList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"allAdsList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/myAdsList?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/myAdsList?userId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"myAdsList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/adsDetails?adsId=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/adsDetails?adsId=3",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"adsDetails"
+					],
+					"query": [
+						{
+							"key": "adsId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/editpromotionAds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "adsName",
+							"value": "My new test ads",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "https://www.test.com",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, laborum.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "4ucNVooSa/speaker_bg_h4.jpg"
+						},
+						{
+							"key": "adsId",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/editpromotionAds",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"editpromotionAds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/addpromotionAds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "adsName",
+							"value": "My new test ads",
+							"type": "text"
+						},
+						{
+							"key": "url",
+							"value": "https://www.test.com",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, laborum.\n\n",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "RppBDj-VA/footer_bg1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/addpromotionAds",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addpromotionAds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/myPromotionList?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/myPromotionList?userId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"myPromotionList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/allPromotionList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/allPromotionList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"allPromotionList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/searchPromotion?searchText=Unveiling Creativity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/searchPromotion?searchText=Unveiling Creativity",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"searchPromotion"
+					],
+					"query": [
+						{
+							"key": "searchText",
+							"value": "Unveiling Creativity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/networkList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/networkList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"networkList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/networkList?searchText=Entertainer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/networkList?searchText=Entertainer",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"networkList"
+					],
+					"query": [
+						{
+							"key": "searchText",
+							"value": "Entertainer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/networkfilterList",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userType\" : \"ATHLETES & ENTERTAINERS\",\r\n    \"tags\" : \"Entertainer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/networkfilterList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"networkfilterList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/networkfilterList",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userType\" : \"ATHLETES & ENTERTAINERS\",\r\n    \"tags\" : \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/networkfilterList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"networkfilterList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/userProfile?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/userProfile?userId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"userProfile"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/productCategoryList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/productCategoryList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"productCategoryList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/productSubcategoryList?categoryId=6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/productSubcategoryList?categoryId=6",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"productSubcategoryList"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "productName",
+							"value": "Men's Cotton Sweatshirts",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "subcategory",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "listingId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "specialPrice",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "availability",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "We introduce our company as a well renowned maker and exporter of Men's Cotton Sweatshirts . The men's Cotton Sweatshirt is suitable for both",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productImage[]",
+							"type": "file",
+							"src": [
+								"JzeQx2D0R/81RfrPhqb3L.jpg",
+								"JzeQx2D0R/CLICHYBLACKSWEATSHIRT_GRINDLEGREENSWEATER_ZANDBLACKTROUSER_16.jpg",
+								"JzeQx2D0R/Knitted-Men-Clothes-Knitwear-Cotton-Men-Sweater.jpg",
+								"JzeQx2D0R/woolen-sweaters.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/addProduct",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/productDeatils?productId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/productDeatils?productId=9",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"productDeatils"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/updateProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "productName",
+							"value": "Men's Cotton Sweatshirts",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "subcategory",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "listingId",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "specialPrice",
+							"value": "45",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "availability",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "We introduce our company as a well renowned maker and exporter of Men's Cotton Sweatshirts . The men's Cotton Sweatshirt is suitable for both",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productImage[]",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/updateProduct",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"updateProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/productList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/productList",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"productList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/deleteProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\" : \"11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/deleteProduct",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"deleteProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techc.igiapp.com/starbiz/api/editEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\": \"15\",\r\n    \"eventName\": \"My new test Event\",\r\n    \"description\": \"My new test Event\",\r\n    \"category\": \"2\",\r\n    \"startDate\": \"06-02-2024\",\r\n    \"startTime\": \"10:27 AM\",\r\n    \"endDate\": \"06-05-2024\",\r\n    \"endTime\": \"10:27 AM\",\r\n    \"location\": \"United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA\",\r\n    \"country\": \"United States\",\r\n    \"state\": \"District of Columbia\",\r\n    \"city\": \"Washington\",\r\n    \"zipcode\": \"20024\",\r\n    \"latitude\": \"38.8867076\",\r\n    \"longitude\": \"-77.0326074\",\r\n    \"phone\" : \"9876543210\",\r\n    \"email\" : \"test@gmail.com\",\r\n    \"website\" : \"https://test.com\",\r\n    \"tags\" : [8,9,13,21]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techc.igiapp.com/starbiz/api/editEvent",
+					"protocol": "https",
+					"host": [
+						"techc",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"editEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addUserOneSignalId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"1\",\r\n    \"onesignalUserId\" : \"90f1ee3e-125b-46e6-af97-2df14e03b650\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addUserOneSignalId",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addUserOneSignalId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/businessManagement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/businessManagement",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"businessManagement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/stripeConnect",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/stripeConnect",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"stripeConnect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/userStripeInfo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/userStripeInfo",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"userStripeInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/bannerList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/bannerList",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"bannerList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/promotionManagement?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/promotionManagement?userId=9",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"promotionManagement"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/eventManagement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/eventManagement",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"eventManagement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/subscriptionManagement?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/subscriptionManagement?userId=9",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"subscriptionManagement"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/networkManagement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/networkManagement",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"networkManagement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/appearanceManagement?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/appearanceManagement?userId=9",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"appearanceManagement"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/searchService?searchText=Sevice Name&category=7&tags=Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/searchService?searchText=Sevice Name&category=7&tags=Services",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"searchService"
+					],
+					"query": [
+						{
+							"key": "searchText",
+							"value": "Sevice Name"
+						},
+						{
+							"key": "category",
+							"value": "7"
+						},
+						{
+							"key": "tags",
+							"value": "Services"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/deleteService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serviceId\" : \"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/deleteService",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"deleteService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/serviceList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/serviceList",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"serviceList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/updateService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serviceId\" : \"3\",\r\n    \"serviceName\" : \"Sevice Name\",\r\n    \"category\" : \"7\",\r\n    \"listingId\" : \"1\",\r\n    \"price\" : \"150\",\r\n    \"specialPrice\" : \"100\",\r\n    \"description\" : \"We introduce our company as a well renowned maker and exporter of Men's Cotton Sweatshirts . The men's Cotton Sweatshirt is suitable for both\",\r\n    \"tags\" : [\"Services\", \"Product\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/updateService",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"updateService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/serviceDetails?serviceId=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/serviceDetails?serviceId=3",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"serviceDetails"
+					],
+					"query": [
+						{
+							"key": "serviceId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addService",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\",\r\n    \"serviceName\" : \"Sevice Name\",\r\n    \"category\" : \"7\",\r\n    \"listingId\" : \"1\",\r\n    \"price\" : \"150\",\r\n    \"specialPrice\" : \"100\",\r\n    \"description\" : \"We introduce our company as a well renowned maker and exporter of Men's Cotton Sweatshirts . The men's Cotton Sweatshirt is suitable for both\",\r\n    \"tags\" : [\"Services\", \"Product\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addService",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/categoryList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/categoryList",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"categoryList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/deleteCategory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"catId\" : \"9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/deleteCategory",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"deleteCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addCategory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\" : \"Home appliances\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addCategory",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/editEvent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"eventId\": \"19\",\r\n    \"eventName\": \"testing event\",\r\n    \"description\": \"testing event\",\r\n    \"category\": \"2\",\r\n    \"date\": \"2024-09-07\",\r\n    \"time\": \"10:27 AM\",\r\n    \"location\": \"United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA\",\r\n    \"country\": \"United States\",\r\n    \"state\": \"District of Columbia\",\r\n    \"city\": \"Washington\",\r\n    \"zipcode\": \"20024\",\r\n    \"latitude\": \"38.8867076\",\r\n    \"longitude\": \"-77.0326074\",\r\n    \"phone\" : \"9876543210\",\r\n    \"email\" : \"test@gmail.com\",\r\n    \"website\" : \"https://test.com\",\r\n    \"tags\" : [8,9,13,21]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/editEvent",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"editEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addEventCategory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\" : \"Charity Event\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addEventCategory",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addEventCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/deletePromotion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"promotionId\" : \"50\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/deletePromotion",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"deletePromotion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/userProfile?userId=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/userProfile?userId=1",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"userProfile"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addAdvertise",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "My test Ads",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "ads_image",
+							"type": "file",
+							"src": "kZZZOBAJS/speaker_bg_h4.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addAdvertise",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addAdvertise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/advertisePlanList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/advertisePlanList",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"advertisePlanList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/completeInvitationList?userId=9",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/completeInvitationList?userId=9",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"completeInvitationList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/addfavNetworkUsers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\" : \"9\",\r\n    \"favUserId\" : \"15\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/addfavNetworkUsers",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"addfavNetworkUsers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://techb.igiapp.com/starbiz/api/referInvite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"referrerName\" : \"Test Goigi\",\r\n    \"referrerEmail\" : \"test@goigi.in\",\r\n    \"referrerCode\" : \"Test12\",\r\n    \"senderId\" : \"9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://techb.igiapp.com/starbiz/api/referInvite",
+					"protocol": "https",
+					"host": [
+						"techb",
+						"igiapp",
+						"com"
+					],
+					"path": [
+						"starbiz",
+						"api",
+						"referInvite"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

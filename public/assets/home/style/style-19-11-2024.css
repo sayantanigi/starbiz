@@ -1,0 +1,1398 @@
+/*********************************************** Login Screen Style ***********************************************/
+
+.login-card {
+  background-color: #f7f7f7;
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-card img {
+  max-width: 150px;
+  object-fit: cover;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.forgot-password {
+  color: #b58b42;
+  font-size: 14px;
+  margin-bottom: 15px;
+  display: block;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  height: 45px;
+  text-align: center;
+  font-weight: 600;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  color: white;
+}
+
+.signup-link {
+  font-size: 14px;
+}
+
+.signup-link a {
+  color: #b58b42;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/*********************************************** SignUp Screen Style ***********************************************/
+
+.form-container {
+  background-color: #f7f7f7;
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.form-container h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #000;
+  margin-top: 20px;
+}
+
+.logo img {
+  max-width: 150px;
+  object-fit: cover;
+}
+
+.signup-button {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  height: 45px;
+  text-align: center;
+  font-weight: 600;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  color: white;
+}
+
+.signup-button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.signin-link {
+  font-size: 14px;
+}
+
+.signin-link a {
+  color: #b58b42;
+  text-decoration: none;
+}
+
+.signin-link a:hover {
+  text-decoration: underline;
+}
+
+/*********************************************** Others Style ***********************************************/
+
+.input-field {
+  position: relative;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.input-field label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.input-field input,
+.input-field select {
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.input-field select {
+  width: 100%;
+}
+
+.input-field .icon {
+  position: absolute;
+  right: 15px;
+  top: 65%;
+  transform: translateY(-55%);
+  color: #aaa;
+  font-size: 15px;
+}
+
+.PasswordContainer {
+  background-color: #f7f7f7;
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.PasswordContainer img {
+  max-width: 150px;
+  object-fit: cover;
+}
+
+.PasswordContainer h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.PasswordContainer .Link {
+  color: #b58b42;
+  font-size: 14px;
+  margin-bottom: 15px;
+  display: block;
+  text-decoration: none;
+}
+
+.PasswordContainer .Link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.PasswordContainer .Bottomlink {
+  font-size: 14px;
+}
+
+.PasswordContainer .Bottomlink a {
+  color: #b58b42;
+  text-decoration: none;
+}
+
+.PasswordContainer .Bottomlink a:hover {
+  text-decoration: underline;
+}
+
+.PasswordContainer .OTPSendBtn {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  height: 45px;
+  text-align: center;
+  font-weight: 600;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  color: white;
+}
+
+.PasswordContainer .OTPContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.PasswordContainer .OTPinput {
+  font-size: 16px;
+  text-align: center;
+}
+
+.DocumentContainer {
+  background-color: #f7f7f7;
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.DocumentContainer img {
+  max-width: 150px;
+  object-fit: cover;
+}
+
+.DocumentContainer h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.DocumentContainer .SubmitBtn {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 45px;
+  text-align: center;
+  font-weight: 600;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  color: white;
+  margin-bottom: 15px;
+}
+
+.DocumentContainer .SubmitBtn a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.DocumentContainer .UploadData {
+  display: none;
+}
+
+.DocumentContainer .CustomFileUpload {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #000;
+  font-size: 15px;
+  width: 100%;
+}
+
+.DocumentContainer .FileChosen {
+  position: absolute;
+  bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 45%;
+  right: 15px;
+  font-size: 16px;
+  text-align: right;
+}
+
+.DocumentContainer .Link {
+  color: #b58b42;
+  font-size: 14px;
+  display: block;
+  text-decoration: none;
+}
+
+.DocumentContainer .Link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.DocumentContainer.DataComplete p {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.DocumentContainer.DataComplete img {
+  max-width: 110px;
+  object-fit: cover;
+}
+
+/*********************************************** Dashboard Style ***********************************************/
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+::-moz-selection {
+  background: #fff;
+  text-shadow: none;
+}
+
+::selection {
+  background: #fff;
+  text-shadow: none;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.285);
+  z-index: 1001;
+}
+
+.ul-base {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header {
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+header .header-inner {
+  width: 100%;
+  height: 70px;
+  color: #fff;
+  padding: 0 20px;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .header-first-inner {
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 220px);
+  align-items: center;
+  gap: 30px;
+}
+
+header .nav-btn {
+  cursor: pointer;
+  width: 40px;
+  height: 70px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .nav-btn.nav-slider {
+  float: left;
+}
+
+header .nav-btn.search {
+  display: none;
+}
+
+header .nav-btn i {
+  vertical-align: middle;
+}
+
+header .header-logo {
+  height: 70px;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .header-logo a {
+  background: #fff;
+  height: 70px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .header-logo img {
+  width: 150px;
+  object-fit: contain;
+  height: 40px;
+}
+
+header .header-search {
+  display: flex;
+  position: relative;
+  width: 500px;
+  height: 70px;
+  align-items: center;
+  margin-left: 15px;
+}
+
+header .header-search .search {
+  display: flex;
+  position: relative;
+  height: 70px;
+  align-items: center;
+  width: 100%;
+}
+
+header .header-search .search i {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+header .header-search .search input[type="search"] {
+  width: 100%;
+  height: 40px;
+  padding: 0 15px 0 50px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+header .header-search .search ::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+header .header-search .search ::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+header .header-search .search :-moz-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+header .header-search .search :-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+header .header-menu {
+  float: right;
+}
+
+header .header-menu ul {
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+header .header-menu ul li {
+  position: relative;
+  height: 70px;
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+header .header-menu ul li a {
+  color: #fff;
+  font-size: 15px;
+}
+
+header .header-menu ul li a:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  header .header-categories {
+    display: none;
+  }
+
+  header .header-search {
+    width: calc(100% - 440px);
+  }
+}
+
+@media only screen and (max-width: 860px) {
+  header .header-search {
+    display: none;
+  }
+
+  header .header-menu ul li:last-child {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  header .header-inner {
+    padding: 0 12px;
+    text-align: center;
+  }
+
+  header .nav-btn {
+    background-color: rgba(0, 0, 0, 0.175);
+  }
+
+  header .header-logo {
+    float: right;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  header .header-menu {
+    display: none;
+  }
+}
+
+nav {
+  overflow-y: auto;
+  position: fixed;
+  top: 0px;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  color: #fff;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+  z-index: 1002;
+}
+
+nav .nav-header {
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+nav .nav-header .logo-wrap {
+}
+
+nav .nav-header .logo-wrap .logo-text {
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+nav .nav-categories li {
+  display: flex;
+  position: relative;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ddd;
+}
+
+nav .nav-categories li a {
+  width: 100%;
+  color: #000000;
+  padding: 0 15px;
+  text-decoration: none;
+  font-size: 15px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+nav .nav-categories li a:hover {
+  background-color: rgb(255 255 255);
+  color: #b38a41;
+  font-weight: 600;
+  box-shadow: 0 10px 10px #f1f1f1;
+}
+
+nav.open {
+  left: 0px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.275);
+  opacity: 1;
+}
+
+.Section.Promotion {
+  padding-top: 90px;
+  padding-left: 0;
+  padding-right: 0;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.Section.Promotion .Card {
+  padding: 0 10px 10px 10px;
+  position: relative;
+}
+
+.Section.Promotion .Card .CardInner {
+  box-shadow: 0 0 10px #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  background: url(https://img.freepik.com/free-photo/people-concert_1160-737.jpg?t=st=1730050734~exp=1730054334~hmac=4785251…&w=900)
+    no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  height: 200px;
+}
+
+.Section.Promotion .Card .CardInner .Cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.Section.Promotion .Card .CardInner .Heading {
+  color: #fff;
+  z-index: 5;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Promotion .Card .CardInner .SubHeading {
+  color: #fff;
+  z-index: 5;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Promotion .Card .CardInner .IconContainer {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  gap: 10px;
+}
+
+.Section.Promotion .Card .CardInner .IconContainer a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  background: #fff;
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Section.Promotion .Card .CardInner .IconContainer a:nth-child(1) {
+  font-size: 15px;
+  color: #7a5a28;
+  text-decoration: none;
+}
+
+.Section.Promotion .Card .CardInner .IconContainer a:nth-child(2) {
+  font-size: 15px;
+  color: red;
+  text-decoration: none;
+}
+
+.Section.Appearance {
+  padding-top: 90px;
+  padding-left: 0;
+  padding-right: 0;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.Section.Appearance .Card {
+  padding: 0 10px 10px 10px;
+  position: relative;
+}
+
+.Section.Appearance .Card .CardInner {
+  box-shadow: 0 0 10px #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  background: url(https://img.freepik.com/free-photo/people-concert_1160-737.jpg?t=st=1730050734~exp=1730054334~hmac=4785251…&w=900)
+    no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  cursor: pointer;
+}
+
+.Section.Appearance .Card .CardInner .Cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.Section.Appearance .Card .CardInner .Heading {
+  color: #fff;
+  z-index: 5;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Appearance .Card .CardInner .SubHeading {
+  color: #fff;
+  z-index: 5;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Appearance .Card .CardInner .IconContainer {
+  position: absolute;
+  z-index: 10;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  gap: 10px;
+}
+
+.Section.Appearance .Card .CardInner .IconContainer a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  background: #fff;
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Section.Appearance .Card .CardInner .IconContainer a:nth-child(1) {
+  font-size: 15px;
+  color: #7a5a28;
+  text-decoration: none;
+}
+
+.Section.Appearance .Card .CardInner .IconContainer a:nth-child(2) {
+  font-size: 15px;
+  color: red;
+  text-decoration: none;
+}
+
+.Section.Appearance .Card .CardInner .IconContainer a:nth-child(3) {
+  font-size: 15px;
+  color: #7a5a28;
+  text-decoration: none;
+}
+
+.Section.Event {
+  padding-top: 90px;
+  padding-left: 0;
+  padding-right: 0;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.Section.Event .Card {
+  padding: 0 10px 10px 10px;
+  position: relative;
+}
+
+.Section.Event .Card .CardInner {
+  box-shadow: 0 0 10px #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  background: url(https://img.freepik.com/free-photo/people-concert_1160-737.jpg?t=st=1730050734~exp=1730054334~hmac=4785251…&w=900)
+    no-repeat center center / cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  cursor: pointer;
+  height: 250px;
+  justify-content: flex-end;
+}
+
+.Section.Event .Card .CardInner .Cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: block;
+  background: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.Section.Event .Card .CardInner .UserImage {
+  object-fit: cover;
+  width: 65px;
+  height: 65px;
+  z-index: 10;
+  border-radius: 100px;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+.Section.Event .Card .CardInner .Heading {
+  color: #fff;
+  z-index: 5;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Event .Card .CardInner .SubHeading {
+  color: #fff;
+  z-index: 5;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Section.Event .Card .CardInner .IconContainer {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  gap: 10px;
+}
+
+.Section.Event .Card .CardInner .IconContainer a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  background: #fff;
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Section.Event .Card .CardInner .IconContainer a:nth-child(1) {
+  font-size: 15px;
+  color: #7a5a28;
+  text-decoration: none;
+}
+
+.Section.Event .Card .CardInner .IconContainer a:nth-child(2) {
+  font-size: 15px;
+  color: red;
+  text-decoration: none;
+}
+
+
+/**************************/
+.Section .AddButton {
+  width: 180px;
+  height: 50px;
+  background: #c5a668;
+  display: flex;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border: none;
+}
+
+.Section .AddButton:hover {
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.btn-close:focus {
+  box-shadow: none;
+}
+
+.Section .AddButton i {
+  font-size: 25px;
+  color: #fff;
+}
+
+.Section .AddButton p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.Section .CustomModal .modal-header {
+  background: linear-gradient(-90deg, #b58b42, #7a5a28);
+}
+
+.Section .CustomModal .modal-header .modal-title {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Section .CustomModal .modal-body .form-label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.Section .CustomModal .modal-body input,
+.Section .CustomModal .modal-body select {
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.Section .CustomModal .modal-body textarea {
+  min-height: 100px;
+  font-size: 16px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 10px;
+  outline: none;
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+  height: 72px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+}
+
+.Section .CustomModal .modal-body .InnerData {
+  box-shadow: 0 0 10px #cfcfcf;
+  padding: 15px 10px 20px 10px;
+  border-radius: 10px;
+}
+
+.Section .CustomModal .modal-body .InnerData .Heading {
+  display: block;
+  text-align: left;
+  font-size: 15px;
+  color: #b38941;
+  font-weight: 600;
+  margin: 0;
+}
+
+.Section .CustomModal .modal-body .InnerData .ORText {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  color: #000000;
+  font-weight: 600;
+  margin: 0;
+}
+
+.Section .CustomModal .modal-body .InfoText {
+  font-size: 17px;
+  margin: 0;
+}
+
+.Section .CustomModal .modal-footer button {
+  height: 40px;
+  background: #c5a668;
+  display: flex;
+  border-radius: 10px;
+  z-index: 100;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.Section .CustomModal .modal-footer button:hover {
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+.Section .CustomModal .PromotionDetail .PromotionImg img {
+  height: 50vh;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData .TitleText {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData .OwnerImg {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData .OwnerText {
+  margin: 0;
+  font-size: 14px;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData .BodyText {
+  margin: 15px 0 0 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-block: 10px;
+}
+
+.Section .CustomModal .PromotionDetail .PromotionData ul li {
+  background: #fff;
+  padding: 5px 15px 5px 15px;
+  box-shadow: 0 0 10px #dddddd;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C5A668;
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 15px;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn {
+  background: #fff;
+  height: 45px;
+  border: 0;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  box-shadow: 0 0 10px #ddd;
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn:hover {
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn:hover p {
+  color: #fff;
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn span {
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn span img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.Section .CustomModal .AppearanceData .BtnContainer .btn p {
+  font-size: 15px;
+  font-weight: 600;
+  color: #c5a668;
+  margin: 0;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #ddd;
+  padding: 15px 10px;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock .Heading {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock .BlockData1 {
+  height: 45px;
+  border: 0;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 10px #ddd;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  border-radius: 5px;
+  padding-right: 15px;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock .BlockData2 {
+  height: 45px;
+  border: 0;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 10px #ddd;
+  border-radius: 5px;
+  padding-right: 15px;
+}
+
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData1
+  .BlockDataInner1,
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData2
+  .BlockDataInner2 {
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  align-items: center;
+  gap: 15px;
+}
+
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData1
+  .BlockDataInner1
+  span,
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData2
+  .BlockDataInner2
+  span {
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData1
+  .BlockDataInner1
+  span
+  img,
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData2
+  .BlockDataInner2
+  span
+  img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData1
+  .BlockDataInner1
+  p,
+.Section .CustomModal .AppearanceData .SmallDataBlock .BlockData1 .Price1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.Section
+  .CustomModal
+  .AppearanceData
+  .SmallDataBlock
+  .BlockData2
+  .BlockDataInner2
+  p,
+.Section .CustomModal .AppearanceData .SmallDataBlock .BlockData2 .Price2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #c5a668;
+  margin: 0;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock .btn {
+  width: 100%;
+  height: 50px;
+  background: #c5a668;
+  border-radius: 10px;
+  border: none;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.Section .CustomModal .AppearanceData .SmallDataBlock .btn:hover {
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+}
+
+.Section .CustomModal .AppearanceData .QRBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #ddd;
+  padding: 15px 10px;
+  border-radius: 10px;
+}
+
+.Section .CustomModal .AppearanceData .QRBlock p {
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.Section .CustomModal .AppearanceData .QRBlock img {
+  width: 100%;
+  object-fit: contain;
+  max-height: 250px;
+}
+
+.Section .InnerTabContainer {
+  border-bottom: 2px solid #8d6a30;
+  padding: 0;
+}
+
+.Section .InnerTabData {
+  box-shadow: 0 5px 10px #ddd;
+  border-radius: 0 0 10px 10px;
+  padding-top: 10px;
+}
+
+.Section .InnerTabContainer li .nav-link {
+  border-radius: 15px 15px 0 0;
+  padding: 10px 20px;
+  background: #ffffff;
+  font-size: 15px;
+  color: #000000;
+  box-shadow: 0 0 10px #ddd;
+  min-width: 150px;
+  text-align: center;
+  border: 0;
+}
+
+.Section .InnerTabContainer li .nav-link.active {
+  color: #fff;
+  border-radius: 15px 15px 0 0;
+  background: linear-gradient(90deg, #b58b42, #7a5a28);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#SentAppearance {
+  padding-left: 20px;
+  padding-right: 20px;
+}
