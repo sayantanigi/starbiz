@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 30, 2024 at 02:29 PM
+-- Generation Time: Jan 06, 2025 at 04:20 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.3.14
 
@@ -38,7 +38,7 @@ CREATE TABLE `academics` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `academics`
@@ -64,7 +64,7 @@ CREATE TABLE `admin` (
   `role_id` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `admin`
@@ -95,7 +95,7 @@ CREATE TABLE `ads_sub_plan` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `ads_sub_plan`
@@ -119,7 +119,7 @@ CREATE TABLE `advertise` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `advertise`
@@ -153,7 +153,7 @@ CREATE TABLE `advertise_sub_plan` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `advertise_sub_plan`
@@ -174,7 +174,7 @@ CREATE TABLE `age_range` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `age_range`
@@ -203,7 +203,7 @@ CREATE TABLE `athletics` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `athletics`
@@ -227,7 +227,7 @@ CREATE TABLE `banner` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `banner`
@@ -48260,7 +48260,7 @@ CREATE TABLE `cms` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `cms`
@@ -48294,7 +48294,7 @@ CREATE TABLE `compose_email` (
   `status` int NOT NULL DEFAULT '1',
   `created_date` datetime NOT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `compose_email`
@@ -48592,7 +48592,7 @@ CREATE TABLE `discount` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `discount`
@@ -48620,7 +48620,7 @@ CREATE TABLE `email_template` (
   `status` int NOT NULL DEFAULT '1',
   `created_date` datetime NOT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `email_template`
@@ -48659,7 +48659,7 @@ CREATE TABLE `events` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `events`
@@ -48671,7 +48671,12 @@ INSERT INTO `events` (`id`, `event_name`, `description`, `user_id`, `category`, 
 (29, 'Messi PSG Partnership', 'Football club partnership', 40, 3, '1970-01-01 00:00:00', NULL, NULL, NULL, 'Cupertino, California, United States', 'United States', 'California', NULL, NULL, '37.31932', '-122.02928', 'pravat45@yopmail.com', '7980558689', 'https://psg.in', '22', 1, '2024-11-27 06:50:25', '2024-11-27 06:50:25'),
 (32, 'Winter Festival Parade', 'Celebrate the season with a lively parade featuring floats, music, and performances.', 9, 4, '2024-12-31 09:00:00', NULL, NULL, NULL, 'Main Street, Downtown', NULL, NULL, NULL, NULL, NULL, NULL, 'email@gmail.com', '1234567890', 'www.google.com', '8,21,17,18,11,23', 1, '2024-11-27 12:22:40', '2024-11-27 12:22:40'),
 (40, 'SuperBowl Charity Basketball Event', 'CELEBRITY SUPER SLAM', 0, 4, '2025-02-07 16:00:00', '1970-01-01 00:00:00', NULL, NULL, 'New Orleans, LA, USA', 'Louisiana', 'Orleans Parish', 'New Orleans', '70125', '29.9508941', '-90.07583559999999', 'info@GenesisMP.com', '5618597552', 'CelebritySuperSlam25.eventbright.com', '22,20', 1, '2024-12-18 21:51:02', '2024-12-18 16:22:23'),
-(42, 'Test event', 'Test description', 66, 3, '2024-12-30 21:00:00', NULL, NULL, NULL, 'Cupertino, California, United States', 'United States', 'California', NULL, NULL, '37.31932', '-122.02928', 'sayandeb@goigi.in', '7980558688', 'https://testevent.in', '6,21', 1, '2024-12-28 13:11:38', '2024-12-28 13:11:38');
+(42, 'Test event', 'Test description', 66, 3, '2024-12-30 21:00:00', NULL, NULL, NULL, 'Cupertino, California, United States', 'United States', 'California', NULL, NULL, '37.31932', '-122.02928', 'sayandeb@goigi.in', '7980558688', 'https://testevent.in', '6,21', 1, '2024-12-28 13:11:38', '2024-12-28 13:11:38'),
+(43, 'Test', 'Testtttg', 67, 4, '2025-01-17 12:04:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'igi@gmail.com', '9999999888', 'www.@gmail.com', '8', 1, '2025-01-06 06:36:14', '2025-01-06 06:36:14'),
+(44, 'My event', 'testing', 79, 4, '2025-01-06 13:54:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'igi128@goigi.in', '99999999999', 'www.google.com', '8,9,21', 1, '2025-01-06 08:25:53', '2025-01-06 02:57:26'),
+(45, 'SDG', 'Testing', 66, 2, '2025-01-06 15:25:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'i@gmail.com', '99999999999', 'www.facebook.com', '8,9', 1, '2025-01-06 09:56:12', '2025-01-06 09:56:12'),
+(46, 'RTGS Hitting', 'Testing', 66, 4, '2025-01-08 04:34:00', NULL, NULL, NULL, 'Kolka, Talsi, Latvia', 'Latvia', 'Talsi', NULL, NULL, '57.746155', '22.59067', 'igikolkata2024@gmail.com', '99999999999', 'www.xyz.com', '8,9,21', 1, '2025-01-06 10:06:04', '2025-01-06 10:06:04'),
+(47, 'RANDOM', 'Testtttg', 79, 4, '2025-01-06 15:37:00', NULL, NULL, NULL, 'Kölked, Baranya County, Hungary', 'Hungary', 'Baranya County', NULL, NULL, '45.94918', '18.707436', 'igi@gmail.com', '9999999999', 'wew.s@gmail.com', '8,9', 1, '2025-01-06 10:08:56', '2025-01-06 10:08:56');
 
 -- --------------------------------------------------------
 
@@ -48686,7 +48691,7 @@ CREATE TABLE `event_category` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `event_category`
@@ -48709,7 +48714,7 @@ CREATE TABLE `event_image` (
   `event_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `event_image`
@@ -48771,7 +48776,13 @@ INSERT INTO `event_image` (`id`, `image`, `event_id`, `created_at`, `updated_at`
 (60, '664c7298d2b73b3c7fe2d1e8d1781c06.jpeg', 39, '2024-12-16 07:40:02', '2024-12-16 07:40:02'),
 (61, 'e5fc3b8d9510b02e42361c337597d9fa.jpg', 40, '2024-12-18 21:56:31', '2024-12-18 21:56:31'),
 (62, 'c2f8e6f7f5a740e5b753357c9bb2c664.jpg', 41, '2024-12-23 10:11:33', '2024-12-23 10:11:33'),
-(63, '2be9bd7a3434f7038ca27d1918de58bd.jpeg', 42, '2024-12-28 13:11:38', '2024-12-28 13:11:38');
+(63, '2be9bd7a3434f7038ca27d1918de58bd.jpeg', 42, '2024-12-28 13:11:38', '2024-12-28 13:11:38'),
+(64, 'a4c42bfd5f5130ddf96e34a036c75e0a.jpeg', 43, '2025-01-06 06:36:14', '2025-01-06 06:36:14'),
+(65, 'd16509f6eaca1022bd8f28d6bc582cae.jpg', 44, '2025-01-06 08:25:53', '2025-01-06 08:25:53'),
+(66, 'ca1d3153a1cf0ed998d4879fbb50d9ab.jpg', 44, '2025-01-06 08:27:26', '2025-01-06 08:27:26'),
+(67, '8ff3fdef6f5144f50eb2a83cd34baa5d.jpg', 45, '2025-01-06 09:56:12', '2025-01-06 09:56:12'),
+(68, '8ce1a43fb75e779c6b794ba4d255cf6d.jpg', 46, '2025-01-06 10:06:04', '2025-01-06 10:06:04'),
+(69, '8ce241e1ed84937ee48322b170b9b18c.jpg', 47, '2025-01-06 10:08:56', '2025-01-06 10:08:56');
 
 -- --------------------------------------------------------
 
@@ -48788,7 +48799,7 @@ CREATE TABLE `event_ticket` (
   `feature` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `event_ticket`
@@ -48821,7 +48832,7 @@ CREATE TABLE `experience` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `experience`
@@ -48844,7 +48855,7 @@ CREATE TABLE `faq` (
   `status` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `faq`
@@ -48888,7 +48899,8 @@ INSERT INTO `favouritebusiness` (`id`, `listing_id`, `user_id`, `created_at`, `u
 (53, 65, 66, '2024-12-09 06:12:50', '2024-12-09 06:12:50'),
 (54, 69, 67, '2024-12-16 06:14:34', '2024-12-16 06:14:34'),
 (59, 70, 67, '2024-12-17 06:36:30', '2024-12-17 06:36:30'),
-(61, 64, 61, '2024-12-26 20:30:18', '2024-12-26 20:30:18');
+(61, 64, 61, '2024-12-26 20:30:18', '2024-12-26 20:30:18'),
+(66, 89, 79, '2025-01-06 08:30:45', '2025-01-06 08:30:45');
 
 -- --------------------------------------------------------
 
@@ -48918,7 +48930,8 @@ INSERT INTO `favouriteevent` (`id`, `event_id`, `user_id`, `created_at`, `update
 (152, 39, 67, '2024-12-17 06:25:16', '2024-12-17 06:25:16'),
 (155, 40, 61, '2024-12-19 01:50:01', '2024-12-19 01:50:01'),
 (156, 40, 9, '2024-12-27 06:22:19', '2024-12-27 06:22:19'),
-(158, 32, 67, '2024-12-28 07:13:41', '2024-12-28 07:13:41');
+(158, 32, 67, '2024-12-28 07:13:41', '2024-12-28 07:13:41'),
+(160, 43, 78, '2025-01-06 08:00:32', '2025-01-06 08:00:32');
 
 -- --------------------------------------------------------
 
@@ -48932,7 +48945,7 @@ CREATE TABLE `favouriteusers` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `favouriteusers`
@@ -48944,7 +48957,10 @@ INSERT INTO `favouriteusers` (`id`, `fav_user_id`, `user_id`, `created_at`, `upd
 (11, 1, 9, '2024-12-27 05:33:34', '2024-12-27 05:33:34'),
 (12, 41, 67, '2024-12-28 06:15:08', '2024-12-28 06:15:08'),
 (15, 61, 66, '2024-12-28 13:08:05', '2024-12-28 13:08:05'),
-(16, 59, 66, '2024-12-28 13:08:19', '2024-12-28 13:08:19');
+(16, 59, 66, '2024-12-28 13:08:19', '2024-12-28 13:08:19'),
+(17, 1, 67, '2025-01-06 07:21:56', '2025-01-06 07:21:56'),
+(18, 78, 79, '2025-01-06 08:11:09', '2025-01-06 08:11:09'),
+(19, 67, 79, '2025-01-06 08:11:22', '2025-01-06 08:11:22');
 
 -- --------------------------------------------------------
 
@@ -48961,7 +48977,7 @@ CREATE TABLE `guardian` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `guardian`
@@ -48983,7 +48999,7 @@ CREATE TABLE `household_income` (
   `status` tinyint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `household_income`
@@ -49057,7 +49073,10 @@ INSERT INTO `invitation` (`id`, `event_id`, `description`, `status`, `created_at
 (38, 42, NULL, '1', '2024-12-28 13:16:45', '2024-12-28 07:48:24'),
 (39, 40, NULL, '0', '2024-12-28 13:20:45', '2024-12-28 07:52:58'),
 (40, 40, 'test', '3', '2024-12-28 14:07:25', '2024-12-28 14:10:18'),
-(41, 40, NULL, '2', '2024-12-28 23:07:22', '2024-12-28 23:07:22');
+(41, 40, NULL, '2', '2024-12-28 23:07:22', '2024-12-28 23:07:22'),
+(42, 40, NULL, '3', '2025-01-06 08:01:56', '2025-01-06 02:34:22'),
+(43, 40, NULL, '2', '2025-01-06 08:04:51', '2025-01-06 08:04:51'),
+(44, 40, NULL, '2', '2025-01-06 08:38:34', '2025-01-06 08:38:34');
 
 -- --------------------------------------------------------
 
@@ -49089,7 +49108,7 @@ CREATE TABLE `listing` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `listing`
@@ -49112,7 +49131,9 @@ INSERT INTO `listing` (`id`, `business_name`, `name`, `category`, `subcategory`,
 (83, 'Basuri Business', 'Aruna Icecrem', 30, NULL, '0', '0', '0', NULL, 0, 0, 'Mosco Street, New York, New York 10013, United States', '40.714484', '-73.999277', 'Test', '9876545678', 's@gmail.com', 'r@gmail.com', '#Aesthetic, #Artist', 67, 1, '2024-12-28 09:38:09', '2024-12-28 09:38:09'),
 (84, 'Dusu', 'hhh', 22, NULL, '0', '0', '0', NULL, 0, 0, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', '54.321102', '48.57002', 'ttttttt', '88888888888', 'email@gmail.com', 'e.com', '#Actor, #Actress, #Aesthetic', 67, 1, '2024-12-28 10:07:40', '2024-12-28 10:07:40'),
 (86, 'Elegant Furniture', 'Sayan Deb', 33, NULL, '0', '0', '0', NULL, 0, 0, 'Kenwood Street, Englewood, New Jersey 07631, United States', '40.869375', '-73.973616', 'Elegant Living Furniture offers a stunning collection of high quality furniture designed to transform your spaces into beautiful functional and comfortable heavens', '7980558688', 'sayandeb@goigi.in', 'https://elegantfurniture.in', '#Fitfam, #Fitnessmotivation, #Football', 66, 1, '2024-12-28 11:52:52', '2024-12-28 11:52:52'),
-(87, 'test', 'data', 22, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'fffffg', '9999999999', '12@gmail.com', 'www.gmail.com', '#Actor, #Actress', 67, 1, '2024-12-28 12:59:08', '2024-12-28 12:59:08');
+(87, 'test', 'data', 22, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'fffffg', '9999999999', '12@gmail.com', 'www.gmail.com', '#Actor, #Actress', 67, 1, '2024-12-28 12:59:08', '2024-12-28 12:59:08'),
+(88, 'suman', 'test', 22, NULL, '0', '0', '0', NULL, 0, 0, 'District of Columbia, United States', '38.895', '-77.03667', 'tttt', '999999999', 'ig@gmail.com', 'www.cv.com', '#Actress', 67, 1, '2025-01-06 05:55:40', '2025-01-06 05:55:40'),
+(89, 'Because', 'Trik ffgg', 11, NULL, '0', '0', '0', NULL, 0, 0, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', '54.321102', '48.57002', 'testing', '999999999', 'igi187@goigi.in', 'www.google.com', '#Actor, #Actress', 79, 1, '2025-01-06 08:22:19', '2025-01-06 08:22:19');
 
 -- --------------------------------------------------------
 
@@ -49197,7 +49218,7 @@ CREATE TABLE `listing_image` (
   `listing_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `undated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `listing_image`
@@ -49283,7 +49304,9 @@ INSERT INTO `listing_image` (`id`, `image`, `listing_id`, `created_at`, `undated
 (92, 'c97e7a5153badb6576d8939469f58336.jpg', 87, '2024-12-28 12:59:08', '2024-12-28 12:59:08'),
 (93, '4fe5149039b52765bde64beb9f674940.png', 1, '2024-12-28 13:34:18', '2024-12-28 13:34:18'),
 (94, '61bfdc160e4c099203c72258d8825340.jpg', 1, '2024-12-28 13:38:42', '2024-12-28 13:38:42'),
-(95, '640258597cbc50037072712f964cf5d8.jpg', 64, '2024-12-28 13:42:49', '2024-12-28 13:42:49');
+(95, '640258597cbc50037072712f964cf5d8.jpg', 64, '2024-12-28 13:42:49', '2024-12-28 13:42:49'),
+(96, '78d69f40906679a976dc4d45cebffbe6.jpg', 88, '2025-01-06 05:55:40', '2025-01-06 05:55:40'),
+(97, '1f88c7c5d7d94ae08bd752aa3d82108b.jpg', 89, '2025-01-06 08:22:19', '2025-01-06 08:22:19');
 
 -- --------------------------------------------------------
 
@@ -49298,7 +49321,7 @@ CREATE TABLE `listing_subcategory_sub` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `listing_subcategory_sub`
@@ -49321,7 +49344,7 @@ CREATE TABLE `listing_sub_category` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `listing_sub_category`
@@ -49377,7 +49400,7 @@ CREATE TABLE `notifications` (
   `status` enum('0','1') DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `notifications`
@@ -49408,7 +49431,10 @@ INSERT INTO `notifications` (`id`, `noti_msg`, `event_id`, `sender_id`, `receive
 (140, 'Chetan Bele your event invitation is accepted from Sayan Deb.', 42, 67, 66, 2, '1', '2024-12-28 13:18:24', '2024-12-28 13:18:24'),
 (141, 'Chetan Bele has invite you for join event.', 40, 67, 66, 1, '1', '2024-12-28 13:20:45', '2024-12-28 13:20:45'),
 (142, 'Sayan Deb your event invitation is rejected from Sayan Deb.', 40, 66, 66, 2, '1', '2024-12-28 13:22:58', '2024-12-28 13:22:58'),
-(143, 'Duan Starks has invite you for join event.', 40, 9, 35, 1, '1', '2024-12-28 23:07:22', '2024-12-28 23:07:22');
+(143, 'Duan Starks has invite you for join event.', 40, 9, 35, 1, '1', '2024-12-28 23:07:22', '2024-12-28 23:07:22'),
+(144, 'sumon null has invite you for join event.', 40, 79, 78, 1, '1', '2025-01-06 08:01:56', '2025-01-06 08:01:56'),
+(145, 'Chetan Bele has invite you for join event.', 40, 67, 66, 1, '1', '2025-01-06 08:04:51', '2025-01-06 08:04:51'),
+(146, 'Sayantest null has invite you for join event.', 40, 78, 66, 1, '1', '2025-01-06 08:38:34', '2025-01-06 08:38:34');
 
 -- --------------------------------------------------------
 
@@ -49422,7 +49448,7 @@ CREATE TABLE `onesignal_users` (
   `player_id` varchar(255) NOT NULL COMMENT 'One Signal user id',
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `onesignal_users`
@@ -49454,7 +49480,7 @@ CREATE TABLE `product` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product`
@@ -49475,7 +49501,8 @@ INSERT INTO `product` (`id`, `name`, `category`, `subcategory`, `listing_id`, `p
 (29, 'Tara', 6, 0, 82, '50', '0', 0, 0, 'fhj', '#Actor, #Actress', 1, 67, '2024-12-28 09:18:00', '2024-12-28 09:18:00'),
 (30, 'Product', 6, 0, NULL, '50', '0', 0, 0, 'ghhhjj', 'Actor', 1, 67, '2024-12-28 10:29:15', '2024-12-28 06:09:22'),
 (31, 'tyyhhhh', 6, 0, 82, '50', '0', 0, 0, 'vvvhj', 'Actor', 1, 67, '2024-12-28 10:30:04', '2024-12-28 10:30:04'),
-(32, 'Luxurious Sofa set', 4, 0, 86, '1500', '0', 0, 0, 'Luxurious cozy sofa set with finest material on market', 'Performer', 1, 66, '2024-12-28 11:55:52', '2024-12-28 11:55:52');
+(32, 'Luxurious Sofa set', 4, 0, 86, '1500', '0', 0, 0, 'Luxurious cozy sofa set with finest material on market', 'Performer', 1, 66, '2024-12-28 11:55:52', '2024-12-28 11:55:52'),
+(33, 'Dfggg', 22, 0, 89, '50', '0', 0, 0, 'testing data', 'Actor, Actress, Aesthetic', 1, 79, '2025-01-06 08:23:07', '2025-01-06 08:23:07');
 
 -- --------------------------------------------------------
 
@@ -49491,7 +49518,7 @@ CREATE TABLE `product_category` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product_category`
@@ -49524,7 +49551,7 @@ CREATE TABLE `product_image` (
   `product_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product_image`
@@ -49565,7 +49592,8 @@ INSERT INTO `product_image` (`id`, `image`, `product_id`, `created_at`, `updated
 (33, 'ca0daec69b5adc880fb464895726dbdf.jpg', 29, '2024-12-28 09:18:00', '2024-12-28 09:18:00'),
 (34, 'ddc96fb7d590861ce4bbc4579f5fa848.jpg', 30, '2024-12-28 10:29:15', '2024-12-28 10:29:15'),
 (35, '3b5e2c9be5002e87e0477099db5ff21b.jpg', 31, '2024-12-28 10:30:04', '2024-12-28 10:30:04'),
-(36, '2d5c4ea4c4aaf3aea8ac8dee1df8fbe8.jpg', 32, '2024-12-28 11:55:52', '2024-12-28 11:55:52');
+(36, '2d5c4ea4c4aaf3aea8ac8dee1df8fbe8.jpg', 32, '2024-12-28 11:55:52', '2024-12-28 11:55:52'),
+(37, '4d42d2f5010c1c13f23492a35645d6a7.jpg', 33, '2025-01-06 08:23:07', '2025-01-06 08:23:07');
 
 -- --------------------------------------------------------
 
@@ -49582,7 +49610,7 @@ CREATE TABLE `product_subcategory` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product_subcategory`
@@ -49631,7 +49659,7 @@ CREATE TABLE `promotion` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `promotion`
@@ -49646,7 +49674,12 @@ INSERT INTO `promotion` (`id`, `ads_name`, `url`, `description`, `file_type`, `i
 (49, 'Black Friday Sale', NULL, '', 1, '979068229.png', NULL, 66, '1', 'Male', '2', 'Single Parent', '3', 'Alabama, United States', '32.828866', '-86.789292', '', 1, '2024-12-03 11:09:43', '2024-12-11 05:21:39'),
 (52, 'Vigneto\'s Italian Grill', '', '', 1, '603936309.jpg', 'Home,Ads', 0, '2', 'Male', '3', 'Parent', '1', 'Plantation, FL, USA', '26.1275862', '-80.23310359999999', '', 1, '2024-12-19 02:13:49', '2024-12-19 02:13:49'),
 (53, 'test ads', '', '', 1, '1229280766.jpg', '', 9, '1', 'Male', '3', 'Parent', '2', 'Nagpur, Maharashtra, India', '21.1458004', '79.0881546', '', 1, '2024-12-24 12:58:18', '2024-12-24 12:58:18'),
-(54, 'holiday special', NULL, '', 1, '1419731892.jpg', NULL, 9, '1', 'Male', '4', 'Select parental status', '6', 'undefined', 'undefined', 'undefined', '', 0, '2024-12-28 23:14:12', '2024-12-28 23:14:12');
+(54, 'holiday special', NULL, '', 1, '1419731892.jpg', NULL, 9, '1', 'Male', '4', 'Select parental status', '6', 'undefined', 'undefined', 'undefined', '', 0, '2024-12-28 23:14:12', '2024-12-28 23:14:12'),
+(55, 'test promotion', NULL, '', 1, '60460120.jpg', NULL, 78, '1', 'Male', '3', 'Single Parent', '4', 'New Jersey, United States', '40.150248', '-74.389317', '', 1, '2025-01-06 08:14:02', '2025-01-06 08:16:36'),
+(56, 'RND', NULL, '', 1, '1688843493.jpg', NULL, 79, '2', 'Male', '3', 'Single Parent', '1', 'New York, New York, United States', '40.712749', '-74.005994', '', 0, '2025-01-06 08:15:04', '2025-01-06 08:15:04'),
+(57, 'RND', NULL, '', 1, '1940803905.jpg', NULL, 79, '2', 'Male', '3', 'Single Parent', '1', 'New York, New York, United States', '40.712749', '-74.005994', '', 0, '2025-01-06 08:17:34', '2025-01-06 08:17:34'),
+(58, 'tuuuu', NULL, '', 1, '126121367.jpg', NULL, 67, '2', 'Male', '3', 'Single Parent', '4', 'Kolkata Airport Quarters, Kaikhali, Dum Dum, North 24 Parganas, West Bengal, India', '22.634433', '88.434491', '', 0, '2025-01-06 08:18:56', '2025-01-06 08:18:56'),
+(59, 'Texas', NULL, '', 1, '253264261.jpg', NULL, 66, '1', 'Female', '3', 'Prefer Not to Say', '4', 'Kolkata Airport Quarters, Kaikhali, Dum Dum, North 24 Parganas, West Bengal, India', '22.634433', '88.434491', '', 1, '2025-01-06 10:37:56', '2025-01-06 10:39:20');
 
 -- --------------------------------------------------------
 
@@ -49660,7 +49693,7 @@ CREATE TABLE `promotion_category` (
   `status` tinyint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `promotion_category`
@@ -49683,7 +49716,7 @@ CREATE TABLE `reference` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reference`
@@ -49707,7 +49740,7 @@ CREATE TABLE `referral_comission_setting` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `referral_comission_setting`
@@ -49731,7 +49764,7 @@ CREATE TABLE `referral_rewards_transaction` (
   `my_earned_point` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `referral_rewards_transaction`
@@ -49757,7 +49790,7 @@ CREATE TABLE `reffer` (
   `status` enum('1','2') DEFAULT NULL COMMENT '2 => pending, 1 => complete',
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reffer`
@@ -49824,7 +49857,11 @@ INSERT INTO `repeat_invitation` (`id`, `invitation_id`, `sender_id`, `receiver_i
 (39, 39, 66, 66, '500', '4', NULL, NULL, '0', '2024-12-28 13:21:23', '2024-12-28 07:52:58'),
 (40, 40, 9, 66, '10', NULL, '07:37', '19:37', '2', '2024-12-28 14:07:25', '2024-12-28 14:11:17'),
 (41, 40, 66, 9, '10', NULL, '07:37', '19:37', '3', '2024-12-28 14:07:25', '2024-12-28 14:11:53'),
-(42, 41, 9, 35, '10000', NULL, '18:06:00', '06:06:00', '2', '2024-12-28 23:07:22', '2024-12-28 23:07:22');
+(42, 41, 9, 35, '10000', NULL, '18:06:00', '06:06:00', '2', '2024-12-28 23:07:22', '2024-12-28 23:07:22'),
+(43, 42, 79, 78, '200', NULL, '13:32:00', '13:32:00', '2', '2025-01-06 08:01:56', '2025-01-06 08:01:56'),
+(44, 42, 78, 78, '200', '4', NULL, NULL, '3', '2025-01-06 08:04:22', '2025-01-06 08:04:22'),
+(45, 43, 67, 66, '40', NULL, '13:34:00', '13:34:00', '2', '2025-01-06 08:04:51', '2025-01-06 08:04:51'),
+(46, 44, 78, 66, '500', NULL, '14:08:00', '14:08:00', '2', '2025-01-06 08:38:34', '2025-01-06 08:38:34');
 
 -- --------------------------------------------------------
 
@@ -49921,7 +49958,7 @@ CREATE TABLE `services` (
   `user_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `services`
@@ -49947,7 +49984,7 @@ CREATE TABLE `services_image` (
   `service_id` bigint DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `services_image`
@@ -54118,7 +54155,7 @@ CREATE TABLE `stripe_connect` (
   `url` text,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `stripe_connect`
@@ -54140,7 +54177,7 @@ CREATE TABLE `sub_access_menu` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `sub_access_menu`
@@ -54169,7 +54206,7 @@ CREATE TABLE `sub_permision_menu` (
   `number_of` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `sub_permision_menu`
@@ -54261,7 +54298,7 @@ CREATE TABLE `sub_plan` (
   `stripe_plan_id` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `sub_plan`
@@ -54287,7 +54324,7 @@ CREATE TABLE `tags` (
   `status` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tags`
@@ -54355,7 +54392,7 @@ CREATE TABLE `transaction` (
   `status` varchar(100) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `transaction`
@@ -54391,7 +54428,15 @@ INSERT INTO `transaction` (`id`, `user_id`, `user_name`, `address`, `country`, `
 (55, 75, 'Chetan Bele', 'Nagpur, Maharashtra, India', 'India', 'Maharashtra', 'Nagpur Division', '223456', 47, NULL, NULL, NULL, NULL, NULL, 'sub_1QZXTRKLraOwZNrJ3rlRXwv6', 'ORDNO-466722', '12.00', '', 'sub_1QZXTRKLraOwZNrJ3rlRXwv6', '1', 'usd', '2025-04-27', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2024-12-24 12:44:35', '2024-12-24 12:44:35'),
 (59, 66, 'Sayan Deb', '115/1 KCM SARANI BHADRAKALI UTTARPARA HOOGHLY ', 'India ', 'West Bengal ', 'Kolkata ', '712232', 9, NULL, NULL, NULL, NULL, NULL, 'sub_1QaxwOKLraOwZNrJJPyzAztM', 'ORDNO-764265', '2500.00', '', NULL, NULL, 'usd', '2025-12-28', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2024-12-28 11:12:22', '2024-12-28 11:12:22'),
 (60, 67, 'Chetan Bele', 'Nagpur Maharashtra', 'India ', 'Maharashtra ', 'Nagpur ', '712256', 47, NULL, NULL, NULL, NULL, NULL, 'sub_1QayxjKLraOwZNrJEfamLo33', 'ORDNO-848683', '12.00', '', NULL, NULL, 'usd', '2025-02-28', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2024-12-28 12:17:50', '2024-12-28 12:17:50'),
-(61, 66, 'Sayan Deb', '115/1 KCM SARANI BHADRAKALI UTTARPARA HOOGHLY ', 'India ', 'West Bengal ', 'Kolkata ', '712232', 51, NULL, NULL, NULL, NULL, NULL, 'sub_1Qazj3KLraOwZNrJEBFN2T1Z', 'ORDNO-447681', '19.00', '', NULL, NULL, 'usd', '2025-01-28', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2024-12-28 13:06:43', '2024-12-28 13:06:43');
+(61, 66, 'Sayan Deb', '115/1 KCM SARANI BHADRAKALI UTTARPARA HOOGHLY ', 'India ', 'West Bengal ', 'Kolkata ', '712232', 51, NULL, NULL, NULL, NULL, NULL, 'sub_1Qazj3KLraOwZNrJEBFN2T1Z', 'ORDNO-447681', '19.00', '', NULL, NULL, 'usd', '2025-01-28', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2024-12-28 13:06:43', '2024-12-28 13:06:43'),
+(62, 79, 'sumon null', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 53, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBBhKLraOwZNrJqCEAEprg', 'ORDNO-135382', '1.00', '', NULL, NULL, 'usd', '2025-02-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:57:27', '2025-01-06 07:57:27'),
+(63, 79, 'sumon null', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 53, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBBjKLraOwZNrJpQu6Rrpr', 'ORDNO-854853', '1.00', '', NULL, NULL, 'usd', '2025-02-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:57:29', '2025-01-06 07:57:29'),
+(64, 79, 'sumon null', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 53, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBBmKLraOwZNrJJWSKBI05', 'ORDNO-745821', '1.00', '', NULL, NULL, 'usd', '2025-02-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:57:32', '2025-01-06 07:57:32'),
+(65, 79, 'sumon null', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 53, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBBpKLraOwZNrJDpe4AF4F', 'ORDNO-899585', '1.00', '', NULL, NULL, 'usd', '2025-02-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:57:35', '2025-01-06 07:57:35'),
+(66, 79, 'sumon null', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 53, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBBsKLraOwZNrJdPwQyWvs', 'ORDNO-159185', '1.00', '', NULL, NULL, 'usd', '2025-02-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:57:38', '2025-01-06 07:57:38'),
+(67, 78, 'Sayantest null', 'Webel tower 1 kolkata', 'India', 'West Bengal ', 'Kolkata ', '712232', 9, NULL, NULL, NULL, NULL, NULL, 'sub_1QeBDaKLraOwZNrJ3Tf6DEp3', 'ORDNO-742141', '2500.00', '', NULL, NULL, 'usd', '2026-01-06', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-06 07:59:24', '2025-01-06 07:59:24'),
+(68, 78, 'Sayantest null', 'Webel tower 1 kolkata', 'India ', 'West Bengal ', 'Kolkata ', '712232', 5, NULL, NULL, NULL, NULL, NULL, 'txn_3QeBUFKLraOwZNrJ0MJtxufG', 'ORDNO-191345', '120', 'ch_3QeBUFKLraOwZNrJ0QDl4GzL', NULL, NULL, 'usd', '2025-07-06', 2, '55', NULL, NULL, NULL, 'Yes', '6', 'succeeded', '2025-01-06 08:16:36', '2025-01-06 08:16:36'),
+(69, 66, 'Sayan Deb', '03, Major Arterial Road', 'India', 'West Bengal', 'Kolkata ', '700156', 5, NULL, NULL, NULL, NULL, NULL, 'txn_3QeDiNKLraOwZNrJ1UIa36qz', 'ORDNO-494265', '100', 'ch_3QeDiNKLraOwZNrJ1PJXIqQh', NULL, NULL, 'usd', '2025-07-06', 2, '59', NULL, NULL, NULL, 'No', '6', 'succeeded', '2025-01-06 10:39:20', '2025-01-06 10:39:20');
 
 -- --------------------------------------------------------
 
@@ -54412,7 +54457,7 @@ CREATE TABLE `users` (
   `latitude` varchar(100) DEFAULT NULL,
   `longitude` varchar(100) DEFAULT NULL,
   `profile_image` varchar(100) DEFAULT NULL,
-  `cover_image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `cover_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `bio` text,
   `dob` date DEFAULT NULL,
   `area_interest` text,
@@ -54428,11 +54473,11 @@ CREATE TABLE `users` (
   `eventCount` int DEFAULT '0',
   `invitationCount` int DEFAULT '0',
   `promotionCount` int DEFAULT '0',
-  `spend_money` varchar(255) CHARACTER SET utf8mb4 DEFAULT '0',
+  `spend_money` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '0',
   `earned_rewords_point` int DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -54441,7 +54486,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `country`, `state`, `city`, `latitude`, `longitude`, `profile_image`, `cover_image`, `bio`, `dob`, `area_interest`, `zipcode`, `tags`, `user_type`, `password`, `status`, `otp`, `wallet_amount`, `auto_renew_status`, `businessCount`, `eventCount`, `invitationCount`, `promotionCount`, `spend_money`, `earned_rewords_point`, `created_at`, `updated_at`) VALUES
 (1, 'Jame', 'Henry', 'jamehenry@gmail.com', '9876543210', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', NULL, NULL, '1715152678.png', '', '<p>test..</p>', '1995-01-20', '1,2,3', '20024', '3,4', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-05-08 07:18:20', '2024-12-24 12:23:23'),
 (9, 'Duan', 'Starks', 'DStarks22@starbiz.com', '2022860115', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '38.8867076', '-77.0326074', '429994657.png', '943760837.jpg', 'Former NFL player. Superbowl XXXV ChampionETC', '1995-01-20', '1,2,3,4,5', '33330', '21,6,5', 8, 'e10adc3949ba59abbe56e057f20f883e', 1, '388371', '10', '1', 0, 1, 0, 2, '0', 5, '2024-05-27 13:32:11', '2024-12-28 14:07:25'),
-(10, 'John1', 'Doe', 'johndoe@gmail.com', '9876543210', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', NULL, NULL, '1560723312.jpg', '1553035308.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1994-09-12', '1,2,3', '20024', '3,4', 8, 'fcea920f7412b5da7be0cf42b8c93759', 1, '252264', '0', NULL, 0, 0, 0, 0, '0', 0, '2024-05-27 13:32:11', '2024-12-24 12:23:23'),
+(10, 'John', 'Doe', 'johndoe@gmail.com', '9876543210', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', NULL, NULL, '1560723312.jpg', '1553035308.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1994-09-12', '[1,2,3]', '20024', '[3,4]', 8, 'fcea920f7412b5da7be0cf42b8c93759', 1, '252264', '0', NULL, 0, 0, 0, 0, '0', 0, '2024-05-27 13:32:11', '2025-01-06 00:43:30'),
 (11, 'Pravat', 'behera', 'pravat@yopmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, '871491', NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-08-23 11:41:26', '2024-12-24 12:23:23'),
 (12, 'Pravat', 'Behera', 'Pravatbehera@yopmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-08-23 12:16:51', '2024-12-24 12:23:23'),
 (13, 'Demo', 'one', 'Demo@yopmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-08-23 12:18:13', '2024-12-24 12:23:23'),
@@ -54477,12 +54522,15 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address
 (59, 'Test', 'User', 'testuser@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '858530321.jpeg', NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-12 11:03:05', '2024-12-24 12:25:28'),
 (61, 'Chetan', 'Bele', 'care123@goigi.in', '7980226954', 'Nagpur Maharashtra', NULL, NULL, NULL, NULL, NULL, '611533551.png', '', 'Hi its Chetan', '1994-08-17', '3,2,5', NULL, '21,6,17', 8, '75ea1832b2cfc40e9209dd41b3233c63', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-29 12:24:16', '2024-12-24 12:25:28'),
 (63, 'chetan', NULL, 'chetanbele11994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-27 12:29:51', '2024-12-24 12:25:28'),
-(66, 'Sayan', 'Deb', 'sayandeb@goigi.in', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '325205469.png', '', NULL, '1994-08-31', NULL, NULL, NULL, 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-29 12:22:56', '2024-12-28 06:51:44'),
+(66, 'Sayan', 'Deb', 'sayandeb@goigi.in', '7980558688', '115/1 KCM Sarani Bhadrakali Uttarpara', NULL, NULL, NULL, NULL, NULL, '1029406133.jpg', '', 'Hi i am Sayan', '1998-06-28', '4,3,2,1', NULL, '17,21,19,22,3,14', 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-29 12:22:56', '2025-01-06 05:04:55'),
 (67, 'Chetan', 'Bele', 'care@goigi.in', '7980226954', 'Nagpur Maharashtra', NULL, NULL, NULL, NULL, NULL, '611533551.png', '', 'Hi its Chetan', '1994-08-17', '3,2,5', NULL, '21,6,17', 8, '75ea1832b2cfc40e9209dd41b3233c63', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-11-29 12:24:16', '2024-12-24 12:25:28'),
 (70, 'Rob', 'Roy', 'care@goigi.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, '75ea1832b2cfc40e9209dd41b3233c63', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-23 12:46:10', '2024-12-24 12:11:56'),
 (71, 'test', 'con', 'chetanbele11994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-23 13:53:38', '2024-12-24 12:11:54'),
 (75, 'Chetan', 'Bele', 'chetanbele1994@gmail.com', '9876543210', 'Nagpur, Maharashtra, India', 'India', 'Maharashtra', 'Nagpur Division', '21.1458004', '79.0881546', '1308788389.jpg', NULL, 'my bio', '1994-01-20', NULL, NULL, '8,9,21,6,17', 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, '1', 0, 1, 1, 1, '8', 10, '2024-12-24 06:08:10', '2024-12-27 07:27:25'),
-(76, 'new', 'user', 'newuser@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1590644560.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-28 11:46:48', '2024-12-28 11:48:33');
+(76, 'new', 'user', 'newuser@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1590644560.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-28 11:46:48', '2024-12-28 11:48:33'),
+(78, 'Sayantest', 'null', 'sayandeb998@gmail.com', '7980558688', 'Webel tower 1 kolkata', NULL, NULL, NULL, NULL, NULL, '269040366.jpg', '', 'hi i am Sayan', '1998-06-28', '4,3,2,1', NULL, '6,19,22,16', 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 07:49:49', '2025-01-06 03:00:23'),
+(79, 'sumon', 'null', 'igi187@goigi.in', '9999999999', 'Kolkata', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'testtt', '2025-01-06', '5,7', NULL, '9,20,10', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 07:51:30', '2025-01-06 02:25:48'),
+(80, 'Sayantan', 'Bhakta', 'sayantan@goigi.in', '9876543210', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', NULL, NULL, '1099023122.jpg', '600499099.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1991-01-02', '1,2,3', '700099', '3,4', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 09:56:24', '2025-01-06 10:15:49');
 
 -- --------------------------------------------------------
 
@@ -54559,7 +54607,11 @@ INSERT INTO `user_gallery_photo` (`id`, `user_id`, `image`, `created_at`, `updat
 (4, 1, '300d1539c3b6aa1793b5678b857732cf.jpg', '2024-06-20 09:24:17', '2024-12-03 13:06:27'),
 (6, 9, 'a8d3b1e36a14da038a06f675d1693dd8.jpg', '2024-12-24 13:45:22', '2024-12-24 13:45:22'),
 (7, 9, '3546ab441e56fa333f8b44b610d95691.jpg', '2024-12-24 13:47:59', '2024-12-24 13:47:59'),
-(8, 9, '0b229b5ea84cc5f79dcaf2984efb7e45.jpg', '2024-12-24 13:47:59', '2024-12-24 13:47:59');
+(8, 9, '0b229b5ea84cc5f79dcaf2984efb7e45.jpg', '2024-12-24 13:47:59', '2024-12-24 13:47:59'),
+(9, 10, '36ad8b5f42db492827016448975cc22d.jpg', '2025-01-06 06:13:30', '2025-01-06 06:13:30'),
+(10, 10, 'daad98225feffee70936b5e3b88658c9.jpg', '2025-01-06 06:13:30', '2025-01-06 06:13:30'),
+(11, 10, 'f50fb34f27bd263e6be8ffcf8967ced0.jpg', '2025-01-06 06:13:30', '2025-01-06 06:13:30'),
+(12, 10, 'd25414405eb37dae1c14b18d6a2cac34.jpg', '2025-01-06 06:13:30', '2025-01-06 06:13:30');
 
 -- --------------------------------------------------------
 
@@ -54573,7 +54625,7 @@ CREATE TABLE `user_type` (
   `status` tinyint(1) DEFAULT NULL COMMENT '1 => active, 0 => inactive',
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user_type`
@@ -55102,7 +55154,7 @@ ALTER TABLE `email_template`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `event_category`
@@ -55114,7 +55166,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_image`
 --
 ALTER TABLE `event_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `event_ticket`
@@ -55138,19 +55190,19 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `favouritebusiness`
 --
 ALTER TABLE `favouritebusiness`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `favouriteevent`
 --
 ALTER TABLE `favouriteevent`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT for table `favouriteusers`
 --
 ALTER TABLE `favouriteusers`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `guardian`
@@ -55174,13 +55226,13 @@ ALTER TABLE `interest`
 -- AUTO_INCREMENT for table `invitation`
 --
 ALTER TABLE `invitation`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `listing`
 --
 ALTER TABLE `listing`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `listing_category`
@@ -55192,7 +55244,7 @@ ALTER TABLE `listing_category`
 -- AUTO_INCREMENT for table `listing_image`
 --
 ALTER TABLE `listing_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `listing_subcategory_sub`
@@ -55216,7 +55268,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `onesignal_users`
@@ -55228,7 +55280,7 @@ ALTER TABLE `onesignal_users`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -55240,7 +55292,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `product_subcategory`
@@ -55252,7 +55304,7 @@ ALTER TABLE `product_subcategory`
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `promotion_category`
@@ -55288,7 +55340,7 @@ ALTER TABLE `reffer`
 -- AUTO_INCREMENT for table `repeat_invitation`
 --
 ALTER TABLE `repeat_invitation`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `role_permission`
@@ -55360,13 +55412,13 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `user_document`
@@ -55378,7 +55430,7 @@ ALTER TABLE `user_document`
 -- AUTO_INCREMENT for table `user_gallery_photo`
 --
 ALTER TABLE `user_gallery_photo`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_type`

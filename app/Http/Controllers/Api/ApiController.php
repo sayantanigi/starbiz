@@ -1631,8 +1631,7 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    function addFavevent_post(Request $request)
-    {
+    function addFavevent_post(Request $request) {
         $validator = Validator::make(
             $request->all(),
             [
@@ -2002,6 +2001,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2056,6 +2057,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2110,6 +2113,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2164,6 +2169,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2194,7 +2201,8 @@ class ApiController extends Controller {
         if (!empty(@$_GET['userId'])) {
             $userCheck = DB::table('users')->where(['id' => @$_GET['userId']])->select('*')->orderBy('id', 'DESC')->count();
             if ($userCheck > 0) {
-                $Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status, repeat_invitation.start_time, repeat_invitation.end_time FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id WHERE invitation.status='1' AND repeat_invitation.status='1' AND (repeat_invitation.sender_id = '" . @$_GET['userId'] . "' OR repeat_invitation.receiver_id = '" . @$_GET['userId'] . "')";
+                //$Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status, repeat_invitation.start_time, repeat_invitation.end_time FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id WHERE invitation.status='1' AND repeat_invitation.status='1' AND (repeat_invitation.sender_id = '" . @$_GET['userId'] . "' OR repeat_invitation.receiver_id = '" . @$_GET['userId'] . "')";
+                $Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status, repeat_invitation.start_time, repeat_invitation.end_time FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id JOIN events ON events.id = invitation.event_id WHERE invitation.status='1' AND repeat_invitation.status='1' AND (repeat_invitation.sender_id = '" . @$_GET['userId'] . "' OR repeat_invitation.receiver_id = '" . @$_GET['userId'] . "') AND events.start_date < '".date('Y-m-d')."'";
                 $list = DB::select($Sql);
                 if ($list) {
                     foreach ($list as $k => $v) {
@@ -2218,6 +2226,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2308,6 +2318,8 @@ class ApiController extends Controller {
                         $array[] = [
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
+							'receiver_id' => @$v->receiver_id,
+                            'sender_id' => @$v->sender_id,
                             'athleteName' => @$userInfo[0]->first_name . ' ' . @$userInfo[0]->last_name,
                             'eventName' => @$eventInfo[0]->event_name,
                             'location' => @$eventInfo[0]->location,
@@ -2739,8 +2751,7 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function eventByCategory_get()
-    {
+    public function eventByCategory_get() {
         if (!empty(@$_GET['categoryId'])) {
             //$eventList = DB::table('events')->where(['category' => @$_GET['categoryId'], 'status' => 1])->select('*')->orderBy('id', 'DESC')->get();
             $date = date('Y-m-d');
@@ -2770,7 +2781,12 @@ class ApiController extends Controller {
                             $userPic = url('noimage.jpg');
                         }
                     }
-                    //echo $galleryImg;die;
+                    $checkfav = DB::table('favouriteevent')->where('user_id', $_GET['userId'])->where('event_id', @$v->id)->first();
+                    if(!empty($checkfav)) {
+                        $isFav = 1;
+                    } else {
+                        $isFav = 0;
+                    }
                     $array[] = [
                         'eventId' => @$v->id,
                         'eventName' => @$v->event_name,
@@ -2781,6 +2797,7 @@ class ApiController extends Controller {
                         'image' => @$galleryImg,
                         'userName' => @$userName,
                         'userPic' => @$userPic,
+                        'isFav' => @$isFav
                     ];
                 }
                 $response = ["status" => 1, "list" => $array];
@@ -4280,8 +4297,8 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function eventManagement_get()
-    {
+    public function eventManagement_get() {
+        if (!empty($_GET['userId']) || $_GET['userId'] != '' ) {
         $Sql = "SELECT * FROM events WHERE status = '1' AND DATE(start_date) >= '" . date('Y-m-d') . "' order by id DESC";
         $eventsList = DB::select($Sql);
         if ($eventsList) {
@@ -4311,6 +4328,12 @@ class ApiController extends Controller {
             } else {
                 $userPic = url('noimage.jpg');
             }
+            $checkfav = DB::table('favouriteevent')->where('user_id', $_GET['userId'])->where('event_id', $eventsList[0]->id)->first();
+            if(!empty($checkfav)) {
+                $isFav = 1;
+            } else {
+                $isFav = 0;
+            }
             $array = [
                 'eventId' => @$eventsList[0]->id,
                 'eventName' => @$eventsList[0]->event_name,
@@ -4321,6 +4344,7 @@ class ApiController extends Controller {
                 'image' => @$galleryImg,
                 'userName' => @$userName,
                 'userPic' => @$userPic,
+                'isFav' => @$isFav,
             ];
             $response = ["status" => 1, "list" => $array];
             return response()->json($response, 200);
@@ -4328,6 +4352,10 @@ class ApiController extends Controller {
             $response = ["status" => 0, "error" => "events not found."];
             return response()->json($response, 200);
         }
+    } else {
+        $response = ["status" => 0, "error" => "Events not found."];
+        return response()->json($response, 200);
+    }
     }
     public function subscriptionManagement_get()
     {
@@ -4424,8 +4452,7 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function appearanceManagement_get()
-    {
+    public function appearanceManagement_get() {
         if (!empty(@$_GET['userId'])) {
             $userCheck = DB::table('users')->where(['id' => @$_GET['userId']])->select('*')->orderBy('id', 'DESC')->count();
             if ($userCheck > 0) {
@@ -4460,36 +4487,46 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function businessManagement_get()
-    {
-        $businessList = DB::table('listing')->where(['status' => 1])->limit(9)->select('*')->orderBy('id', 'DESC')->get();
-        if ($businessList) {
-            foreach ($businessList as $k => $v) {
-                $category = DB::table('listing_category')->where(['id' => @$v->category])->select('name')->orderBy('id', 'DESC')->first();
-                $image = DB::table('listing_image')->where(['listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
-                if (!empty($image->image) && file_exists('public/listing/' . $image->image . '')) {
-                    $galleryImg = url('listing/' . $image->image . '');
-                } else {
-                    $galleryImg = url('noimage.jpg');
+    public function businessManagement_get() {
+        if (!empty($_GET['userId']) || $_GET['userId'] != '' ) {
+            $businessList = DB::table('listing')->where(['status' => 1])->limit(9)->select('*')->orderBy('id', 'DESC')->get();
+            if ($businessList) {
+                foreach ($businessList as $k => $v) {
+                    $category = DB::table('listing_category')->where(['id' => @$v->category])->select('name')->orderBy('id', 'DESC')->first();
+                    $image = DB::table('listing_image')->where(['listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
+                    if (!empty($image->image) && file_exists('public/listing/' . $image->image . '')) {
+                        $galleryImg = url('listing/' . $image->image . '');
+                    } else {
+                        $galleryImg = url('noimage.jpg');
+                    }
+                    //echo $galleryImg;die;
+                    $checkfav = DB::table('favouritebusiness')->where('user_id', $_GET['userId'])->where('user_id', @$v->id)->first();
+                    if(!empty($checkfav)) {
+                        $isFav = 1;
+                    } else {
+                        $isFav = 0;
+                    }
+                    $array[] = [
+                        'businessId' => @$v->id,
+                        'businessName' => @$v->business_name,
+                        'address' => @$v->address,
+                        'category' => @$category->name,
+                        'image' => @$galleryImg,
+                        'isFav' => @$isFav
+                    ];
                 }
-                //echo $galleryImg;die;
-                $array[] = [
-                    'businessId' => @$v->id,
-                    'businessName' => @$v->business_name,
-                    'address' => @$v->address,
-                    'category' => @$category->name,
-                    'image' => @$galleryImg,
-                ];
+                $response = ["status" => 1, "list" => $array];
+                return response()->json($response, 200);
+            } else {
+                $response = ["status" => 0, "error" => "Business not found."];
+                return response()->json($response, 200);
             }
-            $response = ["status" => 1, "list" => $array];
-            return response()->json($response, 200);
         } else {
-            $response = ["status" => 0, "error" => "business not found."];
+            $response = ["status" => 0, "error" => "Business not found."];
             return response()->json($response, 200);
         }
     }
-    public function addCategory_post(Request $request)
-    {
+    public function addCategory_post(Request $request) {
         $validator = Validator::make(
             $request->all(),
             [
@@ -4500,10 +4537,30 @@ class ApiController extends Controller {
             $response = ["status" => 0, "error" => $validator->errors()->toArray()];
             return response()->json($response, 200);
         } else {
-            $data = ['name' => @$request->category, 'status' => 1, 'created_at' => date('Y-m-d H:i:s')];
+            /*$data = ['name' => @$request->category, 'status' => 1, 'created_at' => date('Y-m-d H:i:s')];
             $result = DB::table('product_category')->insertGetId($data);
             if ($result) {
                 $response = ["status" => 1, "catId" => @$result, "message" => "category added successfully."];
+                return response()->json($response, 200);
+            } else {
+                $response = ["status" => 0, "error" => "Some error occurred, please try again."];
+                return response()->json($response, 200);
+            }*/
+            // Check if the category already exists
+            $existingCategory = DB::table('product_category')->where('name', $request->category)->first();
+            if ($existingCategory) {
+                $response = ["status" => 0, "error" => "Category name already exists."];
+                return response()->json($response, 200);
+            }
+            $data = [
+                'name' => $request->category,
+                'user_id' => $request->userId,
+                'status' => 1,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            $result = DB::table('product_category')->insertGetId($data);
+            if ($result) {
+                $response = ["status" => 1, "catId" => $result, "message" => "Category added successfully."];
                 return response()->json($response, 200);
             } else {
                 $response = ["status" => 0, "error" => "Some error occurred, please try again."];
@@ -5042,8 +5099,7 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function eventList_get()
-    {
+    public function eventList_get() {
         $date = date('Y-m-d');
         $eventsList = DB::select("select * from events where DATE(start_date) > '$date' order by DATE(start_date) ASC");
         if ($eventsList) {
@@ -5060,9 +5116,9 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function athleticList_get()
-    {
-        $list = DB::table('users')->where(['status' => 1, 'user_type' => 10])->select('*')->orderBy('id', 'DESC')->get();
+    public function athleticList_get() {
+        $userId = $_GET['userId'];
+        $list = DB::table('users')->where('status', 1)->where('user_type', 10)->where('id', '!=', $userId)->select('*')->orderBy('id', 'DESC')->get();
         if (count($list) > 0) {
             foreach ($list as $k => $v) {
                 if (!empty(@$v->profile_image) && file_exists('public/profile/' . @$v->profile_image . '')) {
@@ -5589,8 +5645,7 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
-    public function myReferrals_get()
-    {
+    public function myReferrals_get() {
         $array = [];
         if (!empty(@$_GET['userId'])) {
             $list = DB::table('reffer')->where(['sender_id' => @$_GET['userId']])->select('*')->orderBy('id', 'DESC')->get();
@@ -5651,4 +5706,98 @@ class ApiController extends Controller {
             return response()->json($response, 200);
         }
     }
+
+    // public function deleteAccount_post(Request $request){
+    //     $userId = $request->userId ?? null;
+    //     if(!empty($request->userId) || $request->userId != '') {
+    //         $deletewhere = array(
+    //             'user_id' => @$request->userId,
+    //         );
+    //         // DB::table('academics')->where($deletewhere)->delete();
+    //         // DB::table('advertise')->where($deletewhere)->delete();
+    //         // DB::table('athletics')->where($deletewhere)->delete();
+    //         // $chatresults = DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+    //         // if(!empty($chatresults)) {
+    //         //     DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+    //         // }
+    //         $eventresults = DB::table('events')->where('user_id', $userId)->get();
+    //         if(!empty($eventresults)) {
+    //             foreach ($eventresults as $event) {
+    //                 $eventimageresults = DB::table('event_image')->where('event_id', $event->id)->get();
+    //                 if(!empty($eventimageresults)) {
+    //                     DB::table('event_image')->where('event_id', $event->id)->delete();
+    //                 }
+    //                 $eventticketresults = DB::table('event_ticket')->where('event_id', $event->id)->get();
+    //                 if(!empty($eventticketresults)) {
+    //                     DB::table('event_ticket')->where('event_id', $event->id)->delete();
+    //                 }
+    //                 $eventinvitationtresults = DB::table('invitation')->where('event_id', $event->id)->get();
+    //                 if(!empty($eventinvitationtresults)) {
+    //                     DB::table('invitation')->where('event_id', $event->id)->delete();
+    //                 }
+    //                 $eventnotificationstresults = DB::table('notifications')->where('event_id', $event->id)->get();
+    //                 if(!empty($eventnotificationstresults)) {
+    //                     DB::table('notifications')->where('event_id', $event->id)->delete();
+    //                 }
+    //                 $repeateventinvitationresults = DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+    //                 if(!empty($repeateventinvitationresults)) {
+    //                     DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+    //                 }
+    //             }
+    //             DB::table('events')->where('user_id', $userId)->delete();
+    //         }
+
+    //         $listingresults = DB::table('listing')->where('user_id', $userId)->get();
+    //         if(!empty($listingresults)){
+    //             foreach ($listingresults as $listing) {
+    //                 $listingimageresults = DB::table('listing_image')->where('listing_id', $listing->id)->get();
+    //                 if(!empty($listingimageresults)) {
+    //                     DB::table('listing_image')->where('listing_id', $listing->id)->delete();
+    //                 }
+    //                 $listingproductresults = DB::table('product')->where('listing_id', $listing->id)->get();
+    //                 if(!empty($listingproductresults)) {
+    //                     DB::table('product')->where('listing_id', $listing->id)->delete();
+    //                 }
+    //             }
+    //             DB::table('listing')->where('user_id', $userId)->delete();
+    //         }
+
+    //         $notificationresults = DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+    //         if(!empty($notificationresults)) {
+    //             DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+    //         }
+
+    //         $productresults = DB::table('product')->where('user_id', $userId)->get();
+    //         if(!empty($productresults)) {
+    //             foreach ($productresults as $product) {
+    //                 $productimageresults = DB::table('product_image')->where('product_id', $product->id)->get();
+    //                 if(!empty($productimageresults)) {
+    //                     DB::table('product_image')->where('product_id', $product->id)->delete();
+    //                 }
+
+    //             }
+    //             DB::table('product_category')->where('user_id', $userId)->update(['user_id' => '']);
+    //             DB::table('product')->where('user_id', $userId)->delete();
+    //         }
+
+    //         Service
+
+    //         DB::table('experience')->where($deletewhere)->delete();
+    //         DB::table('favouritebusiness')->where($deletewhere)->delete();
+    //         DB::table('favouriteevent')->where($deletewhere)->delete();
+    //         DB::table('favouriteusers')->where($deletewhere)->delete();
+    //         DB::table('guardian')->where($deletewhere)->delete();
+    //         DB::table('promotion')->where($deletewhere)->delete();
+    //         DB::table('reference')->where($deletewhere)->delete();
+    //         DB::table('referral_rewards_transaction')->where(function ($query) use ($userId) {$query->where('referral_user_id', $userId)->orWhere('user_id', $userId);})->delete();
+    //         DB::table('reffer')->where($deletewhere)->delete();
+
+    //         echo "<pre>"; print_r($eventimageresults);
+    //         //$response = ["status" => 1, "message" => $results];
+    //         //return response()->json($response, 200);
+    //     } else {
+    //         $response = ['status' => 0, "error" => "User ID not found."];
+    //         return response()->join($response, 200);
+    //     }
+    // }
 }
