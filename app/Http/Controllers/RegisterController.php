@@ -81,13 +81,55 @@ class RegisterController extends Controller {
 					}
 				}
 				
-				$subject = 'StarBiz Registration';	
+				
+				$setting = DB::table('settings')->where(['settingId' => 1])->select('*')->orderBy('settingId', 'DESC')->first();				
+				$imagePath = url('setting/'.@$setting->logo.'');
+				$imagebackPath = '';
+				$subject = "StarBiz Registration";
+
+				$message = "<!Doctype html>
+				<html>
+				<head>
+				<meta charset='utf-8'>
+				<meta name='viewport' content='width=device-width, initial-scale=1'>
+				<title>StarBiz Registration</title>
+				<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap' rel='stylesheet'>
+				<body>
+				<div style='max-width:600px;
+				margin:auto;
+				border:1px solid #eee;
+				box-shadow:0 0 10px rgba(0, 0, 0, .15);
+				line-height:17px;
+				font-size:13px;
+				box-sizing:border-box; -webkit-print-color-adjust: exact;font-family: Poppins, sans-serif; background:url(".@$imagebackPath.")'>
+				<div style='padding:20px; box-sizing: border-box;text-align: center; background: #fff;'>
+				<a href='#'><img src='".@$imagePath."' style='width: 80%;'></a>
+				</div>
+				<div style='width: 400px; margin:50px auto;background: #ffffffd1;padding: 50px;text-align: center;'>
+				<h3>Your registration is successfully completed. Please see below details.</h3>
+				<p style='font-size: 15px;color: #262626;line-height: 24px;margin: 20px 0;'><b>Email: </b>: ".strip_tags(@$request->email)."</p>
+				<p style='font-size: 15px;color: #262626;line-height: 24px;margin: 20px 0;'><b>Password: </b>: ".@$request->password."</p>
+				</div>
+				<div style='background: #000;
+				text-align: left;
+				box-sizing: border-box;
+				width: 100%;
+				padding: 20px 50px;
+				color: #fff;'>
+				<p style='margin: 5px 0;font-size: 12px;'>Warm Regards,</p>
+				<p style='margin: 5px 0;font-size: 12px;'>StarBiz Team</p>
+				<p style='margin: 5px 0;font-size: 12px;'><strong>Email:</strong> <a href='#' style='color: #78daff;'>info@starbiz.com</a></p>
+				<br/>
+				<p style='margin: 5px 0;font-size: 11px;'>This is an automated response, please do not reply.</p>
+				</div>
+				</div>
+				</body>
+				</html>";
+				
+				//echo $message;die;
+				
 				$to = 	@$request->email;	
-				$message = " 
-				<h3>Your registration is successfully completed. Please see below details.</h3> 
-				<p><b>Email: </b>".strip_tags(@$request->email)."</p> 
-				<p><b>Password: </b>".@$request->password."</p>";
-				$this->sentMail($to, $message, $subject);
+				$this->sentMail($to, $message, $subject); 
 				
 				
 				//email

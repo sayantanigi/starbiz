@@ -127,17 +127,17 @@
   </div>
 <script>
 	$(document).on('click', '.toggle-password', function() {
-	$(this).toggleClass("fa-eye fa-eye-slash");
+		$(this).toggleClass("fa-eye fa-eye-slash");
 
-	var input = $("#password");
-	input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+		var input = $("#password");
+		input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 	});
 
 	$(document).on('click', '.toggle-password1', function() {
-	$(this).toggleClass("fa-eye fa-eye-slash");
+		$(this).toggleClass("fa-eye fa-eye-slash");
 
-	var input = $("#confirm_password");
-	input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
+		var input = $("#confirm_password");
+		input.attr('type') === 'password' ? input.attr('type','text') : input.attr('type','password')
 	});
 </script>
 </body>

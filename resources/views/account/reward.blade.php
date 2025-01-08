@@ -82,10 +82,32 @@
     }
 	
 	.pac-container {
-    z-index: 10000 !important;
-}
+        z-index: 10000 !important;
+    }
+	
+	#country-list {
+		float: left;
+		list-style: none;
+		margin-top: 20px;
+		padding: 0;
+		width: 99.7%;
+		position: absolute;
+		z-index: 1;
+		margin-left: -500px;
+	}
 
+	#country-list li {
+		padding: 10px;
+		/*background: #f0f0f0;*/
+		border-bottom: #bbb9b9 1px solid;
+		/*border-radius: 8px;*/
+		background: linear-gradient(90deg, #b58b42, #7a5a28)
+	}
 
+	#country-list li:hover {
+		background: #ece3d2;
+		cursor: pointer;
+	} 
   </style>
 </head>
 
@@ -156,7 +178,7 @@
         </a>
       </li>
       <li>
-        <a href="" id="TermsConditions">
+        <a href="javascript:void(0);" id="TermsConditions">
           <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
           <p>Terms & Conditions</p>
         </a>
@@ -171,14 +193,23 @@
           <i class="material-icons">menu</i>
         </div>
         <div class="header-logo">
-          <a href=""><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
+          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
         </div>
-        <div class="header-search">
+		
+        <!--<div class="header-search">
           <div class="search">
+            <i class="material-icons">search</i>
+            <input type="search" name="search" placeholder="Search" id="search-box">
+			<div id="suggesstion-box"></div>
+          </div>
+        </div>--> 
+		<div class="header-search">
+          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
             <i class="material-icons">search</i>
             <input type="search" name="search" placeholder="Search">
           </div>
-        </div>
+        </div> 
+		
       </div>
       <div class="header-menu">
         <ul class="ul-base">
@@ -193,13 +224,13 @@
     	<div class="container-fluid m-0 Section Rewards" >
       <div class="row m-0 TabBar mb-2">
         <div class="Pagination">
-          <a href="" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Rewards</a>
+          <a href="<?=url('dashboard')?>" ><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Rewards</a>
         </div>
 
         <div class="row m-0 align-items-center d-flex flex-row justify-content-center" style="background: #fff;">
           <div class="col-lg-3 col-md-3 col-sm-12 ReferralDataContainer">
             <p class="m-0 Heading">Total Reward Points</p>
-            <p class="m-0 SubHeading">5000</p>
+            <p class="m-0 SubHeading"><?=@$userInfo->earned_rewords_point?></p>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
             <img class="ReferralDataImage" src="<?=url('assets/home/images/RewardBanner.png')?>" alt="">
@@ -214,6 +245,54 @@
       </div>
 
       <div id="AllReward" class="row m-0 TabContent active">
+	    <?php
+		    if(count(@$myReward) > 0){
+				foreach($myReward as $k => $v){
+					$my_earned_point = '--';
+					if(!empty($v->my_earned_point)){
+					    $my_earned_point = $v->my_earned_point;
+					}
+					$active_date = '';
+					if(!empty(@$v->created_at) && @$v->created_at != '0000-00-00 00:00:00'){
+						$active_date = date('M d, Y', strtotime(@$v->created_at));
+					}
+		?>
+			<div class="col-lg-4 col-md-4 ps-0 mb-4">
+			  <div class="TransactionBlock">
+				<div class="TransactionData">
+				  <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
+				  <div class="TransactionTextdata">
+					<p class="m-0">You have earned</p>
+					<p class="m-0"><?=@$active_date?></p>
+				  </div>
+				</div>
+				<div class="LastDataContainer">
+				  <p class="TransactionAmount">+<?=@$my_earned_point?></p>
+				  <div class="PointsBlock">
+					<img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<?php } } ?>
+        <!--<div class="col-lg-4 col-md-4 ps-0 mb-4">
+          <div class="TransactionBlock">
+            <div class="TransactionData">
+              <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
+              <div class="TransactionTextdata">
+                <p class="m-0">You have earned</p>
+                <p class="m-0">Date</p>
+              </div>
+            </div>
+            <div class="LastDataContainer">
+              <p class="TransactionAmount">+100</p>
+              <div class="PointsBlock">
+                <img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+		
         <div class="col-lg-4 col-md-4 ps-0 mb-4">
           <div class="TransactionBlock">
             <div class="TransactionData">
@@ -231,40 +310,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 ps-0 mb-4">
-          <div class="TransactionBlock">
-            <div class="TransactionData">
-              <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
-              <div class="TransactionTextdata">
-                <p class="m-0">You have earned</p>
-                <p class="m-0">Date</p>
-              </div>
-            </div>
-            <div class="LastDataContainer">
-              <p class="TransactionAmount">+100</p>
-              <div class="PointsBlock">
-                <img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 ps-0 mb-4">
-          <div class="TransactionBlock">
-            <div class="TransactionData">
-              <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
-              <div class="TransactionTextdata">
-                <p class="m-0">You have earned</p>
-                <p class="m-0">Date</p>
-              </div>
-            </div>
-            <div class="LastDataContainer">
-              <p class="TransactionAmount">+100</p>
-              <div class="PointsBlock">
-                <img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
+		
         <div class="col-lg-4 col-md-4 ps-0">
           <div class="TransactionBlock">
             <div class="TransactionData">
@@ -298,11 +344,42 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>--->
+		
       </div>
 
       <div id="EarnedReward" class="row m-0 TabContent">
-        <div class="col-lg-4 col-md-4 ps-0 mb-4">
+        <?php
+		    if(count(@$myReward) > 0){
+				foreach($myReward as $k => $v){
+					$my_earned_point = '--';
+					if(!empty($v->my_earned_point)){
+					    $my_earned_point = $v->my_earned_point;
+					}
+					$active_date = '';
+					if(!empty(@$v->created_at) && @$v->created_at != '0000-00-00 00:00:00'){
+						$active_date = date('M d, Y', strtotime(@$v->created_at));
+					}
+		?>
+			<div class="col-lg-4 col-md-4 ps-0 mb-4">
+			  <div class="TransactionBlock">
+				<div class="TransactionData">
+				  <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
+				  <div class="TransactionTextdata">
+					<p class="m-0">You have earned</p>
+					<p class="m-0"><?=@$active_date?></p>
+				  </div>
+				</div>
+				<div class="LastDataContainer">
+				  <p class="TransactionAmount">+<?=@$my_earned_point?></p>
+				  <div class="PointsBlock">
+					<img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<?php } } ?>
+        <!--<div class="col-lg-4 col-md-4 ps-0 mb-4">
           <div class="TransactionBlock">
             <div class="TransactionData">
               <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
@@ -335,24 +412,7 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 ps-0 mb-4">
-          <div class="TransactionBlock">
-            <div class="TransactionData">
-              <img src="<?=url('assets/home/images/CompleteIcon.png')?>" alt="">
-              <div class="TransactionTextdata">
-                <p class="m-0">You have earned</p>
-                <p class="m-0">Date</p>
-              </div>
-            </div>
-            <div class="LastDataContainer">
-              <p class="TransactionAmount">+100</p>
-              <div class="PointsBlock">
-                <img src="<?=url('assets/home/images/Icon35.png')?>" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
+        </div>-->
       </div>
 
       <div id="RedeemedReward" class="row m-0 TabContent">
@@ -393,6 +453,56 @@
       </div>
     </div>
     </main>
+	
+	<!-- Search Modal -->
+    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-12 col-sm-12">
+                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" id="suggesstion-box">
+		  
+            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Event Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Business Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Network Name</p>
+              </a>
+            </div>-->
+			
+          </div>
+        </div>
+      </div>
+    </div>
 
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
@@ -2372,6 +2482,38 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$("#SaleList").click(function () {
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
 	});
+	
+	$(document).ready(function() {
+		$("#search-box").keyup(function() {
+			$.ajax({
+				type: "POST",
+				url: "<?=url('dashboard/autoSuggestion')?>",
+				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+				beforeSend: function() {
+				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					//$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	
+	$(document).on("click", ".selectCountry", function () {
+		var search  = $(this).attr("search");
+		var keywork = $(this).attr("keywork");
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+	});
+	
+	<!-- New Script -->
+    document.querySelector('.search').addEventListener('click', function () {
+      const modal = document.getElementById('SearchModal');
+      if (modal) {
+        modal.classList.add('SearchModalStyle');
+      }
+    });
   </script>
 </body>
 

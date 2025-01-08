@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 07, 2025 at 08:01 PM
+-- Generation Time: Jan 08, 2025 at 08:12 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.3.14
 
@@ -48659,7 +48659,10 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`id`, `event_name`, `description`, `user_id`, `category`, `start_date`, `end_date`, `backgroung_image`, `front_image`, `location`, `country`, `state`, `city`, `zipcode`, `latitude`, `longitude`, `email`, `phone`, `website`, `tags`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Sayantan', 'Testtttg', 79, 0, '2025-01-07 17:32:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'i@gmail.com', '99999999999', 'wew.v@gmail.com', '8,9,21,6,17', 1, '2025-01-06 12:03:39', '2025-01-06 12:11:48'),
-(3, 'New testing Event', 'test', 9, 2, '2025-01-09 05:42:00', NULL, NULL, NULL, 'Nashville, TN, USA', 'United States', 'Tennessee', 'Davidson County', '37219', '36.1626638', '-86.7816016', 'test@gmail.com', '9876543210', 'http://test.com', '9,21,6', 1, '2025-01-06 12:13:46', '2025-01-07 13:47:46');
+(3, 'New testing Event', 'test', 9, 2, '2025-01-09 05:42:00', NULL, NULL, NULL, 'Nashville, TN, USA', 'United States', 'Tennessee', 'Davidson County', '37219', '36.1626638', '-86.7816016', 'test@gmail.com', '9876543210', 'http://test.com', '9,21,6', 1, '2025-01-06 12:13:46', '2025-01-07 13:47:46'),
+(4, 'My event', 'ggghhjj', 79, 2, '2025-01-09 11:45:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'igi@gmail.com', '99999999999', 'wee.wbut@gmail.com', '8,9', 1, '2025-01-08 05:17:00', '2025-01-08 05:17:00'),
+(5, 'My Event', 'bbbbn', 80, 4, '2025-01-09 16:01:00', NULL, NULL, NULL, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', 'Russia', 'Ulyanovsk', NULL, NULL, '54.321102', '48.57002', 'hhhj', '999999999', 'ghhhj', '8,9', 1, '2025-01-08 10:32:22', '2025-01-08 10:32:22'),
+(6, 'Testtttt', 'gggggh', 93, 0, '2025-01-17 16:25:00', NULL, NULL, NULL, 'Kolkata, West Bengal, India', 'India', 'West Bengal', NULL, NULL, '22.556843', '88.35465', 't@gmail.com', '99999999998888', 'ggggg', '8,9,21', 1, '2025-01-08 10:56:29', '2025-01-08 10:56:29');
 
 -- --------------------------------------------------------
 
@@ -48706,7 +48709,10 @@ CREATE TABLE `event_image` (
 INSERT INTO `event_image` (`id`, `image`, `event_id`, `created_at`, `updated_at`) VALUES
 (70, 'e7d6e2e80f0955c01f3e043ee79abbb6.jpg', 1, '2025-01-06 12:03:39', '2025-01-06 12:03:39'),
 (72, 'a9b7ba70783b617e9998dc4dd82eb3c5.jpg', 3, '2025-01-06 12:13:46', '2025-01-06 12:13:46'),
-(73, 'c3a690be93aa602ee2dc0ccab5b7b67e.jpg', 3, '2025-01-06 12:13:46', '2025-01-06 12:13:46');
+(73, 'c3a690be93aa602ee2dc0ccab5b7b67e.jpg', 3, '2025-01-06 12:13:46', '2025-01-06 12:13:46'),
+(74, '33dd6dba1d56e826aac1cbf23cdcca87.jpg', 4, '2025-01-08 05:17:00', '2025-01-08 05:17:00'),
+(75, '7c2c48a32443ad8f805e48520f3b26a4.jpg', 5, '2025-01-08 10:32:22', '2025-01-08 10:32:22'),
+(76, '647c722bf90a49140184672e0d3723e3.jpeg', 6, '2025-01-08 10:56:29', '2025-01-08 10:56:29');
 
 -- --------------------------------------------------------
 
@@ -48825,7 +48831,8 @@ INSERT INTO `favouritebusiness` (`id`, `listing_id`, `user_id`, `created_at`, `u
 (59, 70, 67, '2024-12-17 06:36:30', '2024-12-17 06:36:30'),
 (61, 64, 61, '2024-12-26 20:30:18', '2024-12-26 20:30:18'),
 (68, 89, 79, '2025-01-06 11:05:54', '2025-01-06 11:05:54'),
-(77, 90, 79, '2025-01-07 07:46:09', '2025-01-07 07:46:09');
+(77, 90, 79, '2025-01-07 07:46:09', '2025-01-07 07:46:09'),
+(78, 94, 79, '2025-01-08 09:33:54', '2025-01-08 09:33:54');
 
 -- --------------------------------------------------------
 
@@ -48859,7 +48866,11 @@ INSERT INTO `favouriteevent` (`id`, `event_id`, `user_id`, `created_at`, `update
 (160, 43, 78, '2025-01-06 08:00:32', '2025-01-06 08:00:32'),
 (197, 47, 79, '2025-01-06 11:47:51', '2025-01-06 11:47:51'),
 (622, 3, 66, '2025-01-07 08:05:22', '2025-01-07 08:05:22'),
-(624, 1, 81, '2025-01-07 08:37:43', '2025-01-07 08:37:43');
+(624, 1, 81, '2025-01-07 08:37:43', '2025-01-07 08:37:43'),
+(625, 4, 79, '2025-01-08 05:17:22', '2025-01-08 05:17:22'),
+(628, 5, 80, '2025-01-08 10:33:26', '2025-01-08 10:33:26'),
+(629, 5, 93, '2025-01-08 10:51:20', '2025-01-08 10:51:20'),
+(631, 6, 93, '2025-01-08 11:16:55', '2025-01-08 11:16:55');
 
 -- --------------------------------------------------------
 
@@ -48987,7 +48998,10 @@ CREATE TABLE `invitation` (
 --
 
 INSERT INTO `invitation` (`id`, `event_id`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, NULL, '1', '2025-01-07 13:51:51', '2025-01-07 08:26:32');
+(1, 4, NULL, '2', '2025-01-08 11:59:50', '2025-01-08 11:59:50'),
+(2, 3, NULL, '1', '2025-01-08 12:00:35', '2025-01-08 06:31:29'),
+(3, 3, NULL, '1', '2025-01-08 12:07:44', '2025-01-08 06:38:09'),
+(4, 3, NULL, '0', '2025-01-08 12:08:42', '2025-01-08 06:39:02');
 
 -- --------------------------------------------------------
 
@@ -49040,7 +49054,12 @@ INSERT INTO `listing` (`id`, `business_name`, `name`, `category`, `subcategory`,
 (87, 'test', 'data', 22, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'fffffg', '9999999999', '12@gmail.com', 'www.gmail.com', '#Actor, #Actress', 67, 1, '2024-12-28 12:59:08', '2024-12-28 12:59:08'),
 (88, 'suman', 'test', 22, NULL, '0', '0', '0', NULL, 0, 0, 'District of Columbia, United States', '38.895', '-77.03667', 'tttt', '999999999', 'ig@gmail.com', 'www.cv.com', '#Actress', 67, 1, '2025-01-06 05:55:40', '2025-01-06 05:55:40'),
 (89, 'Because', 'Trik ffgg', 11, NULL, '0', '0', '0', NULL, 0, 0, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', '54.321102', '48.57002', 'testing', '999999999', 'igi187@goigi.in', 'www.google.com', '#Actor, #Actress', 79, 1, '2025-01-06 08:22:19', '2025-01-06 08:22:19'),
-(90, 'Test', 'suman', 22, NULL, NULL, NULL, NULL, NULL, 0, 0, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', '54.321102', '48.57002', 'Testtttg', '99999999999', 'suman.f@gmail.com', 'www.xyz.com', '#Actor, #Actress, #Aesthetic', 79, 1, '2025-01-07 07:42:02', '2025-01-07 06:29:26');
+(90, 'Test', 'suman', 22, NULL, NULL, NULL, NULL, NULL, 0, 0, 'Колхозный, Чердаклинский район, Ulyanovsk, Russia', '54.321102', '48.57002', 'Testtttg', '99999999999', 'suman.f@gmail.com', 'www.xyz.com', '#Actor, #Actress, #Aesthetic', 79, 1, '2025-01-07 07:42:02', '2025-01-07 06:29:26'),
+(92, 'test', 'test', 15, NULL, '0', '0', '0', NULL, 0, 0, 'College Park, Maryland, United States', '38.980858', '-76.93798', 'tgcvg', '7980558698', 'sayandeb@goigi.in', 'texxg', '#Artist, #Aesthetic', 66, 1, '2025-01-08 09:22:13', '2025-01-08 09:22:13'),
+(93, 'SG', 'hg', 22, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'vhh', '9999999999', 'd@gmail.com', 'www', '#Actor, #Actress', 79, 1, '2025-01-08 09:25:50', '2025-01-08 09:25:50'),
+(94, 'new business', 'Akter', 17, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'vbbb', '999999999999', 'hhj', 'tyyy', '#Actor, #Actress', 79, 1, '2025-01-08 09:32:36', '2025-01-08 09:32:36'),
+(95, 'Business event', 'kolkata', 22, NULL, '0', '0', '0', NULL, 0, 0, 'New York, New York, United States', '40.712749', '-74.005994', 'tedffff', '9999999999999', 'gghh', 'weee', '#Actor, #Actress', 93, 1, '2025-01-08 10:47:20', '2025-01-08 10:47:20'),
+(96, 'Genuine Car Service', 'Sayan Deb', 35, NULL, '0', '0', '0', NULL, 0, 0, 'Kolkata, West Bengal, India', '22.556843', '88.35465', 'Genuine car service', '7980558688', 'sayannaskar@gmail.com', NULL, '#Actress, #Aesthetic, #Artist', 98, 1, '2025-01-08 12:11:53', '2025-01-08 12:11:53');
 
 -- --------------------------------------------------------
 
@@ -49215,7 +49234,13 @@ INSERT INTO `listing_image` (`id`, `image`, `listing_id`, `created_at`, `undated
 (96, '78d69f40906679a976dc4d45cebffbe6.jpg', 88, '2025-01-06 05:55:40', '2025-01-06 05:55:40'),
 (97, '1f88c7c5d7d94ae08bd752aa3d82108b.jpg', 89, '2025-01-06 08:22:19', '2025-01-06 08:22:19'),
 (98, '487129304eca93e3646dd0c7dd441bf5.jpg', 90, '2025-01-07 07:42:02', '2025-01-07 07:42:02'),
-(99, '54f3bc04830d762a3b56a789b6ff62df.jpg', 1, '2025-01-07 11:59:26', '2025-01-07 11:59:26');
+(99, '54f3bc04830d762a3b56a789b6ff62df.jpg', 1, '2025-01-07 11:59:26', '2025-01-07 11:59:26'),
+(100, '043c2ec6c6390dd0ac5519190a57c88c.jpeg', 91, '2025-01-08 07:02:52', '2025-01-08 07:02:52'),
+(101, '7de6cd35982b5384abd11277d1c25f4f.jpeg', 92, '2025-01-08 09:22:13', '2025-01-08 09:22:13'),
+(102, '13ece95531e87921222a0f9d93230691.jpeg', 93, '2025-01-08 09:25:51', '2025-01-08 09:25:51'),
+(103, '7bd66825e9a97424ffe5645549270832.png', 94, '2025-01-08 09:32:36', '2025-01-08 09:32:36'),
+(104, '4491777b1aa8b5b32c2e8666dbe1a495.jpg', 95, '2025-01-08 10:47:20', '2025-01-08 10:47:20'),
+(105, '4513c30b7d281d3bd5b6f91ddb1f61b9.jpg', 96, '2025-01-08 12:11:53', '2025-01-08 12:11:53');
 
 -- --------------------------------------------------------
 
@@ -49363,7 +49388,45 @@ INSERT INTO `notifications` (`id`, `noti_msg`, `event_id`, `sender_id`, `receive
 (163, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-07 12:54:01', '2025-01-07 12:54:01'),
 (164, 'Sayan Deb your event invitation is accepted from sumon Majumder.', 3, 66, 79, 2, '1', '2025-01-07 13:18:57', '2025-01-07 13:18:57'),
 (165, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-07 13:51:51', '2025-01-07 13:51:51'),
-(166, 'sumon Majumder your event invitation is accepted from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-07 13:56:32', '2025-01-07 13:56:32');
+(166, 'sumon Majumder your event invitation is accepted from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-07 13:56:32', '2025-01-07 13:56:32'),
+(167, 'sumon Majumder has invite you for join event.', 4, 79, 66, 1, '1', '2025-01-08 05:26:36', '2025-01-08 05:26:36'),
+(168, 'Chetan Bele has invite you for join event.', 4, 67, 22, 1, '1', '2025-01-08 05:31:15', '2025-01-08 05:31:15'),
+(169, 'sumon Majumder has invite you for join event.', 3, 79, 91, 1, '1', '2025-01-08 05:43:19', '2025-01-08 05:43:19'),
+(170, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 06:03:11', '2025-01-08 06:03:11'),
+(171, 'Sayan Deb your event invitation is rejected from sumon Majumder.', 3, 66, 79, 2, '1', '2025-01-08 06:28:20', '2025-01-08 06:28:20'),
+(172, 'sumon Majumder your event invitation is rejected from suman AE.', 3, 79, 91, 2, '1', '2025-01-08 07:00:56', '2025-01-08 07:00:56'),
+(173, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 4, 79, 66, 2, '1', '2025-01-08 07:06:17', '2025-01-08 07:06:17'),
+(174, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 07:13:26', '2025-01-08 07:13:26'),
+(175, 'sumon Majumder your event invitation is accepted from Sayan Deb.', 4, 79, 66, 2, '1', '2025-01-08 07:48:35', '2025-01-08 07:48:35'),
+(176, 'Sayan Deb your event invitation is accepted from sumon Majumder.', 3, 66, 79, 2, '1', '2025-01-08 08:01:09', '2025-01-08 08:01:09'),
+(177, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 08:17:56', '2025-01-08 08:17:56'),
+(178, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 08:18:12', '2025-01-08 08:18:12'),
+(179, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 08:19:40', '2025-01-08 08:19:40'),
+(180, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 08:19:54', '2025-01-08 08:19:54'),
+(181, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:35:25', '2025-01-08 09:35:25'),
+(182, 'sumon Majumder your event invitation is accepted from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 09:35:53', '2025-01-08 09:35:53'),
+(183, 'sumon Majumder has invite you for join event.', 4, 79, 66, 1, '1', '2025-01-08 09:36:45', '2025-01-08 09:36:45'),
+(184, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 4, 79, 66, 2, '1', '2025-01-08 09:36:56', '2025-01-08 09:36:56'),
+(185, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:38:02', '2025-01-08 09:38:02'),
+(186, 'sumon Majumder your event invitation is accepted from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 09:38:21', '2025-01-08 09:38:21'),
+(187, 'sumon Majumder has invite you for join event.', 4, 79, 66, 1, '1', '2025-01-08 09:39:01', '2025-01-08 09:39:01'),
+(188, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 4, 79, 66, 2, '1', '2025-01-08 09:39:17', '2025-01-08 09:39:17'),
+(189, 'Sayantan Bhakta has invite you for join event.', 3, 80, 66, 1, '1', '2025-01-08 09:43:00', '2025-01-08 09:43:00'),
+(190, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:43:28', '2025-01-08 09:43:28'),
+(191, 'Sayantan Bhakta your event invitation is rejected from Sayan Deb.', 3, 80, 66, 2, '1', '2025-01-08 09:43:41', '2025-01-08 09:43:41'),
+(192, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 09:43:46', '2025-01-08 09:43:46'),
+(193, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:45:38', '2025-01-08 09:45:38'),
+(194, 'sumon Majumder your event invitation is rejected from Sayan Deb.', 3, 79, 66, 2, '1', '2025-01-08 09:45:55', '2025-01-08 09:45:55'),
+(195, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:46:39', '2025-01-08 09:46:39'),
+(196, 'sumon Majumder has invite you for join event.', 3, 79, 66, 1, '1', '2025-01-08 09:55:35', '2025-01-08 09:55:35'),
+(197, 'Sayan Deb your event invitation is rejected from sumon Majumder.', 3, 66, 79, 2, '1', '2025-01-08 09:59:38', '2025-01-08 09:59:38'),
+(198, 'A  has invite you for join event.', 4, 99, 98, 1, '1', '2025-01-08 11:59:50', '2025-01-08 11:59:50'),
+(199, 'A  has invite you for join event.', 3, 99, 98, 1, '1', '2025-01-08 12:00:35', '2025-01-08 12:00:35'),
+(200, 'Sayan Naskar your event invitation is accepted from A .', 3, 98, 99, 2, '1', '2025-01-08 12:01:29', '2025-01-08 12:01:29'),
+(201, 'sumon Majumder has invite you for join event.', 3, 79, 98, 1, '1', '2025-01-08 12:07:44', '2025-01-08 12:07:44'),
+(202, 'Sayan Naskar your event invitation is accepted from sumon Majumder.', 3, 98, 79, 2, '1', '2025-01-08 12:08:09', '2025-01-08 12:08:09'),
+(203, 'sumon Majumder has invite you for join event.', 3, 79, 98, 1, '1', '2025-01-08 12:08:42', '2025-01-08 12:08:42'),
+(204, 'sumon Majumder your event invitation is rejected from Sayan Naskar.', 3, 79, 98, 2, '1', '2025-01-08 12:09:02', '2025-01-08 12:09:02');
 
 -- --------------------------------------------------------
 
@@ -49434,7 +49497,13 @@ INSERT INTO `product` (`id`, `name`, `category`, `subcategory`, `listing_id`, `p
 (36, 'kajra product', 3, 0, 90, '60000', '0', 0, 0, 'y yvyv yvy', 'Artist, Aesthetic, Bodybuilding', 1, 79, '2025-01-07 12:04:58', '2025-01-07 12:04:58'),
 (37, 'kajraproduct2', 8, 0, 90, '6000', '0', 0, 0, 'gggg', 'Bodybuilding', 1, 79, '2025-01-07 12:07:32', '2025-01-07 12:07:32'),
 (38, 'kajraproduct3', 24, 0, 90, '80000', '0', 0, 0, 'ghvbhvf', 'Actress, Artist, Bodybuilding', 1, 79, '2025-01-07 12:07:32', '2025-01-07 12:07:32'),
-(39, 'TYecc', 22, 0, 90, '200', '0', 0, 0, 'ttttttyy', 'Actress', 1, 79, '2025-01-07 12:20:50', '2025-01-07 12:20:50');
+(39, 'TYecc', 22, 0, 90, '200', '0', 0, 0, 'ttttttyy', 'Actress', 1, 79, '2025-01-07 12:20:50', '2025-01-07 12:20:50'),
+(40, 'ttttt', 22, 0, 90, '509', '0', 0, 0, 'ghg', 'Actor, Actress', 1, 79, '2025-01-08 08:28:28', '2025-01-08 08:28:28'),
+(41, 'dinning table', 4, 0, 86, '15000', '0', 0, 0, 'test', 'Bodybuilding, Artist, Actress', 1, 66, '2025-01-08 09:30:41', '2025-01-08 09:30:41'),
+(42, 'Treddd', 22, 0, 94, '500', '0', 0, 0, 'ghhhhj', 'Actor, Aesthetic', 1, 79, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(43, 'Treju', 23, 0, 95, '600', '0', 0, 0, 'Testyyu', 'Actor, Actress', 1, 93, '2025-01-08 10:49:27', '2025-01-08 10:49:27'),
+(44, 'UTE', 23, 0, 94, '7509', '0', 0, 0, 'test', 'Actor, Actress', 1, 79, '2025-01-08 12:11:49', '2025-01-08 12:11:49'),
+(45, 'Car parts', 19, 0, 96, '5000', '0', 0, 0, 'test', 'Actress, Artist', 1, 98, '2025-01-08 12:12:54', '2025-01-08 12:12:54');
 
 -- --------------------------------------------------------
 
@@ -49485,7 +49554,12 @@ INSERT INTO `product_category` (`id`, `user_id`, `name`, `description`, `image`,
 (34, '79', 'Testhhh', NULL, NULL, 1, '2025-01-07 09:34:34', '2025-01-07 09:34:34'),
 (35, '79', 'Youttt', NULL, NULL, 1, '2025-01-07 09:46:00', '2025-01-07 09:46:00'),
 (36, '79', 'Tttttttt', NULL, NULL, 1, '2025-01-07 09:46:43', '2025-01-07 09:46:43'),
-(37, '79', 'Home Services', NULL, NULL, 1, '2025-01-07 09:53:24', '2025-01-07 09:53:24');
+(37, '79', 'Home Services', NULL, NULL, 1, '2025-01-07 09:53:24', '2025-01-07 09:53:24'),
+(42, '79', 'Trrrr', NULL, NULL, 1, '2025-01-08 08:27:43', '2025-01-08 08:27:43'),
+(44, '66', 'Liquor', NULL, NULL, 1, '2025-01-08 08:58:38', '2025-01-08 08:58:38'),
+(45, '79', 'Rrrrr', NULL, NULL, 1, '2025-01-08 09:32:46', '2025-01-08 09:32:46'),
+(46, '93', 'AB test', NULL, NULL, 1, '2025-01-08 10:47:34', '2025-01-08 10:47:34'),
+(47, '79', 'UTEST CAT', NULL, NULL, 1, '2025-01-08 12:10:06', '2025-01-08 12:10:06');
 
 -- --------------------------------------------------------
 
@@ -49556,7 +49630,19 @@ INSERT INTO `product_image` (`id`, `image`, `product_id`, `created_at`, `updated
 (49, '569ff987c643b4bedf504efda8f786c2.jpg', 38, '2025-01-07 12:07:32', '2025-01-07 12:07:32'),
 (50, '07bb5fdef1ee99d35eaccce14f8b5540.jpg', 38, '2025-01-07 12:07:32', '2025-01-07 12:07:32'),
 (51, '642eaa3479d2eb1130f6e0564f00f751.jpg', 39, '2025-01-07 12:20:50', '2025-01-07 12:20:50'),
-(52, '590494d54ebe8eda5858c48f34e12b51.jpg', 39, '2025-01-07 12:20:50', '2025-01-07 12:20:50');
+(52, '590494d54ebe8eda5858c48f34e12b51.jpg', 39, '2025-01-07 12:20:50', '2025-01-07 12:20:50'),
+(53, 'c678aec6e828c899b32a099c14ee882c.jpg', 40, '2025-01-08 08:28:28', '2025-01-08 08:28:28'),
+(54, '16fc18d787294ad5171100e33d05d4e2.jpg', 41, '2025-01-08 09:30:41', '2025-01-08 09:30:41'),
+(55, 'e7a425c6ece20cbc9056f98699b53c6f.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(56, '690e6de4e3e2c0916b6160d9959d156b.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(57, '28a7602724ba16600d5ccc644c19bf18.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(58, '3f1656d9668dffcf8119e3ecff873558.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(59, 'c922de9e01cba8a4684f6c3471130e4c.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(60, '31c23973a376c90940f5f5ff2118b5d2.jpg', 42, '2025-01-08 09:33:26', '2025-01-08 09:33:26'),
+(61, '4d7a968bb636e25818ff2a3941db08c1.jpg', 43, '2025-01-08 10:49:27', '2025-01-08 10:49:27'),
+(62, 'e7023ba77a45f7e84c5ee8a28dd63585.jpg', 43, '2025-01-08 10:49:27', '2025-01-08 10:49:27'),
+(63, '2e7638c6f7667569fe469fec28c7405b.jpg', 44, '2025-01-08 12:11:49', '2025-01-08 12:11:49'),
+(64, '83187550749e6b8024a097630f9d4722.jpg', 45, '2025-01-08 12:12:54', '2025-01-08 12:12:54');
 
 -- --------------------------------------------------------
 
@@ -49637,7 +49723,8 @@ INSERT INTO `promotion` (`id`, `ads_name`, `url`, `description`, `file_type`, `i
 (52, 'Vigneto\'s Italian Grill', '', '', 1, '603936309.jpg', 'Home,Ads', 0, '2', 'Male', '3', 'Parent', '1', 'Plantation, FL, USA', '26.1275862', '-80.23310359999999', '', 1, '2024-12-19 02:13:49', '2024-12-19 02:13:49'),
 (53, 'test ads', '', '', 1, '1229280766.jpg', '', 9, '1', 'Male', '3', 'Parent', '2', 'Nagpur, Maharashtra, India', '21.1458004', '79.0881546', '', 1, '2024-12-24 12:58:18', '2024-12-24 12:58:18'),
 (54, 'holiday special', NULL, '', 1, '1419731892.jpg', NULL, 9, '1', 'Male', '4', 'Select parental status', '6', 'undefined', 'undefined', 'undefined', '', 0, '2024-12-28 23:14:12', '2024-12-28 23:14:12'),
-(56, 'RND', NULL, '', 1, '1688843493.jpg', NULL, 79, '2', 'Male', '3', 'Single Parent', '1', 'New York, New York, United States', '40.712749', '-74.005994', '', 0, '2025-01-06 08:15:04', '2025-01-06 08:15:04');
+(56, 'RND', NULL, '', 1, '1688843493.jpg', NULL, 79, '2', 'Male', '3', 'Single Parent', '1', 'New York, New York, United States', '40.712749', '-74.005994', '', 0, '2025-01-06 08:15:04', '2025-01-06 08:15:04'),
+(70, 'test', '', '', 1, '1496925507.jpg', '', 9, '1', 'Male', '2', 'Parent', '2', 'Nagpur, Maharashtra, India', '21.1458004', '79.0881546', '', 1, '2025-01-08 12:06:17', '2025-01-08 12:06:17');
 
 -- --------------------------------------------------------
 
@@ -49730,7 +49817,8 @@ CREATE TABLE `referral_rewards_transaction` (
 
 INSERT INTO `referral_rewards_transaction` (`id`, `referral_user_id`, `user_id`, `referral_code`, `referral_earned_point`, `my_earned_point`, `created_at`, `updated_at`) VALUES
 (6, 75, 9, 'MNioJ7', '10', '5', '2024-12-24 12:41:01', '2024-12-24 12:41:01'),
-(7, 75, 9, 'MNioJ7', '10', '5', '2024-12-24 12:44:35', '2024-12-24 12:44:35');
+(7, 75, 9, 'MNioJ7', '10', '5', '2024-12-24 12:44:35', '2024-12-24 12:44:35'),
+(8, NULL, 9, '', '10', '', '2025-01-08 12:19:46', '2025-01-08 12:19:46');
 
 -- --------------------------------------------------------
 
@@ -49786,7 +49874,11 @@ CREATE TABLE `repeat_invitation` (
 --
 
 INSERT INTO `repeat_invitation` (`id`, `invitation_id`, `sender_id`, `receiver_id`, `amount`, `hour`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 79, 66, '500', NULL, '19:20:00', '19:20:00', '1', '2025-01-07 13:51:51', '2025-01-07 08:26:32');
+(1, 1, 99, 98, '500', NULL, '17:29:00', '17:29:00', '2', '2025-01-08 11:59:50', '2025-01-08 11:59:50'),
+(2, 2, 99, 98, '500', NULL, '17:30:00', '17:30:00', '2', '2025-01-08 12:00:35', '2025-01-08 12:00:35'),
+(3, 2, 98, 99, '400', '4', '17:30:00', '17:30:00', '1', '2025-01-08 12:01:18', '2025-01-08 06:31:29'),
+(4, 3, 79, 98, '600', NULL, '04:37:00', '06:37:00', '2', '2025-01-08 12:07:44', '2025-01-08 12:07:44'),
+(5, 3, 98, 79, '450', '4', '04:37:00', '06:37:00', '1', '2025-01-08 12:08:01', '2025-01-08 06:38:09');
 
 -- --------------------------------------------------------
 
@@ -49896,7 +49988,9 @@ INSERT INTO `services` (`id`, `name`, `category`, `subcategory`, `listing_id`, `
 (11, 'services', 6, NULL, 83, '50', '0', NULL, NULL, 'tytggg', '', 1, 67, '2024-12-28 09:50:04', '2024-12-28 09:50:04'),
 (12, 'Rest', 2, NULL, 1, '50', '0', NULL, NULL, 'test', 'Actress', 1, 9, '2024-12-28 09:55:34', '2024-12-28 09:55:34'),
 (13, 'catddd', 8, NULL, 84, '50', '0', NULL, NULL, 'treed', 'Actress', 1, 67, '2024-12-28 11:22:10', '2024-12-28 11:22:10'),
-(14, 'Services', 3, NULL, 90, '590', '0', NULL, NULL, 'vghhhjj', 'Actor, Actress', 1, 0, '2025-01-07 12:20:52', '2025-01-07 06:52:05');
+(14, 'Services', 3, NULL, 90, '590', '0', NULL, NULL, 'vghhhjj', 'Actor, Actress', 1, 0, '2025-01-07 12:20:52', '2025-01-07 06:52:05'),
+(15, 'test', 23, NULL, 94, '509', '0', NULL, NULL, 'ttyy', 'Actor, Actress', 1, 79, '2025-01-08 12:12:01', '2025-01-08 12:12:01'),
+(16, 'test', 23, NULL, 94, '509', '0', NULL, NULL, 'ttyy', 'Actor, Actress', 1, 79, '2025-01-08 12:12:10', '2025-01-08 12:12:10');
 
 -- --------------------------------------------------------
 
@@ -49924,7 +50018,11 @@ INSERT INTO `services_image` (`id`, `image`, `service_id`, `created_at`, `update
 (9, '83f97f4825290be4cb794ec6a234595f.jpg', 11, '2024-12-28 09:50:04', '2024-12-28 09:50:04'),
 (10, '59139a91a16c9b09a388091bdfe639de.jpg', 13, '2024-12-28 10:08:08', '2024-12-28 10:08:08'),
 (11, 'a7f592cef8b130a6967a90617db5681b.jpg', 14, '2025-01-07 12:20:52', '2025-01-07 12:20:52'),
-(12, '8c9a14ffebb7677d033ffce847991293.jpg', 14, '2025-01-07 12:20:52', '2025-01-07 12:20:52');
+(12, '8c9a14ffebb7677d033ffce847991293.jpg', 14, '2025-01-07 12:20:52', '2025-01-07 12:20:52'),
+(13, '97785e0500ad16c18574c64189ccf4b4.jpg', 15, '2025-01-08 12:12:01', '2025-01-08 12:12:01'),
+(14, '74563ba21a90da13dacf2a73e3ddefa7.jpg', 15, '2025-01-08 12:12:01', '2025-01-08 12:12:01'),
+(15, 'c67ba7c4c5c0cd4cc3e3a7146fe5c015.jpg', 16, '2025-01-08 12:12:10', '2025-01-08 12:12:10'),
+(16, '3ac48664b7886cf4e4ab4aba7e6b6bc9.jpg', 16, '2025-01-08 12:12:10', '2025-01-08 12:12:10');
 
 -- --------------------------------------------------------
 
@@ -54091,8 +54189,8 @@ CREATE TABLE `stripe_connect` (
 
 INSERT INTO `stripe_connect` (`id`, `userId`, `stripe_acc_id`, `expires_at`, `url`, `created_at`, `updated_at`) VALUES
 (2, 99, 'acct_1QPjJ4Ic1SyMOleJ', '1732706780', 'https://connect.stripe.com/setup/e/acct_1QPjJ4Ic1SyMOleJ/FVaxYFc2lcOl', NULL, '2024-11-30 05:41:24'),
-(4, 9, 'acct_1QeanRQMkCDk9rr7', '1736248990', 'https://connect.stripe.com/setup/e/acct_1QeanRQMkCDk9rr7/6qCEAaDpnspo', NULL, '2025-01-07 11:18:11'),
-(5, 81, 'acct_1QeYrV4GQCRK71h3', '1736241555', 'https://connect.stripe.com/setup/e/acct_1QeYrV4GQCRK71h3/DN9StIQCvDoJ', NULL, '2025-01-07 09:14:15');
+(4, 9, 'acct_1QesZ73iNfaM4wyr', '1736317293', 'https://connect.stripe.com/setup/e/acct_1QesZ73iNfaM4wyr/IpSrkUaV1f4W', NULL, '2025-01-08 06:16:34'),
+(5, 81, 'acct_1Qer4ZQMRwJAKZ02', '1736311555', 'https://connect.stripe.com/setup/e/acct_1Qer4ZQMRwJAKZ02/bnOt5DFZ8PyQ', NULL, '2025-01-08 04:40:56');
 
 -- --------------------------------------------------------
 
@@ -54380,7 +54478,16 @@ INSERT INTO `transaction` (`id`, `user_id`, `user_name`, `address`, `country`, `
 (77, 9, 'Duan Starks', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '33330', 47, NULL, NULL, NULL, NULL, NULL, 'sub_1QeXxXKLraOwZNrJi1npc2MC', 'ORDNO-339967', '12.00', '', 'sub_1QeXxXKLraOwZNrJi1npc2MC', '1', 'usd', '2026-02-27', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-07 08:16:22', '2025-01-07 08:16:22'),
 (78, 81, 'PRITHWIRAJ BHATTACHARJEE', 'WEBEL IT PARK', 'India', 'WEST BENGAL', 'DURGAPUR', '713208', NULL, NULL, NULL, NULL, NULL, NULL, 'txn_3QeYxXKLraOwZNrJ1Jx6rS5X', 'ORDNO-129393', '5000', 'ch_3QeYxXKLraOwZNrJ1XZXaz3O', NULL, NULL, 'usd', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-07 09:20:24', '2025-01-07 09:20:24'),
 (81, 81, 'PRITHWIRAJ BHATTACHARJEE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'txn_mShvFR7EOreaTpmcPPptALkr', 'ORDNO-527429', '100', 'ch_gEmcQAwoZF6FtqXBfGpEdsVA', NULL, NULL, 'usd', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-07 10:19:56', '2025-01-07 10:19:56'),
-(82, 9, 'Duan Starks', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '33330', NULL, NULL, NULL, NULL, NULL, NULL, 'txn_ePB1PqQwaYap2A9uWjXBqcoZ', 'ORDNO-564835', '10', 'ch_cGWAztYvGsx87jzGqzcIASlp', NULL, NULL, 'usd', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-07 14:10:49', '2025-01-07 14:10:49');
+(82, 9, 'Duan Starks', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '33330', NULL, NULL, NULL, NULL, NULL, NULL, 'txn_ePB1PqQwaYap2A9uWjXBqcoZ', 'ORDNO-564835', '10', 'ch_cGWAztYvGsx87jzGqzcIASlp', NULL, NULL, 'usd', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-07 14:10:49', '2025-01-07 14:10:49'),
+(83, 91, 'suman AE', 'Suman ', 'India', 'Wesbengal', 'Kolkata ', '7000156', 9, NULL, NULL, NULL, NULL, NULL, 'sub_1QervtKLraOwZNrJEcDBbEJG', 'ORDNO-747444', '2500.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 05:35:59', '2025-01-08 05:35:59'),
+(84, 91, 'suman AE', 'Suman ', 'India', 'Wesbengal', 'Kolkata ', '7000156', 9, NULL, NULL, NULL, NULL, NULL, 'sub_1QervvKLraOwZNrJR75VQXDi', 'ORDNO-234735', '2500.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 05:36:01', '2025-01-08 05:36:01'),
+(85, 80, 'Sayantan Bhakta', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', '700099', 54, NULL, NULL, NULL, NULL, NULL, 'sub_1QewaeKLraOwZNrJUd3Z2lqk', 'ORDNO-586253', '2000.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 10:34:22', '2025-01-08 10:34:22'),
+(86, 80, 'Sayantan Bhakta', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', '700099', 54, NULL, NULL, NULL, NULL, NULL, 'sub_1QewafKLraOwZNrJpTdUWsg0', 'ORDNO-967217', '2000.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 10:34:23', '2025-01-08 10:34:23'),
+(87, 80, 'Sayantan Bhakta', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', '700099', 54, NULL, NULL, NULL, NULL, NULL, 'sub_1QewagKLraOwZNrJsQEcz7AI', 'ORDNO-218219', '2000.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 10:34:25', '2025-01-08 10:34:25'),
+(88, 80, 'Sayantan Bhakta', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', '700099', 54, NULL, NULL, NULL, NULL, NULL, 'sub_1QewaiKLraOwZNrJKNxQCeLi', 'ORDNO-637261', '2000.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 10:34:26', '2025-01-08 10:34:26'),
+(89, 98, 'Sayan Naskar', '115/1 KCM Sarani Bhadrakali ', 'India ', 'West Bengal ', 'Kolkata ', '712232', 9, NULL, NULL, NULL, NULL, NULL, 'sub_1Qexw0KLraOwZNrJT2iWfTh6', 'ORDNO-287288', '2500.00', '', NULL, NULL, 'usd', '2026-01-08', 1, NULL, NULL, NULL, NULL, NULL, NULL, 'succeeded', '2025-01-08 12:00:31', '2025-01-08 12:00:31'),
+(90, 9, 'Duan Starks', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '33330', NULL, 1, NULL, NULL, NULL, NULL, 'txn_3QeyBiIuZrwn6gWg23V8bNih', 'ORDNO-375518', '19.4', 'ch_3QeyBiIuZrwn6gWg2A8OJot2', NULL, NULL, 'usd', '2025-06-18', 2, '70', NULL, NULL, NULL, 'Yes', '10', 'succeeded', '2025-01-08 12:16:43', '2025-01-08 12:16:43'),
+(91, 9, 'Duan Starks', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '33330', NULL, 1, NULL, NULL, NULL, NULL, 'txn_3QeyEfIuZrwn6gWg0drSRtqc', 'ORDNO-646576', '19.4', 'ch_3QeyEfIuZrwn6gWg09dzd71C', NULL, NULL, 'usd', '2025-06-18', 2, '70', NULL, NULL, NULL, 'Yes', '10', 'succeeded', '2025-01-08 12:19:46', '2025-01-08 12:19:46');
 
 -- --------------------------------------------------------
 
@@ -54429,7 +54536,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `country`, `state`, `city`, `latitude`, `longitude`, `profile_image`, `cover_image`, `bio`, `dob`, `area_interest`, `zipcode`, `tags`, `user_type`, `password`, `status`, `otp`, `wallet_amount`, `auto_renew_status`, `businessCount`, `eventCount`, `invitationCount`, `promotionCount`, `spend_money`, `earned_rewords_point`, `created_at`, `updated_at`) VALUES
 (1, 'Jame', 'Henry', 'jamehenry@gmail.com', '9876543210', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', NULL, NULL, '1715152678.png', '', '<p>test..</p>', '1995-01-20', '1,2,3', '20024', '3,4', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-05-08 07:18:20', '2024-12-24 12:23:23'),
-(9, 'Duan', 'Starks', 'DStarks22@starbiz.com', '2022860115', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '38.8867076', '-77.0326074', '429994657.png', '943760837.jpg', 'Former NFL player. Superbowl XXXV ChampionETC', '1995-01-20', '1,2,3,4,5', '33330', '21,6,5', 8, 'e10adc3949ba59abbe56e057f20f883e', 1, '388371', '0', '1', 2, 2, 2, 2, '12', 5, '2024-05-27 13:32:11', '2025-01-07 14:10:49'),
+(9, 'Duan', 'Starks', 'DStarks22@starbiz.com', '2022860115', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', '38.8867076', '-77.0326074', '429994657.png', '943760837.jpg', 'Former NFL player. Superbowl XXXV ChampionETC', '1995-01-20', '1,2,3,4,5', '33330', '21,6,5', 8, 'e10adc3949ba59abbe56e057f20f883e', 1, '388371', '0', '1', 2, 2, 2, 2, '46.8', 15, '2024-05-27 13:32:11', '2025-01-08 12:19:46'),
 (10, 'John', 'Doe', 'johndoe@gmail.com', '9876543210', 'United States Holocaust Memorial Museum, Raoul Wallenberg Place Southwest, Washington, DC, USA', 'United States', 'District of Columbia', 'Washington', NULL, NULL, '1560723312.jpg', '1553035308.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1994-09-12', '[1,2,3]', '20024', '[3,4]', 8, 'fcea920f7412b5da7be0cf42b8c93759', 1, '252264', '0', NULL, 0, 0, 0, 0, '0', 0, '2024-05-27 13:32:11', '2025-01-06 00:43:30'),
 (11, 'Pravat', 'behera', 'pravat@yopmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, '871491', NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-08-23 11:41:26', '2024-12-24 12:23:23'),
 (12, 'Pravat', 'Behera', 'Pravatbehera@yopmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1,2,3', NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-08-23 12:16:51', '2024-12-24 12:23:23'),
@@ -54471,12 +54578,15 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address
 (71, 'test', 'con', 'chetanbele11994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-23 13:53:38', '2024-12-24 12:11:54'),
 (75, 'Chetan', 'Bele', 'chetanbele19941@gmail.com', '9876543210', 'Nagpur, Maharashtra, India', 'India', 'Maharashtra', 'Nagpur Division', '21.1458004', '79.0881546', '1308788389.jpg', NULL, 'my bio', '1994-01-20', NULL, NULL, '8,9,21,6,17', 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, '1', 0, 1, 1, 1, '8', 10, '2024-12-24 06:08:10', '2025-01-07 09:12:55'),
 (76, 'new', 'user', 'newuser@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1590644560.jpg', NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2024-12-28 11:46:48', '2024-12-28 11:48:33'),
-(78, 'Sayantest', 'null', 'sayandeb998@gmail.com', '7980558688', 'Webel tower 1 kolkata', NULL, NULL, NULL, NULL, NULL, '269040366.jpg', '', 'hi i am Sayan', '1998-06-28', '4,3,2,1', NULL, '6,19,22,16', 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 07:49:49', '2025-01-06 03:00:23'),
 (79, 'sumon', 'Majumder', 'igi187@goigi.in', '9999999999', 'Kolkata', NULL, NULL, NULL, NULL, NULL, '213763924.jpg', '', 'testtt', '2025-01-06', '5,7', NULL, '9,10,20', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 07:51:30', '2025-01-07 14:01:31'),
 (80, 'Sayantan', 'Bhakta', 'sayantan@goigi.in', '9876543210', 'Kolkata, Saltlake, WB, 700091', 'India', 'West Bengal', 'Kolkata', NULL, NULL, '1099023122.jpg', '600499099.png', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1991-01-02', '1,2,3', '700099', '3,4', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-06 09:56:24', '2025-01-06 05:37:26'),
 (81, 'PRITHWIRAJ', 'BHATTACHARJEE', 'care@goigi.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1894751720.png', NULL, NULL, NULL, NULL, NULL, NULL, 8, '75ea1832b2cfc40e9209dd41b3233c63', 1, NULL, '4900', NULL, 0, 0, 0, 0, '0', 0, '2025-01-07 08:22:33', '2025-01-07 10:19:56'),
 (82, 'Ios', 'Tester', 'ios@goigi.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2067166925.png', NULL, NULL, NULL, NULL, NULL, NULL, 8, '75ea1832b2cfc40e9209dd41b3233c63', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-07 08:55:57', '2025-01-07 09:15:48'),
-(90, 'chetan', 'bele', 'chetanbele1994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-07 09:56:34', '2025-01-07 11:21:48');
+(90, 'chetan', 'bele', 'chetanbele1994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, 'e10adc3949ba59abbe56e057f20f883e', 0, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-07 09:56:34', '2025-01-07 11:21:48'),
+(91, 'suman', 'AE', 'igikolkata2024@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-08 05:32:44', '2025-01-08 05:32:44'),
+(93, 'suman', 'null', 'email@gmail.com', '9999999999', 'Kolkata', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'bhhhj', '2025-01-08', '7,5', NULL, '8,9', 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-08 10:43:25', '2025-01-08 05:15:55'),
+(98, 'Sayan', 'Naskar', 'sayannaskar@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1349921177.jpeg', NULL, NULL, NULL, NULL, NULL, NULL, 10, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-08 11:12:31', '2025-01-08 11:13:07'),
+(99, 'A', NULL, 'e@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8, '25d55ad283aa400af464c76d713c07ad', 1, NULL, NULL, NULL, 0, 0, 0, 0, '0', 0, '2025-01-08 11:58:26', '2025-01-08 11:58:26');
 
 -- --------------------------------------------------------
 
@@ -54528,7 +54638,8 @@ INSERT INTO `user_document` (`id`, `document_type`, `document_number`, `document
 (36, 'Drivers\' License', '89087', 'b977b532403e14d6681a00f78f95506e.jpg', '2024-12-26', 74, '2024-12-24 05:10:24', '2024-12-24 05:10:24'),
 (37, 'Drivers\' License', '89087', '00989c20ff1386dc386d8124ebcba1a5.jpg', '2024-12-30', 76, '2024-12-28 11:47:34', '2024-12-28 11:47:34'),
 (38, 'Drivers\' License', 'DL1216', '95c8f422f9c3308d391cbcefae21d5ad.png', '2001-12-31', 81, '2025-01-07 08:23:50', '2025-01-07 08:23:50'),
-(39, 'Drivers\' License', 'DL12190', '865bf46435bd84fa5d89f64cf3ba7347.png', '2018-01-01', 82, '2025-01-07 08:57:03', '2025-01-07 08:57:03');
+(39, 'Drivers\' License', 'DL12190', '865bf46435bd84fa5d89f64cf3ba7347.png', '2018-01-01', 82, '2025-01-07 08:57:03', '2025-01-07 08:57:03'),
+(40, 'passport', 'PA04449', '', '1998-05-25', 98, '2025-01-08 11:13:07', '2025-01-08 11:13:07');
 
 -- --------------------------------------------------------
 
@@ -54572,7 +54683,9 @@ INSERT INTO `user_gallery_photo` (`id`, `user_id`, `image`, `created_at`, `updat
 (27, 79, 'd89a66c7c80a29b1bdbab0f2a1a94af8.jpeg', '2025-01-07 05:44:41', '2025-01-07 05:44:41'),
 (28, 79, 'a3c36d0c741ddabbdb44b35a4fbebcb4.jpg', '2025-01-07 05:44:41', '2025-01-07 05:44:41'),
 (29, 79, 'fd9dd764a6f1d73f4340d570804eacc4.jpg', '2025-01-07 05:44:41', '2025-01-07 05:44:41'),
-(30, 79, '3f088ebeda03513be71d34d214291986.jpg', '2025-01-07 05:44:41', '2025-01-07 05:44:41');
+(30, 79, '3f088ebeda03513be71d34d214291986.jpg', '2025-01-07 05:44:41', '2025-01-07 05:44:41'),
+(31, 93, '1359aa933b48b754a2f54adb688bfa77.jpg', '2025-01-08 10:45:55', '2025-01-08 10:45:55'),
+(32, 93, 'a012869311d64a44b5a0d567cd20de04.jpg', '2025-01-08 10:45:55', '2025-01-08 10:45:55');
 
 -- --------------------------------------------------------
 
@@ -55148,7 +55261,7 @@ ALTER TABLE `email_template`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `event_category`
@@ -55160,7 +55273,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_image`
 --
 ALTER TABLE `event_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `event_ticket`
@@ -55184,13 +55297,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `favouritebusiness`
 --
 ALTER TABLE `favouritebusiness`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `favouriteevent`
 --
 ALTER TABLE `favouriteevent`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=625;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=632;
 
 --
 -- AUTO_INCREMENT for table `favouriteusers`
@@ -55220,13 +55333,13 @@ ALTER TABLE `interest`
 -- AUTO_INCREMENT for table `invitation`
 --
 ALTER TABLE `invitation`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `listing`
 --
 ALTER TABLE `listing`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `listing_category`
@@ -55238,7 +55351,7 @@ ALTER TABLE `listing_category`
 -- AUTO_INCREMENT for table `listing_image`
 --
 ALTER TABLE `listing_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `listing_subcategory_sub`
@@ -55262,7 +55375,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
 
 --
 -- AUTO_INCREMENT for table `onesignal_users`
@@ -55274,19 +55387,19 @@ ALTER TABLE `onesignal_users`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `product_image`
 --
 ALTER TABLE `product_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `product_subcategory`
@@ -55298,7 +55411,7 @@ ALTER TABLE `product_subcategory`
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `promotion_category`
@@ -55322,19 +55435,19 @@ ALTER TABLE `referral_comission_setting`
 -- AUTO_INCREMENT for table `referral_rewards_transaction`
 --
 ALTER TABLE `referral_rewards_transaction`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `reffer`
 --
 ALTER TABLE `reffer`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `repeat_invitation`
 --
 ALTER TABLE `repeat_invitation`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `role_permission`
@@ -55352,13 +55465,13 @@ ALTER TABLE `sentonesignalmsg`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `services_image`
 --
 ALTER TABLE `services_image`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -55406,25 +55519,25 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `user_document`
 --
 ALTER TABLE `user_document`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `user_gallery_photo`
 --
 ALTER TABLE `user_gallery_photo`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `user_type`

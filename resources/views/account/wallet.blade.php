@@ -85,6 +85,29 @@
     z-index: 10000 !important;
 }
 
+    #country-list {
+		float: left;
+		list-style: none;
+		margin-top: 20px;
+		padding: 0;
+		width: 99.7%;
+		position: absolute;
+		z-index: 1;
+		margin-left: -500px;
+	}
+
+	#country-list li {
+		padding: 10px;
+		/*background: #f0f0f0;*/
+		border-bottom: #bbb9b9 1px solid;
+		/*border-radius: 8px;*/
+		background: linear-gradient(90deg, #b58b42, #7a5a28)
+	}
+
+	#country-list li:hover {
+		background: #ece3d2;
+		cursor: pointer;
+	} 
 
   </style>
 </head>
@@ -156,7 +179,7 @@
         </a>
       </li>
       <li>
-        <a href="" id="TermsConditions">
+        <a href="javascript:void(0);" id="TermsConditions">
           <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
           <p>Terms & Conditions</p>
         </a>
@@ -173,8 +196,16 @@
         <div class="header-logo">
           <a href=""><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
         </div>
-        <div class="header-search">
+        <!--<div class="header-search">
           <div class="search">
+            <i class="material-icons">search</i>
+            <input type="search" name="search" placeholder="Search" id="search-box">
+			<div id="suggesstion-box"></div>
+          </div>
+        </div>-->
+		
+		<div class="header-search">
+          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
             <i class="material-icons">search</i>
             <input type="search" name="search" placeholder="Search">
           </div>
@@ -232,15 +263,25 @@
                   <label class="form-label">Enter Amount</label>
                   <input type="text" placeholder="Enter amount" id="withdrawAmount" name="withdrawAmount">
                 </div>
-                <div class="col-md-12 col-sm-12">
-                  <label class="form-label">Account Details</label>
-                  <input type="text" placeholder="Enter account details" id="withdrawAccountno" name="withdrawAccountno">
+				
+				<div class="col-md-12 col-sm-12">
+                  <label class="form-label">Bank Name</label>
+                  <input type="text" placeholder="Enter Bank Name" id="bankName" name="bankName">
                 </div>
 				
+                <div class="col-md-12 col-sm-12">
+                  <label class="form-label">Account Number</label>
+                  <input type="number" placeholder="Enter Account Number" id="withdrawAccountno" name="withdrawAccountno">
+                </div>
+				
+				<div class="col-md-12 col-sm-12">
+                  <label class="form-label">Swift Code</label>
+                  <input type="text" placeholder="Enter Swift Code" id="swiftCode" name="swiftCode">
+                </div>
+
 				<div class="modal-footer">
-				  <button type="submit" class="btn btn-primary w-100">Withdraw Amount</button>
+				    <button type="submit" class="btn btn-primary w-100">Withdraw Amount</button>
 				</div>
-			
               </form>
 			  
             </div>
@@ -251,7 +292,7 @@
 
       <div class="row m-0 TabBar mb-2">
         <div class="Pagination TabBar">
-          <a href="" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Wallet</a>
+          <a href="<?=url('dashboard')?>" ><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Wallet</a>
         </div>
 
         <div class="row m-0 align-items-center d-flex flex-row justify-content-center" style="background: #fff;">
@@ -269,13 +310,38 @@
               <p class="m-0">Withdraw</p>
             </a>
           </div>
+		  
+		  <div class="col-lg-3 col-md-3 col-sm-12 ExportBtnContainer" style="    display: flex;
+    align-items: center;
+    justify-content: center;">
+            <a href="<?=url('dashboard/downloadCsvWallet')?>" class="ExportBtn" style="box-shadow: 0 0 10px #ddd;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    gap: 10px;
+    height: 50px;
+    border-radius: 100px;
+    width: 150px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #c5a668;">Export</a>
+          </div>
         </div>
-
-        <div class="TabContainer">
-          <div class="Tab active" onclick="openTab(event, 'AllTransaction')">All Transaction</div>
-          <div class="Tab" onclick="openTab(event, 'TopUp')">Top Up</div>
-          <div class="Tab" onclick="openTab(event, 'Withdraw')">Withdraw</div>
-        </div>
+        <!--<a href="<?=url('dashboard/downloadCsvWallet')?>" class="btn btn-primary" style="background: #c5a668;
+    color: #fff;
+    border-color: #c5a668;
+    position: absolute;
+    margin: 225px 75rem;
+    width: 10%;">Export</a>-->
+	
+		<div class="TabContainer">
+			<div class="Tab active" onclick="openTab(event, 'AllTransaction')">All Transaction</div>
+			<div class="Tab" onclick="openTab(event, 'TopUp')">Top Up</div>
+			<div class="Tab" onclick="openTab(event, 'Withdraw')">Withdraw</div>
+		</div>
+		
       </div>
 
       <div id="AllTransaction" class="row m-0 TabContent active">
@@ -402,6 +468,57 @@
       </div>
     </div>
     </main>
+	
+	
+	<!-- Search Modal -->
+    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-12 col-sm-12">
+                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" id="suggesstion-box">
+		  
+            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Event Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Business Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Network Name</p>
+              </a>
+            </div>-->
+			
+          </div>
+        </div>
+      </div>
+    </div>
 
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
@@ -2094,10 +2211,14 @@ $(document).ready(function(){
          
 		var withdrawAmount   = $('#withdrawAmount').val(); 
 		var withdrawAccountno   = $('#withdrawAccountno').val(); 
+		var bankName   = $('#bankName').val(); 
+		var swiftCode   = $('#swiftCode').val(); 
 		var userId   = '<?=session()->get('USERLOGINID')?>';
 
 		form_data.append("withdrawAmount", withdrawAmount);
 		form_data.append("withdrawAccountno", withdrawAccountno);
+		form_data.append("bankName", bankName);
+		form_data.append("swiftCode", swiftCode);
 		form_data.append("userId", userId);
 		
 
@@ -2420,6 +2541,40 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
 	});
 	
+	$(document).ready(function() {
+		$("#search-box").keyup(function() {
+			$.ajax({
+				type: "POST",
+				url: "<?=url('dashboard/autoSuggestion')?>",
+				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+				beforeSend: function() {
+				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					//$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	
+	$(document).on("click", ".selectCountry", function () {
+		var search  = $(this).attr("search");
+		var keywork = $(this).attr("keywork");
+		
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+		
+	});
+	
+	<!-- New Script -->
+  
+    document.querySelector('.search').addEventListener('click', function () {
+      const modal = document.getElementById('SearchModal');
+      if (modal) {
+        modal.classList.add('SearchModalStyle');
+      }
+    });
   </script>
 </body>
 

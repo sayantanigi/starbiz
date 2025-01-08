@@ -91,6 +91,29 @@
 			overflow-x: hidden;
 		}
 		
+		#country-list {
+			float: left;
+			list-style: none;
+			margin-top: 20px;
+			padding: 0;
+			width: 99.7%;
+			position: absolute;
+			z-index: 1;
+			margin-left: -500px;
+		}
+
+		#country-list li {
+			padding: 10px;
+			/*background: #f0f0f0;*/
+			border-bottom: #bbb9b9 1px solid;
+			/*border-radius: 8px;*/
+			background: linear-gradient(90deg, #b58b42, #7a5a28)
+		}
+
+		#country-list li:hover {
+			background: #ece3d2;
+			cursor: pointer;
+		} 
 
 	</style>
 </head>
@@ -187,11 +210,11 @@
           <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
         </div>
         <div class="header-search">
-          <div class="search">
+          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
             <i class="material-icons">search</i>
             <input type="search" name="search" placeholder="Search">
           </div>
-        </div>
+        </div> 
       </div>
       <div class="header-menu">
         <ul class="ul-base">
@@ -562,6 +585,56 @@
     </div>
     
     </main>
+	
+	<!-- Search Modal -->
+    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-12 col-sm-12">
+                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" id="suggesstion-box">
+		  
+            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Event Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Business Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Network Name</p>
+              </a>
+            </div>-->
+			
+          </div>
+        </div>
+      </div>
+    </div>
 <script>
 window.onbeforeunload = function () {
     window.scrollTo(0,0);
@@ -2634,6 +2707,39 @@ $(document).ready(function(){
 	});
 
 });
+
+
+$(document).ready(function() {
+		$("#search-box").keyup(function() {
+			$.ajax({
+				type: "POST",
+				url: "<?=url('dashboard/autoSuggestion')?>",
+				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+				beforeSend: function() {
+				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					//$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	
+	$(document).on("click", ".selectCountry", function () {
+		var search  = $(this).attr("search");
+		var keywork = $(this).attr("keywork");
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+	});
+	
+	<!-- New Script -->
+    document.querySelector('.search').addEventListener('click', function () {
+      const modal = document.getElementById('SearchModal');
+      if (modal) {
+        modal.classList.add('SearchModalStyle');
+      }
+    });
 </script>
 
 </body>

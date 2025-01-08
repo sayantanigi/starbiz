@@ -272,7 +272,7 @@ img {
 														foreach($explodeTags as $k => $v){
 															//$selected_tags[] = $v;
 															$tags = DB::table('tags')->where(['id' => @$v])->select('name')->first();
-															$tagsName[] = $tags->name;
+															$tagsName[] = @$tags->name;
 														}
 														$tagName1 = implode(', ', $tagsName);
 													}
@@ -288,7 +288,7 @@ img {
 														foreach($explodeInterest as $k => $v){
 															//$selected_tags[] = $v;
 															$interest = DB::table('interest')->where(['id' => @$v])->select('name')->first();
-															$interestName[] = $interest->name;
+															$interestName[] = @$interest->name;
 														}
 														$interestName1 = implode(', ', $interestName);
 													}

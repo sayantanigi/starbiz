@@ -182,13 +182,65 @@ class ApiController extends Controller {
             $data = ['first_name' => @$request->firstName, 'last_name' => @$request->lastName, 'user_type' => @$request->userType, 'email' => @$request->email, 'password' => md5(@$request->password), 'status' => 1, 'created_at' => date('Y-m-d H:i:s')];
             $result = DB::table('users')->insertGetId($data);
             if ($result) {
-                $subject = 'StarBiz Registration';
+
+                /*$subject = 'StarBiz Registration';
                 $to = @$request->email;
                 $message = "
 				<h3>Your registration is successfully completed. Please see below details.</h3>
 				<p><b>Email: </b>" . strip_tags(@$request->email) . "</p>
 				<p><b>Password: </b>" . @$request->password . "</p>";
-                $this->sentMail($to, $message, $subject);
+                $this->sentMail($to, $message, $subject);*/
+
+
+				$setting = DB::table('settings')->where(['settingId' => 1])->select('*')->orderBy('settingId', 'DESC')->first();
+				$imagePath = url('setting/'.@$setting->logo.'');
+				$imagebackPath = '';
+				$subject = "StarBiz Registration";
+
+				$message = "<!Doctype html>
+				<html>
+				<head>
+				<meta charset='utf-8'>
+				<meta name='viewport' content='width=device-width, initial-scale=1'>
+				<title>StarBiz Registration</title>
+				<link href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap' rel='stylesheet'>
+				<body>
+				<div style='max-width:600px;
+				margin:auto;
+				border:1px solid #eee;
+				box-shadow:0 0 10px rgba(0, 0, 0, .15);
+				line-height:17px;
+				font-size:13px;
+				box-sizing:border-box; -webkit-print-color-adjust: exact;font-family: Poppins, sans-serif; background:url(".@$imagebackPath.")'>
+				<div style='padding:20px; box-sizing: border-box;text-align: center; background: #fff;'>
+				<a href='#'><img src='".@$imagePath."' style='width: 80%;'></a>
+				</div>
+				<div style='width: 400px; margin:50px auto;background: #ffffffd1;padding: 50px;text-align: center;'>
+				<h3>Your registration is successfully completed. Please see below details.</h3>
+				<p style='font-size: 15px;color: #262626;line-height: 24px;margin: 20px 0;'><b>Email: </b> ".strip_tags(@$request->email)."</p>
+				<p style='font-size: 15px;color: #262626;line-height: 24px;margin: 20px 0;'><b>Password: </b> ".@$request->password."</p>
+				</div>
+				<div style='background: #000;
+				text-align: left;
+				box-sizing: border-box;
+				width: 100%;
+				padding: 20px 50px;
+				color: #fff;'>
+				<p style='margin: 5px 0;font-size: 12px;'>Warm Regards,</p>
+				<p style='margin: 5px 0;font-size: 12px;'>StarBiz Team</p>
+				<p style='margin: 5px 0;font-size: 12px;'><strong>Email:</strong> <a href='#' style='color: #78daff;'>info@starbiz.com</a></p>
+				<br/>
+				<p style='margin: 5px 0;font-size: 11px;'>This is an automated response, please do not reply.</p>
+				</div>
+				</div>
+				</body>
+				</html>";
+
+				//echo $message;die;
+
+				$to = 	@$request->email;
+				$this->sentMail($to, $message, $subject);
+
                 $response = ["status" => 1, "message" => 'registration is successfully completed.', 'userId' => $result];
                 return response()->json($response, 200);
             } else {
@@ -294,7 +346,7 @@ class ApiController extends Controller {
 					font-size:13px;
 					box-sizing:border-box; -webkit-print-color-adjust: exact;font-family: Poppins, sans-serif; background:url(" . @$imagebackPath . ")'>
 					<div style='padding:20px; box-sizing: border-box;text-align: center; background: #fff;'>
-					<a href='#'><img src='" . @$imagePath . "' style='width: 350px; height80px;'></a>
+					<a href='#'><img src='" . @$imagePath . "' style='width: 80%;'></a>
 					</div>
 					<div style='width: 400px; margin:50px auto;background: #ffffffd1;padding: 50px;text-align: center;'>
 					<h1 style=' font-size: 30px; line-height: 32px; color: #0b0b0b; margin: 30px 0;'>Dear User</h1>
@@ -329,8 +381,8 @@ class ApiController extends Controller {
                     $mail->SMTPSecure = 'tls';
                     $mail->Host = 'smtp.gmail.com';
                     $mail->Port = 587;
-                    $mail->Username = 'rameshwebdev21@gmail.com';
-                    $mail->Password = 'gqbtiijrzaljwkhz';
+                    $mail->Username = 'starbiznetwork7@gmail.com';
+                    $mail->Password = 'krvm xzzz vumq fdll';
                     $send = $mail->send();
                     $response = [
                         'status' => 1,
@@ -2089,7 +2141,7 @@ class ApiController extends Controller {
         if (!empty(@$_GET['userId'])) {
             $userCheck = DB::table('users')->where(['id' => @$_GET['userId']])->select('*')->orderBy('id', 'DESC')->count();
             if ($userCheck > 0) {
-                $Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status, repeat_invitation.start_time, repeat_invitation.end_time FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id WHERE invitation.status='0' AND repeat_invitation.status='0' AND (repeat_invitation.sender_id = '" . @$_GET['userId'] . "' OR repeat_invitation.receiver_id = '" . @$_GET['userId'] . "')";
+                $Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.id as repeat_id, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status, repeat_invitation.start_time, repeat_invitation.end_time FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id WHERE invitation.status='0' AND repeat_invitation.status='0' AND (repeat_invitation.sender_id = '" . @$_GET['userId'] . "' OR repeat_invitation.receiver_id = '" . @$_GET['userId'] . "')";
                 $list = DB::select($Sql);
                 if ($list) {
                     foreach ($list as $k => $v) {
@@ -2111,6 +2163,7 @@ class ApiController extends Controller {
                             $start_date = '';
                         }
                         $array[] = [
+                            'repeat_id' => @$v->repeat_id,
                             'invitationId' => @$v->invId,
                             'eventId' => @$v->event_id,
 							'receiver_id' => @$v->receiver_id,
@@ -2267,16 +2320,18 @@ class ApiController extends Controller {
         );
         if (!$validator->fails()) {
             /*$numRows = DB::table('invitation')->where(['sender_id' => @$request->senderId, 'receiver_id' => @$request->receiverId, 'event_id' => @$request->eventId, 'status' => '2'])->select('*')->orderBy('id', 'DESC')->count();
-                     if($numRows > 0){
-                         $response = ["status" => 0, "error" => "Already send invitation."];
-                         return response()->json($response, 200);exit();
-                     }
-                     */
+            if($numRows > 0){
+                $response = ["status" => 0, "error" => "Already send invitation."];
+                return response()->json($response, 200);exit();
+            }*/
+            $rdata = DB::table('repeat_invitation')->where(['invitation_id' => @$request->invitationId])->select('*')->orderBy('id', 'DESC')->first();
+            $start_time = $rdata->start_time;
+            $end_time = $rdata->end_time;
             $data = ['status' => '3', 'updated_at' => date("Y-m-d H:i:s")];
             //$result = DB::table('invitation')->insertGetId($data);
             $result = DB::table('invitation')->where(['id' => $request->invitationId])->update($data);
             if ($result) {
-                $repeatData = ['sender_id' => @$request->senderId, 'receiver_id' => @$request->receiverId, 'amount' => @$request->amount, 'hour' => @$request->hour, 'status' => '3', 'invitation_id' => $request->invitationId, 'created_at' => date("Y-m-d H:i:s")];
+                $repeatData = ['sender_id' => @$request->senderId, 'receiver_id' => @$request->receiverId, 'amount' => @$request->amount, 'hour' => @$request->hour, 'start_time' => @$start_time, 'end_time' => @$end_time, 'status' => '3', 'invitation_id' => $request->invitationId, 'created_at' => date("Y-m-d H:i:s")];
                 DB::table('repeat_invitation')->insertGetId($repeatData);
                 $response = ["status" => 1, 'invitationId' => $request->invitationId, "message" => "Your invitation sent successfully."];
                 return response()->json($response, 200);
@@ -3013,8 +3068,8 @@ class ApiController extends Controller {
         $mail->Port = 587;
         //$mail->Username = 'gowologlobal@gmail.com';
         //$mail->Password = 'hovndmbbedmhhemg';
-        $mail->Username = 'rameshwebdev21@gmail.com';
-        $mail->Password = 'gqbtiijrzaljwkhz';
+        $mail->Username = 'starbiznetwork7@gmail.com';
+        $mail->Password = 'krvm xzzz vumq fdll';
         return $mail->send();
     }
     public function myPromotionList_get()
@@ -5611,7 +5666,7 @@ class ApiController extends Controller {
 				font-size:13px;
 				box-sizing:border-box; -webkit-print-color-adjust: exact;font-family: Poppins, sans-serif; background:url(" . @$imagebackPath . ")'>
 				<div style='padding:20px; box-sizing: border-box;text-align: center; background: #fff;'>
-				<a href='#'><img src='" . @$imagePath . "' style='width: 350px; height80px;'></a>
+				<a href='#'><img src='" . @$imagePath . "' style='width: 80%;'></a>
 				</div>
 				<div style='width: 400px; margin:50px auto;background: #ffffffd1;padding: 50px;text-align: center;'>
 				<h1 style=' font-size: 30px; line-height: 32px; color: #0b0b0b; margin: 30px 0;'>Dear " . @$request->referrerName . "</h1>
@@ -5707,97 +5762,154 @@ class ApiController extends Controller {
         }
     }
 
-    // public function deleteAccount_post(Request $request){
-    //     $userId = $request->userId ?? null;
-    //     if(!empty($request->userId) || $request->userId != '') {
-    //         $deletewhere = array(
-    //             'user_id' => @$request->userId,
-    //         );
-    //         // DB::table('academics')->where($deletewhere)->delete();
-    //         // DB::table('advertise')->where($deletewhere)->delete();
-    //         // DB::table('athletics')->where($deletewhere)->delete();
-    //         // $chatresults = DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
-    //         // if(!empty($chatresults)) {
-    //         //     DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
-    //         // }
-    //         $eventresults = DB::table('events')->where('user_id', $userId)->get();
-    //         if(!empty($eventresults)) {
-    //             foreach ($eventresults as $event) {
-    //                 $eventimageresults = DB::table('event_image')->where('event_id', $event->id)->get();
-    //                 if(!empty($eventimageresults)) {
-    //                     DB::table('event_image')->where('event_id', $event->id)->delete();
-    //                 }
-    //                 $eventticketresults = DB::table('event_ticket')->where('event_id', $event->id)->get();
-    //                 if(!empty($eventticketresults)) {
-    //                     DB::table('event_ticket')->where('event_id', $event->id)->delete();
-    //                 }
-    //                 $eventinvitationtresults = DB::table('invitation')->where('event_id', $event->id)->get();
-    //                 if(!empty($eventinvitationtresults)) {
-    //                     DB::table('invitation')->where('event_id', $event->id)->delete();
-    //                 }
-    //                 $eventnotificationstresults = DB::table('notifications')->where('event_id', $event->id)->get();
-    //                 if(!empty($eventnotificationstresults)) {
-    //                     DB::table('notifications')->where('event_id', $event->id)->delete();
-    //                 }
-    //                 $repeateventinvitationresults = DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
-    //                 if(!empty($repeateventinvitationresults)) {
-    //                     DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
-    //                 }
-    //             }
-    //             DB::table('events')->where('user_id', $userId)->delete();
-    //         }
+    public function deleteAccount_post(Request $request){
+        $userId = $request->userId ?? null;
+        if(!empty($request->userId) || $request->userId != '') {
+            $deletewhere = array(
+                'user_id' => @$request->userId,
+            );
+            DB::table('academics')->where($deletewhere)->delete();
+            DB::table('advertise')->where($deletewhere)->delete();
+            DB::table('athletics')->where($deletewhere)->delete();
+            $chatresults = DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+            if(!empty($chatresults)) {
+                DB::table('chat')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+            }
+            DB::table('compose_email')->where($deletewhere)->delete();
+            DB::table('email_template')->where($deletewhere)->delete();
+            DB::table('experience')->where($deletewhere)->delete();
+            $eventresults = DB::table('events')->where('user_id', $userId)->get();
+            if(!empty($eventresults)) {
+                foreach ($eventresults as $event) {
+                    $eventimageresults = DB::table('event_image')->where('event_id', $event->id)->get();
+                    if(!empty($eventimageresults)) {
+                        DB::table('event_image')->where('event_id', $event->id)->delete();
+                    }
 
-    //         $listingresults = DB::table('listing')->where('user_id', $userId)->get();
-    //         if(!empty($listingresults)){
-    //             foreach ($listingresults as $listing) {
-    //                 $listingimageresults = DB::table('listing_image')->where('listing_id', $listing->id)->get();
-    //                 if(!empty($listingimageresults)) {
-    //                     DB::table('listing_image')->where('listing_id', $listing->id)->delete();
-    //                 }
-    //                 $listingproductresults = DB::table('product')->where('listing_id', $listing->id)->get();
-    //                 if(!empty($listingproductresults)) {
-    //                     DB::table('product')->where('listing_id', $listing->id)->delete();
-    //                 }
-    //             }
-    //             DB::table('listing')->where('user_id', $userId)->delete();
-    //         }
+                    $eventticketresults = DB::table('event_ticket')->where('event_id', $event->id)->get();
+                    if(!empty($eventticketresults)) {
+                        DB::table('event_ticket')->where('event_id', $event->id)->delete();
+                    }
 
-    //         $notificationresults = DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
-    //         if(!empty($notificationresults)) {
-    //             DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
-    //         }
+                    $faveventresults = DB::table('favouriteevent')->where('event_id', $event->id)->get();
+                    if(!empty($faveventresults)) {
+                        DB::table('favouriteevent')->where('event_id', $event->id)->delete();
+                    }
 
-    //         $productresults = DB::table('product')->where('user_id', $userId)->get();
-    //         if(!empty($productresults)) {
-    //             foreach ($productresults as $product) {
-    //                 $productimageresults = DB::table('product_image')->where('product_id', $product->id)->get();
-    //                 if(!empty($productimageresults)) {
-    //                     DB::table('product_image')->where('product_id', $product->id)->delete();
-    //                 }
+                    $eventinvitationtresults = DB::table('invitation')->where('event_id', $event->id)->get();
+                    if(!empty($eventinvitationtresults)) {
+                        foreach ($eventinvitationtresults as $eventinvitation) {
+                            DB::table('repeat_invitation')->where('invitation_id', $eventinvitation->id)->delete();
+                        }
+                        DB::table('invitation')->where('event_id', $event->id)->delete();
+                    }
 
-    //             }
-    //             DB::table('product_category')->where('user_id', $userId)->update(['user_id' => '']);
-    //             DB::table('product')->where('user_id', $userId)->delete();
-    //         }
+                    $eventnotificationstresults = DB::table('notifications')->where('event_id', $event->id)->get();
+                    if(!empty($eventnotificationstresults)) {
+                        DB::table('notifications')->where('event_id', $event->id)->delete();
+                    }
 
-    //         Service
+                    $transactionresults = DB::table('transaction')->where('event_id', $event->id)->get();
+                    if(!empty($transactionresults)) {
+                        DB::table('transaction')->where('event_id', $event->id)->delete();
+                    }
+                }
+                DB::table('favouriteevent')->where($deletewhere)->delete();
+                DB::table('events')->where('user_id', $userId)->delete();
+                DB::table('transaction')->where('user_id', $userId)->delete();
+            }
+            DB::table('guardian')->where($deletewhere)->delete();
+            DB::table('favouritebusiness')->where($deletewhere)->delete();
+            DB::table('favouriteusers')->where($deletewhere)->delete();
+            $listingresults = DB::table('listing')->where('user_id', $userId)->get();
+            if(!empty($listingresults)){
+                foreach ($listingresults as $listing) {
+                    $listingimageresults = DB::table('listing_image')->where('listing_id', $listing->id)->get();
+                    if(!empty($listingimageresults)) {
+                        DB::table('listing_image')->where('listing_id', $listing->id)->delete();
+                    }
 
-    //         DB::table('experience')->where($deletewhere)->delete();
-    //         DB::table('favouritebusiness')->where($deletewhere)->delete();
-    //         DB::table('favouriteevent')->where($deletewhere)->delete();
-    //         DB::table('favouriteusers')->where($deletewhere)->delete();
-    //         DB::table('guardian')->where($deletewhere)->delete();
-    //         DB::table('promotion')->where($deletewhere)->delete();
-    //         DB::table('reference')->where($deletewhere)->delete();
-    //         DB::table('referral_rewards_transaction')->where(function ($query) use ($userId) {$query->where('referral_user_id', $userId)->orWhere('user_id', $userId);})->delete();
-    //         DB::table('reffer')->where($deletewhere)->delete();
+                    $listingproductresults = DB::table('product')->where('listing_id', $listing->id)->get();
+                    if(!empty($listingproductresults)) {
+                        DB::table('product')->where('listing_id', $listing->id)->delete();
+                    }
 
-    //         echo "<pre>"; print_r($eventimageresults);
-    //         //$response = ["status" => 1, "message" => $results];
-    //         //return response()->json($response, 200);
-    //     } else {
-    //         $response = ['status' => 0, "error" => "User ID not found."];
-    //         return response()->join($response, 200);
-    //     }
-    // }
+                    $listingservicesresults = DB::table('services')->where('listing_id', $listing->id)->get();
+                    if(!empty($listingservicesresults)) {
+                        foreach ($listingservicesresults as $services) {
+                            $servicesimageresults = DB::table('services_image')->where('service_id', $services->id)->get();
+                            if(!empty($servicesimageresults)) {
+                                DB::table('services_image')->where('service_id', $services->id)->delete();
+                            }
+                        }
+                        DB::table('services')->where('listing_id', $listing->id)->delete();
+                    }
+                }
+                DB::table('listing')->where('user_id', $userId)->delete();
+            }
+
+            $notificationresults = DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+            if(!empty($notificationresults)) {
+                DB::table('notifications')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+            }
+
+            $repeateventinvitationresults = DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+            if(!empty($repeateventinvitationresults)) {
+                DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+            }
+
+            $productresults = DB::table('product')->where('user_id', $userId)->get();
+            if(!empty($productresults)) {
+                foreach ($productresults as $product) {
+                    $productimageresults = DB::table('product_image')->where('product_id', $product->id)->get();
+                    if(!empty($productimageresults)) {
+                        DB::table('product_image')->where('product_id', $product->id)->delete();
+                    }
+                }
+                DB::table('product_category')->where('user_id', $userId)->update(['user_id' => '']);
+                DB::table('product')->where('user_id', $userId)->delete();
+            }
+            DB::table('promotion')->where($deletewhere)->delete();
+            DB::table('reference')->where($deletewhere)->delete();
+            DB::table('referral_rewards_transaction')->where(function ($query) use ($userId) {$query->where('referral_user_id', $userId)->orWhere('user_id', $userId);})->delete();
+            DB::table('reffer')->where('sender_id', $userId)->delete();
+            DB::table('stripe_connect')->where('userId', $userId)->delete();
+            DB::table('user_document')->where('user_id', $userId)->delete();
+            DB::table('user_gallery_photo')->where('user_id', $userId)->delete();
+            DB::table('wallet')->where('user_id', $userId)->delete();
+            DB::table('withdraw_request')->where('user_id', $userId)->delete();
+            $response = ["status" => 1, "message" => "Account Deleted"];
+            return response()->json($response, 200);
+        } else {
+            $response = ['status' => 0, "error" => "User ID not found."];
+            return response()->join($response, 200);
+        }
+    }
+    public function clearsingleitem_post(Request $request) {
+        $item_id = $request->input('item_id');
+        //$userId = $request->input('userId');
+        //$checkinvitationList = DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->Where('invitation_id', $invitation_id)->get();
+        $checkinvitationRecord = DB::table('repeat_invitation')->Where('id', $item_id)->get();
+        if(!empty($checkinvitationRecord)) {
+            //DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->Where('invitation_id', $invitation_id)->delete();
+            DB::table('repeat_invitation')->Where('id', $item_id)->delete();
+            $response = ["status" => 1, "message" => "Removed."];
+            return response()->json($response, 200);
+        } else {
+            $response = ["status" => 0, "error" => "Some error occurred, Please try again."];
+            return response()->json($response, 200);
+        }
+    }
+    public function clearallitem_post(Request $request) {
+        $userId = $request->input('userId');
+        $checkinvitationList = DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->get();
+        if(!empty($checkinvitationList)) {
+            DB::table('repeat_invitation')->where(function ($query) use ($userId) {$query->where('sender_id', $userId)->orWhere('receiver_id', $userId);})->delete();
+            $response = ["status" => 1, "message" => "Cleared All data."];
+            return response()->json($response, 200);
+        } else {
+            $response = ["status" => 0, "error" => "Some error occurred, Please try again."];
+            return response()->json($response, 200);
+        }
+    }
 }

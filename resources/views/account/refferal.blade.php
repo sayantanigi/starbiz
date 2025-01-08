@@ -92,6 +92,30 @@
 	.notm-0 {
 	    color: red!important;
 	}
+	
+	#country-list {
+		float: left;
+		list-style: none;
+		margin-top: 20px;
+		padding: 0;
+		width: 99.7%;
+		position: absolute;
+		z-index: 1;
+		margin-left: -500px;
+	}
+
+	#country-list li {
+		padding: 10px;
+		/*background: #f0f0f0;*/
+		border-bottom: #bbb9b9 1px solid;
+		/*border-radius: 8px;*/
+		background: linear-gradient(90deg, #b58b42, #7a5a28)
+	}
+
+	#country-list li:hover {
+		background: #ece3d2;
+		cursor: pointer;
+	} 
 
 
   </style>
@@ -180,14 +204,23 @@
           <i class="material-icons">menu</i>
         </div>
         <div class="header-logo">
-          <a href=""><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
+          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
         </div>
-        <div class="header-search">
+        <!--<div class="header-search">
           <div class="search">
+            <i class="material-icons">search</i>
+            <input type="search" name="search" placeholder="Search" id="search-box">
+			<div id="suggesstion-box"></div>
+          </div>
+        </div>-->
+		
+		<div class="header-search">
+          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
             <i class="material-icons">search</i>
             <input type="search" name="search" placeholder="Search">
           </div>
         </div>
+		
       </div>
       <div class="header-menu">
         <ul class="ul-base">
@@ -200,7 +233,7 @@
 
     <main role="main" class="Main">
     
-     <div class="container-fluid m-0 Section ReferralLink" >
+     <div class="container-fluid m-0 Section ReferralLink" style="display: block;">
 	 
 	  <!-- Send Invitation Modal -->
       <div class="modal fade CustomModal" id="AddAppearanceModal" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -258,7 +291,7 @@
 
       <div class="row m-0 TabBar mb-2">
         <div class="Pagination">
-          <a href="" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Referral Link</a>
+          <a href="<?=url('dashboard')?>"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Referral Link</a>
         </div>
 
         <div class="row m-0 align-items-center d-flex flex-row justify-content-center" style="background: #fff;">
@@ -269,11 +302,16 @@
           <div class="col-lg-3 col-md-3 col-sm-12">
             <img class="ReferralDataImage" src="<?=url('assets/home/images/ReferralBanner.png')?>" alt="">
           </div>
+		  
+		  <div class="col-lg-3 col-md-3 col-sm-12 ExportBtnContainer">
+            <a href="<?=url('dashboard/downloadCsvReferral')?>" class="ExportBtn">Export</a>
+          </div>
         </div>
 
         <div class="TabContainer">
           <div class="Tab active" onclick="openTab(event, 'MyReferrals')">My Referrals</div>
           <div class="Tab" onclick="openTab(event, 'MyRewards')">My Rewards</div>
+          <div class="Tab" onclick="openTab(event, 'SentInvite')">Sent Invites</div>
         </div>
       </div>
 	  
@@ -281,7 +319,20 @@
 	 
 
       <div id="MyReferrals" class="row m-0 TabContent active">
-	    <?php
+	    <div class="col-lg-12 col-md-12 col-sm-12">
+          <table class="table table-striped table-list CustomTable">
+            <thead>
+              <tr>
+                <th class="hidden-xs">UserName</th>
+                <th>Referral Status</th>
+                <th>Signed Up</th>
+                <th>Since Date of Active</th>
+              </tr>
+            </thead>
+            <tbody>
+			
+			
+			<?php
 		    if(count(@$myReferral) > 0){
 				foreach(@$myReferral as $k => $v){
 					
@@ -300,8 +351,10 @@
 						}else{
 							$userEmail = @$v->reffer_user_email;
 						}
+						
 						$registerStatus = 1;
 						$date_of_activation = date('M d, Y', strtotime(@$userInfo->created_at));
+						$date_of_activationClass="DoneStatus";
 						$style = 'style="margin-bottom: -36px;"';
 						
 						if((@$userInfo->first_name || @$userInfo->last_name) && @$userInfo->email && @$userInfo->phone && @$userInfo->address && @$userInfo->profile_image && @$userInfo->bio && @$userInfo->dob){
@@ -326,16 +379,21 @@
 						$registerStatus = 0;
 						$profileStatus = 0;
 						$eventStatus = 0;
-						$date_of_activation = '<img src="'.url('assets/home/images/Icon34.png').'" alt="">';
+						$date_of_activation = '';
 						$style = '';
+						$date_of_activationClass="PendingStatus";
 					}
 					
 					if($registerStatus == 1){
 						$signUp = '<img src="'.url('assets/home/images/Icon33.png').'" alt="">';
 						$signUpClass = 'm-0';
+						$signUpStatus = 'Done';
+						$signUpStatusClass = 'DoneStatus';
 					}else{
 						$signUp = '<img src="'.url('assets/home/images/Icon34.png').'" alt="">';
 						$signUpClass = 'notm-0';
+						$signUpStatus = 'Pending';
+						$signUpStatusClass = 'PendingStatus';
 					}
 					
 					if($profileStatus == 1){
@@ -359,48 +417,44 @@
 					if(@$v->status == '2'){
 						$status = 'Pending';
 						$referColor = 'notm-0';
+						$statusClass="PendingStatus";
 					}elseif(@$v->status == '1'){
 						$status = 'Successful';
 						$referColor = 'm-0';
+						$statusClass="DoneStatus";
 					}
 					
 					
 					
-					echo '
-						<div class="col-lg-3 col-md-3 ps-0 mb-4">
-							<div class="ReferralBlock" style="width: 350px;">
-								<div class="ReferralBlockDataContainer">
-									<div class="ReferralText">
-										<p class="m-0 Heading">'.@$userName.'</p>
-										<p class="m-0 SubHeading">
-											Referral Status:
-											<span class="'.@$referColor.'">'.@$status.'</span>
-										</p>
-									</div>
-									<div class="ReferralMarkContainer">
-										<div class="ReferralMarkBlock">
-											'.@$signUp.'
-											<p class="'.@$signUpClass.'">Signed up</p>
-										</div>
-										<div class="ReferralMarkBlock" '.@$style.'>
-											<p class="m-0">'.@$date_of_activation.'</p>
-											<p class="'.@$signUpClass.'">Since date of Active</p>
-										</div>
-										<!--<div class="ReferralMarkBlock">
-											'.@$event.'
-											<p class="'.@$eventClass.'">Create Event</p>
-										</div>-->
-									</div>
-								</div>
-								<!--<div class="ReferralBlockPriceContainer">
-									<p class="m-0">You’ve got $100</p>
-								</div>-->
-							</div>
-						</div>
+					 echo '
+						
+						
+						<tr>
+							<td class="hidden-xs">'.@$userName.'</td>
+							<td class="hidden-xs '.@$statusClass.'">'.@$status.'</td>
+							<td class="hidden-xs '.@$signUpStatusClass.'">'.@$signUpStatus.'</td>
+							<td class="hidden-xs '.@$date_of_activationClass.'">'.@$date_of_activation.'</td>
+						</tr>
 					';
 				}
 			}
 		?>
+		
+              <!--<tr>
+                <td class="hidden-xs">Goigi</td>
+                <td class="hidden-xs PendingStatus">Pending</td>
+                <td class="hidden-xs PendingStatus">Pending</td>
+                <td class="hidden-xs PendingStatus">Pending</td>
+              </tr>
+              <tr>
+                <td class="hidden-xs">Chetan Bele</td>
+                <td class="hidden-xs DoneStatus">Successful</td>
+                <td class="hidden-xs DoneStatus">Done</td>
+                <td class="hidden-xs DoneStatus">Done</td>
+              </tr>-->
+            </tbody>
+          </table>
+        </div>
 		
 				
       </div>
@@ -464,22 +518,20 @@
         </div>--->
 		
 		
-		<div class="col-lg-12 col-md-3 ps-0 mb-4">
-							<div class="ReferralBlock" style="width: 70%;margin-right: 978px;height: 10px;margin-top: -210px;position: fixed;margin-left: -653px;">
-							<div class="ReferralBlockDataContainer">
-								<table class="table table-striped table-bordered table-list">
-									<thead>
-										<tr>
-											<th class="hidden-xs">UserName</th>
-											<th>Referral Code</th>
-											<th>Since Date of Active</th>
-											<th>Earned Points</th>
-											<th>Merchant Name</th>
-											<th>Rewards</th>
-										</tr> 
-									</thead>
-									<tbody>
-									    <?php
+		<div class="col-lg-12 col-md-12 col-sm-12">
+          <table class="table table-striped table-list CustomTable">
+            <thead>
+              <tr>
+                <th class="hidden-xs">UserName</th>
+                <th>Referral Code</th>
+                <th>Since Date of Active</th>
+                <th>Earned Points</th>
+                <th>Merchant Name</th>
+                <th>Rewards</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
 										    if(count(@$myReward)){
 												foreach(@$myReward as $k => $v){
 													
@@ -524,16 +576,123 @@
 												}
 											}
 										?>
-									   
-										
-									</tbody>
-								</table>
-							</div>
-								
-							</div>
-						</div>
+              
+            </tbody>
+          </table>
+        </div>
+						
+						
 		
 		
+      </div>
+	    <div id="SentInvite" class="row m-0 TabContent">
+			<!--<div class="row m-0 AllContain">
+                        
+				<div class="col-lg-4 col-md-4 ps-0 mb-4">
+				  <div class="AllContainBlock">
+					<div class="Data">
+					  <img src="https://techb.igiapp.com/starbiz/profile/2067166925.png" alt="">
+					   <p>Ios Tester</p>
+					</div>
+					<a href="">
+					  <img src="https://techb.igiapp.com/starbiz/assets/home/images/Icon7.png" alt="">
+					</a>
+				  </div>
+				</div>
+		  </div>-->
+			<div class="col-lg-12 col-md-12 col-sm-12">
+			  <table class="table table-striped table-list CustomTable">
+				<thead>
+				  <tr>
+					<th class="hidden-xs">UserName</th>
+					<th>Referral Code</th>
+					<th>Status</th>
+					<th>Action</th>
+				  </tr>
+				</thead>
+				<tbody>
+				
+				 <?php
+			    if(count(@$pendingReferral) > 0){
+					foreach($pendingReferral as $k => $v){
+						echo '
+							
+							
+							<tr>
+								<td class="hidden-xs">'.@$v->reffer_user_name.'</td>
+								<td class="hidden-xs">'.@$v->reffer_code.'</td>
+								<td class="hidden-xs PendingStatus">Not Accepted</td>
+									<td class="hidden-xs">
+									    <!--<a class="ResendBtn" href="">Resend</a>-->
+										<a href="javascript:void(0);" class="ResendBtn resent" relid="'.@$v->id.'" style="color: #c5a668;">Resend</a>
+									</td>
+							</tr>
+						';
+					}
+				}
+			?>
+			
+				  
+				</tbody>
+			  </table>
+			</div>
+      </div>
+			
+		
+	    </div>
+		
+		
+		
+	  
+    </div>
+	
+	  <!-- Search Modal -->
+    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="row g-3">
+              <div class="col-md-12 col-sm-12">
+                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer" id="suggesstion-box">
+		  
+            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Event Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Business Name</p>
+              </a>
+            </div>
+			
+            <div class="col-md-12 col-sm-12 SearchDataContainer">
+              <a href="">
+                <div class="SearchDataBlock">
+                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
+                </div>
+                <p>Network Name</p>
+              </a>
+            </div>-->
+			
+          </div>
+        </div>
       </div>
     </div>
     </main>
@@ -545,7 +704,7 @@
 
   <script>
   
-  
+     
     $('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
@@ -2075,6 +2234,7 @@ $(document).ready(function(){
 			},
 			success: function(data){
                 if(data.status == 1){
+					$("#AddAppearanceModal").modal("hide");
 					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true});
 				}
 				if(data.status == 0){
@@ -2426,6 +2586,34 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			
 		});	
 	});
+	
+	
+	$(".resent").click(function () {
+		var referralId = $(this).attr('relid');
+		
+			$.ajax({
+			url: "<?=url('dashboard/resent_referral')?>",
+			method: "POST",
+			data:{referralId : referralId, "_token": "{{ csrf_token() }}"},
+			dataType: 'json',
+			success: function(data) {
+				//$('#userProfile').html(response);
+				//$('#profileUser').html(response.output);
+				//$('#Info').html(response.info);
+				
+				if(data.status == 1){
+					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true});
+				}
+				if(data.status == 0){
+					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
+				}
+				
+			}
+			
+		});	
+	});
+	
+	
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -2511,6 +2699,41 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$("#SaleList").click(function () {
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
 	});
+	
+	$(document).ready(function() {
+		$("#search-box").keyup(function() {
+			$.ajax({
+				type: "POST",
+				url: "<?=url('dashboard/autoSuggestion')?>",
+				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+				beforeSend: function() {
+				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					//$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	
+	$(document).on("click", ".selectCountry", function () {
+		var search  = $(this).attr("search");
+		var keywork = $(this).attr("keywork");
+		
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+		
+	});
+	
+	<!-- New Script -->
+  
+    document.querySelector('.search').addEventListener('click', function () {
+      const modal = document.getElementById('SearchModal');
+      if (modal) {
+        modal.classList.add('SearchModalStyle');
+      }
+    });
   </script>
 </body>
 

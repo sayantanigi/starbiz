@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>StarBiz</title>
-<meta charset="UTF-8">
-<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<?=url('assets/home/style/style.css')?>">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+@include('account.header');
 <style>
 	.showSweetAlert > h2{
 	    font-size: 20px !important;
@@ -86,125 +71,35 @@
 	    z-index: 10000 !important;
 	}
 	body{
-			height:700px;
-			overflow-x: hidden;
-		}
+		height:700px;
+		overflow-x: hidden;
+	}
+
+	#country-list {
+		float: left;
+		list-style: none;
+		margin-top: 20px;
+		padding: 0;
+		width: 99.7%;
+		position: absolute;
+		z-index: 1;
+		margin-left: -500px;
+	}
+
+	#country-list li {
+		padding: 10px;
+		/*background: #f0f0f0;*/
+		border-bottom: #bbb9b9 1px solid;
+		/*border-radius: 8px;*/
+		background: linear-gradient(90deg, #b58b42, #7a5a28)
+	}
+
+	#country-list li:hover {
+		background: #ece3d2;
+		cursor: pointer;
+	} 
 </style>
-</head>
 
-<body>
-  <nav class="sidebar">
-    <div class="nav-header">
-      <div class="logo-wrap">
-        <a class="logo-text" href="">StarBiz</a>
-      </div>
-      <a href="javascipt:void(0)" class="NavHeaderCloseIcon">
-        <img src="<?=url('assets/home/images/Icon8.png')?>" alt="">
-      </a>
-    </div>
-    <ul class="nav-categories ul-base">
-	
-      <li>
-        <a href="" id="Home" class="Active">
-          <img src="<?=url('assets/home/images/NavIcon1.png')?>" alt="">
-          <p>Home</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="UpcomingEvents">
-          <img src="<?=url('assets/home/images/NavIcon2.png')?>" alt="">
-          <p>Upcoming Events</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="ReferralLink">
-          <img src="<?=url('assets/home/images/NavIcon3.png')?>" alt="">
-          <p>Referral Link</p>
-        </a>
-      </li>
-	  
-       
-	  
-	  <li>
-        <a href="<?=url('dashboard/stripe-connect')?>" id="ManageSubscription">
-          <img src="<?=url('assets/home/images/NavIcon4.png')?>" alt="">
-          <p>Manage Stripe </p>
-        </a>
-      </li>
-	  
-	  
-      <li>
-        <a href="" id="SaleList">
-          <img src="<?=url('assets/home/images/NavIcon5.png')?>" alt="">
-          <p>Sale List</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="PurchaseHistory">
-          <img src="<?=url('assets/home/images/NavIcon6.png')?>" alt="">
-          <p>Purchase History</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="Wallet">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Wallet</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="TransactionsPayment">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Transactions & Payment</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="Rewards">
-          <img src="<?=url('assets/home/images/NavIcon8.png')?>" alt="">
-          <p>Rewards</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="TermsConditions">
-          <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
-          <p>Terms & Conditions</p>
-        </a>
-      </li>
-	  
-    </ul>
-  </nav>
-
-  <header>
-    <div class="header-inner">
-      <div class="header-first-inner">
-        <div class="nav-btn nav-slider">
-          <i class="material-icons">menu</i>
-        </div>
-        <div class="header-logo">
-          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
-        </div>
-        <div class="header-search">
-          <div class="search">
-            <i class="material-icons">search</i>
-            <input type="search" name="search" placeholder="Search">
-          </div>
-        </div>
-      </div>
-      <div class="header-menu">
-        <ul class="ul-base">
-          <li><a href="<?=url('dashboard/profile')?>" id="ProfileTab" class="HeaderProfileBtn">Profile</a></li>
-		  
-           <li><a href="<?=url('logout')?>">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
 
   <main role="main" class="Main">
     <div class="container-fluid m-0 Section Home">
@@ -327,13 +222,13 @@
 					    <select name="preferredListing" id="preferredListing" required>
 							<option value="">Choose a type</option>
 							<option value="1">Yes</option>
-							<option value="2">No</option>
+							<option value="0">No</option>
 					    </select>
 					</div>
 					
-					<div class="col-md-6 col-sm-12">
+					<div class="col-md-6 col-sm-12" style="display:none;" id="promotionPrefered">
 					  <label class="form-label">Duration</label>
-					  <input type="text" placeholder="Enter Duration" name="duration"  id="duration"  autocomplete="off" >
+					  <input type="text" placeholder="Enter Duration Number of Days" name="duration"  id="duration"  autocomplete="off" >
 					  <input type="hidden"  name="adsId"  id="adsId"  autocomplete="off" >
 					</div>
 					
@@ -1917,8 +1812,9 @@
                   
 
                   <!-- Tabs Content -->
-                    <div class="tab-content" id="myTabContent">
-				  
+                    <div class="tab-content" >
+					<input class="form-control mt-4 mb-4 SearchBarInner" type="search" placeholder="Search" aria-label="Search" id="searchInvitee" >
+				        <div id="myTabContent"></div>
 				    
 					
                     </div>
@@ -5583,12 +5479,104 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			dataType: 'text', 
 			success: function(response) {
 				$('#myTabContent').html(response);
+				//$('#searchInvitee').val(eventId);
+				$('#searchInvitee').attr('relid-event', eventId);
 				//window.location.href = "<?=url('dashboard/addtoCart')?>";
 			}
-			
 		});	
-
 	});
+	
+	
+	$(document.body).on('keyup', "#searchInvitee" ,function(){
+		var searchText = $(this).val();
+		//console.log(searchText);
+		var eventId = $('#searchInvitee').attr('relid-event');
+		$.ajax({
+			url: "<?=url('dashboard/searchInvitePeople')?>",
+			method: "POST",
+			data:{searchText : searchText, eventId : eventId, "_token": "{{ csrf_token() }}"},
+			dataType: 'text', 
+			success: function(response) {
+				$('#myTabContent').html(response);
+			}
+		});
+	});
+	
+	
+	$(document.body).on('click', ".deleteProduct" ,function(){
+		var productId = $(this).attr('relid');
+		//var quantity = $('#counterId').text();
+		
+		
+		    swal({
+				title: 'Do you really want your product to be deleted? It cannot be undone once deleted.',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#A5DC86',
+				cancelButtonColor: '#DD6B55',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				closeOnConfirm: true,
+				closeOnCancel: true
+			}, function(isConfirm){
+				if (isConfirm) {
+					$.ajax({
+						url: "<?=url('dashboard/delete_product')?>",
+						method: "POST",
+						data:{productId : productId, "_token": "{{ csrf_token() }}"},
+						dataType: 'json',
+						success: function(data) {
+							console.log(data);
+							if(data.status == 1){
+								swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true});
+							}
+							if(data.status == 0){
+								swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
+							}
+						}
+					});	
+				}
+			});
+	});
+	
+	
+	$(document.body).on('click', ".deleteService" ,function(){
+		var productId = $(this).attr('relid');
+		//var quantity = $('#counterId').text();
+		
+		
+		    swal({
+				title: 'Do you really want your service to be deleted? It cannot be undone once deleted.',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#A5DC86',
+				cancelButtonColor: '#DD6B55',
+				confirmButtonText: 'Yes',
+				cancelButtonText: 'No',
+				closeOnConfirm: true,
+				closeOnCancel: true
+			}, function(isConfirm){
+				if (isConfirm) {
+					$.ajax({
+						url: "<?=url('dashboard/delete_service')?>",
+						method: "POST",
+						data:{serviceId : serviceId, "_token": "{{ csrf_token() }}"},
+						dataType: 'json',
+						success: function(data) {
+							//console.log(data);
+							if(data.status == 1){
+								swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true});
+							}
+							if(data.status == 0){
+								swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
+							}
+						}
+					});	
+				}
+			});
+	});
+	
+	
 	
 	
 	$("#ManageSubscription").click(function () {
@@ -5627,6 +5615,53 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
 	});
 	
+	
+	$(document).ready(function() {
+		$("#search-box").keyup(function() {
+			$.ajax({
+				type: "POST",
+				url: "<?=url('dashboard/autoSuggestion')?>",
+				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+				beforeSend: function() {
+				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+				},
+				success: function(data) {
+					$("#suggesstion-box").show();
+					$("#suggesstion-box").html(data);
+					//$("#search-box").css("background", "#FFF");
+				}
+			});
+		});
+	});
+	
+	$(document).on("click", ".selectCountry", function () {
+		var search  = $(this).attr("search");
+		var keywork = $(this).attr("keywork");
+		
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+		
+	});
+	
+	<!-- New Script -->
+  
+    document.querySelector('.search').addEventListener('click', function () {
+      const modal = document.getElementById('SearchModal');
+      if (modal) {
+        modal.classList.add('SearchModalStyle');
+      }
+    });
+	
+	$(document).on('change','#preferredListing',function(e){
+        var preferred_listing = $(this).val();
+        if(preferred_listing == 1){
+			$("#promotionPrefered").css('display', 'block');
+		}else if(preferred_listing == 0){
+			$("#promotionPrefered").css('display', 'none');
+		}else if(plan_type == 'Yearly'){
+			$("#promotionPrefered").css('display', 'none');
+		}
+    });
+  
   </script>
   
 

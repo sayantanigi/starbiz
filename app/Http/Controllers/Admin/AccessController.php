@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Stripe;
 
 class AccessController extends Controller {
-  
+
 
 	public function __construct()
 	{
@@ -24,11 +24,11 @@ class AccessController extends Controller {
 			// let the request continue through the stack
 			return $next($request);
 		});
-	}	
-	
+	}
+
     public function index()
-    { 
-	
+    {
+
         $data = array(
 			'title'   => 'Users Lists',
 			'page'    => 'users',
@@ -38,10 +38,10 @@ class AccessController extends Controller {
 		$data['result'] = DB::table('users')->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.users', $data);
     }
-	
+
 	public function add()
-    { 
-	
+    {
+
         $data = array(
 			'title'   => 'Add Access',
 			'page'    => 'access-mng',
@@ -50,22 +50,22 @@ class AccessController extends Controller {
 		$data['userType'] = DB::table('user_type')->where(['status' => 1])->select('*')->get();
         return view('admin.add_access_mng', $data);
     }
-	
+
 	public function save(Request $request)
-    { 		
+    {
 		$view    = $request->view;
 		$created = $request->created;
 		$edited  = $request->edited;
 		$deleted = $request->deleted;
 		$menu_id = $request->menu_id;
 		$role_id = $request->user_type;
-		
+
 		$where = array('role_id' => $role_id);
 		DB::table('role_permission')->where($where)->delete();
-		
+
 		if(!empty($menu_id)) {
         		foreach ($menu_id as $key => $value) {
-					
+
 					 // echo @$view[$key] . $value;
 					 // echo "<br/>";
 
@@ -118,9 +118,9 @@ class AccessController extends Controller {
 
         		return redirect()->intended('admin/users')->with("status", "User added successfully!");
         	}
-		
-		
-		
+
+
+
 		// $data = ['first_name' => $fname, 'last_name' => $lname, 'email' => $email, 'phone' => @$phone, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'latitude' => $latitude, 'longitude' => @$longitude, 'profile_image' => @$profileImg, 'zipcode' => @$zipcode, 'user_type' => @$user_type, 'password' => md5(@$password), 'status' => @$status, 'created_at' => date('Y-m-d H:i:s')];
 
 		// $result = DB::table('users')->insertGetId($data);
@@ -131,12 +131,12 @@ class AccessController extends Controller {
 		    // //return back()->with("error", "Some error occure, Please try again!");
 			// return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
 		// }
-        
+
     }
-	
+
 	public function user()
-    { 
-	
+    {
+
         $data = array(
 			'title'   => 'User List',
 			'page'    => 'access-mng',
@@ -145,26 +145,26 @@ class AccessController extends Controller {
 		$data['result'] = DB::table('admin')->select('*')->get();
         return view('admin.admin_user_list', $data);
     }
-	
+
 	public function adduser()
-    {  
-	
+    {
+
         $data = array(
 			'title'   => 'Add User',
 			'page'    => 'access-mng',
 			'subpage' => 'access-mng1'
 		);
-		
+
         return view('admin.add_admin_user', $data);
     }
-	
+
 	public function edit($id)
-    { 
-	    
+    {
+
 		if(empty($id)){
 			return false;
 		}
-		
+
         $data = array(
 			'title'   => 'Edit Users',
 			'page'    => 'access-mng',
@@ -174,10 +174,10 @@ class AccessController extends Controller {
 		$data['userType'] = DB::table('user_type')->where(['status' => 1])->select('*')->get();
         return view('admin.edit_admin_user', $data);
     }
-	
-	
+
+
 	public function saveuser(Request $request)
-    { 	
+    {
 
         $validatedData = $request->validate([
 			'email' => 'required|email|unique:admin',
@@ -188,13 +188,13 @@ class AccessController extends Controller {
             return back()->withErrors('message', $validatedData);
 			//return Redirect::back()->withErrors('message', $validatedData);
         }
-		
+
 		$user_type = $request->user_type;
 		$name      = $request->name;
 		//$username = $request->username;
 		$email     = $request->email;
 		$password  = $request->password;
-		
+
 		$mydata = ['name' => $name, 'email' => $email, 'password' => md5($password), 'status' => 1, 'role_id' => $user_type];
 		$result = DB::table('admin')->insertGetId($mydata);
 		if($result){
@@ -203,9 +203,9 @@ class AccessController extends Controller {
 			return redirect()->intended('admin/access-management/userlist')->with("error", "Some error occure, Please try again!");
 		}
     }
-	
+
 	public function update(Request $request)
-    { 		
+    {
 	    \DB::enableQueryLog();
 
 		$user_type = $request->user_type;
@@ -216,7 +216,7 @@ class AccessController extends Controller {
 		if(!empty($request->password)){
 			$mydata = ['password' => md5($request->password)];
 		}
-		
+
 		$mydata = ['name' => $name, 'email' => $email,  'role_id' => $user_type, 'updated_at' => date('Y-m-d H:i:s')];
 		//print_r($id);die;
 
@@ -229,26 +229,26 @@ class AccessController extends Controller {
 			return redirect()->intended('admin/access-management/userlist')->with("error", "Some error occure, Please try again!");
 		}
     }
-	
-	
-	
+
+
+
 	function get_tier(Request $request){
-		
+
 		$output = '<option value="">Select Registration Tier</option>';
 		if($request->user_type){
 			$result = DB::table('sub_plan')->where(['status' => 1, 'user_type' => @$request->user_type])->select('*')->orderBy('name', 'ASC')->get();
-			
+
 			foreach($result as $row){
 			    $output .= '<option value="'.$row->id.'">'.$row->name.'</option>';
 			}
 			//return $output;
 		}
 		echo $output;
-	
+
 	}
-	
-	
-	
+
+
+
 	public function changestatus(Request $request)
 	{
 		$response = [];
@@ -261,22 +261,22 @@ class AccessController extends Controller {
 				$msg = 'Your status is Inctivate';
 			}
 			$result = DB::table('admin')->where('id',@$userId)->update(['status'=>$status]);
-			
+
 			if ($result) {
 				$response['status'] = 1;
 			} else {
 				$response['status'] = 0;
 			}
 		}
-		
+
 		echo json_encode($response);
 	}
-	
-	
-	
+
+
+
 	// public function update(Request $request)
-    // { 
-		
+    // {
+
 
 		// $fname = $request->fname;
 		// $lname = $request->lname;
@@ -292,14 +292,14 @@ class AccessController extends Controller {
 		// $zipcode = $request->pincode;
 		// $status = $request->status;
 		// $id = $request->id;
-		
+
 		// if($request->profileImg){
 			// $profileImg = $request->profileImg;
 		// }else{
 			// $profile_image = DB::table('users')->where(['id' => $id])->select('profile_image')->first();
 			// $profileImg = $profile_image->profile_image;
 		// }
-		
+
 		// $data = ['first_name' => $fname, 'last_name' => $lname, 'email' => $email, 'phone' => @$phone, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'latitude' => $latitude, 'longitude' => @$longitude, 'profile_image' => @$profileImg, 'zipcode' => @$zipcode, 'user_type' => @$user_type, 'status' => @$status, 'updated_at' => date('Y-m-d H:i:s')];
 
 		// $result = DB::table('users')->where('id',$id)->update(@$data);
@@ -308,14 +308,14 @@ class AccessController extends Controller {
 		// }else{
 			// return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
 		// }
-        
+
     // }
-	
+
 	function delete_user($id){
 		if(empty(@$id)){
 			return false;
 		}
-		
+
         $result = DB::table('users')->where('id', $id)->delete();
 		if($result){
 			return redirect()->intended('admin/users')->with("status", "User deleted successfully!");
@@ -323,12 +323,12 @@ class AccessController extends Controller {
 			return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
 		}
 	}
-	
+
 	function edit_profile($id){
 		if(empty($id)){
 			return false;
 		}
-		
+
         $data = array(
 			'title' => 'Edit Profile',
 			'page' => 'users',
@@ -336,7 +336,7 @@ class AccessController extends Controller {
 		);
 		// $data['result'] = DB::table('users')->where(['id' => $id])->select('*')->first();
 		// $data['userType'] = DB::table('user_type')->where(['status' => 1])->select('*')->get();
-		
+
 		$data['profile']   = DB::table('users')->where(['id' => $id])->select('*')->first();
 		$data['academics'] = DB::table('academics')->where(['user_id' => $id])->select('*')->get();
 		$data['athletics'] = DB::table('athletics')->where(['user_id' => $id])->select('*')->first();
@@ -346,11 +346,11 @@ class AccessController extends Controller {
 		//print_r($data['academics']);die;
         return view('admin.athletic', $data);
 	}
-	
+
 	function updateProfile(Request $request){
-		
+
 		$row = DB::table('users')->where(['id' => @$request->userId])->select('*')->first();
-		
+
 		$fname         = !empty(@$request->fname) ? @$request->fname : $row->first_name;
 		$lname         = !empty(@$request->lname) ? @$request->lname : $row->last_name;
 		$email         = !empty(@$request->email) ? @$request->email : $row->email;
@@ -365,7 +365,7 @@ class AccessController extends Controller {
 		$latitude      = !empty(@$request->latitude) ? @$request->latitude : $row->latitude;
 		$longitude     = !empty(@$request->longitude) ? @$request->longitude : $row->longitude;
 		$userId        = @$request->userId;
-		
+
 		$data = ['first_name' => $fname, 'last_name' => $lname, 'email' => $email, 'phone' => @$phone, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'latitude' => $latitude, 'longitude' => @$longitude, 'zipcode' => @$pincode, 'bio' => $profile_bio, 'area_interest' => $area_interest, 'updated_at' => date('Y-m-d H:i:s')];
 
 		$result = DB::table('users')->where('id',$userId)->update(@$data);
@@ -387,15 +387,15 @@ class AccessController extends Controller {
 				$i++;
 			}
 		}
-		 
+
 		$athletic_row = DB::table('athletics')->where(['user_id' => @$request->userId])->select('*')->first();
 		$feet     = !empty(@$request->feet) ?  trim(@$request->feet, "'") : $athletic_row->feet;
 		$inches   = !empty(@$request->inches) ? trim(@$request->inches, '"') : $athletic_row->inches;
 		$weight   = !empty(@$request->weight) ? @$request->weight : $athletic_row->weight;
 		$strength = !empty(@$request->strength) ? @$request->strength : $athletic_row->strength;
-		 
-		 
-		 
+
+
+
 		if(!empty($athletic_row)){
 			$athletic_data = [
 				'feet'       => $feet,
@@ -417,7 +417,7 @@ class AccessController extends Controller {
 			];
 			DB::table('athletics')->insertGetId($athletic_data);
 		}
-		 
+
 		if(!empty($request->club_name)){
 			DB::table('experience')->where('user_id', $userId)->delete();
 			$i = 0;
@@ -435,7 +435,7 @@ class AccessController extends Controller {
 				$i++;
 			}
 		}
-		 
+
 		if(!empty($request->coach_name)){
 			DB::table('reference')->where('user_id', $userId)->delete();
 			$i = 0;
@@ -450,7 +450,7 @@ class AccessController extends Controller {
 				$i++;
 			}
 		}
-		 
+
 		if(!empty($request->guardian_name)){
 			DB::table('guardian')->where('user_id', $userId)->delete();
 			$i = 0;
@@ -471,7 +471,7 @@ class AccessController extends Controller {
 		$response['message'] = 'Profile updated successfully.';
 		echo json_encode($response);
 	}
-	
+
 	function delete_academic(Request $request){
 		$academicId = $request->academic;
 		$userId = @$request->userId;
@@ -482,7 +482,7 @@ class AccessController extends Controller {
 			echo 0;
 		}
 	}
-	
+
 	function delete_experience(Request $request){
 		$experienceId = $request->experience;
 		$userId = @$request->userId;
@@ -493,7 +493,7 @@ class AccessController extends Controller {
 			echo 0;
 		}
 	}
-	
+
 	function delete_reference(Request $request){
 		$referenceId = $request->reference;
 		$userId = @$request->userId;
@@ -504,7 +504,7 @@ class AccessController extends Controller {
 			echo 0;
 		}
 	}
-	
+
 	function delete_guardian(Request $request){
 		$guardianId = $request->guardian;
 		$userId = @$request->userId;
@@ -515,7 +515,7 @@ class AccessController extends Controller {
 			echo 0;
 		}
 	}
-	
+
 	function view($id){
 		$data = array(
 			'title' => 'View User Information',
@@ -525,10 +525,10 @@ class AccessController extends Controller {
 		$data['result'] = DB::table('users')->where(['id' => $id])->select('*')->first();
         return view('admin.view_user', $data);
 	}
-	
+
 	 public function type()
-    { 
-	
+    {
+
         $data = array(
 			'title' => 'Users Type',
 			'page' => 'users',
@@ -537,22 +537,22 @@ class AccessController extends Controller {
         $data['result'] = DB::table('user_type')->select('*')->get();
         return view('admin.user_type', $data);
     }
-	
+
 	public function addusertype()
-    { 
-	
+    {
+
         $data = array(
 			'title' => 'Add User Type',
 			'page' => 'users',
 			'subpage' => 'user-type'
 		);
-        
+
         return view('admin.add_user_type', $data);
     }
-	
+
 	public function save_user_type(Request $request)
-    { 
-		
+    {
+
 
 		$user_type = $request->name;
 		$status = $request->status;
@@ -565,28 +565,28 @@ class AccessController extends Controller {
 		    //return back()->with("error", "Some error occure, Please try again!");
 			return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
 		}
-        
+
     }
-	
+
 	public function editusertype($id)
-    { 
+    {
 	    if(empty(@$id)){
 			return false;
 		}
-		
+
         $data = array(
 			'title' => 'Edit User Type',
 			'page' => 'users',
 			'subpage' => 'user-type'
 		);
-		
+
         $data['result'] = DB::table('user_type')->where(['id' => $id])->select('*')->first();
         return view('admin.edit_user_type', $data);
     }
-	
+
 	public function update_user_type(Request $request)
-    { 
-		
+    {
+
 
 		$user_type = $request->name;
 		$status = $request->status;
@@ -600,14 +600,14 @@ class AccessController extends Controller {
 		    //return back()->with("error", "Some error occure, Please try again!");
 			return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
 		}
-        
+
     }
 	public function delete_user_type($id)
-    { 
+    {
 	    if(empty(@$id)){
 			return false;
 		}
-		
+
         $result = DB::table('user_type')->where('id', $id)->delete();
 		if($result){
 			//return back()->with("status", "User type added successfully!");
@@ -616,16 +616,16 @@ class AccessController extends Controller {
 			//return back()->with("error", "Some error occure, Please try again!");
 			return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
 		}
-		
-        
+
+
     }
-	
-	
-	
-	
-	
+
+
+
+
+
 	public function  saveprofile(Request $request){
-		
+
 		if ($request['profilePic']) {
             $img = $request['profilePic'];
             $extn = $img->getClientOriginalExtension();
@@ -637,7 +637,7 @@ class AccessController extends Controller {
 		    $getData = DB::table('admin')->where($where)->select('profile')->first();
             $file_name = $getData->profile;
         }
-		
+
 		$name = $request->username;
 		$email = $request->email;
 		$data = ['name' => $name, 'email' => $email, 'profile' => $file_name, 'updated_at' => date('Y-m-d H:i:s')];
@@ -648,28 +648,28 @@ class AccessController extends Controller {
 		}else{
 			return back()->with("error1", "Some error occure, Please try again.!");
 		}
-		
+
 	}
-	
+
 	public function  changepassword(Request $request){
-		
+
 		$where = ['id' => session()->get('ADMINLOGINID')];
 		$getData = DB::table('admin')->where($where)->select('password')->first();
 
-			
+
 		 $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed',
         ]);
-		
+
 		if(md5($request->old_password) != @$getData->password){
             return back()->with("error", "Old Password Doesn't match!");
         }
-		
+
 		$result = DB::table('admin')->where('id',session()->get('ADMINLOGINID'))->update(['password' => md5($request->new_password)]);
 		return back()->with("status", "Password changed successfully!");
 	}
-	
+
 	function cropImage (){
 		$data = $_POST['image'];
 		$image_array_1 = explode(";", $data);
@@ -680,14 +680,14 @@ class AccessController extends Controller {
 		file_put_contents($image_name, $data);
 	    echo $imageName;
 	}
-	
+
 	public function subscription($id)
-    { 
-	
+    {
+
 	    if(empty(@$id)){
 			return false;
 		}
-	
+
         $data = array(
 			'title'   => 'Users Subscription',
 			'page'    => 'users',
@@ -699,27 +699,27 @@ class AccessController extends Controller {
 		$data['result'] = DB::table('sub_plan')->where(['user_type' => $user_type->user_type])->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.package', $data);
     }
-	
+
 	public function payment()
-    { 
+    {
 	    $data = array(
 			'title' => 'Payment',
 			'page' => 'users',
 			'subpage' => 'users'
 		);
-		
+
 		$data['userId'] = @$userId = @$_GET['uid'];
 		$data['subId'] = @$subId = @$_GET['sid'];
 		$data['subInfo'] = DB::table('sub_plan')->where(['id' => $subId])->select('*')->orderBy('id', 'DESC')->first();
 		$data['userInfo'] = DB::table('users')->where(['id' => $userId])->select('*')->orderBy('id', 'DESC')->first();
-	   
+
         return view('admin.payment', $data);
     }
-	
+
 	function submit_payment(Request $request){
 		//require "vendor/stripe-php/init.php";
 		//print_r($request->input('stripeToken'));
-		$token      = $request->stripeToken; 
+		$token      = $request->stripeToken;
 		$sub_id     = $_POST['sub_id'];
 		$sub_name   = $_POST['sub_name'];
 		$user_id    = $_POST['user_id'];
@@ -733,68 +733,68 @@ class AccessController extends Controller {
 		$email      = $_POST['email'];
 		$itemPrice  = $amount;
         $currency   = 'usd';
-		
+
 		$stripe = array(
 			"secret_key"      => "sk_test_51MPhgSIuZrwn6gWgucZ3pq3OGKnLaQMxviXsKtZb4F7tenDBs25KovJkAB4tii3db6CMW1tdWSk2CB9thQ8yOYdX00iUs05KRN",
 			"publishable_key" => "pk_test_51MPhgSIuZrwn6gWggTu5pxq41l6ZODzSg2zZ1kjKynv3yR61OZDey3AcNm2iwioDVJqSuJ3TCXJCdOAJn1VaNfyk00QkWY7DPT"
-		); 
-		
-		\Stripe\Stripe::setApiKey($stripe['secret_key']); 
-		
-		try {  
-			$customer = \Stripe\Customer::create(array( 
-				'email' => $email, 
-				'source'  => $token 
-			)); 
-		} catch(Exception $e) {  
-			$api_error = $e->getMessage();  
+		);
+
+		\Stripe\Stripe::setApiKey($stripe['secret_key']);
+
+		try {
+			$customer = \Stripe\Customer::create(array(
+				'email' => $email,
+				'source'  => $token
+			));
+		} catch(Exception $e) {
+			$api_error = $e->getMessage();
 		}
-		
-		
-		
-		if(empty($api_error) && $customer) 
+
+
+
+		if(empty($api_error) && $customer)
 		{
 			$itemName = @$sub_name;
 			$orderID = "ORDNO-".$this->generate_otp(6);
 			$itemPriceCents = ($itemPrice*100);
 			//print_r($orderID);die;
-			
-			try {  
-				$charge = \Stripe\Charge::create(array( 
-					'customer' => $customer->id, 
-					'amount'   => $itemPriceCents, 
-					'currency' => 'usd', 
+
+			try {
+				$charge = \Stripe\Charge::create(array(
+					'customer' => $customer->id,
+					'amount'   => $itemPriceCents,
+					'currency' => 'usd',
 					'description' => $itemName,
 					 'metadata' => array(
 						 'order_id' => $orderID
 					 )
-				)); 
-			} catch(Exception $e) {  
-				$api_error = $e->getMessage();  
+				));
+			} catch(Exception $e) {
+				$api_error = $e->getMessage();
 			}
-			
+
 			//echo $api_error;die;
-			
-			if(empty($api_error) && $charge) 
+
+			if(empty($api_error) && $charge)
 			{
-				
-				
-				$chargeJson = $charge->jsonSerialize(); 
-				if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1) 
+
+
+				$chargeJson = $charge->jsonSerialize();
+				if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1)
 				{
-					$transactionID = $chargeJson['balance_transaction']; 	
-					$paidAmount = $chargeJson['amount']; 
-					$paidAmount = ($paidAmount/100); 
-					$paidCurrency = $chargeJson['currency']; 
-					$payment_status = $chargeJson['status']; 
+					$transactionID = $chargeJson['balance_transaction'];
+					$paidAmount = $chargeJson['amount'];
+					$paidAmount = ($paidAmount/100);
+					$paidCurrency = $chargeJson['currency'];
+					$payment_status = $chargeJson['status'];
 					$chargeID = $chargeJson['id'];
 					$paymentDate = date('Y-m-d H:i:s');
 					//print_r($chargeJson);
-					if($payment_status == 'succeeded') 
+					if($payment_status == 'succeeded')
                     {
-						
+
 						$sub_info = DB::table('sub_plan')->where(['id' => @$sub_id])->select('*')->orderBy('id', 'DESC')->first();
-						
+
 						if($sub_info->type == 1){
 							$current_period_start = date('Y-m-d');
 							$current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' month'));
@@ -802,13 +802,13 @@ class AccessController extends Controller {
 							$current_period_start = date('Y-m-d');
 							$current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' year'));
 						}
-						
+
 						//echo $current_period_end;die;
-						
+
 						$data = ['user_name' => $card_name, 'user_id' => $user_id, 'address' => $address, 'country' => $country, 'state' => @$state, 'city' => @$city, 'zipcode' => $zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => $transactionID, 'charge_id' => $chargeID, 'status' => $payment_status, 'expiry_date' => $current_period_end, 'created_at' => $paymentDate];
 						$result = DB::table('transaction')->insertGetId($data);
 						return redirect()->intended('admin/users')->with("status", "Your Payment has been Successful!");
-						
+
 					}else{
 						return redirect()->intended('admin/users')->with("error", "Your Payment has Failed. Some error occure, Please try again!");
 					}
@@ -817,29 +817,29 @@ class AccessController extends Controller {
 				}
 			}else{
 				return redirect()->intended('admin/users')->with("error", "Charge creation failed! $api_error");
-				
+
 			}
 		}else{
-			
+
 			return redirect()->intended('admin/users')->with("error", "Invalid card details! $api_error");
 		}
 	}
 
     public function updateAccess(Request $request)
-    { 		
+    {
 		$view = $request->view;
 		$created = $request->created;
 		$edited = $request->edited;
 		$deleted = $request->deleted;
 		$menu_id = $request->menu_id;
 		$role_id = $request->user_type;
-		
+
 		$where = array('role_id' => $role_id);
 		DB::table('role_permission')->where($where)->delete();
-		
+
 		if(!empty($menu_id)) {
 			foreach ($menu_id as $key => $value) {
-				
+
 				 // echo @$view[$key] . $value;
 				 // echo "<br/>";
 
@@ -892,12 +892,12 @@ class AccessController extends Controller {
 
 			return redirect()->intended('admin/access-management/userlist')->with("status", "Access updated successfully!");
 		}
-		
-        
+
+
     }
 
 	function editAccess($id){
-        
+
         $roleId = base64_decode($id);
         if($roleId == 0){
             $roleId = '0000';
@@ -925,5 +925,5 @@ class AccessController extends Controller {
 		}
 		return $randomString;
 	}
-	
+
 }

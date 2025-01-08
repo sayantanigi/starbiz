@@ -11,8 +11,8 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-	 
-	
+
+
     protected $except = [
        '/api/register',
        '/api/login',
@@ -60,5 +60,8 @@ class VerifyCsrfToken extends Middleware
        '/api/addAdvertise',
        '/api/addfavNetworkUsers',
        '/api/referInvite',
+       '/api/deleteAccount',
+       '/api/clearsingleitem',
+       '/api/clearallitem'
     ];
 }
