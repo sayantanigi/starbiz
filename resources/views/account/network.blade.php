@@ -4,7 +4,7 @@
 <head>
 	<title>StarBiz</title>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
+	<link rel="shortcut icon" href="<?=url('setting/2019685580.png')?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -2613,6 +2613,10 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       selectPlanDetailsBtnBack.addEventListener("click", () => switchSection("advertisement"));
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
+	
+	$("#Home").click(function () {
+		window.location.href = '<?=url('dashboard');?>'; 
+	});
 	
 	$("#ManageSubscription").click(function () {
 	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 

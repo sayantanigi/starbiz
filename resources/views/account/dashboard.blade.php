@@ -2946,7 +2946,6 @@
 							}else{
 								$userName = '';
 							}
-							
 							if(!empty($checkUser->profile_image) && file_exists('public/profile/'.$checkUser->profile_image.'')){
 								$userProfile = url('profile/'.$checkUser->profile_image.'');
 							}else{
@@ -2958,7 +2957,6 @@
 						}else{
 							$galleryImg = url('noimage.jpg');
 						}
-						
 						// $startDate  = $v->start_date;
 						// $start_date = date('Y-m-d', strtotime($startDate));
 						// $start_time = date('H:i:s', strtotime($startDate));
@@ -3120,8 +3118,8 @@
 			
 		<div id="MyBusiness" class="row m-0 TabContent">
 			<?php
-				if(@$allBusiness){
-					foreach(@$allBusiness as $k => $v){
+				if(@$favBusiness){
+					foreach(@$favBusiness as $k => $v){
 						
 					$category = DB::table('listing_category')->where(['id' => @$v->category])->select('name')->orderBy('id', 'DESC')->first();
 					$image    = DB::table('listing_image')->where(['listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
@@ -3154,7 +3152,7 @@
 					// $start_date = date('Y-m-d', strtotime($startDate));
 					// $start_time = date('H:i:s', strtotime($startDate));
 					
-					$numRows = DB::table('favouritebusiness')->where(['user_id' => session()->get('USERLOGINID'), 'listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->count();
+					$numRows = DB::table('favouritebusiness')->where(['listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->count();
 					
 					if($numRows > 0){
 						$fav = '<i class="fa fa-heart" aria-hidden="true"></i>';
@@ -3395,6 +3393,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
+<script src="https://cdn.jsdelivr.net/npm/notifyjs-browser/dist/notify.js"></script>
 <script>
 	window.onbeforeunload = function () {
 		window.scrollTo(0,0);
@@ -3435,7 +3434,7 @@
 	}
 </script>
   <script>
-    $('.dropdown-toggle').on('click', function (e) {
+    /*$('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
 
@@ -3460,7 +3459,7 @@
       if ($('.sidebar').hasClass('open')) {
         $('.sidebar').removeClass('open');
       }
-    });
+    });*/
   </script>
   <script>
     $(document).ready(function () {
@@ -4585,6 +4584,12 @@ $(document).ready(function(){
 		var business_website = $('#business_website').val();
 		var business_category = $('#business_category').val();
 		var business_userId = $('#business_userId').val();
+		
+		if($("#add_product_or_not").prop('checked') == true){
+			var add_product_or_not = 1;
+		}else{
+			var add_product_or_not = 0;
+		}
 
 		
 
@@ -4604,6 +4609,7 @@ $(document).ready(function(){
 		form_data.append("business_website", business_website);
 		form_data.append("business_category", business_category);
 		form_data.append("business_userId", business_userId);
+		form_data.append("add_product_or_not", add_product_or_not);
 
 
 		$.ajax({
@@ -4635,6 +4641,10 @@ $(document).ready(function(){
 			}
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
+			}
+			
+			if(data.status == 2){
+				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = "<?=url('dashboard/stripe-connect')?>"});
 			}
 			
 		}
@@ -5433,16 +5443,28 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       });
     });*/
 	$(document.body).on('click', ".AddToCartNotify" ,function(){
-		var productId = $(this).attr('relid');
-		var quantity = $('#counterId').text();
+		var productId     = $(this).attr('relid');
+		var specipication = $(this).attr('specipication');
+		var quantity      = $('#counterId').text();
 		
 		$.ajax({
 			url: "<?=url('dashboard/add_to_cart')?>",
 			method: "POST",
-			data:{quantity : quantity, productId : productId, "_token": "{{ csrf_token() }}"},
-			dataType: 'text',
+			data:{quantity : quantity, productId : productId, specipication : specipication, "_token": "{{ csrf_token() }}"},
+			dataType: 'json',
 			success: function(response) {
 				//$('#service-gallery-model').html(response);
+				
+				
+				if(response.status == 1){
+					$.notify("Hooray! 1 item added to your cart", {
+					className: "success",
+					position: "bottom right",
+					autoHide: true,
+					autoHideDelay: 3000,
+					});
+				}
+				
 			}
 			
 		});	
@@ -5450,13 +5472,14 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	});
 	
 	$(document.body).on('click', "#BuyNowSection" ,function(){
-		var productId = $(this).attr('relid');
-		var quantity = $('#counterId').text();
+		var productId     = $(this).attr('relid');
+		var specipication = $(this).attr('specipication');
+		var quantity      = $('#counterId').text();
 		
 		$.ajax({
 			url: "<?=url('dashboard/add_to_cart')?>",
 			method: "POST",
-			data:{quantity : quantity, productId : productId, "_token": "{{ csrf_token() }}"},
+			data:{quantity : quantity, productId : productId, specipication : specipication, "_token": "{{ csrf_token() }}"},
 			dataType: 'text',
 			success: function(response) {
 				//$('#service-gallery-model').html(response);
@@ -5579,41 +5602,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	
 	
 	
-	$("#ManageSubscription").click(function () {
-	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
-	});
-	
-	$("#UpcomingEvents").click(function () {
-	    window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
-	});
-	
-	$("#ReferralLink").click(function () {
-	    window.location.href = '<?=url('dashboard/refferalLink');?>'; 
-	});
-	
-	$("#Wallet").click(function () {
-	    window.location.href = '<?=url('dashboard/wallet');?>'; 
-	});
-	
-	$("#TransactionsPayment").click(function () {
-	    window.location.href = '<?=url('dashboard/transaction');?>'; 
-	});
-	
-	$("#Rewards").click(function () {
-	    window.location.href = '<?=url('dashboard/reward');?>'; 
-	});
-	
-	$("#TermsConditions").click(function () {
-	    window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
-	});
-	
-	$("#PurchaseHistory").click(function () {
-	    window.location.href = '<?=url('dashboard/purchase-history');?>'; 
-	});
-	
-	$("#SaleList").click(function () {
-	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
-	});
 	
 	
 	$(document).ready(function() {

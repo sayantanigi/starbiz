@@ -107,6 +107,8 @@ class DashboardController extends Controller {
 		$Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id WHERE invitation.status='1' AND repeat_invitation.status='1' AND (repeat_invitation.sender_id = '".session()->get('USERLOGINID')."' OR repeat_invitation.receiver_id = '".session()->get('USERLOGINID')."')";
 		$data['complete'] = DB::select($Sql);
 		
+		//print_r($data['accept']);die;
+		
 		$data['income']   = DB::table('household_income')->select('*')->orderBy('id', 'ASC')->get();
 		$data['age']      = DB::table('age_range')->select('*')->orderBy('id', 'ASC')->get();
 		$data['category'] = DB::table('promotion_category')->select('*')->orderBy('name', 'ASC')->get();
@@ -115,11 +117,11 @@ class DashboardController extends Controller {
 		$data['allBusiness'] = DB::table('listing')->select('*')->where(['status' => 1])->limit(10)->orderBy('id', 'DESC')->get();
 		$data['allBusinessCount'] = DB::table('listing')->select('*')->where(['status' => 1])->orderBy('id', 'DESC')->count();
 		$data['myBusiness'] = DB::table('listing')->select('*')->where(['status' => 1, 'user_id' => session()->get('USERLOGINID')])->orderBy('id', 'DESC')->get();
-		
+		$favBusiness = "SELECT listing.* FROM listing INNER JOIN favouritebusiness ON listing.id = favouritebusiness.listing_id WHERE favouritebusiness.user_id='".session()->get('USERLOGINID')."'";		$data['favBusiness'] = DB::select($favBusiness);
 		$data['listing_category'] = DB::table('listing_category')->where(['status' => 1])->select('*')->orderBy('name', 'ASC')->get();
 		$data['product_category'] = DB::table('product_category')->where(['status' => 1])->select('*')->orderBy('name', 'ASC')->get();
 		
-		$Sql = "SELECT event_name, id FROM events WHERE status = '1' AND DATE(start_date) >= '".date('Y-m-d')."' order by id DESC";
+		$Sql = "SELECT event_name, id FROM events WHERE status = '1' AND user_id = '".session()->get('USERLOGINID')."' AND DATE(start_date) >= '".date('Y-m-d')."' order by id DESC";
 		$data['upcomingEventList'] = DB::select($Sql);
 		
 		$Sql = "SELECT first_name, last_name, id FROM users WHERE status = '1' AND user_type = '10' order by id DESC";
@@ -680,13 +682,27 @@ class DashboardController extends Controller {
 				}
 			}
 			
+			$photoSection = '';
+			if(!empty(@$gallaryBlock)){
+				$photoSection='<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
+					<div class="TopSection">
+						<p>Photos</p>
+						<a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
+							<img src="'.url('assets/home/images/Icon6.png').'" alt="">
+						</a>
+					</div>
+					<div class="EventPhotoContainer">
+						'.@$gallaryBlock.'
+					</div>
+				</div>';
+			}
+			
 			$inviteeProfile = '';
 			$inviteeId = [];
 			$invitation  = DB::table('invitation')->where(['event_id' => @$eventInfo->id])->select('*')->get();
 			if(count($invitation) > 0){
 				foreach($invitation as $k => $v){
-					$get_receiverInfo  = DB::table('repeat_invitation')->where(['invitation_id' => @$v->id])->select('*')->first();
-					$inviteeId[] = $get_receiverInfo->receiver_id;
+					$get_receiverInfo  = DB::table('repeat_invitation')->where(['invitation_id' => @$v->id])->select('*')->first();                    if(@$get_receiverInfo){						if(@$get_receiverInfo->receiver_id){							$inviteeId[] = @$get_receiverInfo->receiver_id;						}					}
 				}
 			}
 			
@@ -777,21 +793,7 @@ class DashboardController extends Controller {
                   <p class="BodyText">'.strip_tags(@$eventInfo->description).'</p>
                 </div>
 				
-				<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
-                  <div class="TopSection">
-                    <p>Photos</p>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img src="'.url('assets/home/images/Icon6.png').'" alt="">
-                    </a>
-                  </div>
-                  <div class="EventPhotoContainer">
-				  
-                    '.@$gallaryBlock.'
-					
-                    
-                    
-                  </div>
-                </div>
+				'.@$photoSection.'	
               </div>
 			  ';
 			  
@@ -802,39 +804,28 @@ class DashboardController extends Controller {
     {
 		$output        = '';
 		$galleryPhotos = '';
-		
 		if(@$request->eventId){
 			$eventImg  = DB::table('event_image')->where(['event_id' => @$request->eventId])->select('*')->orderBy('id', 'ASC')->get();
-			if(count($eventImg) > 0){
-				foreach($eventImg as $imgKey => $imgVal){
-					
+			if(count($eventImg) > 0){								$i = 1;
+				foreach($eventImg as $imgKey => $imgVal){					
 					if(!empty(@$imgVal->image) && file_exists('public/events/'.@$imgVal->image.'')){
 						$imageUrl_1 = url('events/'.@$imgVal->image.'');
 					}else{
 						$imageUrl_1 = url('noimage.jpg');
 					}
-					
 					$galleryPhotos.='
-						<div class="carousel-item active">
-							<img style="height: 75vh;"
-							  src="'.@$imageUrl_1.'"
-							  class="d-block w-100" alt="">
+						<div class="carousel-item '.((@$i == 1) ? 'active' : '').'">						    <img style="height: 75vh;" src="'.@$imageUrl_1.'" class="d-block w-100" alt="">
 						</div>
-					';
+					';					$i++;
 				}	
 				
 				$output= '
 					<div class="row PromotionDetail">
 						<div class="col-md-12 col-sm-12 PromotionImg">
 						  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-						  
-							<div class="carousel-inner">
-							  
+							<div class="carousel-inner"> 
 							  '.@$galleryPhotos.'
-							  
-							 
 							</div>
-							
 							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
 							  data-bs-slide="prev">
 							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -848,8 +839,7 @@ class DashboardController extends Controller {
 						  </div>
 						</div>
 					  </div>
-				';
-					
+				';	
 			}
 		}
 		echo $output;
@@ -1018,6 +1008,21 @@ class DashboardController extends Controller {
 				}
 			}
 			
+			$photoSection = '';
+			if(!empty(@$gallaryBlock)){
+				$photoSection = '<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
+					<div class="TopSection">
+						<p>Photos</p>
+						<a href="javascript:void(0);" class="businessPhotos" relid="'.@$listingInfo->id.'" data-bs-toggle="modal" data-bs-target="#BusinessPhotosModal">
+							<img src="'.url('assets/home/images/Icon6.png').'" alt="">
+						</a>
+					</div>
+					<div class="EventPhotoContainer">
+						'.@$gallaryBlock.'
+					</div>
+				</div>';
+			}
+			
 			$productList  = DB::table('product')->where(['listing_id' => @$listingInfo->id])->select('*')->orderBy('id', 'DESC')->get();
 			
 			if(count($productList) > 0){
@@ -1038,25 +1043,30 @@ class DashboardController extends Controller {
 					if(@$v->user_id == session()->get('USERLOGINID')){
 						$addTocart = '';
 					}else{
-						$addTocart = '<a class="AddToCartBlock AddToCartNotify">
+						$addTocart = '<a href="javascript:void(0);" class="AddToCartBlock AddToCartNotify" relid="'.@$v->id.'" specipication="product">
 							<img class="ColorIcon" src="'.url('assets/home/images/NavIcon6.png').'" alt="">
 							<img class="WhiteIcon" src="'.url('assets/home/images/Icon26.png').'" alt="">
 						</a>';
 					}
+					
+					// $addTocart = '<a href="javascript:void(0);" class="AddToCartBlock AddToCartNotify" relid="'.@$v->id.'" specipication="product">
+							// <img class="ColorIcon" src="'.url('assets/home/images/NavIcon6.png').'" alt="">
+							// <img class="WhiteIcon" src="'.url('assets/home/images/Icon26.png').'" alt="">
+						// </a>';
 					$productOutPut.='
 						<div class="ProductBlock ps-0 product-details" relid="'.@$v->id.'" data-bs-toggle="modal" data-bs-target="#ProductDetailsModal"
 						style="cursor: pointer;">
 						<img src="'.@$productImg.'" alt="">
 							<div class="ProductTextBlock">
 									'.@$addTocart.'
-								<p class="m-0 Heading">'.substr(@$v->name,0,20).'</p>
+								<p class="m-0 Heading">'.substr(@$v->name,0,15).'</p> 
 								<p class="m-0 Price">$'.@$v->price.'</p>
 							</div>
 						</div>
 					';
 				}
 			}else{
-				$productOutPut = 'Not found any product list';
+				$productOutPut = '';
 			}
 			
 			$serviceList  = DB::table('services')->where(['listing_id' => @$listingInfo->id])->select('*')->orderBy('id', 'DESC')->get();
@@ -1078,7 +1088,7 @@ class DashboardController extends Controller {
 					if(@$v->user_id == session()->get('USERLOGINID')){
 						$addTocart = '';
 					}else{
-						$addTocart = '<a class="AddToCartBlock AddToCartNotify">
+						$addTocart = '<a href="javascript:void(0);" class="AddToCartBlock AddToCartNotify" relid="'.@$v->id.'" specipication="service">
 							<img class="ColorIcon" src="'.url('assets/home/images/NavIcon6.png').'" alt="">
 							<img class="WhiteIcon" src="'.url('assets/home/images/Icon26.png').'" alt="">
 						</a>';
@@ -1089,12 +1099,40 @@ class DashboardController extends Controller {
                         <img src="'.@$serviceImg.'" alt="">
                         <div class="ProductTextBlock">
 						    '.@$addTocart.'
-                          <p class="m-0 Heading">'.substr(@$v->name,0,20).'</p>
+                          <p class="m-0 Heading">'.substr(@$v->name,0,15).'</p>
                           <p class="m-0 Price">$'.@$v->price.'</p>
                         </div>
                       </div>
 					';
 				}
+			}else{
+				$serviceOutPut = '';
+			}
+			
+			$productORService = '';
+			if(!empty(@$serviceOutPut) || !empty(@$productOutPut)){
+				$productORService = '<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
+                  <div class="PeopleContainer">
+						<div class="TopSection mb-0">
+							<p>Products & Services</p>
+							<div class="d-flex flex-row gap-3">
+								<!--<a href="">
+								<i class="fa fa-plus" aria-hidden="true" style="color: #b48a42;"></i>
+								</a>
+								<a href="" data-bs-toggle="modal" data-bs-target="#BusinessPSModal">
+								<img src="'.url('assets/home/images/Icon6.png').'" alt="">
+								</a>-->
+							</div>
+						</div>
+					
+						<div class="ProductServiceSection ps-0">
+						    '.@$productOutPut.'
+						</div>
+						<div class="ProductServiceSection ps-0">
+						    '.@$serviceOutPut.'
+						</div>
+                  </div>
+                </div>';
 			}
 			
 			$output = '<div class="row PromotionDetail">
@@ -1172,55 +1210,17 @@ class DashboardController extends Controller {
 				  
                 </div>
 				
-				<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
-                  <div class="PeopleContainer">
-                    <div class="TopSection mb-0">
-                      <p>Products & Services</p>
-					  
-                      <div class="d-flex flex-row gap-3">
-                        <!--<a href="">
-                          <i class="fa fa-plus" aria-hidden="true" style="color: #b48a42;"></i>
-                        </a>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#BusinessPSModal">
-                          <img src="'.url('assets/home/images/Icon6.png').'" alt="">
-                        </a>-->
-                      </div>
-                    </div>
-					
-                    <div class="ProductServiceSection ps-0">
-					
-                      '.@$productOutPut.'
-                    </div>
-					
-					<div class="ProductServiceSection ps-0">
-					  '.@$serviceOutPut.'
-					  
-					</div>
-                  </div>
-                </div>
+				'.@$productORService.'
 				
                 
 				
-				<div class="col-md-12 col-sm-12 PromotionData">
-                  <p class="BodyText">'.strip_tags(@$listingInfo->description).'</p>
-                </div>
-				
-				<div class="col-md-12 col-sm-12 PeopleContainer mt-2">
-                  <div class="TopSection">
-                    <p>Photos</p>
-                    <a href="javascript:void(0);" class="businessPhotos" relid="'.@$listingInfo->id.'" data-bs-toggle="modal" data-bs-target="#BusinessPhotosModal">
-                      <img src="'.url('assets/home/images/Icon6.png').'" alt="">
-                    </a>
-                  </div>
-                  <div class="EventPhotoContainer">
-				  
-                    '.@$gallaryBlock.'
+					<div class="col-md-12 col-sm-12 PromotionData">
+					  <p class="BodyText">'.strip_tags(@$listingInfo->description).'</p>
+					</div>
 					
-                    
-                    
-                  </div>
-                </div>
-              </div>
+					'.@$photoSection.'
+				
+				</div>
 			  ';
 			  
 		}
@@ -1320,6 +1320,24 @@ class DashboardController extends Controller {
 			}
 		}*/
 		
+		if(@$request->add_product_or_not == 1){
+			$stripe  = DB::table('stripe_connect')->where(['userId' => session()->get('USERLOGINID')])->select('*')->first();
+			if($stripe){
+			    $stripecon = $this->get_stripe_info($stripe->stripe_acc_id);
+				if($stripecon == 1){
+					
+				}else{
+					$response['status'] = 2;
+					$response['msg'] = 'Please connect your stripe.If you want to add product or services.';
+					echo json_encode($response);exit();	
+				}
+			}else{
+				$response['status'] = 2;
+				$response['msg'] = 'Please connect your stripe.If you want to add product or services.';
+				echo json_encode($response);exit();	
+			}
+		} 
+		
 		$accessList = DB::table('users')->where(['id' => session()->get('USERLOGINID')])->select('businessCount')->first();
 		if(!empty(@$accessList)){
 			if(@$accessList->businessCount > 0){
@@ -1330,6 +1348,9 @@ class DashboardController extends Controller {
 				echo json_encode($response);exit();	
 			}
 		}
+		
+		
+		
 		
 		
 		$data = ['business_name' => @$listing_business_name, 'name' => @$listing_name, 'country' => @$country, 'city' => @$city, 'state' => @$state, 'online_busi' => @$onlineBusiness, 'address' => @$address, 'latitude' => @$latitude, 'longitude' => @$longitude, 'description' => @$description, 'phone' => @$phone, 'email' => @$email, 'website' => @$website, 'google_map_address' => @$chk_address, 'status' => 1, 'category' => @$category, 'subcategory' => @$subcategory, 'user_id' => @$userId, 'tags' => @$tags, 'created_at' => date('Y-m-d H:i:s')];
@@ -1958,8 +1979,7 @@ class DashboardController extends Controller {
 			$duration         =  $_POST['duration'];
 			
 			$stripe = array(
-				"secret_key"      => "sk_test_51MPhgSIuZrwn6gWgucZ3pq3OGKnLaQMxviXsKtZb4F7tenDBs25KovJkAB4tii3db6CMW1tdWSk2CB9thQ8yOYdX00iUs05KRN",
-				"publishable_key" => "pk_test_51MPhgSIuZrwn6gWggTu5pxq41l6ZODzSg2zZ1kjKynv3yR61OZDey3AcNm2iwioDVJqSuJ3TCXJCdOAJn1VaNfyk00QkWY7DPT"
+				"secret_key"      => STRIPE_SECRET_KEY,				"publishable_key" => STRIPE_PUBLISHABLE_KEY
 			); 
 			
 			\Stripe\Stripe::setApiKey($stripe['secret_key']); 
@@ -2225,10 +2245,10 @@ class DashboardController extends Controller {
 				  </div>
 				  
 				  <div class="BtnContainer">
-					<a class="BuyNowBtn" id="BuyNowSection" relid="'.@$request->productId.'">
+					<a class="BuyNowBtn" id="BuyNowSection" relid="'.@$request->productId.'" specipication="product">
 					  <p class="m-0">Buy Now</p>
 					</a>
-					<a class="AddToCartBtn AddToCartNotify" relid="'.@$request->productId.'">
+					<a class="AddToCartBtn AddToCartNotify" relid="'.@$request->productId.'" specipication="product">
 					  <img src="'.url('assets/home/images/Icon25.png').'" alt="">
 					</a>
 					
@@ -2421,6 +2441,38 @@ class DashboardController extends Controller {
 				$deleteService='';
 			}
 			
+			
+			if(@$productInfo->user_id == session()->get('USERLOGINID')){
+				$quantityAndBuyNow = '';
+			}else{
+				$quantityAndBuyNow = '<div class="QuantityAddBlock">
+					<p class="m-0 QuantityTextHeading">Quantity</p>
+					<div class="QuantityContainer">
+					  <a class="decrement">
+						<i class="fa fa-minus" aria-hidden="true"></i>
+					  </a>
+					  <span>
+						<p class="m-0 QuantityCount counter" id="counterId">1</p>
+						
+						
+					  </span>
+					  <a class="increment">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+					  </a>
+					</div>
+				  </div>
+				  
+				  <div class="BtnContainer">
+					<a class="BuyNowBtn" id="BuyNowSection" relid="'.@$request->serviceId.'" specipication="service">
+					  <p class="m-0">Buy Now</p>
+					</a>
+					<a class="AddToCartBtn AddToCartNotify" relid="'.@$request->serviceId.'" specipication="service">
+					  <img src="'.url('assets/home/images/Icon25.png').'" alt="">
+					</a>
+					
+				  </div>';
+			}
+			
 			$output.='
 				<div class="row PromotionDetail">
 					<div class="col-md-8 col-sm-12 PromotionImg position-relative">
@@ -2440,6 +2492,8 @@ class DashboardController extends Controller {
 					  <ul>
 						'.@$tagsConcate.'
 					  </ul>
+					  
+					  '.@$quantityAndBuyNow.'
 					</div>
 					<div class="col-md-12 col-sm-12 PromotionData">
 					  <p class="BodyText">'.@$serviceInfo->description.'</p>
@@ -2527,20 +2581,40 @@ class DashboardController extends Controller {
 		
 			$product_id = @$request->productId;
 			$quantity = @$request->quantity;
+			
+			if(@$request->specipication == 'product'){
+				
+				//$product = $this->Mymodel->get_single_row_info('*', 'product', 'product_status = "1" AND product_id = '.@$product_id.'', '', 1);
+				$product = DB::table('product')->where(['status' => 1, 'id' => @$product_id])->select('*')->first();
 
-			//$product = $this->Mymodel->get_single_row_info('*', 'product', 'product_status = "1" AND product_id = '.@$product_id.'', '', 1);
-			$product = DB::table('product')->where(['status' => 1, 'id' => @$product_id])->select('*')->first();
-			
-			//print_r($product);die;
-			$image_1  = DB::table('product_image')->where(['product_id' => @$product_id])->select('*')->orderBy('id', 'ASC')->first();
-			
-			if(!empty(@$image_1->image) && file_exists('public/product/'.@$image_1->image.'')){
-				$imageUrl = url('product/'.@$image_1->image.'');
+				//print_r($product);die;
+				$image_1  = DB::table('product_image')->where(['product_id' => @$product_id])->select('*')->orderBy('id', 'ASC')->first();
+
+				if(!empty(@$image_1->image) && file_exists('public/product/'.@$image_1->image.'')){
+				    $imageUrl = url('product/'.@$image_1->image.'');
+				}else{
+				    $imageUrl = url('noimage.jpg');
+				}
+				
+				$specipication = 'product';
 			}else{
-				$imageUrl = url('noimage.jpg');
+				$product = DB::table('services')->where(['status' => 1, 'id' => @$product_id])->select('*')->first();
+
+				//print_r($product);die;
+				$image_1  = DB::table('services_image')->where(['service_id' => @$product_id])->select('*')->orderBy('id', 'ASC')->first();
+
+				if(!empty(@$image_1->image) && file_exists('public/service/'.@$image_1->image.'')){
+				    $imageUrl = url('service/'.@$image_1->image.'');
+				}else{
+				    $imageUrl = url('noimage.jpg');
+				}
+				$specipication = 'service';
 			}
+
 			
-			$cartArray = array('product'.$product_id => array('id' => $product->id, 'name' => $product->name, 'product_price' => $product->price, 'product_special_price' => $product->special_price, 'image' => $imageUrl, 'quantity' => $quantity));
+			
+			
+			$cartArray = array('product'.$product_id => array('id' => $product->id, 'name' => $product->name, 'product_price' => $product->price, 'product_special_price' => $product->special_price, 'image' => $imageUrl, 'quantity' => $quantity, 'specipication' => $specipication));
 			
 			if(empty(session()->get('shopping_cart'))) {
 				
@@ -2966,6 +3040,7 @@ class DashboardController extends Controller {
 		$data['stripe']  = DB::table('stripe_connect')->where(['userId' => session()->get('USERLOGINID')])->select('*')->first();
 		if($data['stripe']){
 			$data['stripecon'] = $this->get_stripe_info($data['stripe']->stripe_acc_id);
+			//print_r($data['stripecon']);die;
 		}else{
 			$data['stripecon'] = '';
 		}
@@ -3476,6 +3551,9 @@ class DashboardController extends Controller {
 				$i = 0;
 			$post = $_POST['product'];
 			
+			
+			
+			
 			//$post['products'] = array();
 			$products_to_order = array();
 			foreach ($post as $product) {
@@ -3485,9 +3563,34 @@ class DashboardController extends Controller {
 					'product_name' => $product['productName'],
 					'price' => $product['price'],
 					'quantity' => $product['quantity'],
+					'specipication' => $product['specipication'],
 				];
 				$i++;
 			}
+			
+			//print_r($products_to_order[0]['product_id']);die;
+			$productId = $products_to_order[0]['product_id'];
+			$productUserId = DB::table('product')->where(['id' => $productId])->select('user_id')->first();
+			$stripe  = DB::table('stripe_connect')->where(['userId' => @$productUserId->user_id])->select('*')->first();
+			
+			$stripeAccountId = '';
+			if($stripe){
+			    $stripecon = $this->get_stripe_info($stripe->stripe_acc_id);
+				if($stripecon == 1){
+					$stripeAccountId = $stripe->stripe_acc_id;
+				}else{
+					$stripeNotConnect = 'Your stripe not connected.Please connect stripe first.';
+					$status = 0;
+					return redirect()->intended("dashboard/stripe-connect?statusMsg=".$stripeNotConnect."&status=".$status."");
+					exit();
+				}
+			}else{
+				$stripeNotConnect = 'Your stripe not connected.Please connect stripe first.';
+				$status = 0;
+				return redirect()->intended("dashboard/stripe-connect?statusMsg=".$stripeNotConnect."&status=".$status."");
+				exit();
+			}
+			
 			//print_r($products_to_order);die;
 			
 			$stripe = array(
@@ -3512,12 +3615,25 @@ class DashboardController extends Controller {
 				$orderID  = "ORDNO-".$this->generate_otp(6);
 				$itemPriceCents = ($itemPrice*100);
 				
+				$percentage = 0.2;
+				$adminPercentage  = DB::table('settings')->select('admin_percentage')->first();
+				if($adminPercentage){
+					if(@$adminPercentage->admin_percentage){
+						$percentage = $adminPercentage->admin_percentage/100;
+					}
+				}
+				
+				
+				$application_fee = intval($itemPrice * $percentage);
+				
 				try {  
 					$charge = \Stripe\Charge::create(array( 
 						'customer' => $customer->id, 
 						'amount'   => $itemPriceCents, 
 						'currency' => 'usd', 
 						'description' => $itemName,
+						"destination" => $stripeAccountId,
+						"application_fee" => $application_fee,
 						'metadata' => array(
 							'order_id' => $orderID
 						)
@@ -4339,7 +4455,7 @@ class DashboardController extends Controller {
 						$image    = DB::table('listing_image')->where(['listing_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
 						
 						if(@$v->user_id == 0){
-							$userName = 'Admin';
+							$userName = 'Admin';							$userProfile = url('profile/unnamed.jpg');
 						}else{
 							$checkUser = DB::table('users')->where(['id' => @$v->user_id])->select('*')->orderBy('id', 'DESC')->first();
 							if($checkUser){
@@ -4347,7 +4463,6 @@ class DashboardController extends Controller {
 							}else{
 								$userName = '';
 							}
-							
 							if(!empty($checkUser->profile_image) && file_exists('public/profile/'.$checkUser->profile_image.'')){
 								$userProfile = url('profile/'.$checkUser->profile_image.'');
 							}else{
@@ -4729,7 +4844,7 @@ class DashboardController extends Controller {
 		$output = '';
 		
 		if(@$request->keyword){
-			$Sql = "SELECT business_name as name, 'business' as const_value FROM listing where business_name LIKE '%$request->keyword%' UNION SELECT CONCAT(first_name, ',', last_name) as name, 'user' as const_value  FROM users where CONCAT(first_name, ',', last_name) LIKE '%$request->keyword%'";
+			$Sql = "SELECT business_name as name, 'business' as const_value FROM listing where business_name LIKE '%$request->keyword%' AND status = '1' UNION SELECT CONCAT(first_name, ' ', last_name) as name, 'user' as const_value  FROM users where CONCAT(first_name, ',', last_name) LIKE '%$request->keyword%' AND status = '1' UNION SELECT event_name as name, 'event' as const_value FROM events where event_name LIKE '%$request->keyword%' AND status = '1' AND DATE(start_date) >= '".date('Y-m-d')."'";
 			$result = DB::select($Sql);
 			//$output.='<ul id="country-list">';
 			if(count(@$result) > 0){
@@ -4757,16 +4872,13 @@ class DashboardController extends Controller {
 		if(!empty(@$_GET['search']) && !empty(@$_GET['keyword'])){
 			$search  = $_GET['search'];
 			$keyword = $_GET['keyword'];
-			
-			$Sql = "SELECT business_name as name, id FROM listing where business_name LIKE '%$search%' UNION SELECT CONCAT(first_name, ',', last_name) as name, id  FROM users where CONCAT(first_name, ',', last_name) LIKE '%$search%'";
+			$Sql = "SELECT business_name as name, id, user_id, 'start_date' as start_date, 'location' as location FROM listing where business_name LIKE '%$search%' AND status = '1' UNION SELECT CONCAT(first_name, ' ', last_name) as name, id, 'user_id' as user_id, 'start_date' as start_date, 'location' as location FROM users where CONCAT(first_name, ' ', last_name) LIKE '%$search%' AND status = '1' UNION SELECT event_name as name, id, user_id, start_date, location FROM events where event_name LIKE '%$search%' AND status = '1' AND DATE(start_date) >= '".date('Y-m-d')."'";
 			$data['result'] = DB::select($Sql);
 			//print_r($data['result']);die;
 		}
 		$data['AdvsPlan']=[];
 		return view('account.search', $data);
 	}
-	
-	
 	function downloadCsvAll(){
 
 		$filename = 'transaction_list'.date('Ymd').'.csv'; 
@@ -5100,6 +5212,12 @@ class DashboardController extends Controller {
 		}
 		fclose($file); 
 		exit; 
+	}
+	
+	function deleteAccount(){ 
+		require "vendor/stripe/stripe-php/init.php";
+		$stripe = new \Stripe\StripeClient('sk_test_51MPhgSIuZrwn6gWgucZ3pq3OGKnLaQMxviXsKtZb4F7tenDBs25KovJkAB4tii3db6CMW1tdWSk2CB9thQ8yOYdX00iUs05KRN');
+		$stripe->accounts->delete('acct_1QCbhRRJtyjKAQ0z', []);
 	}
 	
 }

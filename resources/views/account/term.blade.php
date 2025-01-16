@@ -1,220 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>StarBiz</title>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?=url('assets/home/style/style.css')?>">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-  <style>
-    .showSweetAlert > h2{
-	    font-size: 20px !important;
-	}
-    body {
-      width: 100vw;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .nav-categories .Active {
-      background-color: rgb(255 255 255);
-      box-shadow: 0 10px 10px #f1f1f1;
-    }
-
-    .nav-categories .Active p {
-      color: #b38a41;
-      font-weight: 600;
-    }
-
-    .TabContainer {
-      display: flex;
-      cursor: pointer;
-      border-bottom: 2px solid #8d6a30;
-      padding: 0;
-      background: #ffffff;
-      padding-top: 15px;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    .Tab {
-      border-radius: 15px 15px 0 0;
-      padding: 10px 20px;
-      background: #ffffff;
-      font-size: 15px;
-      color: #000000;
-      box-shadow: 0 0 10px #ddd;
-      min-width: 150px;
-      text-align: center;
-    }
-
-    .Tab.active {
-      color: #fff;
-      border-radius: 15px 15px 0 0;
-      background: linear-gradient(90deg, #b58b42, #7a5a28);
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .TabContent {
-      display: none;
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    .TabContent.active {
-      display: flex;
-    }
-
-    .TabBar {
-      position: sticky;
-      top: -20px;
-      z-index: 100;
-      padding-bottom: 10px;
-    }
-	
-	.pac-container {
-    z-index: 10000 !important;
-}
-
-    #country-list {
-		float: left;
-		list-style: none;
-		margin-top: 20px;
-		padding: 0;
-		width: 99.7%;
-		position: absolute;
-		z-index: 1;
-		margin-left: -500px;
-	}
-
-	#country-list li {
-		padding: 10px;
-		/*background: #f0f0f0;*/
-		border-bottom: #bbb9b9 1px solid;
-		/*border-radius: 8px;*/
-		background: linear-gradient(90deg, #b58b42, #7a5a28)
-	}
-
-	#country-list li:hover {
-		background: #ece3d2;
-		cursor: pointer;
-	} 
-
-
-  </style>
-</head>
-
-<body>
-  
-<nav class="sidebar">
-    <div class="nav-header">
-      <div class="logo-wrap">
-        <a class="logo-text" href="">StarBiz</a>
-      </div>
-      <a href="javascipt:void(0)" class="NavHeaderCloseIcon">
-        <img src="<?=url('assets/home/images/Icon8.png')?>" alt="">
-      </a>
-    </div>
-    <ul class="nav-categories ul-base">
-      <li>
-        <a href="<?=url('dashboard')?>" id="Home1" class="Active">
-          <img src="<?=url('assets/home/images/NavIcon1.png')?>" alt="">
-          <p>Home</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="UpcomingEvents">
-          <img src="<?=url('assets/home/images/NavIcon2.png')?>" alt="">
-          <p>Upcoming Events</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="ReferralLink">
-          <img src="<?=url('assets/home/images/NavIcon3.png')?>" alt="">
-          <p>Referral Link</p>
-        </a>
-      </li>
-      <li>
-        <a href="<?=url('dashboard/stripe-connect')?>" id="ManageSubscription" >
-          <img src="<?=url('assets/home/images/NavIcon4.png')?>" alt="">
-          <p>Manage Stripe </p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="SaleList">
-          <img src="<?=url('assets/home/images/NavIcon5.png')?>" alt="">
-          <p>Sale List</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="PurchaseHistory">
-          <img src="<?=url('assets/home/images/NavIcon6.png')?>" alt="">
-          <p>Purchase History</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="Wallet">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Wallet</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="TransactionsPayment">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Transactions & Payment</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="Rewards">
-          <img src="<?=url('assets/home/images/NavIcon8.png')?>" alt="">
-          <p>Rewards</p>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0);" id="TermsConditions">
-          <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
-          <p>Terms & Conditions</p>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  
-  <header>
-    <div class="header-inner">
-      <div class="header-first-inner">
-        <div class="nav-btn nav-slider">
-          <i class="material-icons">menu</i>
-        </div>
-        <div class="header-logo">
-          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
-        </div>
-		
-        <div class="header-search">
-          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
-            <i class="material-icons">search</i>
-            <input type="search" name="search" placeholder="Search">
-          </div>
-        </div>
-		
-      </div>
-      <div class="header-menu">
-        <ul class="ul-base">
-          <li><a href="">Profile</a></li>
-           <li><a href="<?=url('logout')?>">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
+@include('account.header');<style>	.showSweetAlert > h2{		font-size: 20px !important;	}		/*body {      width: 100vw;      height: 100vh;      margin: 0;    }*/		body {		width: 100vw;		height: 100vh;		overflow: hidden;	}		.nav-categories .Active {	  background-color: rgb(255 255 255);	  box-shadow: 0 10px 10px #f1f1f1;	}	.nav-categories .Active p {	  color: #b38a41;	  font-weight: 600;	}	.TabContainer {	  display: flex;	  cursor: pointer;	  border-bottom: 2px solid #8d6a30;	  padding: 0;	  background: #ffffff;	  padding-top: 15px;	  padding-left: 20px;	  padding-right: 20px;	}	.Tab {	  border-radius: 15px 15px 0 0;	  padding: 10px 20px;	  background: #ffffff;	  font-size: 15px;	  color: #000000;	  box-shadow: 0 0 10px #ddd;	  min-width: 150px;	  text-align: center;	}	.Tab.active {	  color: #fff;	  border-radius: 15px 15px 0 0;	  background: linear-gradient(90deg, #b58b42, #7a5a28);	  font-size: 15px;	  font-weight: 600;	}	.TabContent {	  display: none;	  padding-left: 10px;	  padding-right: 10px;	}	.TabContent.active {	  display: flex;	}	.TabBar {	  position: sticky;	  top: -20px;	  z-index: 100;	  padding-bottom: 10px;	}	.pac-container {	z-index: 10000 !important;	}	#country-list {		float: left;		list-style: none;		margin-top: 20px;		padding: 0;		width: 99.7%;		position: absolute;		z-index: 1;		margin-left: -500px;	}	#country-list li {		padding: 10px;		/*background: #f0f0f0;*/		border-bottom: #bbb9b9 1px solid;		/*border-radius: 8px;*/		background: linear-gradient(90deg, #b58b42, #7a5a28)	}	#country-list li:hover {		background: #ece3d2;		cursor: pointer;	} </style>
     <main role="main" class="Main">
     	<div class="container-fluid m-0 Section TermsConditions" >
       <div class="row m-0 TabBar mb-2">
@@ -297,97 +81,38 @@
               <li><b>Address:</b> Address Details</li>
             </ul>
           </div>-->
-		  
         </div>
       </div>
     </div>
-    </main>
-	
-	<!-- Search Modal -->
-    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
-      tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Search</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form class="row g-3">
-              <div class="col-md-12 col-sm-12">
-                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer" id="suggesstion-box">
-		  
-            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Event Name</p>
-              </a>
-            </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Business Name</p>
-              </a>
-            </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Network Name</p>
-              </a>
-            </div>-->
-			
-          </div>
-        </div>
-      </div>
-    </div>
-
+    </main>	
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
-
-  <script>
-  
-  
-    $('.dropdown-toggle').on('click', function (e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      var self = $(this);
-      if (self.is('.disabled, :disabled')) {
-        return false;
-      }
-      self.parent().toggleClass("open");
-    });
-
-    $(document).on('click', function (e) {
-      if ($('.dropdown').hasClass('open')) {
-        $('.dropdown').removeClass('open');
-      }
-    });
-
-    $('.nav-btn.nav-slider').on('click', function () {
-      $('nav').toggleClass("open");
-    });
-
-    $('.NavHeaderCloseIcon').on('click', function () {
-      if ($('.sidebar').hasClass('open')) {
-        $('.sidebar').removeClass('open');
-      }
-    });
-  </script>
+<script>
+	/*$('.dropdown-toggle').on('click', function (e) {
+	e.stopPropagation();
+	e.preventDefault();
+	var self = $(this);
+	if (self.is('.disabled, :disabled')) {
+	return false;
+	}
+	self.parent().toggleClass("open");
+	});
+	$(document).on('click', function (e) {
+	if ($('.dropdown').hasClass('open')) {
+	$('.dropdown').removeClass('open');
+	}
+	});
+	$('.nav-btn.nav-slider').on('click', function () {
+	$('nav').toggleClass("open");
+	});
+	$('.NavHeaderCloseIcon').on('click', function () {
+	if ($('.sidebar').hasClass('open')) {
+	$('.sidebar').removeClass('open');
+	}
+	});*/
+</script>
   <script>
     $(document).ready(function () {
       $('#Home').click(function (e) {
@@ -2296,74 +2021,68 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
 	
-	$("#ManageSubscription").click(function () {
-	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
-	});
+/*$("#Home").click(function () {
+	window.location.href = '<?=url('dashboard');?>'; 
+});
+$("#ManageSubscription").click(function () {
+	window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
+});
+$("#UpcomingEvents").click(function () {
+	window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
+});
+$("#ReferralLink").click(function () {
+	window.location.href = '<?=url('dashboard/refferalLink');?>'; 
+});
+$("#Wallet").click(function () {
+	window.location.href = '<?=url('dashboard/wallet');?>'; 
+});
+$("#TransactionsPayment").click(function () {
+	window.location.href = '<?=url('dashboard/transaction');?>'; 
+});
+$("#Rewards").click(function () {
+	window.location.href = '<?=url('dashboard/reward');?>'; 
+});
+$("#TermsConditions").click(function () {
+	window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
+});
+$("#PurchaseHistory").click(function () {
+	window.location.href = '<?=url('dashboard/purchase-history');?>'; 
+});	
+$("#SaleList").click(function () {
+	window.location.href = '<?=url('dashboard/sale-list');?>'; 
+});*/
 	
-	$("#UpcomingEvents").click(function () {
-	    window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
-	});
-	
-	$("#ReferralLink").click(function () {
-	    window.location.href = '<?=url('dashboard/refferalLink');?>'; 
-	});
-	
-	$("#Wallet").click(function () {
-	    window.location.href = '<?=url('dashboard/wallet');?>'; 
-	});
-	
-	$("#TransactionsPayment").click(function () {
-	    window.location.href = '<?=url('dashboard/transaction');?>'; 
-	});
-	
-	$("#Rewards").click(function () {
-	    window.location.href = '<?=url('dashboard/reward');?>'; 
-	});
-	
-	$("#TermsConditions").click(function () {
-	    window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
-	});
-	
-	$("#PurchaseHistory").click(function () {
-	    window.location.href = '<?=url('dashboard/purchase-history');?>'; 
-	});
-	
-	$("#SaleList").click(function () {
-	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
-	});
-	
-	$(document).ready(function() {
-		$("#search-box").keyup(function() {
-			$.ajax({
-				type: "POST",
-				url: "<?=url('dashboard/autoSuggestion')?>",
-				data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
-				beforeSend: function() {
-				   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
-				},
-				success: function(data) {
-					$("#suggesstion-box").show();
-					$("#suggesstion-box").html(data);
-					//$("#search-box").css("background", "#FFF");
-				}
-			});
+$(document).ready(function() {
+	$("#search-box").keyup(function() {
+		$.ajax({
+			type: "POST",
+			url: "<?=url('dashboard/autoSuggestion')?>",
+			data: {keyword : $(this).val(), "_token": "{{ csrf_token() }}"},
+			beforeSend: function() {
+			   // $("#search-box").css("background", "#FFF url(LoaderIcon.gif) no-repeat 165px");
+			},
+			success: function(data) {
+				$("#suggesstion-box").show();
+				$("#suggesstion-box").html(data);
+				//$("#search-box").css("background", "#FFF");
+			}
 		});
 	});
+});
 	
-	$(document).on("click", ".selectCountry", function () {
-		var search  = $(this).attr("search");
-		var keywork = $(this).attr("keywork");
-		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
-	});
-	
-	<!-- New Script -->
-    document.querySelector('.search').addEventListener('click', function () {
-      const modal = document.getElementById('SearchModal');
-      if (modal) {
-        modal.classList.add('SearchModalStyle');
-      }
-    });
-  </script>
+$(document).on("click", ".selectCountry", function () {
+	var search  = $(this).attr("search");
+	var keywork = $(this).attr("keywork");
+	window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+});
+<!-- New Script -->
+document.querySelector('.search').addEventListener('click', function () {
+  const modal = document.getElementById('SearchModal');
+  if (modal) {
+	modal.classList.add('SearchModalStyle');
+  }
+});
+</script>
 </body>
 
 </html>

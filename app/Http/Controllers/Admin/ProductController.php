@@ -610,28 +610,68 @@ class ProductController extends Controller {
 			// print_r($pro_data);
 			// return;
 			foreach($pro_data as $k => $v){
-				
-				
-					//$productinfo = $this->Adminmodel->get_single_row_info('*', 'product', 'product_id = '.@$v['product_id'].'', '', 1);
-					$productinfo = DB::table('product')->where(['id' => @$v['product_id']])->select('*')->orderBy('id', 'DESC')->first();
+				    
 					
-					//$vendorinfo = $this->Adminmodel->get_single_row_info('first_name, last_name', 'users', 'id = '.@$v['vendor_id'].'', '', 1);
+				    if(@$v['specipication'] == 'service'){
+						
+						echo $echo = 1;
+						$productInfo = DB::table('services')->where(['id' => $v['product_id']])->select('*')->orderBy('id', 'DESC')->first();	
+						$productImg = DB::table('services_image')->where(['service_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+						
+						
+						if(!empty(@$productImg->image) && file_exists('public/service/'.@$productImg->image.'')){
+							$proimg = url('service/'.@$productImg->image.'');
+						}else{
+							$proimg = url('noimage.jpg');
+						} 
+						
+						if(@$productinfo->user_id == 0){
+							$vendorName = 'Admin';
+						}else{
+							$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
+							$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
+						}
 					
-					if(!empty(@$productinfo)){
-					if(@$productinfo->user_id == 0){
+					}else{
+						//$productinfo = $this->Adminmodel->get_single_row_info('*', 'product', 'product_id = '.@$v['product_id'].'', '', 1);
+						$productinfo = DB::table('product')->where(['id' => @$v['product_id']])->select('*')->orderBy('id', 'DESC')->first();
+						//$vendorinfo = $this->Adminmodel->get_single_row_info('first_name, last_name', 'users', 'id = '.@$v['vendor_id'].'', '', 1);
+						
+						if(@$productinfo->user_id == 0){
+							$vendorName = 'Admin';
+						}else{
+							$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
+							$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
+						}
+					
+					    $productImg = DB::table('product_image')->where(['product_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+					
+						if(!empty(@$productImg->image) && file_exists('./public/product/'.@$productImg->image.'')){
+							$proimg = url('product/'.@$productImg->image.'');
+						}else{
+							$proimg = url('noimage.jpg');
+						}
+					
+			        }
+					//echo $echo;
+					
+					
+				if(!empty(@$productinfo)){
+					
+					/*if(@$productinfo->user_id == 0){
 						$vendorName = 'Admin';
 					}else{
 						$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
 						$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
-					}
+					}*/
 					
-					$productImg = DB::table('product_image')->where(['product_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+					/*$productImg = DB::table('product_image')->where(['product_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
 					
 					if(!empty(@$productImg->image) && file_exists('./public/product/'.@$productImg->image.'')){
 						$proimg = url('product/'.@$productImg->image.'');
 					}else{
 						$proimg = url('noimage.jpg');
-					}
+					}*/
 					
 					
 					$result .='<div style="word-break: break-all;">
@@ -660,7 +700,7 @@ class ProductController extends Controller {
 					<div style="padding-top:10px; font-size:16px;">Total amount of products: $'.@$totalAmount.'</div>
 					<hr>';
 				
-			}
+			    }
 			}
 		}
 		return $result;

@@ -163,6 +163,10 @@ class AdvertisementController extends Controller {
 							
 							DB::table('advertise')->where(['id' => @$adsId])->update(['status' => 1]);
 							
+							if(!empty(@$duration)){
+								$current_period_end   = date('Y-m-d', strtotime($current_period_end. ' + '.@$duration.' day'));
+							}
+							
 							$statusMsg = 'Your Payment has been Successful!';
 							$data = ['user_name' => @$card_name, 'user_id' => @$user_id, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'zipcode' => @$zipcode, 'adv_sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => @$transactionID, 'order_id' => @$orderID, 'charge_id' => @$chargeID, 'status' => @$payment_status, 'expiry_date' => @$current_period_end, 'payment_type' => '7', 'adv_id' => @$adsId, 'preferredListing' => @$preferredListing, 'duration' => @$duration, 'created_at' => @$paymentDate];
 							

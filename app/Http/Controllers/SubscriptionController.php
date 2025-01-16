@@ -326,7 +326,7 @@ class SubscriptionController extends Controller {
 								
 								if((@$myInfo->spend_money != 0) && (@$myInfo->spend_money >= @$referral_setting->spend_money)){
 									
-									$referalData = ['referral_user_id' => '', 'user_id' => @$user_id, 'referral_code' => '', 'referral_earned_point' => @$referral_setting->reward_points, 'my_earned_point' => '', 'created_at' => date('Y-m-d H:i:s')];
+									$referalData = ['referral_user_id' => @$user_id, 'user_id' => @$user_id, 'referral_code' => '', 'referral_earned_point' => @$referral_setting->reward_points, 'my_earned_point' => '', 'created_at' => date('Y-m-d H:i:s')];
 									DB::table('referral_rewards_transaction')->insertGetId($referalData);
 									
 									DB::table('users')->where('id',@$user_id)->update(['earned_rewords_point' => DB::raw('earned_rewords_point+'.@$referral_setting->reward_points)]);

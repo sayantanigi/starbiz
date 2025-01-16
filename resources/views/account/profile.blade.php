@@ -2521,6 +2521,10 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
 	
+	$("#Home").click(function () {
+		window.location.href = '<?=url('dashboard');?>'; 
+	});
+	 
 	$("#ManageSubscription").click(function () {
 	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
 	});

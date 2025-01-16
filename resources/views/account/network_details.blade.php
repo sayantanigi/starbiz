@@ -4,7 +4,7 @@
 <head>
 	<title>StarBiz</title>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
+	<link rel="shortcut icon" href="<?=url('setting/2019685580.png')?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -492,20 +492,23 @@
 						?>
 					</div>
 
-					<div class="col-md-6 col-sm-12">
+					
+					<div class="col-md-6 col-sm-12" >
+					  <label class="form-label">Preferred Listing</label>
+						<select  id="preferredListing" name="preferredListing" required>
+							<option selected value="">Choose a category</option>
+							<option value="1">Yes</option>
+							<option value="0">No</option>
+						</select>
+					</div>
+					
+					<div class="col-md-6 col-sm-12" style="display:none;" id="promotionPrefered">
 						<label class="form-label">Enter Duration</label>
-						<input type="text" placeholder="Enter Duration" id="duration" name="duration">
+						<input type="text" placeholder="Enter Duration Number of Days" id="duration" name="duration">
 						<input type="hidden" id="adsId" name="adsId">
 					</div>
 					
-					<div class="col-md-6 col-sm-12">
-					  <label class="form-label">Preferred Listing</label>
-						<select  id="preferredListing" name="preferredListing">
-							<option selected value="">Choose a category</option>
-							<option value="Yes">Yes</option>
-							<option value="No">No</option>
-						</select>
-					</div>
+					
 					
 					<div class="modal-footer">
 						<!--<div class="AddAdvertisementFooter">
@@ -2772,6 +2775,10 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
 	
+	$("#Home").click(function () {
+		window.location.href = '<?=url('dashboard');?>'; 
+	});
+	
 	$("#ManageSubscription").click(function () {
 	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
 	});
@@ -2915,6 +2922,17 @@ $(document.body).on('click', '.usersPhotos' ,function(){
       if (modal) {
         modal.classList.add('SearchModalStyle');
       }
+    });
+	
+	$(document).on('change','#preferredListing',function(e){
+        var preferred_listing = $(this).val();
+        if(preferred_listing == 1){
+			$("#promotionPrefered").css('display', 'block');
+		}else if(preferred_listing == 0){
+			$("#promotionPrefered").css('display', 'none');
+		}else if(plan_type == 'Yearly'){
+			$("#promotionPrefered").css('display', 'none');
+		}
     });
   </script>
 </body>

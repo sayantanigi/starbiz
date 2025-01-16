@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>StarBiz</title>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="<?=url('setting/2019685580.png')?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?=url('assets/home/style/style.css')?>">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-  <style>
+@include('account.header');
+<style>
     .showSweetAlert > h2{
 	    font-size: 20px !important;
 	}
-    body {
+	
+    /*body {
       width: 100vw;
       height: 100vh;
       margin: 0;
-    }
+    }*/
+	
+	body {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
 
     .nav-categories .Active {
       background-color: rgb(255 255 255);
@@ -83,19 +75,9 @@
 	
 	.pac-container {
     z-index: 10000 !important;
-}
-   
-   .NoDataFound {
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: #c5a668;
-}
-
-    #country-list {
+    }
+	
+	#country-list {
 		float: left;
 		list-style: none;
 		margin-top: 20px;
@@ -118,284 +100,409 @@
 		background: #ece3d2;
 		cursor: pointer;
 	} 
-  </style>
-</head>
-
-<body>
-  
-    <nav class="sidebar">
-    <div class="nav-header">
-      <div class="logo-wrap">
-        <a class="logo-text" href="">StarBiz</a>
-      </div>
-      <a href="javascipt:void(0)" class="NavHeaderCloseIcon">
-        <img src="<?=url('assets/home/images/Icon8.png')?>" alt="">
-      </a>
-    </div>
-    <ul class="nav-categories ul-base">
-	
-      <li>
-        <a href="" id="Home" class="Active">
-          <img src="<?=url('assets/home/images/NavIcon1.png')?>" alt="">
-          <p>Home</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="UpcomingEvents">
-          <img src="<?=url('assets/home/images/NavIcon2.png')?>" alt="">
-          <p>Upcoming Events</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="ReferralLink">
-          <img src="<?=url('assets/home/images/NavIcon3.png')?>" alt="">
-          <p>Referral Link</p>
-        </a>
-      </li>
-	  
-       
-	  
-	  <li>
-        <a href="<?=url('dashboard/stripe-connect')?>" id="ManageSubscription">
-          <img src="<?=url('assets/home/images/NavIcon4.png')?>" alt="">
-          <p>Manage Stripe </p>
-        </a>
-      </li>
-	  
-	  
-      <li>
-        <a href="" id="SaleList">
-          <img src="<?=url('assets/home/images/NavIcon5.png')?>" alt="">
-          <p>Sale List</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="PurchaseHistory">
-          <img src="<?=url('assets/home/images/NavIcon6.png')?>" alt="">
-          <p>Purchase History</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="Wallet">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Wallet</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="TransactionsPayment">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Transactions & Payment</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="" id="Rewards">
-          <img src="<?=url('assets/home/images/NavIcon8.png')?>" alt="">
-          <p>Rewards</p>
-        </a>
-      </li>
-	  
-      <li>
-        <a href="javascript:void(0);" id="TermsConditions">
-          <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
-          <p>Terms & Conditions</p>
-        </a>
-      </li>
-	  
-    </ul>
-  </nav>
-  <header>
-    <div class="header-inner">
-      <div class="header-first-inner">
-        <div class="nav-btn nav-slider">
-          <i class="material-icons">menu</i>
-        </div>
-        <div class="header-logo">
-          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
-        </div>
-		
-        <div class="header-search">
-          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
-            <i class="material-icons">search</i>
-            <input type="search" name="search" placeholder="Search">
-          </div>
-        </div>
-		
-      </div>
-      <div class="header-menu">
-        <ul class="ul-base">
-          <li><a href="">Profile</a></li>
-           <li><a href="<?=url('logout')?>">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
+</style>
     <main role="main" class="Main">
     
-        <div class="container-fluid m-0 Section Business BuyNowSection" >
-      <div class="row m-0 TabBar">
-        <div class="Pagination BuyNowSectionPagination">
-          <a href="<?=url('dashboard')?>" id="Home">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            Home / Cart Details
-          </a>
+     <div class="container-fluid m-0 Section Network" >
+      <!--<div class="row m-0 TabBar">
+        <div class="Pagination">
+          <a href="<?=url('dashboard')?>" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Stripe Connect</a>
         </div>
-        <form method="GET" action="<?=url('dashboard/productPayment')?>">
-        <div class="row m-0 mt-3 CartContainer">
-          <div class="col-lg-4 col-md-4 col-sm-12 p-0">
-		    <?php
-			    $total_price = 0;
-			    $i = 0;
-			    if(count(@$product) > 0){
-					foreach(@$product as $k => $v){
-						
-						echo "<input type='hidden' name='product[".@$i."][productName]' value='".@$v['name']."'>";
-						echo "<input type='hidden' name='product[".@$i."][price]' value='".@$v['product_price']."'>";
-						echo "<input type='hidden' name='product[".@$i."][quantity]' value='".@$v['quantity']."'>";
-						echo "<input type='hidden' name='product[".@$i."][productId]' value='".@$v['id']."'>";
-						echo "<input type='hidden' name='product[".@$i."][specipication]' value='".@$v['specipication']."'>";
-						
-						
-						
-						$total_product_quatity_price = @$v['quantity'] * @$v['product_price'];
-						// print_r($v['image']);
-						// if(!empty($v['image']) && file_exists('public/product/'.@$v['image'].'')){
-							// $imageUrl_1 = url('product/'.@$v['image'].'');
-						// }else{
-							// $imageUrl_1 = url('noimage.jpg');
-						// }
-					    $total_price += ($v["quantity"]*$v["product_price"]);
-						echo '
-							<div class="col-lg-12 col-md-12">
-							  <div class="CartProductBlock">
-								<img class="CartProductImg" src="'.@$v['image'].'" alt="">
-								<div class="CartProductDataBlock">
-								  <div class="CartProductTextBlock">
-									<p class="m-0 ProductName">'.@$v['name'].'</p>
-									<p class="m-0 ProductPrice">$'.@$v['product_price'].'</p>
-								  </div>
-								  <div class="CartProductCountBlock">
-									<!--<a href="">
-									  <i class="fa fa-minus" aria-hidden="true"></i>
-									</a>
-									<p class="m-0 CartCount">'.@$v['quantity'].'</p>
-									<a href="">
-									  <i class="fa fa-plus" aria-hidden="true"></i>
-									</a>-->
-									
-									<select name="quantity" id="quantity" class="quantity" relid="'.@$v['id'].'">
-										<option '.(($v["quantity"]==1) ? "selected" : '').' value="1">1</option>
-										<option '.(($v["quantity"]==2) ? "selected" : '').' value="2">2</option>
-										<option '.(($v["quantity"]==3) ? "selected" : '').' value="3">3</option>
-										<option '.(($v["quantity"]==4) ? "selected" : '').' value="4">4</option>
-										<option '.(($v["quantity"]==5) ? "selected" : '').' value="5">5</option>
-									</select>
-								  </div>
-								  <a class="CartDeleteBtn remove" href="javascript:void(0);" relid="'.@$v['id'].'">
-									<img src="'.url('assets/home/images/Icon28.png').'" alt="">
-								  </a>
-								</div>
-							  </div>
-							</div><br/>
-							
-							
-						';
-						$i++;
-					}
-				}else{
-					echo '<div class="row NoDataFound">Product not found.Your cart is empty.</div>';
-				}
-			?>
-            
-			
-           <input type='hidden' name='shippingAmount' value='0'>
-           <input type='hidden' name='totalAmount' value='<?=@$total_price?>'>
-           <input type='hidden' name='userId' value='<?=session()->get('USERLOGINID')?>'>
-			
-          </div>
 
-          <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="CartPriceContainer">
-              <div class="CartPriceData">
-                <p class="m-0 Heading">Sub Total:</p>
-                <p class="m-0 Amount"><?='$'.@$total_price?></p>
-              </div>
-              <div href="#" class="CheckoutBtn" style="background: #b58b42;">
-                <button type="submit" class="m-0 CheckoutBtnText" style="border: 0px solid #7a5a28;background: #b58b42;">Checkout</button>
-              </div>
-            </div>
-          </div>
-		  
+        <div class="TabContainer">
+          <div class="Tab active" onclick="openTab(event, 'AllMembers')">All Members</div>
+          <div class="Tab" onclick="openTab(event, 'MyNetwork')">My Network A&E</div>
         </div>
-		</form>
+      </div>-->
+
+      <div id="AllMembers" class="row m-0 TabContent active">
+	   <div class="Card col-lg-4 col-md-4 col-sm-6 mt-3">
+	   </div>
+	    <div class="Card col-lg-4 col-md-4 col-sm-6 mt-3">
+						  <div class="NetworkCartBlock" >
+						    <?php
+							       if(@$stripecon == 1){ 
+							 echo '<button style="margin: 0 auto;height: 50px; background: #c5a668;display: flex;border-radius: 10px;align-items: center;justify-content: center; gap: 15px;border: none;padding: 0 20px;"><p style="    margin: 0;font-size: 15px;font-weight: 600;color: #fff;">Stripe Connected</p></button><br/><br/>';
+							 echo '<div><span>Stripe Account Id : Activated</span></div>';
+							}else{
+								echo '<a href="'.url('dashboard/stripeconnect').'" target="_blank" style="margin: 0 auto;height: 50px; background: #c5a668;display: flex;border-radius: 10px;align-items: center;justify-content: center; gap: 15px;border: none;padding: 0 20px;"><p style="    margin: 0;font-size: 15px;font-weight: 600;color: #fff;">Connect Stripe</p></a>';
+								echo '<div><span>Stripe Account Id : Not Activate</span></div>';
+							}?>
+							<div class="BtnDetails">
+							  
+							    
+								
+								
+							</div>
+						  </div>
+						</div>
+						
+						 <div class="Card col-lg-4 col-md-4 col-sm-6 mt-3">
+	   </div>
+        
+		
+        
+		
+      </div>
+
+      <div id="MyNetwork" class="row m-0 TabContent">
+	    
+		<?php
+		    if(count(@$myMem)){
+				foreach(@$myMem as $k => $v){
+					$userInfo  = DB::table('users')->where(['id' => @$v->fav_user_id])->select('*')->first();
+					
+					if(!empty(@$userInfo->profile_image) && file_exists('public/profile/'.@$userInfo->profile_image.'')){
+						$profilePic = url('profile/'.@$userInfo->profile_image.'');
+					}else{
+						$profilePic = url('profile/unnamed.jpg');
+					}
+					
+					$numRows = DB::table('favouriteusers')->where(['user_id' => session()->get('USERLOGINID'), 'fav_user_id' => @$v->fav_user_id])->select('*')->orderBy('id', 'DESC')->count();
+					
+					if($numRows > 0){
+						$fav = '<i class="fa fa-heart" aria-hidden="true"></i>';
+					}else{
+						$fav = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
+					}
+					
+					echo '
+						<div class="Card col-lg-4 col-md-4 col-sm-6 mt-3">
+						  <div class="NetworkCartBlock" >
+							<div class="UserDetails">
+							  <img src="'.@$profilePic.'" alt="">
+							  <p class="Heading">'.@$userInfo->first_name.' '.@$userInfo->last_name.'</p>
+							</div>
+							<div class="BtnDetails">
+							  <div class="NameTag">
+								<p class="m-0">A & E</p>
+							  </div>
+							  
+							  <a href="javascript:void(0)" class="LikeBtn allmemLike bookmarkUsers" id="bookmarkUsers_'.@$v->fav_user_id.'" relid="'.@$v->fav_user_id.'">
+								'.@$fav.'
+							  </a>
+							</div>
+						  </div>
+						</div>
+					';
+				}
+			}
+		?>
+        
+		
+        
 		
       </div>
     </div>
-    </main>
+
+    <div class="container-fluid m-0 Section NetworkProfile" style="display: none;">
 	
-	<!-- Search Modal -->
-    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
-      tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Search</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form class="row g-3">
-              <div class="col-md-12 col-sm-12">
-                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
+	
+	 <!-- Advertise Modal -->
+      <div class="modal fade CustomModal" id="AdvertiseModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Advertisement</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3 AddAdvertisement">
+                <div class="col-md-6 col-sm-12">
+                  <label class="form-label">Title</label>
+                  <input type="text" placeholder="Enter title">
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label class="form-label">Upload File</label>
+                  <input type="file" class="form-control" id="inputGroupFile01">
+                </div>
+              </form>
+
+              <form class="row g-3 AddAdvertisementPlan">
+                <div class="col-lg-12 col-md-12 col-sm-12 AddAdvertisementPlanContainer">
+                  <div class="col-md-6 col-sm-12 pe-2">
+                    <div class="SubscriptionBlock">
+                      <div class="SubscriptionHeadingBlock">
+                        <h2>Subscription Heading</h2>
+                        <p class="m-0">$50/month</p>
+                      </div>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                      </ul>
+                      <div class="SubscriptionBtnContainer">
+                        <a href="" class="SubscriptionBtn ChooseBtn">
+                          <p>Choose</p>
+                        </a>
+                        <a href="" class="AdvertisementLearnMoreBtn">Learn More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 ps-2 pe-2">
+                    <div class="SubscriptionBlock">
+                      <div class="SubscriptionHeadingBlock">
+                        <h2>Subscription Heading</h2>
+                        <p class="m-0">$50/month</p>
+                      </div>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                      </ul>
+                      <div class="SubscriptionBtnContainer">
+                        <a href="" class="SubscriptionBtn ChooseBtn">
+                          <p>Choose</p>
+                        </a>
+                        <a href="" class="AdvertisementLearnMoreBtn">Learn More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 ps-2">
+                    <div class="SubscriptionBlock">
+                      <div class="SubscriptionHeadingBlock">
+                        <h2>Subscription Heading</h2>
+                        <p class="m-0">$50/month</p>
+                      </div>
+                      <ul>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, voluptates.</li>
+                      </ul>
+                      <div class="SubscriptionBtnContainer">
+                        <a href="" class="SubscriptionBtn ChooseBtn">
+                          <p>Choose</p>
+                        </a>
+                        <a href="" class="AdvertisementLearnMoreBtn">Learn More</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12">
+                  <label class="form-label">Select Duration</label>
+                  <select>
+                    <option selected disabled value="">Choose a category</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label class="form-label">Preferred Listing</label>
+                  <select>
+                    <option selected disabled value="">Choose a category</option>
+                    <option>...</option>
+                  </select>
+                </div>
+              </form>
+
+              <form class="row g-3 AddAdvertisementPlanDetails">
+                <div class="col-md-12 col-sm-12">
+                  <div class="m-0 row w-100 LearnMoreData" style="display: block;">
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0">Yes</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0">Yes</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0 VipText">VIP Access</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0 VipText">Top Presence</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0">Yes</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0">Yes</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 p-0">
+                      <div class="TransactionBlock">
+                        <div class="TransactionData">
+                          <img src="../assets/images/CompleteIcon.png" alt="">
+                          <p class="m-0 TransactionTextdata">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                          </p>
+                        </div>
+                        <div class="TransactionAmount">
+                          <p class="m-0">Yes</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <div class="AddAdvertisementFooter">
+                <button type="button" class="btn btn-primary SelectPlanBtn">Select Promotion Plan</button>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer" id="suggesstion-box">
-		  
-            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Event Name</p>
-              </a>
+
+              <div class="AddAdvertisementPlanFooter">
+                <button type="button" class="btn btn-primary SelectPlanDetailsBtnBack">Back</button>
+                <button type="button" class="btn btn-primary SelectPlanDetailsBtn">Pay & Post Promotion</button>
+              </div>
+
+              <div class="AddAdvertisementPlanDetailsFooter">
+                <button type="button" class="btn btn-primary SelectPlanWholeDetailsBtnBack">Back</button>
+              </div>
             </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Business Name</p>
-              </a>
-            </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Network Name</p>
-              </a>
-            </div>-->
-			
           </div>
         </div>
       </div>
+      <!-- Advertise Modal -->
+
+      <div class="row m-0 TabBar">
+        <div class="TabBar">
+          <div class="Pagination">
+            <a href="" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Profile</a>
+          </div>
+
+          <div class="row m-0" style="background: #fff;" id="profileUser">
+		  
+            
+			
+          </div>
+
+          <div class="TabContainer">
+            <div class="Tab active" onclick="openTab(event, 'Info')">Info</div>
+            <div class="Tab" onclick="openTab(event, 'Photos')">Photos</div>
+            <div class="Tab" onclick="openTab(event, 'Events')">Events</div>
+          </div>
+        </div>
+
+        <div id="Info" class="row m-0 TabContent active">
+         
+        </div>
+
+        <div id="Photos" class="row m-0 TabContent">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="EventPhotoContainer">
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/blue-holi-color-explosion-young-woman-dancing_23-2148129343.jpg?t=st=1731406746~exp=1731410346~hmac=aac3004aa5f9db23dd6c266f0c5351a065f18d551f3da09872c50dc1851d2c1f&amp;w=1380"
+                  alt="">
+              </a>
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/close-up-people-dancing-yellow-explosion-holi-color_23-2148129155.jpg?t=st=1731406654~exp=1731410254~hmac=e14e090ddbf68f2d9247a7ccfa46a4342c248a318fa4268954954fcbed03faea&amp;w=740"
+                  alt="">
+              </a>
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/green-holi-color-powder-crowd_23-2148129312.jpg?t=st=1731406659~exp=1731410259~hmac=bbd9797f2b5a6ab957dc738298432651e61989de3a9a3dac15534dc439224e36&amp;w=1380"
+                  alt="">
+              </a>
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/group-people-enjoying-holi-color_23-2148129319.jpg?t=st=1731406297~exp=1731409897~hmac=acd19fe86608034c5d2c2cddd5ba441729d9c046cfd629ff77eec2bc60c8b980&amp;w=1380"
+                  alt="">
+              </a>
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/black-man-surrounded-by-orange-smoke_410324-20.jpg?t=st=1731406716~exp=1731410316~hmac=793484971ee67895250accc8aa03bf8873cdb16f98f451ed9751c18de6dee65d&amp;w=740"
+                  alt="">
+              </a>
+              <a href="">
+                <img
+                  src="https://img.freepik.com/free-photo/green-blue-holi-color-powder-crowd_23-2148129315.jpg?t=st=1731407223~exp=1731410823~hmac=38dd34eb6b370798b180a31014e9d25d2e438d6d5b09c4b82e79e3d79448f403&amp;w=1380"
+                  alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div id="Events" class="row m-0 TabContent">
+          <div class="Card col-lg-3 col-md-3 col-sm-6">
+            <div class="CardInner">
+              <div class="Cover"></div>
+              <img class="UserImage"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=1887&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
+              <p class="Heading">Event Name</p>
+              <p class="SubHeading">Event Organizer Name</p>
+              <p class="SubHeading">Location: </p>
+              <p class="SubHeading">Date: </p>
+              <p class="SubHeading">Time: </p>
+              <div class="IconContainer">
+                <a href="">
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
     </div>
+	
+    
+    </main>
 
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
 
-<script>
-    $('.dropdown-toggle').on('click', function (e) {
+  <script>
+    /*$('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
 
@@ -420,7 +527,7 @@
       if ($('.sidebar').hasClass('open')) {
         $('.sidebar').removeClass('open');
       }
-    });
+    });*/
   </script>
   <script>
     $(document).ready(function () {
@@ -683,6 +790,29 @@
         $('.Section.Business').hide();
         $('.Section.Network').hide();
         $('.Section.Subscription').toggle();
+      });
+	  
+	  $('.NetworkProfile-1').click(function (e) {
+        e.preventDefault();
+        $('.Section').hide();
+        $('.Section.Home').hide();
+        $('.Section.UpcomingEvents').hide();
+        $('.Section.ReferralLink').hide();
+        $('.Section.ManageSubscription').hide();
+        $('.Section.SaleList').hide();
+        $('.Section.PurchaseHistory').hide();
+        $('.Section.Wallet').hide();
+        $('.Section.TransactionsPayment').hide();
+        $('.Section.Rewards').hide();
+        $('.Section.TermsConditions').hide();
+        $('.Section.Promotion').hide();
+        $('.Section.Appearance').hide();
+        $('.Section.Event').hide();
+        $('.Section.Business').hide();
+        $('.Section.Network').hide();
+        $('.Section.Subscription').hide();
+        $('.Section.BuyNowSection').hide();
+        $('.Section.NetworkProfile').toggle();
       });
     });
   </script>
@@ -2188,7 +2318,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			},
 			success: function(data){ 
 			    if(data.status = 1){
-					window.location.href = '<?=url('dashboard/addtoCart');?>';
+					//window.location.href = '<?=url('dashboard/addtoCart');?>';
 				}
 			}
 		});
@@ -2209,13 +2339,105 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			},
 			success: function(data){ 
 			    if(data.status = 1){
-					window.location.href = '<?=url('dashboard/addtoCart');?>'; 
+					//window.location.href = '<?=url('dashboard/addtoCart');?>'; 
 				}
 			}
 		});
 	});
 	
-	$("#Home").click(function () {
+	$(".bookmarkUsers").click(function () {
+		var userId = $(this).attr('relid');
+		//console.log(businessId);
+		$.ajax({
+			url: "<?=url('dashboard/addRemoveBookmarkUsers')?>",
+			method: "POST",
+			data:{userId : userId, "_token": "{{ csrf_token() }}"},
+			dataType: 'JSON',
+			success: function(response) {
+				
+				if(response.status == 1){
+					$('#bookmarkUsers_'+userId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
+					$('#allbookmarkUsers_'+userId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
+				}else if(response.status == 2){
+					$('#bookmarkUsers_'+userId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+					$('#allbookmarkUsers_'+userId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+				}
+				
+			}
+			
+		});
+			
+	});
+	
+	
+	$(".NetworkProfile-1").click(function () {
+		var userId = $(this).attr('relid');
+		
+			$.ajax({
+			url: "<?=url('dashboard/get_user_profileInfo')?>",
+			method: "POST",
+			data:{userId : userId, "_token": "{{ csrf_token() }}"},
+			dataType: 'json',
+			success: function(response) {
+				//$('#userProfile').html(response);
+				$('#profileUser').html(response.output);
+				$('#Info').html(response.info);
+				
+			}
+			
+		});	
+	});
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sections = {
+        advertisement: {
+          data: document.querySelector(".AddAdvertisement"),
+          footer: document.querySelector(".AddAdvertisementFooter"),
+          title: "Add Advertisement",
+        },
+        plan: {
+          data: document.querySelector(".AddAdvertisementPlan"),
+          footer: document.querySelector(".AddAdvertisementPlanFooter"),
+          title: "Select Plan",
+        },
+        plandetails: {
+          data: document.querySelector(".AddAdvertisementPlanDetails"),
+          footer: document.querySelector(".AddAdvertisementPlanDetailsFooter"),
+          title: "Plan Details",
+        },
+      };
+
+      const modalTitle = document.querySelector("#AdvertiseModal .modal-title");
+
+      const selectPlanBtn = document.querySelector(".AddAdvertisementFooter .SelectPlanBtn");
+      const selectPlanDetailsBtn = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtn");
+      const selectPlanDetailsBtnBack = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtnBack");
+      const selectPlanWholeDetailsBtnBack = document.querySelector(".AddAdvertisementPlanDetailsFooter .SelectPlanWholeDetailsBtnBack");
+
+      function switchSection(target) {
+        Object.values(sections).forEach((section) => {
+          section.data.style.display = "none";
+          section.footer.style.display = "none";
+        });
+
+        const targetSection = sections[target];
+        if (targetSection) {
+          targetSection.data.style.display = "flex";
+          targetSection.footer.style.display = "flex";
+          modalTitle.textContent = targetSection.title;
+        }
+      }
+
+      switchSection("advertisement");
+
+      selectPlanBtn.addEventListener("click", () => switchSection("plan"));
+      selectPlanDetailsBtn.addEventListener("click", () => switchSection("plandetails"));
+      selectPlanDetailsBtnBack.addEventListener("click", () => switchSection("advertisement"));
+      selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan")); 
+    });
+	
+	/*$("#Home").click(function () {
 		window.location.href = '<?=url('dashboard');?>'; 
 	});
 	
@@ -2253,7 +2475,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	
 	$("#SaleList").click(function () {
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
-	});
+	});*/
 	
 	$(document).ready(function() {
 		$("#search-box").keyup(function() {
@@ -2276,10 +2498,13 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$(document).on("click", ".selectCountry", function () {
 		var search  = $(this).attr("search");
 		var keywork = $(this).attr("keywork");
+		
 		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+		
 	});
 	
 	<!-- New Script -->
+  
     document.querySelector('.search').addEventListener('click', function () {
       const modal = document.getElementById('SearchModal');
       if (modal) {

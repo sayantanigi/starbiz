@@ -4,7 +4,7 @@
 <head>
 <title>StarBiz</title>
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
+<link rel="shortcut icon" href="<?=url('setting/2019685580.png')?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -89,14 +89,14 @@
       </li>
 	  
       <li>
-        <a href="" id="Rewards">
+        <a href="javascript:void(0);" id="Rewards">
           <img src="<?=url('assets/home/images/NavIcon8.png')?>" alt="">
           <p>Rewards</p>
         </a>
       </li>
 	  
       <li>
-        <a href="" id="TermsConditions">
+        <a href="javascript:void(0);" id="TermsConditions">
           <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
           <p>Terms & Conditions</p>
         </a>
@@ -190,3 +190,76 @@
         </div>
       </div>
     </div>
+	
+	<script>
+	
+		$('.dropdown-toggle').on('click', function (e) {
+		  e.stopPropagation();
+		  e.preventDefault();
+
+		  var self = $(this);
+		  if (self.is('.disabled, :disabled')) {
+			return false;
+		  }
+		  self.parent().toggleClass("open");
+		});
+
+		$(document).on('click', function (e) {
+		  if ($('.dropdown').hasClass('open')) {
+			$('.dropdown').removeClass('open');
+		  }
+		});
+
+		$('.nav-btn.nav-slider').on('click', function () {
+		  $('nav').toggleClass("open");
+		});
+
+		$('.NavHeaderCloseIcon').on('click', function () {
+		  if ($('.sidebar').hasClass('open')) {
+			$('.sidebar').removeClass('open');
+		  }
+		});
+		
+		
+		$("#Home").click(function () {
+			window.location.href = '<?=url('dashboard');?>'; 
+		});
+		
+		$("#ManageSubscription").click(function () {
+			window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
+		});
+		
+		$("#UpcomingEvents").click(function () {
+			window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
+		});
+		
+		$("#ReferralLink").click(function () {
+			window.location.href = '<?=url('dashboard/refferalLink');?>'; 
+		});
+		
+		$("#Wallet").click(function () {
+			window.location.href = '<?=url('dashboard/wallet');?>'; 
+		});
+		
+		$("#TransactionsPayment").click(function () {
+			window.location.href = '<?=url('dashboard/transaction');?>'; 
+		});
+		
+		$("#Rewards").click(function () {
+			window.location.href = '<?=url('dashboard/reward');?>'; 
+		});
+		
+		$("#TermsConditions").click(function () {
+			window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
+		});
+		
+		$("#PurchaseHistory").click(function () {
+			window.location.href = '<?=url('dashboard/purchase-history');?>'; 
+		});
+		
+		$("#SaleList").click(function () {
+			window.location.href = '<?=url('dashboard/sale-list');?>'; 
+		});
+		
+		
+	</script>

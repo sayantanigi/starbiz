@@ -1,39 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>StarBiz</title>
-	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?=url('assets/home/style/style.css')?>">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+  @include('account.header');
   <style>
     .showSweetAlert > h2{
 	    font-size: 20px !important;
 	}
-    body {
+    /*body {
       width: 100vw;
       height: 100vh;
       margin: 0;
-    }
-
+    }*/
+	body {
+		width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+	}
     .nav-categories .Active {
       background-color: rgb(255 255 255);
       box-shadow: 0 10px 10px #f1f1f1;
     }
-
     .nav-categories .Active p {
       color: #b38a41;
       font-weight: 600;
     }
-
     .TabContainer {
       display: flex;
       cursor: pointer;
@@ -44,7 +31,6 @@
       padding-left: 20px;
       padding-right: 20px;
     }
-
     .Tab {
       border-radius: 15px 15px 0 0;
       padding: 10px 20px;
@@ -55,7 +41,6 @@
       min-width: 150px;
       text-align: center;
     }
-
     .Tab.active {
       color: #fff;
       border-radius: 15px 15px 0 0;
@@ -63,28 +48,23 @@
       font-size: 15px;
       font-weight: 600;
     }
-
     .TabContent {
       display: none;
       padding-left: 10px;
       padding-right: 10px;
     }
-
     .TabContent.active {
       display: flex;
     }
-
     .TabBar {
       position: sticky;
       top: -20px;
       z-index: 100;
       padding-bottom: 10px;
     }
-	
 	.pac-container {
         z-index: 10000 !important;
     }
-	
 	#country-list {
 		float: left;
 		list-style: none;
@@ -95,7 +75,6 @@
 		z-index: 1;
 		margin-left: -500px;
 	}
-
 	#country-list li {
 		padding: 10px;
 		/*background: #f0f0f0;*/
@@ -103,131 +82,12 @@
 		/*border-radius: 8px;*/
 		background: linear-gradient(90deg, #b58b42, #7a5a28)
 	}
-
 	#country-list li:hover {
 		background: #ece3d2;
 		cursor: pointer;
 	} 
   </style>
-</head>
-
-<body>
-  
-<nav class="sidebar">
-    <div class="nav-header">
-      <div class="logo-wrap">
-        <a class="logo-text" href="">StarBiz</a>
-      </div>
-      <a href="javascipt:void(0)" class="NavHeaderCloseIcon">
-        <img src="<?=url('assets/home/images/Icon8.png')?>" alt="">
-      </a>
-    </div>
-    <ul class="nav-categories ul-base">
-      <li>
-        <a href="<?=url('dashboard')?>" id="Home1" class="Active">
-          <img src="<?=url('assets/home/images/NavIcon1.png')?>" alt="">
-          <p>Home</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="UpcomingEvents">
-          <img src="<?=url('assets/home/images/NavIcon2.png')?>" alt="">
-          <p>Upcoming Events</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="ReferralLink">
-          <img src="<?=url('assets/home/images/NavIcon3.png')?>" alt="">
-          <p>Referral Link</p>
-        </a>
-      </li>
-      <!--<li>
-        <a href="" id="ManageSubscription">
-          <img src="<?=url('assets/home/images/NavIcon4.png')?>" alt="">
-          <p>Manage Subscription</p>
-        </a>
-      </li>-->
-	  
-	  <li>
-        <a href="<?=url('dashboard/stripe-connect')?>" id="ManageSubscription">
-          <img src="<?=url('assets/home/images/NavIcon4.png')?>" alt="">
-          <p>Manage Stripe </p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="SaleList">
-          <img src="<?=url('assets/home/images/NavIcon5.png')?>" alt="">
-          <p>Sale List</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="PurchaseHistory">
-          <img src="<?=url('assets/home/images/NavIcon6.png')?>" alt="">
-          <p>Purchase History</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="Wallet">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Wallet</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="TransactionsPayment">
-          <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
-          <p>Transactions & Payment</p>
-        </a>
-      </li>
-      <li>
-        <a href="" id="Rewards">
-          <img src="<?=url('assets/home/images/NavIcon8.png')?>" alt="">
-          <p>Rewards</p>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:void(0);" id="TermsConditions">
-          <img src="<?=url('assets/home/images/NavIcon9.png')?>" alt="">
-          <p>Terms & Conditions</p>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  
-  <header>
-    <div class="header-inner">
-      <div class="header-first-inner">
-        <div class="nav-btn nav-slider">
-          <i class="material-icons">menu</i>
-        </div>
-        <div class="header-logo">
-          <a href="<?=url('dashboard')?>"><img alt="logo" src="<?=url('assets/home/Logo/Logo.png')?>"></a>
-        </div>
-        <!--<div class="header-search">
-          <div class="search">
-            <i class="material-icons">search</i>
-            <input type="search" name="search" placeholder="Search" id="search-box">
-			<div id="suggesstion-box"></div>
-          </div>
-        </div>-->
-		
-		<div class="header-search">
-          <div class="search" data-bs-toggle="modal" data-bs-target="#SearchModal">
-            <i class="material-icons">search</i>
-            <input type="search" name="search" placeholder="Search">
-          </div>
-        </div>
-      </div>
-      <div class="header-menu">
-        <ul class="ul-base">
-          <li><a href="<?=url('dashboard/profile')?>">Profile</a></li>
-           <li><a href="<?=url('logout')?>">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
-
     <main role="main" class="Main">
-    
      <div class="container-fluid m-0 Section UpcomingEvents" >
 	    <!-- Details My Event Modal -->
       <div class="modal fade CustomModal" id="DetailsMyEventModal" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -239,9 +99,6 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body event-block-detail" id="">
-			
-			
-			
               <!--<div class="row PromotionDetail">
                 <div class="col-md-8 col-sm-12 PromotionImg">
                   <img class="w-100"
@@ -371,12 +228,10 @@
                   </div>
                 </div>
               </div>-->
-			  
             </div>
           </div>
         </div>
       </div>
-	 
       <div class="row m-0 TabBar">
         <div class="Pagination TabBar">
           <a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Upcoming Events</a>
@@ -385,15 +240,12 @@
             $eventMng = DB::table('sub_permision_menu')->where(['sub_id' => @$usersubInfo->sub_id, 'menu_id' => 2])->select('*')->first();
 		?>
         <div class="row m-0">
-		   
           <?php
 		  if(@$eventMng->read_access == 1 || @$eventMng->write_access == 1 || @$eventMng->full_access == 1){
 			if(@$eventList){
 				foreach(@$eventList as $k => $v){
-					
 				$category = DB::table('event_category')->where(['id' => @$v->category])->select('name')->orderBy('id', 'DESC')->first();
 				$image    = DB::table('event_image')->where(['event_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
-				
 				if(@$v->user_id == 0){
 					$userName = 'Admin';
 				}else{
@@ -403,7 +255,6 @@
 					}else{
 						$userName = '';
 					}
-					
 					if(!empty(@$checkUser->profile_image) && file_exists('public/profile/'.@$checkUser->profile_image.'')){
 						$userProfile = url('profile/'.@$checkUser->profile_image.'');
 					}else{
@@ -415,21 +266,15 @@
 				}else{
 					$galleryImg = url('noimage.jpg');
 				}
-				
 				$startDate  = @$v->start_date;
 				$start_date = date('Y-m-d', strtotime(@$startDate));
 				$start_time = date('H:i:s', strtotime(@$startDate));
-				
 				$numRows = DB::table('favouriteevent')->where(['user_id' => session()->get('USERLOGINID'), 'event_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->count();
-				
 				if(@$numRows > 0){
 					$fav = '<i class="fa fa-heart" aria-hidden="true"></i>';
 				}else{
 					$fav = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
 				}
-
-			
-			
 				echo '
 				<div class="Card col-lg-3 col-md-3 col-sm-6">
 				  <div class="CardInner event-detail-1"   style="background:url('.@$galleryImg.') no-repeat center center / cover;" relid="'.@$v->id.'" data-bs-toggle="modal" data-bs-target="#DetailsMyEventModal" block="one">
@@ -456,8 +301,6 @@
 				  </div>
 				</div>
 				';
-			
-				
 				}
 			}else{
 				echo 'Not found any event list.';
@@ -467,89 +310,34 @@
         </div>
       </div>
     </div>
-     <!-- Search Modal -->
-    <div class="modal fade CustomModal" id="SearchModal" data-bs-backdrop="static" data-bs-keyboard="false"
-      tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Search</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form class="row g-3">
-              <div class="col-md-12 col-sm-12">
-                <input class="w-100" placeholder="What are you searching for?" id="search-box" name="search">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer" id="suggesstion-box">
-		  
-            <!--<div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Event Name</p>
-              </a>
-            </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Business Name</p>
-              </a>
-            </div>
-			
-            <div class="col-md-12 col-sm-12 SearchDataContainer">
-              <a href="">
-                <div class="SearchDataBlock">
-                  <img class="ActiveImg" src="<?=url('assets/home/images/Icon17.png')?>" alt="">
-                </div>
-                <p>Network Name</p>
-              </a>
-            </div>-->
-			
-          </div>
-        </div>
-      </div>
-    </div>
     </main>
-
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
-
   <script>
-    $('.dropdown-toggle').on('click', function (e) {
+    /*$('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
-
       var self = $(this);
       if (self.is('.disabled, :disabled')) {
         return false;
       }
       self.parent().toggleClass("open");
     });
-
     $(document).on('click', function (e) {
       if ($('.dropdown').hasClass('open')) {
         $('.dropdown').removeClass('open');
       }
     });
-
     $('.nav-btn.nav-slider').on('click', function () {
       $('nav').toggleClass("open");
     });
-
     $('.NavHeaderCloseIcon').on('click', function () {
       if ($('.sidebar').hasClass('open')) {
         $('.sidebar').removeClass('open');
       }
-    });
+    });*/
   </script>
   <script>
     $(document).ready(function () {
@@ -566,7 +354,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#UpcomingEvents').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -580,7 +367,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#ReferralLink').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -594,7 +380,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#ManageSubscription').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -608,7 +393,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#SaleList').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -622,7 +406,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#PurchaseHistory').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -636,7 +419,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#Wallet').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -650,7 +432,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#TransactionsPayment').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -664,7 +445,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#Rewards').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -678,7 +458,6 @@
         $('.Section.Rewards').toggle();
         $('.Section.TermsConditions').hide();
       });
-
       $('#UpcomingEvents').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -692,7 +471,6 @@
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').toggle();
       });
-
       $('#Promotion').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -712,7 +490,6 @@
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Appearance').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -732,7 +509,6 @@
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Event').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -752,7 +528,6 @@
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Business').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -773,7 +548,6 @@
         $('.Section.Subscription').hide();
         //$('#business-block').css('display', 'block');
       });
-
       $('#Network').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -793,7 +567,6 @@
         $('.Section.Network').toggle();
         $('.Section.Subscription').hide();
       });
-
       $('#Subscription').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -813,7 +586,6 @@
         $('.Section.Network').hide();
         $('.Section.Subscription').toggle();
       });
-	  
 	  $('.NetworkProfile-1').click(function (e) {
         e.preventDefault();
         $('.Section').hide();
@@ -842,10 +614,8 @@
     function openTab(event, tabName) {
       const contents = document.querySelectorAll(".TabContent");
       contents.forEach(content => content.classList.remove("active"));
-
       const tabs = document.querySelectorAll(".Tab");
       tabs.forEach(tab => tab.classList.remove("active"));
-
       document.getElementById(tabName).classList.add("active");
       event.currentTarget.classList.add("active");
     }
@@ -854,7 +624,6 @@
     window.onload = function () {
       document.querySelector('.Home').style.display = 'block';
       document.getElementById('Home').classList.add('Active');
-
       const menuItems = document.querySelectorAll('ul.nav-categories li a');
       menuItems.forEach(item => {
         item.addEventListener('click', function (event) {
@@ -879,14 +648,12 @@
         event.preventDefault();
         const targetId = this.getAttribute("data-target");
         const content = document.querySelector(`.LearnMoreData[data-content="${targetId}"]`);
-
         document.querySelectorAll(".LearnMoreData").forEach(item => {
           if (item !== content) item.style.display = "none";
         });
         document.querySelectorAll(".LearnMoreBtn").forEach(btn => {
           if (btn !== this) btn.textContent = "Learn More";
         });
-
         if (content.style.display === "none" || content.style.display === "") {
           content.style.display = "block";
           this.textContent = "Close";
@@ -896,8 +663,6 @@
         }
       });
     });
-	
-	
 	google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('event_address'));
         google.maps.event.addListener(places, 'place_changed', function () {
@@ -926,8 +691,6 @@
             });
         });
     });
-	
-	
 	google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('edit_event_address'));
         google.maps.event.addListener(places, 'place_changed', function () {
@@ -956,7 +719,6 @@
             });
         });
     });
-	
 	google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('business_address'));
         google.maps.event.addListener(places, 'place_changed', function () {
@@ -985,7 +747,6 @@
             });
         });
     });
-	
 	google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('edit_business_address'));
         google.maps.event.addListener(places, 'place_changed', function () {
@@ -1014,18 +775,15 @@
             });
         });
     });
-	
 	$(document).ready(function(){
 	$("#submitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		var totalfiles = document.getElementById('event_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("event_image[]",  document.getElementById('event_image').files[index]);
 		}
-		
 		var event_name = $('#event_name').val(); 
 		var event_description = $('#event_description').val(); 
 		var event_address = $('#event_address').val();
@@ -1042,9 +800,6 @@
 		var event_email = $('#event_email').val();
 		var event_website = $('#event_website').val();
 		var event_category = $('#event_category').val();
-
-		
-
 		form_data.append("event_name", event_name);
 		form_data.append("event_description", event_description);
 		form_data.append("event_address", event_address);
@@ -1061,8 +816,6 @@
 		form_data.append("event_email", event_email);
 		form_data.append("event_website", event_website);
 		form_data.append("event_category", event_category);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1084,30 +837,22 @@
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
-			
 		}
 		});
 	});
-
 });
-
-
 $(document).ready(function(){
 	$("#adssubmitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		// var totalfiles = document.getElementById('ads_image').files.length;
 		// for (var index = 0; index < totalfiles; index++) {
 		   // form_data.append("ads_image[]",  document.getElementById('ads_image').files[index]);
 		// }
-		
 		// var fileToUpload = $('#ads_image').prop('files')[0];
 		// $('#sortpicture').prop('files')[0];   
 		var fileToUpload = document.getElementById('ads_image').files[0];
-
-		
 		var ads_category = $('#ads_category').val(); 
 		var file_type = $('#file_type').val(); 
 		var ads_name = $('#ads_name').val();
@@ -1118,10 +863,6 @@ $(document).ready(function(){
 		var location = $('#autocomplete_1').val();
 		var latitude = $('#latitude').val();
 		var longitude = $('#longitude').val();
-		
-
-		
-
 		form_data.append("category", ads_category);
 		form_data.append("file_type", file_type);
 		form_data.append("ads_name", ads_name);
@@ -1133,9 +874,6 @@ $(document).ready(function(){
 		form_data.append("latitude", latitude);
 		form_data.append("longitude", longitude);
 		form_data.append("ads_image", fileToUpload);
-
-
-
 		$.ajax({
 			headers: {
 				'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1152,7 +890,6 @@ $(document).ready(function(){
 			},
 			success: function(data){
 				if(data.status == 1){
-					
 					//swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = "<?=url('dashboard')?>"});
 					$("#adsId").val(data.adsId);
 					$("#select-promotion-model").modal("show");
@@ -1161,11 +898,9 @@ $(document).ready(function(){
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 				}
-				
 			}
 		});
 	});
-
 });
 $(document).ready(function() {
 	$(".promotion-detail").click(function () {
@@ -1178,10 +913,8 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.promotion-block-detail').html(response);
 			}
-			
 		});	
 	});
-	
 	$(".promotion-detail-1").click(function () {
 		var promotionId = $(this).attr('relid');
 		$.ajax({
@@ -1192,10 +925,8 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.promotion-block-detail').html(response);
 			}
-			
 		});	
 	});
-	
 	$(".event-detail").click(function () {
 		var eventId = $(this).attr('relid');
 		$.ajax({
@@ -1206,10 +937,8 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.event-block-detail').html(response);
 			}
-			
 		});	
 	});
-	
 	$(".event-detail-1").click(function () {
 		var eventId = $(this).attr('relid');
 		var block = $(this).attr('block');
@@ -1221,12 +950,8 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.event-block-detail').html(response);
 			}
-			
 		});	
 	});
-	
-	
-	
 	$(".edit-info").click(function () {
 		var promotionId = $(this).attr('relid');
 		$.ajax({
@@ -1247,26 +972,19 @@ $(document).ready(function() {
 				$('#edit_longitude').val(response.longitude);
 				$('#edit_id').val(response.id);
 			}
-			
 		});	
 	});
-	
-	
 	$("#editadssubmitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		// var totalfiles = document.getElementById('ads_image').files.length;
 		// for (var index = 0; index < totalfiles; index++) {
 		   // form_data.append("ads_image[]",  document.getElementById('ads_image').files[index]);
 		// }
-		
 		// var fileToUpload = $('#ads_image').prop('files')[0];
 		// $('#sortpicture').prop('files')[0];   
 		var fileToUpload = document.getElementById('edit_ads_image').files[0];
-
-		
 		var ads_category = $('#edit_ads_category').val(); 
 		var file_type = $('#edit_file_type').val(); 
 		var ads_name = $('#edit_ads_name').val();
@@ -1278,10 +996,6 @@ $(document).ready(function() {
 		var latitude = $('#edit_latitude').val();
 		var longitude = $('#edit_longitude').val();
 		var edit_id = $('#edit_id').val();
-		
-
-		
-
 		form_data.append("category", ads_category);
 		form_data.append("file_type", file_type);
 		form_data.append("ads_name", ads_name);
@@ -1294,9 +1008,6 @@ $(document).ready(function() {
 		form_data.append("longitude", longitude);
 		form_data.append("ads_image", fileToUpload);
 		form_data.append("id", edit_id);
-
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1318,14 +1029,11 @@ $(document).ready(function() {
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
-			
 		}
 		});
 	});
-	
 	$('#edit_event_tags').chosen({max_selected_options:10,width:'100%'});
 	$('#event_tags').chosen({max_selected_options:10,width:'100%'});
-	
 	$(".edit-event-detail").click(function () {
 		var eventId = $(this).attr('relid');
 		$.ajax({
@@ -1353,15 +1061,10 @@ $(document).ready(function() {
 				//$('#edit_event_tags').val(response.zipcode);
 				//$('#edit_event_tags option:selected').val(["23", "22"]);
 				$('#edit_event_tags').chosen('destroy').val(response.tags).chosen();
-				
-				
 			}
-			
 		});	
 	});
-	
 });
-
 function deletePromotion(dealId) 
 	{
 		swal({
@@ -1380,19 +1083,15 @@ function deletePromotion(dealId)
 			}
 		});
 	}
-
-	
 	$(document).ready(function(){
 	$("#edit_event_submitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		var totalfiles = document.getElementById('event_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("event_image[]",  document.getElementById('event_image').files[index]);
 		}
-		
 		var event_name = $('#edit_event_name').val(); 
 		var event_description = $('#edit_event_description').val(); 
 		var event_address = $('#edit_event_address').val();
@@ -1410,9 +1109,6 @@ function deletePromotion(dealId)
 		var event_category = $('#edit_event_category').val();
 		var event_tags = $('#edit_event_tags').val();
 		var eventId = $('#edit_event_id').val();
-
-		
-
 		form_data.append("event_name", event_name);
 		form_data.append("event_description", event_description);
 		form_data.append("event_address", event_address);
@@ -1430,8 +1126,6 @@ function deletePromotion(dealId)
 		form_data.append("event_website", event_website);
 		form_data.append("event_category", event_category);
 		form_data.append("eventId", eventId);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1453,13 +1147,10 @@ function deletePromotion(dealId)
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
-			
 		}
 		});
 	});
-
 });
-
 function deleteEvent(dealId) 
 	{
 		swal({
@@ -1478,8 +1169,6 @@ function deleteEvent(dealId)
 			}
 		});
 	}
-
-
     $(".bookmarkEvent").click(function () {
 		var eventId = $(this).attr('relid');
 		//console.log(eventId);
@@ -1489,7 +1178,6 @@ function deleteEvent(dealId)
 			data:{eventId : eventId, "_token": "{{ csrf_token() }}"},
 			dataType: 'JSON',
 			success: function(response) {
-				
 				if(response.status == 1){
 					$('#bookmarkEvent_'+eventId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
 					$('#allbookmarkEvent_'+eventId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
@@ -1497,13 +1185,9 @@ function deleteEvent(dealId)
 					$('#bookmarkEvent_'+eventId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 					$('#allbookmarkEvent_'+eventId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 				}
-				
 			}
-			
 		});
-			
 	});
-
 	$(document).ready(function(){
 		$(document.body).on('click', '.eventsPhotos' ,function(){ 
 		    //alert("success");
@@ -1516,10 +1200,8 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('#events-gallery-model').html(response);
 				}
-				
 			});	
 		});
-		
 		$(document.body).on('click', '.get-payment-list' ,function(){ 
 		    //alert("success");
 			var userId = $(this).attr('relid');
@@ -1531,11 +1213,9 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('#sub-payment-list').html(response); 
 				}
-				
 			});	
 		});
 	});	
-	
 	$(".bookmarkBusiness").click(function () {
 		var businessId = $(this).attr('relid');
 		//console.log(businessId);
@@ -1545,7 +1225,6 @@ function deleteEvent(dealId)
 			data:{businessId : businessId, "_token": "{{ csrf_token() }}"},
 			dataType: 'JSON',
 			success: function(response) {
-				
 				if(response.status == 1){
 					$('#bookmarkBusiness_'+businessId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
 					$('#allbookmarkBusiness_'+businessId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
@@ -1553,13 +1232,9 @@ function deleteEvent(dealId)
 					$('#bookmarkBusiness_'+businessId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 					$('#allbookmarkBusiness_'+businessId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 				}
-				
 			}
-			
 		});
-			
 	});
-	
 	$(document).ready(function(){
 		$(".business-detail").click(function () {
 			var businessId = $(this).attr('relid');
@@ -1571,10 +1246,8 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('.business-block-detail').html(response);
 				}
-				
 			});	
 		});
-	
 		$(".business-detail-1").click(function () {
 			var businessId = $(this).attr('relid');
 			$.ajax({
@@ -1585,13 +1258,9 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('.business-block-detail').html(response);
 				}
-				
 			});	
 		});
-		
-		
 	});
-	
 	$(document.body).on('click', '.businessPhotos' ,function(){ 
 		//alert("success");
 		var businessId = $(this).attr('relid');
@@ -1603,21 +1272,17 @@ function deleteEvent(dealId)
 			success: function(response) {
 				$('#business-gallery-model').html(response);
 			}
-			
 		});	
 	});
-	
 $(document).ready(function(){
 	$("#Businesssubmitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		var totalfiles = document.getElementById('business_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("business_image[]",  document.getElementById('business_image').files[index]);
 		}
-		
 		var business_name = $('#business_name').val(); 
 		var name = $('#name').val(); 
 		var business_description = $('#business_description').val(); 
@@ -1634,9 +1299,6 @@ $(document).ready(function(){
 		var business_website = $('#business_website').val();
 		var business_category = $('#business_category').val();
 		var business_userId = $('#business_userId').val();
-
-		
-
 		form_data.append("business_name", business_name);
 		form_data.append("name", name);
 		form_data.append("business_description", business_description);
@@ -1653,8 +1315,6 @@ $(document).ready(function(){
 		form_data.append("business_website", business_website);
 		form_data.append("business_category", business_category);
 		form_data.append("business_userId", business_userId);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1683,12 +1343,9 @@ $(document).ready(function(){
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
-			
 		}
 		});
 	});
-	
-	
 	$(".edit-business-detail").click(function () {
 		var businessId = $(this).attr('relid');
 		$.ajax({
@@ -1715,25 +1372,17 @@ $(document).ready(function(){
 				$('#edit_business_tags').val(response.tags);
 				$('#edit_business_category').val(response.category);
 				//$('#edit_event_tags').chosen('destroy').val(response.tags).chosen();
-				
-				
 			}
-			
 		});	
 	});
-	
-	
-	
 	$("#EditBusinesssubmitform").on('submit', function(e){
 		e.preventDefault();
 		//var form_data = new FormData(); 	
 		var form_data = new FormData(); 
-		
 		var totalfiles = document.getElementById('edit_business_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("business_image[]",  document.getElementById('edit_business_image').files[index]);
 		}
-		
 		var business_name = $('#edit_business_name').val(); 
 		var name = $('#edit_name').val(); 
 		var business_description = $('#edit_business_description').val(); 
@@ -1750,10 +1399,6 @@ $(document).ready(function(){
 		var business_website = $('#edit_business_website').val();
 		var business_category = $('#edit_business_category').val();
 		var edit_business_id = $('#edit_business_id').val();
-
-
-		
-
 		form_data.append("business_name", business_name);
 		form_data.append("name", name);
 		form_data.append("business_description", business_description);
@@ -1770,9 +1415,6 @@ $(document).ready(function(){
 		form_data.append("business_website", business_website);
 		form_data.append("business_category", business_category);
 		form_data.append("businessId", edit_business_id);
-
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1794,19 +1436,14 @@ $(document).ready(function(){
 			if(data.status == 0){
 				swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
-			
 		}
 		});
 	});
-	
-	
 	$("#Addcat").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData(); 
-		
 		var cat_name = $('#cat_name').val(); 
 		form_data.append("cat_name", cat_name);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1823,13 +1460,10 @@ $(document).ready(function(){
 			},
 			success: function(data){
 				if(data.status == 1){
-					
-					
 				   $("#cat_name").val("");
 				   var output = $("#append-category");
 				   var html = '<div class="col-md-6 col-sm-12 position-relative"><p class="CategoryNameList">'+cat_name+'</p><a href="" class="CategoryDeleteBtn"></a></div>';
 				   output.append(html);
-				   
 				   $("#AddCategoryModal").modal("hide");
 				   $("#chooseModel").modal("show");
 				   return false;
@@ -1837,25 +1471,19 @@ $(document).ready(function(){
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 				}
-				
 				/*if(data.status == 1){
 					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = "<?=url('dashboard')?>"});
 				}
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 				}*/
-				
 			}
 		});
 	});
-	
-	
 	$(".AddAProduct").click(function () {
 		$("#chooseModel").modal("hide");
 		$("#AddProductModel").modal("show");
 		$("#AddServiceModel").modal("hide");
-		
-		
 		$.ajax({
 			url: "<?=url('dashboard/get_product_category')?>",
 			method: "POST",
@@ -1865,14 +1493,11 @@ $(document).ready(function(){
                 $('#product_category').html(response);
 			}
 		});	
-		
 	});
-
 	$(".AddAService").click(function () {
 		$("#chooseModel").modal("hide");
 		$("#AddServiceModel").modal("show");
 		$("#AddProductModel").modal("hide");
-		
 		$.ajax({
 			url: "<?=url('dashboard/get_product_category')?>",
 			method: "POST",
@@ -1883,31 +1508,25 @@ $(document).ready(function(){
 			}
 		});	
 	});
-	
-	
 	$("#addProductForm").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
         var totalfiles = document.getElementById('product_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("product_image[]",  document.getElementById('product_image').files[index]);
 		}		
-		
 		var product_category = $('#product_category').val(); 
 		var product_name     = $('#product_name').val(); 
 		var product_price    = $('#product_price').val(); 
 		var product_tags     = $('#product_tags').val(); 
 		var product_description  = $('#product_description').val(); 
 		var listing_id  = $('#listing_id').val(); 
-		
 		form_data.append("product_category", product_category);
 		form_data.append("product_name", product_name);
 		form_data.append("product_price", product_price);
 		form_data.append("product_tags", product_tags);
 		form_data.append("product_description", product_description);
 		form_data.append("product_listing", listing_id);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1929,43 +1548,34 @@ $(document).ready(function(){
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
 				}
-				
 				/*if(data.status == 1){
 					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = "<?=url('dashboard')?>"});
 				}
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 				}*/
-				
 			}
 		});
 	});
-	
-	
-	
 	$("#addServiceForm").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
         var totalfiles = document.getElementById('service_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("service_image[]",  document.getElementById('service_image').files[index]);
 		}		
-		
 		var service_category = $('#service_category').val(); 
 		var service_name     = $('#service_name').val(); 
 		var service_price    = $('#service_price').val(); 
 		var service_tags     = $('#service_tags').val(); 
 		var service_description  = $('#service_description').val(); 
 		var service_listing_id  = $('#service_listing_id').val(); 
-
 		form_data.append("service_category", service_category);
 		form_data.append("service_name", service_name);
 		form_data.append("service_price", service_price);
 		form_data.append("service_tags", service_tags);
 		form_data.append("service_description", service_description);
 		form_data.append("service_listing_id", service_listing_id);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1987,21 +1597,16 @@ $(document).ready(function(){
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
 				}
-				
 				/*if(data.status == 1){
 					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = "<?=url('dashboard')?>"});
 				}
 				if(data.status == 0){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 				}*/
-				
 			}
 		});
 	});
-	
-	
 });
-
 function deleteBusiness(dealId) 
 {
 	swal({
@@ -2020,29 +1625,22 @@ function deleteBusiness(dealId)
 		}
 	});
 }
-
 $(document).ready(function(){
-	
 	$("#invisubmitform").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var invi_event_name   = $('#invi_event_name').val(); 
 		var invi_event_user   = $('#invi_event_user').val(); 
 		var invi_price        = $('#invi_price').val(); 
 		var invi_start_time   = $('#invi_start_time').val(); 
 		var invi_end_time     = $('#invi_end_time').val(); 
 		var invi_description     = $('#invi_description').val(); 
-		
 		form_data.append("invi_event_name", invi_event_name);
 		form_data.append("invi_event_user", invi_event_user);
 		form_data.append("invi_price", invi_price);
 		form_data.append("invi_start_time", invi_start_time);
 		form_data.append("invi_end_time", invi_end_time);
 		form_data.append("invi_description", invi_description);
-		
-
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2067,12 +1665,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	
 	$(".repeat-invitation").click(function () {
 		var inviTd = $(this).attr('relid');
 		$('#invi_id').val(inviTd);
-
 		$.ajax({
 			url: "<?=url('dashboard/get_counter_offer')?>",
 			method: "POST",
@@ -2084,20 +1679,13 @@ $(document).ready(function(){
 			}
 		});	
 	});
-	
-	
 	$("#sentCountorOffer").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var counter_offer   = $('#counter_offer').val(); 
 		var invi_id   = $('#invi_id').val(); 
-
 		form_data.append("counter_offer", counter_offer);
 		form_data.append("invi_id", invi_id);
-		
-
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2122,11 +1710,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
 	$(".accept-offer").click(function () {
 		var invi_id = $('#invi_id').val();
 		//console.log(invi_id);
-		
 		$.ajax({
 			url: "<?=url('dashboard/accept_invitation')?>",
 			method: "POST",
@@ -2141,13 +1727,10 @@ $(document).ready(function(){
 				}
 			}
 		});	
-	
 	});
-	
 	$(".reject-offer").click(function () {
 		var invi_id = $('#invi_id').val();
 		//console.log(invi_id);
-		
 		$.ajax({
 			url: "<?=url('dashboard/reject_invitation')?>",
 			method: "POST",
@@ -2162,15 +1745,11 @@ $(document).ready(function(){
 				}
 			}
 		});	
-	
 	});
-	
 	$(".withdraw-invitation").click(function () {
 		var inviTd = $(this).attr('relid');
 		$('.pending-reject-offer').attr('pendingreject-offer', inviTd);
 	});
-	
-	
 	$(".pending-reject-offer").click(function () {
 		var invi_id = $(this).attr('pendingreject-offer');
 		$.ajax({
@@ -2188,23 +1767,17 @@ $(document).ready(function(){
 			}
 		});	
 	});
-	
-	
 	$("#adsSub").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var preferredListing   = $('#preferredListing').val(); 
 		var duration   = $('#duration').val(); 
 		var subId   = $('#subId').val(); 
 		var adsId   = $('#adsId').val(); 
 		var userId   = '<?=session()->get('USERLOGINID')?>';
-
         window.location.href = "<?=url('dashboard/adspayment/?')?>userId="+userId+"&planId="+subId+"&adsId="+adsId+"&preferredListing="+preferredListing+"&duration="+duration+"";
 	});
-
 });
-
 $(document.body).on('click', '.product-details' ,function(){ 
 		//alert("success");
 	var productId = $(this).attr('relid');
@@ -2216,10 +1789,8 @@ $(document.body).on('click', '.product-details' ,function(){
 		success: function(response) {
 			$('#product-details-block').html(response);
 		}
-		
 	});	
 });
-
 $(document.body).on('click', '.productPhotos' ,function(){ 
 		//alert("success");
 		var productId = $(this).attr('relid');
@@ -2231,10 +1802,8 @@ $(document.body).on('click', '.productPhotos' ,function(){
 			success: function(response) {
 				$('#product-gallery-model').html(response);
 			}
-			
 		});	
 	});
-	
 $(document.body).on('click', '.service-details' ,function(){ 
 		//alert("success");
 	var serviceId = $(this).attr('relid');
@@ -2246,10 +1815,8 @@ $(document.body).on('click', '.service-details' ,function(){
 		success: function(response) {
 			$('#service-details-block').html(response);
 		}
-		
 	});	
 });
-
 $(document.body).on('click', '.servicePhotos' ,function(){ 
 		//alert("success");
 		var serviceId = $(this).attr('relid');
@@ -2261,11 +1828,9 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			success: function(response) {
 				$('#service-gallery-model').html(response);
 			}
-			
 		});	
 	});
   </script>
-  
   <script>
   // $(document.body).on('click', ".counter" ,function(){ 
     // const counterElement = document.getElementsByClassName("counter")[0];
@@ -2287,7 +1852,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
     // });
     // updateCounter();
 	// });
-	
 	var x = 1;
 	document.getElementsByClassName('counter').innerHTML = x;
 	$(document.body).on('click', ".increment" ,function(){
@@ -2296,7 +1860,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	});
 	$(document.body).on('click', ".decrement" ,function(){ 
 	    $('#counterId').html(--x);
-		
 	});
   </script>
   <script>
@@ -2313,7 +1876,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$(document.body).on('click', ".AddToCartNotify" ,function(){
 		var productId = $(this).attr('relid');
 		var quantity = $('#counterId').text();
-		
 		$.ajax({
 			url: "<?=url('dashboard/add_to_cart')?>",
 			method: "POST",
@@ -2322,11 +1884,8 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			success: function(response) {
 				//$('#service-gallery-model').html(response);
 			}
-			
 		});	
-
 	});
-	
 	$(document.body).on('change', '.quantity' ,function(){ 
 		var id = $(this).attr('relid');
 		var action = 'change';
@@ -2346,7 +1905,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			}
 		});
 	});
-	
 	$(document.body).on('click', '.remove' ,function(){ 
 		var id = $(this).attr('relid');
 		var action = 'remove';
@@ -2367,7 +1925,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			}
 		});
 	});
-	
 	$(".bookmarkUsers").click(function () {
 		var userId = $(this).attr('relid');
 		//console.log(businessId);
@@ -2377,7 +1934,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			data:{userId : userId, "_token": "{{ csrf_token() }}"},
 			dataType: 'JSON',
 			success: function(response) {
-				
 				if(response.status == 1){
 					$('#bookmarkUsers_'+userId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
 					$('#allbookmarkUsers_'+userId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
@@ -2385,17 +1941,11 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 					$('#bookmarkUsers_'+userId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 					$('#allbookmarkUsers_'+userId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 				}
-				
 			}
-			
 		});
-			
 	});
-	
-	
 	$(".NetworkProfile-1").click(function () {
 		var userId = $(this).attr('relid');
-		
 			$.ajax({
 			url: "<?=url('dashboard/get_user_profileInfo')?>",
 			method: "POST",
@@ -2405,9 +1955,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 				//$('#userProfile').html(response);
 				$('#profileUser').html(response.output);
 				$('#Info').html(response.info);
-				
 			}
-			
 		});	
 	});
   </script>
@@ -2430,20 +1978,16 @@ $(document.body).on('click', '.servicePhotos' ,function(){
           title: "Plan Details",
         },
       };
-
       const modalTitle = document.querySelector("#AdvertiseModal .modal-title");
-
       const selectPlanBtn = document.querySelector(".AddAdvertisementFooter .SelectPlanBtn");
       const selectPlanDetailsBtn = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtn");
       const selectPlanDetailsBtnBack = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtnBack");
       const selectPlanWholeDetailsBtnBack = document.querySelector(".AddAdvertisementPlanDetailsFooter .SelectPlanWholeDetailsBtnBack");
-
       function switchSection(target) {
         Object.values(sections).forEach((section) => {
           section.data.style.display = "none";
           section.footer.style.display = "none";
         });
-
         const targetSection = sections[target];
         if (targetSection) {
           targetSection.data.style.display = "flex";
@@ -2451,14 +1995,16 @@ $(document.body).on('click', '.servicePhotos' ,function(){
           modalTitle.textContent = targetSection.title;
         }
       }
-
       switchSection("advertisement");
-
       selectPlanBtn.addEventListener("click", () => switchSection("plan"));
       selectPlanDetailsBtn.addEventListener("click", () => switchSection("plandetails"));
       selectPlanDetailsBtnBack.addEventListener("click", () => switchSection("advertisement"));
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
+	
+	/*$("#Home").click(function () {
+		window.location.href = '<?=url('dashboard');?>'; 
+	});
 	
 	$("#ManageSubscription").click(function () {
 	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
@@ -2467,34 +2013,27 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$("#UpcomingEvents").click(function () {
 	    window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
 	});
-	
 	$("#ReferralLink").click(function () {
 	    window.location.href = '<?=url('dashboard/refferalLink');?>'; 
 	});
-	
 	$("#Wallet").click(function () {
 	    window.location.href = '<?=url('dashboard/wallet');?>'; 
 	});
-	
 	$("#TransactionsPayment").click(function () {
 	    window.location.href = '<?=url('dashboard/transaction');?>'; 
 	});
-	
 	$("#Rewards").click(function () {
 	    window.location.href = '<?=url('dashboard/reward');?>'; 
 	});
-	
 	$("#TermsConditions").click(function () {
 	    window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
 	});
-	
 	$("#PurchaseHistory").click(function () {
 	    window.location.href = '<?=url('dashboard/purchase-history');?>'; 
 	});
-	
 	$("#SaleList").click(function () {
 	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
-	});
+	});*/
 	
 	$(document).ready(function() {
 		$("#search-box").keyup(function() {
@@ -2513,25 +2052,20 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			});
 		});
 	});
-	
 	$(document).on("click", ".selectCountry", function () {
 		var search  = $(this).attr("search");
 		var keywork = $(this).attr("keywork");
-		
 		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
-		
 	});
 	
 	<!-- New Script -->
-  
     document.querySelector('.search').addEventListener('click', function () {
       const modal = document.getElementById('SearchModal');
       if (modal) {
         modal.classList.add('SearchModalStyle');
       }
     });
+	
   </script>
 </body>
-
 </html>
-

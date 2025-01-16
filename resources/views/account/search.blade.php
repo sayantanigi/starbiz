@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<title>StarBiz</title>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="https://techb.igiapp.com/starbiz/setting/2019685580.png">
+	<link rel="shortcut icon" href="<?=url('setting/2019685580.png')?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,17 +23,14 @@
 			height: 100vh;
 			margin: 0;
 		}
-
 		.nav-categories .Active {
 			background-color: rgb(255 255 255);
 			box-shadow: 0 10px 10px #f1f1f1;
 		}
-
 		.nav-categories .Active p {
 			color: #b38a41;
 			font-weight: 600;
 		}
-
 		.TabContainer {
 			display: flex;
 			cursor: pointer;
@@ -45,7 +41,6 @@
 			padding-left: 20px;
 			padding-right: 20px;
 		}
-
 		.Tab {
 			border-radius: 15px 15px 0 0;
 			padding: 10px 20px;
@@ -56,7 +51,6 @@
 			min-width: 150px;
 			text-align: center;
 		}
-
 		.Tab.active {
 			color: #fff;
 			border-radius: 15px 15px 0 0;
@@ -64,24 +58,20 @@
 			font-size: 15px;
 			font-weight: 600;
 		}
-
 		.TabContent {
 			display: none;
 			padding-left: 10px;
 			padding-right: 10px;
 		}
-
 		.TabContent.active {
 		    display: flex;
 		}
-
 		.TabBar {
 			position: sticky;
 			top: -20px;
 			z-index: 100;
 			padding-bottom: 10px;
 		}
-
 		.pac-container {
 		    z-index: 10000 !important;
 		}
@@ -101,7 +91,6 @@
 		z-index: 1;
 		margin-left: -500px;
 	}
-
 	#country-list li {
 		padding: 10px;
 		/*background: #f0f0f0;*/
@@ -109,15 +98,12 @@
 		/*border-radius: 8px;*/
 		background: linear-gradient(90deg, #b58b42, #7a5a28)
 	}
-
 	#country-list li:hover {
 		background: #ece3d2;
 		cursor: pointer;
 	} 
-
 	</style>
 </head>
-
 <body>
   
 <nav class="sidebar">
@@ -226,7 +212,6 @@
       </div>
     </div>
   </header>
-
     <main role="main" class="Main">
     
     
@@ -236,9 +221,8 @@
 			
 			<div class="row m-0 TabBar">
 			<div class="Pagination">
-			    <a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Search</a>
+			    <a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Search Network</a>
 			</div>
-
 			<div class="TabContainer">
 				<!--<div class="Tab active" onclick="openTab(event, 'AllMembers')">All Members</div>
 				<div class="Tab" onclick="openTab(event, 'MyNetwork')"> My Network A&E </div>-->
@@ -305,11 +289,11 @@
 	
 	<?php if(@$_GET['keyword'] == 'business'){ ?>
 			<div class="container-fluid m-0 Section Business" >
+			
 			<div class="row m-0 TabBar">
 			<div class="Pagination">
-			    <a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Search</a>
+			    <a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Search Business</a>
 			</div>
-
 			<div class="TabContainer">
 				<!--<div class="Tab active" onclick="openTab(event, 'AllMembers')">All Members</div>
 				<div class="Tab" onclick="openTab(event, 'MyNetwork')"> My Network A&E </div>-->
@@ -319,6 +303,7 @@
 				<?php
 					if(@$result){
 						foreach(@$result as $k => $v){
+							
 						$listingInfo = DB::table('listing')->whereRaw("id=".@$v->id."")->select('*')->orderBy('id', 'DESC')->first();	
 						
 						$category = DB::table('listing_category')->where(['id' => @$listingInfo->category])->select('name')->orderBy('id', 'DESC')->first();
@@ -346,7 +331,9 @@
 						}else{
 							$galleryImg = url('noimage.jpg');
 						}
-
+						
+						
+						
 						
 						$numRows = DB::table('favouritebusiness')->where(['user_id' => session()->get('USERLOGINID'), 'listing_id' => @$listingInfo->id])->select('*')->orderBy('id', 'DESC')->count();
 						
@@ -404,9 +391,153 @@
 					}
 				?>
 			</div>
+			
+			 <!-- Details My Business Modal -->
+  <div class="modal fade CustomModal" id="DetailsMyBusinessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Business Details</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body business-block-detail" id="">
+		</div>
+	  </div>
+	</div>
+  </div>
+			
 			</div>
 		<?php } ?>
+		
+		<?php if(@$_GET['keyword'] == 'event'){ ?>
+			<div class="container-fluid m-0 Section Event">
+				<div class="row m-0 TabBar">
+					<div class="Pagination">
+						<a href="<?=url('dashboard')?>" id="Home1"><i class="fa fa-angle-left" aria-hidden="true"></i> Search Event</a>
+					</div>
+				</div>
+				
+				<div id="AllEvents" class="row m-0 TabContent active">
+					<?php
+						if(@$result){
+							foreach(@$result as $k => $v){
+								
+								$category = DB::table('event_category')->where(['id' => @$v->category])->select('name')->orderBy('id', 'DESC')->first();
+								$image    = DB::table('event_image')->where(['event_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
 
+								if(@$v->user_id == 0){
+									$userName = 'Admin';
+									$userProfile = url('profile/unnamed.jpg');
+								}else{
+									$checkUser = DB::table('users')->where(['id' => @$v->user_id])->select('*')->orderBy('id', 'DESC')->first();
+									if($checkUser){
+										$userName = $checkUser->first_name.' '.$checkUser->last_name;
+									}else{
+										$userName = '';
+									}
+									
+									if(!empty($checkUser->profile_image) && file_exists('public/profile/'.$checkUser->profile_image.'')){
+										$userProfile = url('profile/'.$checkUser->profile_image.'');
+									}else{
+										$userProfile = url('profile/unnamed.jpg');
+									}
+								}
+								
+								if(!empty($image->image) && file_exists('public/events/'.$image->image.'')){
+									$galleryImg = url('events/'.$image->image.'');
+								}else{
+									$galleryImg = url('noimage.jpg');
+								}
+							
+								$startDate  = @$v->start_date;
+								$start_date = date('Y-m-d', strtotime($startDate));
+								$start_time = date('H:i:s', strtotime($startDate));
+							
+
+								$numRows = DB::table('favouriteevent')->where(['user_id' => session()->get('USERLOGINID'), 'event_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->count();
+
+								if($numRows > 0){
+									$fav = '<i class="fa fa-heart" aria-hidden="true"></i>';
+								}else{
+									$fav = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
+								}
+
+								if(@$eventMng->write_access == 1 || @$eventMng->full_access == 1){		
+									$edit = '<a href="javascript::void(0);" class="edit-event-detail" relid="'.@$v->id.'" data-bs-toggle="modal" data-bs-target="#EditEventModal">
+										<i class="fa fa-pencil-square" aria-hidden="true"></i>
+									</a>';
+								}else{
+									$edit = '';
+								}
+
+								if(@$eventMng->full_access == 1){	
+									$delete = '<a href="javascript::void(0);" onclick="deleteEvent('. @$v->id .')" data-bs-toggle="modal" data-bs-target="#DeleteEventModal-1">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</a>';
+								}else{
+									$delete = '';
+								}
+							
+								echo '
+								<div class="Card col-lg-3 col-md-3 col-sm-6">
+								  <div class="CardInner event-detail-1"   style="background:url('.@$galleryImg.') no-repeat center center / cover;" relid="'.@$v->id.'" data-bs-toggle="modal" data-bs-target="#DetailsMyEventModal" block="one">
+
+									<div class="Cover"></div>
+
+									<img class="UserImage" src="'.@$userProfile.'" alt="">
+									<p class="Heading">'.@$v->name.'</p>
+									<p class="SubHeading">'.@$userName.'</p>
+									<p class="SubHeading">Location: '.substr(@$v->location,0,20).'</p>
+									<p class="SubHeading">Date: '.@$start_date.'</p>
+									<p class="SubHeading">Time: '.@$start_time.'</p>
+									<div class="IconContainer">
+										<a href="javascript:void(0);" class="bookmarkEvent" id="bookmarkEvent_'.@$v->id.'" relid="'.@$v->id.'">
+											'.@$fav.'
+										</a>
+									</div>
+								  </div>
+								</div>';
+							}
+						}else{
+							echo 'Not found any event list.';
+						}
+					?>
+			    </div>
+				
+				<!-- Details My Event Modal -->
+				<div class="modal fade CustomModal" id="DetailsMyEventModal" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-xl">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Event Details</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body event-block-detail" id=""> 
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Event Photos Modal -->
+
+				<div class="modal fade CustomModal" id="EventPhotosModal" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-xl">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">Photos</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body" id="events-gallery-model">
+							</div>
+						</div>
+					</div>
+				</div>
+	  
+			</div>
+		<?php } ?>
+		
     <div class="container-fluid m-0 Section NetworkProfile" style="display: none;">
 	
 	
@@ -430,7 +561,6 @@
                   <input type="file" class="form-control" id="inputGroupFile01" name="ads_img" required>
                 </div>
               
-
 			  
 			<div class="modal-footer">
               <div class="AddAdvertisementFooter">
@@ -441,7 +571,6 @@
                 <button type="button" class="btn btn-primary SelectPlanDetailsBtnBack">Back</button>
                 <button type="button" class="btn btn-primary SelectPlanDetailsBtn">Pay & Post Promotion</button>
               </div>
-
               <div class="AddAdvertisementPlanDetailsFooter">
                 <button type="button" class="btn btn-primary SelectPlanWholeDetailsBtnBack">Back</button>
               </div>-->
@@ -472,7 +601,6 @@
 									
 									$nav = @$v->description;
 									$nav = str_replace(array('<li>', '</li>'),'&&',$nav);
-
 									$nav = str_replace(array('<ul>', '</ul>'),'',$nav);
 									//$n = explode('11', $nav);die;
 									$nav = array_filter(explode('&&', $nav));
@@ -510,7 +638,6 @@
 							}
 						?>
 					</div>
-
 					<div class="col-md-6 col-sm-12">
 						<label class="form-label">Enter Duration</label>
 						<input type="text" placeholder="Enter Duration" id="duration" name="duration">
@@ -530,12 +657,10 @@
 						<!--<div class="AddAdvertisementFooter">
 						<button type="submit" class="btn btn-primary SelectPlanBtn">Select Promotion Plan</button>
 						</div>-->
-
 						<div class="AddAdvertisementPlanFooter">
 							<button type="button" class="btn btn-primary SelectPlanDetailsBtnBack">Back</button>
 							<button type="submit" class="btn btn-primary SelectPlanDetailsBtn">Pay & Post Promotion</button>
 						</div>
-
 						<!--<div class="AddAdvertisementPlanDetailsFooter">
 						<button type="button" class="btn btn-primary SelectPlanWholeDetailsBtnBack">Back</button>
 						</div>-->
@@ -543,7 +668,6 @@
               </form>
 			
             </div>
-
            
 			
           </div>
@@ -552,30 +676,25 @@
       <!-- Advertise Modal -->
 	  
 	  
-
       <div class="row m-0 TabBar">
         <div class="TabBar">
           <div class="Pagination">
             <a href="" id="Home"><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Profile</a>
           </div>
-
             <div class="row m-0" style="background: #fff;" id="profileUser">
 		  
             
 			
             </div>
-
           <div class="TabContainer">
             <div class="Tab active" onclick="openTab(event, 'Info')">Info</div>
             <div class="Tab" onclick="openTab(event, 'Photos')">Photos</div>
             <div class="Tab" onclick="openTab(event, 'Events')">Events</div>
           </div>
         </div>
-
         <div id="Info" class="row m-0 TabContent active">
          
         </div>
-
         <div id="Photos" class="row m-0 TabContent">
           <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="EventPhotoContainer">
@@ -612,7 +731,6 @@
             </div>
           </div>
         </div>
-
         <div id="Events" class="row m-0 TabContent">
           <div class="Card col-lg-3 col-md-3 col-sm-6">
             <div class="CardInner">
@@ -688,6 +806,31 @@
         </div>
       </div>
     </div>
+	
+	<!-- My Product Details Modal -->
+  <div class="modal fade CustomModal" id="ProductDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Product Details</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body" id="product-details-block">
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+ 
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
+
+<link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
+
+<script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
+
+<script src="https://cdn.jsdelivr.net/npm/notifyjs-browser/dist/notify.js"></script>
 <script>
 window.onbeforeunload = function () {
     window.scrollTo(0,0);
@@ -730,29 +873,24 @@ function getMoreData(lastId) {
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
-
 <script>
     $('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
-
       var self = $(this);
       if (self.is('.disabled, :disabled')) {
         return false;
       }
       self.parent().toggleClass("open");
     });
-
     $(document).on('click', function (e) {
       if ($('.dropdown').hasClass('open')) {
         $('.dropdown').removeClass('open');
       }
     });
-
     $('.nav-btn.nav-slider').on('click', function () {
       $('nav').toggleClass("open");
     });
-
     $('.NavHeaderCloseIcon').on('click', function () {
       if ($('.sidebar').hasClass('open')) {
         $('.sidebar').removeClass('open');
@@ -774,7 +912,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#UpcomingEvents').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -788,7 +925,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#ReferralLink').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -802,7 +938,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#ManageSubscription').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -816,7 +951,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#SaleList').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -830,7 +964,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#PurchaseHistory').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -844,7 +977,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#Wallet').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -858,7 +990,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#TransactionsPayment').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -872,7 +1003,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').hide();
       });
-
       $('#Rewards').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -886,7 +1016,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').toggle();
         $('.Section.TermsConditions').hide();
       });
-
       $('#UpcomingEvents').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -900,7 +1029,6 @@ function getMoreData(lastId) {
         $('.Section.Rewards').hide();
         $('.Section.TermsConditions').toggle();
       });
-
       $('#Promotion').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -920,7 +1048,6 @@ function getMoreData(lastId) {
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Appearance').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -940,7 +1067,6 @@ function getMoreData(lastId) {
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Event').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -960,7 +1086,6 @@ function getMoreData(lastId) {
         $('.Section.Network').hide();
         $('.Section.Subscription').hide();
       });
-
       $('#Business').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -981,7 +1106,6 @@ function getMoreData(lastId) {
         $('.Section.Subscription').hide();
         //$('#business-block').css('display', 'block');
       });
-
       $('#Network').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -1001,7 +1125,6 @@ function getMoreData(lastId) {
         $('.Section.Network').toggle();
         $('.Section.Subscription').hide();
       });
-
       $('#Subscription').click(function (e) {
         e.preventDefault();
         $('.Section.Home').hide();
@@ -1050,10 +1173,8 @@ function getMoreData(lastId) {
     function openTab(event, tabName) {
       const contents = document.querySelectorAll(".TabContent");
       contents.forEach(content => content.classList.remove("active"));
-
       const tabs = document.querySelectorAll(".Tab");
       tabs.forEach(tab => tab.classList.remove("active"));
-
       document.getElementById(tabName).classList.add("active");
       event.currentTarget.classList.add("active");
     }
@@ -1062,7 +1183,6 @@ function getMoreData(lastId) {
     window.onload = function () {
       document.querySelector('.Home').style.display = 'block';
       document.getElementById('Home').classList.add('Active');
-
       const menuItems = document.querySelectorAll('ul.nav-categories li a');
       menuItems.forEach(item => {
         item.addEventListener('click', function (event) {
@@ -1087,14 +1207,12 @@ function getMoreData(lastId) {
         event.preventDefault();
         const targetId = this.getAttribute("data-target");
         const content = document.querySelector(`.LearnMoreData[data-content="${targetId}"]`);
-
         document.querySelectorAll(".LearnMoreData").forEach(item => {
           if (item !== content) item.style.display = "none";
         });
         document.querySelectorAll(".LearnMoreBtn").forEach(btn => {
           if (btn !== this) btn.textContent = "Learn More";
         });
-
         if (content.style.display === "none" || content.style.display === "") {
           content.style.display = "block";
           this.textContent = "Close";
@@ -1250,9 +1368,7 @@ function getMoreData(lastId) {
 		var event_email = $('#event_email').val();
 		var event_website = $('#event_website').val();
 		var event_category = $('#event_category').val();
-
 		
-
 		form_data.append("event_name", event_name);
 		form_data.append("event_description", event_description);
 		form_data.append("event_address", event_address);
@@ -1269,8 +1385,6 @@ function getMoreData(lastId) {
 		form_data.append("event_email", event_email);
 		form_data.append("event_website", event_website);
 		form_data.append("event_category", event_category);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1296,10 +1410,7 @@ function getMoreData(lastId) {
 		}
 		});
 	});
-
 });
-
-
 $(document).ready(function(){
 	$("#adssubmitform").on('submit', function(e){
 		e.preventDefault();
@@ -1314,7 +1425,6 @@ $(document).ready(function(){
 		// var fileToUpload = $('#ads_image').prop('files')[0];
 		// $('#sortpicture').prop('files')[0];   
 		var fileToUpload = document.getElementById('ads_image').files[0];
-
 		
 		var ads_category = $('#ads_category').val(); 
 		var file_type = $('#file_type').val(); 
@@ -1327,9 +1437,7 @@ $(document).ready(function(){
 		var latitude = $('#latitude').val();
 		var longitude = $('#longitude').val();
 		
-
 		
-
 		form_data.append("category", ads_category);
 		form_data.append("file_type", file_type);
 		form_data.append("ads_name", ads_name);
@@ -1341,9 +1449,6 @@ $(document).ready(function(){
 		form_data.append("latitude", latitude);
 		form_data.append("longitude", longitude);
 		form_data.append("ads_image", fileToUpload);
-
-
-
 		$.ajax({
 			headers: {
 				'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1373,7 +1478,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-
 });
 $(document).ready(function() {
 	$(".promotion-detail").click(function () {
@@ -1420,10 +1524,11 @@ $(document).ready(function() {
 	
 	$(".event-detail-1").click(function () {
 		var eventId = $(this).attr('relid');
+		var block = $(this).attr('block');
 		$.ajax({
 			url: "<?=url('dashboard/get_event_detail')?>",
 			method: "POST",
-			data:{eventId : eventId, "_token": "{{ csrf_token() }}"},
+			data:{eventId : eventId, block : block, "_token": "{{ csrf_token() }}"},
 			dataType: 'text',
 			success: function(response) {
 				$('.event-block-detail').html(response);
@@ -1472,7 +1577,6 @@ $(document).ready(function() {
 		// var fileToUpload = $('#ads_image').prop('files')[0];
 		// $('#sortpicture').prop('files')[0];   
 		var fileToUpload = document.getElementById('edit_ads_image').files[0];
-
 		
 		var ads_category = $('#edit_ads_category').val(); 
 		var file_type = $('#edit_file_type').val(); 
@@ -1486,9 +1590,7 @@ $(document).ready(function() {
 		var longitude = $('#edit_longitude').val();
 		var edit_id = $('#edit_id').val();
 		
-
 		
-
 		form_data.append("category", ads_category);
 		form_data.append("file_type", file_type);
 		form_data.append("ads_name", ads_name);
@@ -1501,9 +1603,6 @@ $(document).ready(function() {
 		form_data.append("longitude", longitude);
 		form_data.append("ads_image", fileToUpload);
 		form_data.append("id", edit_id);
-
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1568,7 +1667,6 @@ $(document).ready(function() {
 	});
 	
 });
-
 function deletePromotion(dealId) 
 	{
 		swal({
@@ -1587,7 +1685,6 @@ function deletePromotion(dealId)
 			}
 		});
 	}
-
 	
 	$(document).ready(function(){
 	$("#edit_event_submitform").on('submit', function(e){
@@ -1617,9 +1714,7 @@ function deletePromotion(dealId)
 		var event_category = $('#edit_event_category').val();
 		var event_tags = $('#edit_event_tags').val();
 		var eventId = $('#edit_event_id').val();
-
 		
-
 		form_data.append("event_name", event_name);
 		form_data.append("event_description", event_description);
 		form_data.append("event_address", event_address);
@@ -1637,8 +1732,6 @@ function deletePromotion(dealId)
 		form_data.append("event_website", event_website);
 		form_data.append("event_category", event_category);
 		form_data.append("eventId", eventId);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1664,9 +1757,7 @@ function deletePromotion(dealId)
 		}
 		});
 	});
-
 });
-
 function deleteEvent(dealId) 
 	{
 		swal({
@@ -1685,8 +1776,6 @@ function deleteEvent(dealId)
 			}
 		});
 	}
-
-
     $(".bookmarkEvent").click(function () {
 		var eventId = $(this).attr('relid');
 		//console.log(eventId);
@@ -1710,7 +1799,6 @@ function deleteEvent(dealId)
 		});
 			
 	});
-
 	$(document).ready(function(){
 		$(document.body).on('click', '.eventsPhotos' ,function(){ 
 		    //alert("success");
@@ -1841,9 +1929,7 @@ $(document).ready(function(){
 		var business_website = $('#business_website').val();
 		var business_category = $('#business_category').val();
 		var business_userId = $('#business_userId').val();
-
 		
-
 		form_data.append("business_name", business_name);
 		form_data.append("name", name);
 		form_data.append("business_description", business_description);
@@ -1860,8 +1946,6 @@ $(document).ready(function(){
 		form_data.append("business_website", business_website);
 		form_data.append("business_category", business_category);
 		form_data.append("business_userId", business_userId);
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -1957,10 +2041,7 @@ $(document).ready(function(){
 		var business_website = $('#edit_business_website').val();
 		var business_category = $('#edit_business_category').val();
 		var edit_business_id = $('#edit_business_id').val();
-
-
 		
-
 		form_data.append("business_name", business_name);
 		form_data.append("name", name);
 		form_data.append("business_description", business_description);
@@ -1977,9 +2058,6 @@ $(document).ready(function(){
 		form_data.append("business_website", business_website);
 		form_data.append("business_category", business_category);
 		form_data.append("businessId", edit_business_id);
-
-
-
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2013,7 +2091,6 @@ $(document).ready(function(){
 		
 		var cat_name = $('#cat_name').val(); 
 		form_data.append("cat_name", cat_name);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2074,7 +2151,6 @@ $(document).ready(function(){
 		});	
 		
 	});
-
 	$(".AddAService").click(function () {
 		$("#chooseModel").modal("hide");
 		$("#AddServiceModel").modal("show");
@@ -2095,7 +2171,6 @@ $(document).ready(function(){
 	$("#addProductForm").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
         var totalfiles = document.getElementById('product_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("product_image[]",  document.getElementById('product_image').files[index]);
@@ -2114,7 +2189,6 @@ $(document).ready(function(){
 		form_data.append("product_tags", product_tags);
 		form_data.append("product_description", product_description);
 		form_data.append("product_listing", listing_id);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2153,7 +2227,6 @@ $(document).ready(function(){
 	$("#addServiceForm").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
         var totalfiles = document.getElementById('service_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("service_image[]",  document.getElementById('service_image').files[index]);
@@ -2165,14 +2238,12 @@ $(document).ready(function(){
 		var service_tags     = $('#service_tags').val(); 
 		var service_description = $('#service_description').val(); 
 		var service_listing_id  = $('#service_listing_id').val(); 
-
 		form_data.append("service_category", service_category);
 		form_data.append("service_name", service_name);
 		form_data.append("service_price", service_price);
 		form_data.append("service_tags", service_tags);
 		form_data.append("service_description", service_description);
 		form_data.append("service_listing_id", service_listing_id);
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2208,7 +2279,6 @@ $(document).ready(function(){
 	
 	
 });
-
 function deleteBusiness(dealId) 
 {
 	swal({
@@ -2227,13 +2297,11 @@ function deleteBusiness(dealId)
 		}
 	});
 }
-
 $(document).ready(function(){
 	
 	$("#invisubmitform").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var invi_event_name   = $('#invi_event_name').val(); 
 		var invi_event_user   = $('#invi_event_user').val(); 
 		var invi_price        = $('#invi_price').val(); 
@@ -2248,8 +2316,6 @@ $(document).ready(function(){
 		form_data.append("invi_end_time", invi_end_time);
 		form_data.append("invi_description", invi_description);
 		
-
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2279,7 +2345,6 @@ $(document).ready(function(){
 	$(".repeat-invitation").click(function () {
 		var inviTd = $(this).attr('relid');
 		$('#invi_id').val(inviTd);
-
 		$.ajax({
 			url: "<?=url('dashboard/get_counter_offer')?>",
 			method: "POST",
@@ -2296,15 +2361,11 @@ $(document).ready(function(){
 	$("#sentCountorOffer").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var counter_offer   = $('#counter_offer').val(); 
 		var invi_id   = $('#invi_id').val(); 
-
 		form_data.append("counter_offer", counter_offer);
 		form_data.append("invi_id", invi_id);
 		
-
-
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2400,18 +2461,27 @@ $(document).ready(function(){
 	$("#adsSub").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var preferredListing   = $('#preferredListing').val(); 
 		var duration   = $('#duration').val(); 
 		var subId   = $('#subId').val(); 
 		var adsId   = $('#adsId').val(); 
 		var userId   = '<?=session()->get('USERLOGINID')?>';
-
         window.location.href = "<?=url('dashboard/adspayment/?')?>userId="+userId+"&planId="+subId+"&adsId="+adsId+"&preferredListing="+preferredListing+"&duration="+duration+"";
 	});
-
+	
+	$(".business-detail-1").click(function () {
+		var businessId = $(this).attr('relid');
+		$.ajax({
+			url: "<?=url('dashboard/get_business_detail')?>",
+			method: "POST",
+			data:{businessId : businessId, "_token": "{{ csrf_token() }}"},
+			dataType: 'text',
+			success: function(response) {
+				$('.business-block-detail').html(response);
+			}
+		});	
+	});
 });
-
 $(document.body).on('click', '.product-details' ,function(){ 
 		//alert("success");
 	var productId = $(this).attr('relid');
@@ -2426,7 +2496,6 @@ $(document.body).on('click', '.product-details' ,function(){
 		
 	});	
 });
-
 $(document.body).on('click', '.productPhotos' ,function(){ 
 		//alert("success");
 		var productId = $(this).attr('relid');
@@ -2456,7 +2525,6 @@ $(document.body).on('click', '.service-details' ,function(){
 		
 	});	
 });
-
 $(document.body).on('click', '.servicePhotos' ,function(){ 
 		//alert("success");
 		var serviceId = $(this).attr('relid');
@@ -2510,7 +2578,6 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			}
 			
 		});	
-
 	});
 	
 	$(document.body).on('change', '.quantity' ,function(){ 
@@ -2616,20 +2683,16 @@ $(document.body).on('click', '.servicePhotos' ,function(){
           title: "Plan Details",
         },
       };
-
       const modalTitle = document.querySelector("#AdvertiseModal .modal-title");
-
       const selectPlanBtn = document.querySelector(".AddAdvertisementFooter .SelectPlanBtn");
       const selectPlanDetailsBtn = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtn");
       const selectPlanDetailsBtnBack = document.querySelector(".AddAdvertisementPlanFooter .SelectPlanDetailsBtnBack");
       const selectPlanWholeDetailsBtnBack = document.querySelector(".AddAdvertisementPlanDetailsFooter .SelectPlanWholeDetailsBtnBack");
-
       function switchSection(target) {
         Object.values(sections).forEach((section) => {
           section.data.style.display = "none";
           section.footer.style.display = "none";
         });
-
         const targetSection = sections[target];
         if (targetSection) {
           targetSection.data.style.display = "flex";
@@ -2637,14 +2700,16 @@ $(document.body).on('click', '.servicePhotos' ,function(){
           modalTitle.textContent = targetSection.title;
         }
       }
-
       switchSection("advertisement");
-
       selectPlanBtn.addEventListener("click", () => switchSection("plan"));
       selectPlanDetailsBtn.addEventListener("click", () => switchSection("plandetails"));
       selectPlanDetailsBtnBack.addEventListener("click", () => switchSection("advertisement"));
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
+	
+	$("#Home").click(function () {
+		window.location.href = '<?=url('dashboard');?>'; 
+	});
 	
 	$("#ManageSubscription").click(function () {
 	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
@@ -2692,9 +2757,6 @@ $(document).ready(function(){
 		var title = $('#title').val(); 
 		form_data.append("ads_image", fileToUpload);
 		form_data.append("title", title);
-
-
-
 		$.ajax({
 			headers: {
 				'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -2728,18 +2790,14 @@ $(document).ready(function(){
 	$("#AddAdvertisementPlan").on('submit', function(e){
 		e.preventDefault();	
 		var form_data = new FormData();
-
 		var preferredListing   = $('#preferredListing').val(); 
 		var duration   = $('#duration').val(); 
 		var subId   = $('#subId').val(); 
 		var adsId   = $('#adsId').val(); 
 		var userId   = '<?=session()->get('USERLOGINID')?>';
-
         window.location.href = "<?=url('dashboard/advertisement/?')?>userId="+userId+"&planId="+subId+"&adsId="+adsId+"&preferredListing="+preferredListing+"&duration="+duration+"";
 	});
-
 });
-
 $(document).ready(function() {
 		$("#search-box").keyup(function() {
 			$.ajax({
@@ -2772,7 +2830,5 @@ $(document).ready(function() {
       }
     });
 </script>
-
 </body>
 </html>
-

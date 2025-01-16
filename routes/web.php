@@ -122,6 +122,7 @@ Route::get('/dashboard/downloadCsvAll','App\Http\Controllers\DashboardController
 Route::get('/dashboard/downloadCsvWallet','App\Http\Controllers\DashboardController@downloadCsvWallet');
 Route::post('/dashboard/resent_referral','App\Http\Controllers\DashboardController@resent_referral');
 Route::get('/dashboard/downloadCsvReferral','App\Http\Controllers\DashboardController@downloadCsvReferral');
+Route::get('/dashboard/deleteAccount','App\Http\Controllers\DashboardController@deleteAccount');
 
 
 Route::get('/subscription/plan','App\Http\Controllers\SubscriptionController@index');
@@ -569,11 +570,19 @@ Route::get('/api/myReferrals','App\Http\Controllers\Api\ApiController@myReferral
 Route::post('/api/deleteAccount','App\Http\Controllers\Api\ApiController@deleteAccount_post');
 Route::post('/api/clearsingleitem','App\Http\Controllers\Api\ApiController@clearsingleitem_post');
 Route::post('/api/clearallitem','App\Http\Controllers\Api\ApiController@clearallitem_post');
+Route::get('/api/walletBalance','App\Http\Controllers\Api\ApiController@walletBalance_get');
+Route::post('/api/addToCart','App\Http\Controllers\Api\ApiController@addToCart_post');
+Route::post('/api/totalCart','App\Http\Controllers\Api\ApiController@totalCart_post');
+Route::post('/api/cart_list','App\Http\Controllers\Api\ApiController@cart_list_post');
+Route::post('/api/removeCartList','App\Http\Controllers\Api\ApiController@removeCartList_post');
+Route::get('/api/stripeStatus','App\Http\Controllers\Api\ApiController@stripeStatus_get');
 
 
 //webview api
 Route::get('/webview/paymentPage','App\Http\Controllers\PaymentController@paymentPage');
+Route::get('/webview/proceedfromcartpaymentPage','App\Http\Controllers\PaymentController@proceedfromcartpaymentPage');
 Route::post('/webview/web_view_stripe_payment','App\Http\Controllers\PaymentController@web_view_stripe_payment');
+Route::post('/webview/proceed_from_cart_web_view_stripe_payment','App\Http\Controllers\PaymentController@proceed_from_cart_web_view_stripe_payment');
 Route::get('/webview/paymentStatus','App\Http\Controllers\PaymentController@paymentStatus');
 
 Route::get('/webview/promotionPaymentPage','App\Http\Controllers\PaymentController@promotionPaymentPage');

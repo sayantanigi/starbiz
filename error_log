@@ -4,3 +4,7 @@
 [29-May-2024 12:40:38 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Api\ApiController::businessDetails_get() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Api/ApiController.php on line 626
 [24-Jul-2024 07:50:35 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\MailerController::send_new_mail() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Admin/MailerController.php on line 308
 [24-Jul-2024 07:50:46 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Admin\MailerController::send_new_mail() in /home/techcigiapp/public_html/starbiz/app/Http/Controllers/Admin/MailerController.php on line 308
+[13-Jan-2025 11:19:52 UTC] PHP Warning:  Module "imagick" is already loaded in Unknown on line 0
+[13-Jan-2025 11:19:52 UTC] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1692 but version 1693 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
+[13-Jan-2025 11:21:20 UTC] PHP Warning:  Module "imagick" is already loaded in Unknown on line 0
+[13-Jan-2025 11:21:20 UTC] PHP Warning:  Version warning: Imagick was compiled against ImageMagick version 1692 but version 1693 is loaded. Imagick will run but may behave surprisingly in Unknown on line 0
