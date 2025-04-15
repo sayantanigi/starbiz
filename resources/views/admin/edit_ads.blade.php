@@ -182,7 +182,7 @@ body{margin-top:20px;}
 									}
 								}
 							?>
-							<div class="form-group mb-2">
+							<!--<div class="form-group mb-2">
 								<label class="fw-semibold  text-black">Select Places<span class="mand">*</span></label><br>
 								<label class="checkbox-inline" style="margin-bottom: 0;">
 									<input type="checkbox" class="category" name="places[]" id="places" value="Home" <?=(in_array('Home',$cate) ? 'checked' : '')?>>
@@ -204,7 +204,7 @@ body{margin-top:20px;}
 									Event Screen &nbsp;
 								</label>
 								<div class="error invalid-feedback" id="ads-category" style="margin-top: 0;"></div>
-							</div>
+							</div>-->
 							
 							
 							<div class="form-group mb-2">
@@ -224,10 +224,11 @@ body{margin-top:20px;}
 								<select class="form-control" name="gender" id="gender" required>
 								    <option value="Male" <?=((@$result->gender == 'Male') ? 'selected' : '')?>>Male</option>
 								    <option value="Female" <?=((@$result->gender == 'Female') ? 'selected' : '')?>>Female</option>
+								    <option value="All Gender" <?=((@$result->gender == 'All Gender') ? 'selected' : '')?>>All Gender</option>
 								</select>
                             </div>
 							
-							<div class="form-group mb-2" >
+							<!--<div class="form-group mb-2" >
                                 <label class="fw-semibold  text-black">Age</label>
 								<select class="form-control" name="age" id="age" required>
 								    <option value="">Choose Age</option>
@@ -239,16 +240,40 @@ body{margin-top:20px;}
 										}
 									?>
 								</select>
-                            </div>
+                            </div>-->														
+							<?php	
+								if(!empty(@$result->age_range)){
+									$selected_category= array(); 							
+									$exCat = explode(',', (!empty(@$result->age_range) ? @$result->age_range: ''));		
+									foreach ($exCat as $cat){						
+									    $selected_category[]= $cat;			
+									}	
+								}								
+							?>
+
+
+							<div class="form-group mb-2" >                              
+							<label class="fw-semibold  text-black">Age</label>		
+							<select class="form-control" name="age[]" id="age" multiple data-placeholder="Select Age">		
+						    <option value="">Choose Age</option>						
+							<?php									
+							if(@$age){					
+							foreach(@$age as $k => $v){			
+							echo '<option value="'.@$v->id.'" '.(in_array(@$v->id,$selected_category) ? 'selected' : '').'>'.@$v->age.'</option>';											
+							}										
+							}									
+							?>								
+							</select>             
+							</div>
 							
 							
-							<div class="form-group mb-2" >
+							<!--<div class="form-group mb-2" >
                                 <label class="fw-semibold  text-black">Parental Status</label>
 								<select class="form-control" name="parental_status" id="parental_status" required>
 								    <option value="Parent" <?=((@$result->parental_status == 'Parent') ? 'selected' : '')?>>Parent</option>
 								    <option value="Not a Parent" <?=((@$result->parental_status == 'Not a Parent') ? 'selected' : '')?>>Not a Parent</option>
 								</select>
-                            </div>
+                            </div>--->
 							
 							
 							<div class="form-group mb-2" >
@@ -338,7 +363,7 @@ body{margin-top:20px;}
      </section>
    </div>
  </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script> 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script> <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'><script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script>
 <script>
 $(document).ready(function(){
 	$("#submitform").on('submit', function(e){
@@ -627,6 +652,6 @@ function getlistcity(state_name) {
 		   $('#citylist').html(response);
 		}
 	})
-}
+}$(document).ready(function(){	$('#sel1').chosen({disable_search_threshold: 10,width:'200px'});	$('#sel2').chosen({width:'200px'});	$('#sel3').chosen({no_results_text:"Not found",width:'200px'});	$('#age').chosen({max_selected_options:10,width:'100%'});	$('#sel5').chosen({allow_single_deselect:true,width:'200px'});});
 </script>
 @include('admin.footer');

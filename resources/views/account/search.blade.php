@@ -393,18 +393,48 @@
 			</div>
 			
 			 <!-- Details My Business Modal -->
-  <div class="modal fade CustomModal" id="DetailsMyBusinessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-xl">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title">Business Details</h5>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body business-block-detail" id="">
-		</div>
-	  </div>
-	</div>
-  </div>
+			  <div class="modal fade CustomModal" id="DetailsMyBusinessModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title">Business Details</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body business-block-detail" id="">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  
+						  <!-- My Product Details Modal -->
+			  <div class="modal fade CustomModal" id="ProductDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title">Product Details</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="product-details-block">
+					</div>
+				  </div>
+				</div>
+			  </div>
+			  
+			  <!-- Service Details Modal -->
+			  <div class="modal fade CustomModal" id="ServiceDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title">Service Details</h5>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body" id="service-details-block">
+					  
+					</div>
+				  </div>
+				</div>
+			  </div>
 			
 			</div>
 		<?php } ?>
@@ -807,19 +837,7 @@
       </div>
     </div>
 	
-	<!-- My Product Details Modal -->
-  <div class="modal fade CustomModal" id="ProductDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-xl">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h5 class="modal-title">Product Details</h5>
-		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		</div>
-		<div class="modal-body" id="product-details-block">
-		</div>
-	  </div>
-	</div>
-  </div>
+	
   
  
 
@@ -2564,21 +2582,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
         });
       });
     });*/
-	$(document.body).on('click', ".AddToCartNotify" ,function(){
-		var productId = $(this).attr('relid');
-		var quantity = $('#counterId').text();
-		
-		$.ajax({
-			url: "<?=url('dashboard/add_to_cart')?>",
-			method: "POST",
-			data:{quantity : quantity, productId : productId, "_token": "{{ csrf_token() }}"},
-			dataType: 'text',
-			success: function(response) {
-				//$('#service-gallery-model').html(response);
-			}
-			
-		});	
-	});
+	
 	
 	$(document.body).on('change', '.quantity' ,function(){ 
 		var id = $(this).attr('relid');
@@ -2816,6 +2820,54 @@ $(document).ready(function() {
 		});
 	});
 	
+	$(document.body).on('click', "#BuyNowSection" ,function(){
+		var productId     = $(this).attr('relid');
+		var specipication = $(this).attr('specipication');
+		var quantity      = $('#counterId').text();
+		
+		$.ajax({
+			url: "<?=url('dashboard/add_to_cart')?>",
+			method: "POST",
+			data:{quantity : quantity, productId : productId, specipication : specipication, "_token": "{{ csrf_token() }}"},
+			dataType: 'text',
+			success: function(response) {
+				//$('#service-gallery-model').html(response);
+				window.location.href = "<?=url('dashboard/addtoCart')?>";
+			}
+			
+		});	
+
+	});
+	
+	$(document.body).on('click', ".AddToCartNotify" ,function(){
+		var productId     = $(this).attr('relid');
+		var specipication = $(this).attr('specipication');
+		var quantity      = $('#counterId').text();
+		
+		$.ajax({
+			url: "<?=url('dashboard/add_to_cart')?>",
+			method: "POST",
+			data:{quantity : quantity, productId : productId, specipication : specipication, "_token": "{{ csrf_token() }}"},
+			dataType: 'json',
+			success: function(response) {
+				//$('#service-gallery-model').html(response);
+				
+				
+				if(response.status == 1){
+					$.notify("Hooray! 1 item added to your cart", {
+					className: "success",
+					position: "bottom right",
+					autoHide: true,
+					autoHideDelay: 3000,
+					});
+				}
+				
+			}
+			
+		});	
+
+	});
+	
 	$(document).on("click", ".selectCountry", function () {
 		var search  = $(this).attr("search");
 		var keywork = $(this).attr("keywork");
@@ -2830,5 +2882,7 @@ $(document).ready(function() {
       }
     });
 </script>
+
+
 </body>
 </html>

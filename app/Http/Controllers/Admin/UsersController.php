@@ -4,8 +4,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-class UsersController extends Controller {
-    public function __construct() {
+use Stripe;
+class UsersController extends Controller
+{
+    public function __construct()
+    {
         $this->middleware(function ($request, $next) {
             $this->userData = session()->get('userData');
             if (!session()->get('ID_LOGIN') || !session()->get('ADMINLOGINID')) {
@@ -15,7 +18,8 @@ class UsersController extends Controller {
             return $next($request);
         });
     }
-    public function index() {
+    public function index()
+    {
         $data = array(
             'title' => 'Active Users Lists',
             'page' => 'active_users',
@@ -24,7 +28,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('users')->where('status', 1)->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.users', $data);
     }
-    public function inactive_users() {
+    public function inactive_users()
+    {
         $data = array(
             'title' => 'Inactive Users Lists',
             'page' => 'inactive_users',
@@ -33,7 +38,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('users')->where('status', 0)->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.inactive_users', $data);
     }
-    public function add() {
+    public function add()
+    {
         $data = array(
             'title' => 'Add Users',
             'page' => 'users',
@@ -44,7 +50,8 @@ class UsersController extends Controller {
         $data['userType'] = DB::table('user_type')->where(['status' => 1])->select('*')->get();
         return view('admin.add_user', $data);
     }
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $fname = $request->fname;
         $lname = $request->lname;
         $email = $request->email;
@@ -91,7 +98,8 @@ class UsersController extends Controller {
             return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
         }
     }
-    public function changestatus(Request $request) {
+    public function changestatus(Request $request)
+    {
         if ($request->userId) {
             $userId = $request->userId;
             $status = $request->status;
@@ -108,7 +116,8 @@ class UsersController extends Controller {
             }
         }
     }
-    public function edit($id) {
+    public function edit($id)
+    {
         if (empty($id)) {
             return false;
         }
@@ -123,7 +132,8 @@ class UsersController extends Controller {
         $data['interest'] = DB::table('interest')->where(['status' => "1"])->select('*')->get();
         return view('admin.edit_user', $data);
     }
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $fname = $request->fname;
         $lname = $request->lname;
         $email = $request->email;
@@ -168,18 +178,139 @@ class UsersController extends Controller {
             return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
         }
     }
-    function delete_user($id) {
+    function delete_user($id)
+    {
+
         if (empty(@$id)) {
             return false;
         }
-        $result = DB::table('users')->where('id', $id)->delete();
-        if ($result) {
+
+        try {
+            // Start transaction
+            DB::beginTransaction();
+
+            // Delete user-related data in other tables
+            DB::table('academics')->where('user_id', $id)->delete();
+            DB::table('advertise')->where('user_id', $id)->delete();
+            DB::table('athletics')->where('user_id', $id)->delete();
+            DB::table('chat')->where(function ($query) use ($id) {
+                $query->where('sender_id', $id)->orWhere('receiver_id', $id);
+            })->delete();
+            DB::table('compose_email')->where('user_id', $id)->delete();
+            DB::table('email_template')->where('user_id', $id)->delete();
+            DB::table('experience')->where('user_id', $id)->delete();
+
+            // Handle events
+            $eventresults = DB::table('events')->where('user_id', $id)->get();
+            foreach ($eventresults as $event) {
+                DB::table('event_image')->where('event_id', $event->id)->delete();
+                DB::table('event_ticket')->where('event_id', $event->id)->delete();
+                DB::table('favouriteevent')->where('event_id', $event->id)->delete();
+                DB::table('invitation')->where('event_id', $event->id)->delete();
+                DB::table('notifications')->where('event_id', $event->id)->delete();
+                DB::table('transaction')->where('event_id', $event->id)->delete();
+            }
+            DB::table('events')->where('user_id', $id)->delete();
+
+            // Delete related data for the user
+            DB::table('guardian')->where('user_id', $id)->delete();
+            DB::table('favouritebusiness')->where('user_id', $id)->delete();
+            DB::table('favouriteusers')->where('user_id', $id)->delete();
+
+
+            $listingresults = DB::table('listing')->where('user_id', $id)->get();
+            foreach ($listingresults as $listing) {
+                // Delete related images for the listing
+                DB::table('listing_image')->where('listing_id', $listing->id)->delete();
+
+                // Delete related products
+                $listingproductresults = DB::table('product')->where('listing_id', $listing->id)->get();
+                foreach ($listingproductresults as $product) {
+                    // Delete related product images
+                    DB::table('product_image')->where('product_id', $product->id)->delete();
+                }
+                DB::table('product')->where('listing_id', $listing->id)->delete();
+
+                // Delete related services and their images
+                $listingservicesresults = DB::table('services')->where('listing_id', $listing->id)->get();
+                foreach ($listingservicesresults as $service) {
+                    DB::table('services_image')->where('service_id', $service->id)->delete();
+                }
+                DB::table('services')->where('listing_id', $listing->id)->delete();
+            }
+
+            DB::table('listing')->where('user_id', $id)->delete();
+
+
+            // Other related data deletion
+            DB::table('promotion')->where('user_id', $id)->delete();
+            DB::table('reference')->where('user_id', $id)->delete();
+            // // DB::table('referral_rewards_transaction')->where('user_id', $id)->delete();
+            DB::table('reffer')->where('sender_id', $id)->delete();
+            DB::table('stripe_connect')->where('userId', $id)->delete();
+            DB::table('user_document')->where('user_id', $id)->delete();
+            DB::table('user_gallery_photo')->where('user_id', $id)->delete();
+            DB::table('wallet')->where('user_id', $id)->delete();
+            DB::table('withdraw_request')->where('user_id', $id)->delete();
+
+            // // Finally delete the user
+            DB::table('users')->where('id', $id)->delete();
+
+            // Commit transaction
+            DB::commit();
+
+            // Return success message
             return redirect()->intended('admin/users')->with("status", "User deleted successfully!");
-        } else {
-            return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
+        } catch (\Exception $e) {
+            // Rollback transaction in case of an error
+            DB::rollBack();
+
+            // Return error message
+            return redirect()->intended('admin/users')->with("error", "An error occurred, Please try again!");
         }
+
+
+
+
+
+        // $result = DB::table('users')->where('id', $id)->delete();
+        // if ($result) {
+        //     return redirect()->intended('admin/users')->with("status", "User deleted successfully!");
+        // } else {
+        //     return redirect()->intended('admin/users')->with("error", "Some error occure, Please try again!");
+        // }
     }
-    function edit_profile($id) {
+
+
+
+    function getUnreadCount($admin_id)
+    {
+        $unreadCount = DB::table('notifications')
+            ->where('receiver_id', $admin_id)
+            ->where('status', '1')
+            ->where('noti_type','admin')
+            ->count();
+
+        // Return the unread count as a JSON response
+        return response()->json(['unread_count' => $unreadCount]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function edit_profile($id)
+    {
         if (empty($id)) {
             return false;
         }
@@ -201,7 +332,8 @@ class UsersController extends Controller {
         //print_r($data['academics']);die;
         return view('admin.athletic', $data);
     }
-    function updateProfile(Request $request) {
+    function updateProfile(Request $request)
+    {
         $row = DB::table('users')->where(['id' => @$request->userId])->select('*')->first();
         $fname = !empty(@$request->fname) ? @$request->fname : $row->first_name;
         $lname = !empty(@$request->lname) ? @$request->lname : $row->last_name;
@@ -324,7 +456,8 @@ class UsersController extends Controller {
         $response['message'] = 'Profile updated successfully.';
         echo json_encode($response);
     }
-    function delete_academic(Request $request) {
+    function delete_academic(Request $request)
+    {
         $academicId = $request->academic;
         $userId = @$request->userId;
         $result = DB::table('academics')->where('id', $academicId)->delete();
@@ -334,7 +467,8 @@ class UsersController extends Controller {
             echo 0;
         }
     }
-    function delete_experience(Request $request) {
+    function delete_experience(Request $request)
+    {
         $experienceId = $request->experience;
         $userId = @$request->userId;
         $result = DB::table('experience')->where('id', $experienceId)->delete();
@@ -344,7 +478,8 @@ class UsersController extends Controller {
             echo 0;
         }
     }
-    function delete_reference(Request $request) {
+    function delete_reference(Request $request)
+    {
         $referenceId = $request->reference;
         $userId = @$request->userId;
         $result = DB::table('reference')->where('id', $referenceId)->delete();
@@ -354,7 +489,8 @@ class UsersController extends Controller {
             echo 0;
         }
     }
-    function delete_guardian(Request $request) {
+    function delete_guardian(Request $request)
+    {
         $guardianId = $request->guardian;
         $userId = @$request->userId;
         $result = DB::table('guardian')->where('id', $guardianId)->delete();
@@ -364,7 +500,8 @@ class UsersController extends Controller {
             echo 0;
         }
     }
-    function view($id) {
+    function view($id)
+    {
         $data = array(
             'title' => 'View User Information',
             'page' => 'users',
@@ -373,7 +510,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('users')->where(['id' => $id])->select('*')->first();
         return view('admin.view_user', $data);
     }
-    public function type() {
+    public function type()
+    {
         $data = array(
             'title' => 'Users Type',
             'page' => 'users',
@@ -382,7 +520,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('user_type')->select('*')->get();
         return view('admin.user_type', $data);
     }
-    public function addusertype() {
+    public function addusertype()
+    {
         $data = array(
             'title' => 'Add User Type',
             'page' => 'users',
@@ -390,7 +529,8 @@ class UsersController extends Controller {
         );
         return view('admin.add_user_type', $data);
     }
-    public function save_user_type(Request $request) {
+    public function save_user_type(Request $request)
+    {
         $user_type = $request->name;
         $status = $request->status;
         $data = ['name' => $user_type, 'status' => $status, 'created_at' => date('Y-m-d H:i:s')];
@@ -403,7 +543,8 @@ class UsersController extends Controller {
             return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
         }
     }
-    public function editusertype($id) {
+    public function editusertype($id)
+    {
         if (empty(@$id)) {
             return false;
         }
@@ -415,7 +556,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('user_type')->where(['id' => $id])->select('*')->first();
         return view('admin.edit_user_type', $data);
     }
-    public function update_user_type(Request $request) {
+    public function update_user_type(Request $request)
+    {
         $user_type = $request->name;
         $status = $request->status;
         $id = $request->id;
@@ -429,7 +571,8 @@ class UsersController extends Controller {
             return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
         }
     }
-    public function delete_user_type($id) {
+    public function delete_user_type($id)
+    {
         if (empty(@$id)) {
             return false;
         }
@@ -442,7 +585,8 @@ class UsersController extends Controller {
             return redirect()->intended('admin/user-type')->with("error", "Some error occure, Please try again!");
         }
     }
-    public function saveprofile(Request $request) {
+    public function saveprofile(Request $request)
+    {
         if ($request['profilePic']) {
             $img = $request['profilePic'];
             $extn = $img->getClientOriginalExtension();
@@ -465,7 +609,8 @@ class UsersController extends Controller {
             return back()->with("error1", "Some error occure, Please try again.!");
         }
     }
-    public function changepassword(Request $request) {
+    public function changepassword(Request $request)
+    {
         $where = ['id' => session()->get('ADMINLOGINID')];
         $getData = DB::table('admin')->where($where)->select('password')->first();
         $request->validate([
@@ -478,7 +623,8 @@ class UsersController extends Controller {
         $result = DB::table('admin')->where('id', session()->get('ADMINLOGINID'))->update(['password' => md5($request->new_password)]);
         return back()->with("status", "Password changed successfully!");
     }
-    function cropImage() {
+    function cropImage()
+    {
         $data = $_POST['image'];
         $image_array_1 = explode(";", $data);
         $image_array_2 = explode(",", $image_array_1[1]);
@@ -488,7 +634,8 @@ class UsersController extends Controller {
         file_put_contents($image_name, $data);
         echo $imageName;
     }
-    public function subscription($id) {
+    public function subscription($id)
+    {
         if (empty(@$id)) {
             return false;
         }
@@ -502,7 +649,8 @@ class UsersController extends Controller {
         $data['result'] = DB::table('sub_plan')->where(['user_type' => $user_type->user_type])->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.package', $data);
     }
-    public function payment() {
+    public function payment()
+    {
         $data = array(
             'title' => 'Payment',
             'page' => 'users',
@@ -514,8 +662,9 @@ class UsersController extends Controller {
         $data['userInfo'] = DB::table('users')->where(['id' => $userId])->select('*')->orderBy('id', 'DESC')->first();
         return view('admin.payment', $data);
     }
-    function submit_payment(Request $request) {
-        //require "vendor/stripe-php/init.php";
+    function submit_payment(Request $request)
+    {
+        require "vendor/stripe/stripe-php/init.php";
         //print_r($request->input('stripeToken'));
         $token = $request->stripeToken;
         $sub_id = $_POST['sub_id'];
@@ -580,7 +729,7 @@ class UsersController extends Controller {
                             $current_period_start = date('Y-m-d');
                             $current_period_end = date('Y-m-d', strtotime($current_period_start . ' + ' . @$sub_info->duration . ' year'));
                         }
-                        $data = ['user_name' => $card_name, 'user_id' => $user_id, 'address' => $address, 'country' => $country, 'state' => @$state, 'city' => @$city, 'zipcode' => $zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => $transactionID, 'charge_id' => $chargeID, 'status' => $payment_status, 'expiry_date' => $current_period_end, 'created_at' => $paymentDate];
+                        $data = ['user_name' => $card_name, 'user_id' => $user_id, 'address' => $address, 'country' => $country, 'state' => @$state, 'city' => @$city, 'zipcode' => $zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => $transactionID, 'charge_id' => $chargeID, 'status' => $payment_status, 'expiry_date' => $current_period_end, 'created_at' => $paymentDate, 'order_id' => $orderID, 'payment_type' => '1'];
                         $result = DB::table('transaction')->insertGetId($data);
                         return redirect()->intended('admin/users')->with("status", "Your Payment has been Successful!");
                     } else {
@@ -596,7 +745,8 @@ class UsersController extends Controller {
             return redirect()->intended('admin/users')->with("error", "Invalid card details! $api_error");
         }
     }
-    public function generate_otp($length) {
+    public function generate_otp($length)
+    {
         $characters = '123456789';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -604,5 +754,17 @@ class UsersController extends Controller {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+    public function contact_admin()
+    {
+        $data = array('title' => 'Contact Admin', 'page' => '', 'subpage' => '');
+        $data['result'] = DB::table('contact_admin')->select('*')->orderBy('id', 'DESC')->get();
+        return view('admin.contact_admin', $data);
+    }
+    public function reffer()
+    {
+        $data = array('title' => 'referral Code', 'page' => '', 'subpage' => '');
+        $data['result'] = DB::table('reffer')->select('*')->orderBy('id', 'DESC')->get();
+        return view('admin.reffer_code', $data);
     }
 }

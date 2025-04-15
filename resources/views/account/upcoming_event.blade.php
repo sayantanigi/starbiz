@@ -85,7 +85,7 @@
 	#country-list li:hover {
 		background: #ece3d2;
 		cursor: pointer;
-	} 
+	}
   </style>
     <main role="main" class="Main">
      <div class="container-fluid m-0 Section UpcomingEvents" >
@@ -99,135 +99,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body event-block-detail" id="">
-              <!--<div class="row PromotionDetail">
-                <div class="col-md-8 col-sm-12 PromotionImg">
-                  <img class="w-100"
-                    src="https://img.freepik.com/free-photo/people-concert_1160-737.jpg?t=st=1730050734~exp=1730054334~hmac=4785251%E2%80%A6&w=900"
-                    alt="">
-                </div>
-                <div class="col-md-4 col-sm-12 PromotionData">
-                  <img class="OwnerImg"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&amp;w=1887&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="">
-                  <p class="TitleText">Event Name</p>
-                  <p class="OwnerText">Event Organizer Name</p>
-                  <p class="OwnerText"><b>Location:</b></p>
-                  <p class="OwnerText"><b>Date:</b></p>
-                  <p class="OwnerText"><b>Time:</b></p>
-                  <ul>
-                    <li>Tag Item</li>
-                    <li>Tag Item</li>
-                    <li>Tag</li>
-                    <li>Tag Item</li>
-                    <li>Tag Item</li>
-                  </ul>
-                  <div class="PeopleContainer">
-                    <div class="TopSection">
-                      <p>Invited People</p>
-                      <div class="d-flex flex-row gap-3">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#EventInvitedModal">
-                          <img src="../assets/images/Icon7.png" alt="">
-                        </a>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#EventInvitedModal">
-                          <img src="../assets/images/Icon6.png" alt="">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="PhotoSection">
-                      <img
-                        src="https://images.unsplash.com/photo-1541271696563-3be2f555fc4e?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/pleasant-looking-teenage-girl-wears-comfortable-hoodie-had-combed-dark-hair-looks-camera-with-little-smile_273609-38963.jpg?t=st=1731403649~exp=1731407249~hmac=963e1e2f465e3a549ade5f6d2b1a1c76cd808d814e09a26492d113f093c98df9&w=1380"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/happy-ethnic-teenager-with-afro-hair-smiles-positively-wears-purple-hoodie-being-good-mood_273609-46758.jpg?t=st=1731403690~exp=1731407290~hmac=897578c7d33f1e3ec028b597051e6fd4d50f34983a8216b006cbe6470479bcc6&w=1380"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/view-female-soccer-player_23-2150888397.jpg?t=st=1731403756~exp=1731407356~hmac=4056b8a1fc9e97b53ad916d89700567781e74de02d93a20828a84245bcc2b240&w=1380"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/close-up-woman-portrait-new-york_23-2150868218.jpg?t=st=1731403874~exp=1731407474~hmac=4b89bc31aa4d76a4a7861e2904825b05b0c42a47cccfa13bfe5ea4be52198ecf&w=1380"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/international-day-education-celebration_23-2150931022.jpg?t=st=1731403870~exp=1731407470~hmac=286b5917d5d08c0f5291a305bf2ea8abda079436000dcaa1fdb7b536cb1bbf2c&w=826"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/portrait-elegant-professional-businesswoman_23-2150917246.jpg?t=st=1731403456~exp=1731407056~hmac=709ab44fb2fe8a9c29b06e38c60ffa2dade979f272ab9821233ddfc73a4481a0&w=826"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/confident-young-businesswoman-smiling-looking-camera-indoors-generated-by-artificial-intelligence_188544-125559.jpg?t=st=1731403789~exp=1731407389~hmac=63d2f919b22ce1bc0a1ebbf081b67b0120c62ddc96a22e20802a9dcb22ec9f5d&w=1380"
-                        alt="">
-                      <img class="position-absolute z-1"
-                        src="https://img.freepik.com/free-photo/female-freelancer-portrait_1409-7005.jpg?t=st=1731403923~exp=1731407523~hmac=cac4092395d9d3bed18406c8be637fd00d88f7cccb769cf62cc6ea24c68bcc3b&w=1380"
-                        alt="">
-                      <span class="PhotoCount">
-                        <p>+5</p>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-12 col-sm-12 PromotionData">
-                  <p class="BodyText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod molestias nihil vero
-                    quisquam
-                    assumenda. Consequuntur fuga veritatis quasi voluptates eum soluta ea quos eaque, hic possimus
-                    ipsum? Dicta, quisquam natus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque iusto
-                    autem rerum quibusdam pariatur saepe earum, laboriosam quam ab illo quod ad ut voluptatem.
-                    Consectetur, unde. Odit, beatae? Fugiat, magni. Lorem ipsum dolor sit, amet consectetur adipisicing
-                    elit. Nemo tempora delectus, officiis corrupti perspiciatis quam temporibus! Placeat, consectetur
-                    possimus ab accusantium itaque numquam ea. Dicta deserunt quae blanditiis eaque fuga. Lorem ipsum
-                    dolor sit amet, consectetur adipisicing elit. Voluptates perferendis illum earum tempore, voluptas,
-                    facilis ullam illo sed provident tenetur quod accusantium harum, numquam nam consectetur aut
-                    consequuntur sunt quaerat? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque aperiam
-                    in similique quibusdam, ex veniam. Ullam, minus! Sapiente suscipit pariatur eum aspernatur
-                    laudantium earum! Quaerat, molestias ullam! Dolorum, sit similique. Lorem ipsum dolor sit amet,
-                    consectetur adipisicing elit. Exercitationem odio iure corporis deleniti unde quo ab atque soluta
-                    quam porro commodi quae ut natus, in voluptates quia quod fugit sint.</p>
-                </div>
-                <div class="col-md-12 col-sm-12 PeopleContainer mt-2">
-                  <div class="TopSection">
-                    <p>Photos</p>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img src="../assets/images/Icon6.png" alt="">
-                    </a>
-                  </div>
-                  <div class="EventPhotoContainer">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img
-                        src="https://img.freepik.com/free-photo/blue-holi-color-explosion-young-woman-dancing_23-2148129343.jpg?t=st=1731406746~exp=1731410346~hmac=aac3004aa5f9db23dd6c266f0c5351a065f18d551f3da09872c50dc1851d2c1f&w=1380"
-                        alt="">
-                    </a>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img
-                        src="https://img.freepik.com/free-photo/close-up-people-dancing-yellow-explosion-holi-color_23-2148129155.jpg?t=st=1731406654~exp=1731410254~hmac=e14e090ddbf68f2d9247a7ccfa46a4342c248a318fa4268954954fcbed03faea&w=740"
-                        alt="">
-                    </a>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img
-                        src="https://img.freepik.com/free-photo/green-holi-color-powder-crowd_23-2148129312.jpg?t=st=1731406659~exp=1731410259~hmac=bbd9797f2b5a6ab957dc738298432651e61989de3a9a3dac15534dc439224e36&w=1380"
-                        alt="">
-                    </a>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img
-                        src="https://img.freepik.com/free-photo/group-people-enjoying-holi-color_23-2148129319.jpg?t=st=1731406297~exp=1731409897~hmac=acd19fe86608034c5d2c2cddd5ba441729d9c046cfd629ff77eec2bc60c8b980&w=1380"
-                        alt="">
-                    </a>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <img
-                        src="https://img.freepik.com/free-photo/black-man-surrounded-by-orange-smoke_410324-20.jpg?t=st=1731406716~exp=1731410316~hmac=793484971ee67895250accc8aa03bf8873cdb16f98f451ed9751c18de6dee65d&w=740"
-                        alt="">
-                    </a>
-                    <a href="" class="BlurrCover" data-bs-toggle="modal" data-bs-target="#EventPhotosModal">
-                      <div class="BlurrCoverData">
-                        <p>+ 10</p>
-                      </div>
-                      <img
-                        src="https://img.freepik.com/free-photo/green-blue-holi-color-powder-crowd_23-2148129315.jpg?t=st=1731407223~exp=1731410823~hmac=38dd34eb6b370798b180a31014e9d25d2e438d6d5b09c4b82e79e3d79448f403&w=1380"
-                        alt="">
-                    </a>
-                  </div>
-                </div>
-              </div>-->
+
             </div>
           </div>
         </div>
@@ -266,14 +138,16 @@
 				}else{
 					$galleryImg = url('noimage.jpg');
 				}
-				$startDate  = @$v->start_date;
-				$start_date = date('Y-m-d', strtotime(@$startDate));
-				$start_time = date('H:i:s', strtotime(@$startDate));
+				$startDate = $v->start_date;
+                $startTime = date('h:i A', strtotime($v->start_time));
+                $endTime = date('h:i A', strtotime($v->end_time));
+                $start_date = date('d-m-Y', strtotime($startDate));
+                $start_time = $startTime . " to " . $endTime;
 				$numRows = DB::table('favouriteevent')->where(['user_id' => session()->get('USERLOGINID'), 'event_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->count();
 				if(@$numRows > 0){
-					$fav = '<i class="fa fa-heart" aria-hidden="true"></i>';
+					$fav = '<i class="fa fa-heart" aria-hidden="true" style=" font-size: 15px; color: red; text-decoration: none; "></i>';
 				}else{
-					$fav = '<i class="fa fa-heart-o" aria-hidden="true"></i>';
+					$fav = '<i class="fa fa-heart-o" aria-hidden="true" style=" font-size: 15px; color: red; text-decoration: none; "></i>';
 				}
 				echo '
 				<div class="Card col-lg-3 col-md-3 col-sm-6">
@@ -287,23 +161,17 @@
 					<p class="SubHeading">Location: '.substr(@$v->location,0,20).'</p>
 					<p class="SubHeading">Date: '.@$start_date.'</p>
 					<p class="SubHeading">Time: '.@$start_time.'</p>
-					<div class="IconContainer" >
-						<a href="javascript:void(0);" class="bookmarkEvent" id="allbookmarkEvent_'.@$v->id.'" relid="'.@$v->id.'">
-							'.@$fav.'
-						</a>
-						<!--<a href="" data-bs-toggle="modal" data-bs-target="#EditEventModal">
-						<i class="fa fa-pencil-square" aria-hidden="true"></i>
-						</a>
-						<a href="" data-bs-toggle="modal" data-bs-target="#DeleteEventModal">
-						<i class="fa fa-trash" aria-hidden="true"></i>
-						</a>-->
-					</div>
-				  </div>
+                </div>
+                <div class="IconContainer" style="position: absolute; top: 10px; right: 30px;z-index: 999">
+                    <a href="javascript:void(0);" class="bookmarkEvent" id="allbookmarkEvent_'.@$v->id.'" relid="'.@$v->id.'" style=" width: 35px; height: 35px; display: flex; background: #fff; border-radius: 100px; align-items: center; justify-content: center;">
+                        '.@$fav.'
+                    </a>
+                </div>
 				</div>
 				';
 				}
 			}else{
-				echo 'Not found any event list.';
+				echo '<div class="row NoDataFound">Not found any event list.</div>';
 			}
 		}
 		?>
@@ -314,7 +182,7 @@
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
-<script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
+<script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script>
   <script>
     /*$('.dropdown-toggle').on('click', function (e) {
       e.stopPropagation();
@@ -640,7 +508,7 @@
           }
         });
       });
-    };    
+    };
   </script>
   <script>
     document.querySelectorAll(".LearnMoreBtn").forEach(button => {
@@ -778,18 +646,18 @@
 	$(document).ready(function(){
 	$("#submitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		var totalfiles = document.getElementById('event_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("event_image[]",  document.getElementById('event_image').files[index]);
 		}
-		var event_name = $('#event_name').val(); 
-		var event_description = $('#event_description').val(); 
+		var event_name = $('#event_name').val();
+		var event_description = $('#event_description').val();
 		var event_address = $('#event_address').val();
-        var event_country = $('#event_country').val(); 
-		var event_state = $('#event_state').val(); 
-		var event_city = $('#event_city').val(); 
+        var event_country = $('#event_country').val();
+		var event_state = $('#event_state').val();
+		var event_city = $('#event_city').val();
 		var event_zipcode = $('#event_zipcode').val();
 		var event_latitude = $('#event_latitude').val();
 		var event_longitude = $('#event_longitude').val();
@@ -819,7 +687,7 @@
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
-		},	
+		},
 		type: 'POST',
 		url: '<?php echo url('dashboard/addEvent'); ?>',
 		data: form_data,
@@ -844,21 +712,21 @@
 $(document).ready(function(){
 	$("#adssubmitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		// var totalfiles = document.getElementById('ads_image').files.length;
 		// for (var index = 0; index < totalfiles; index++) {
 		   // form_data.append("ads_image[]",  document.getElementById('ads_image').files[index]);
 		// }
 		// var fileToUpload = $('#ads_image').prop('files')[0];
-		// $('#sortpicture').prop('files')[0];   
+		// $('#sortpicture').prop('files')[0];
 		var fileToUpload = document.getElementById('ads_image').files[0];
-		var ads_category = $('#ads_category').val(); 
-		var file_type = $('#file_type').val(); 
+		var ads_category = $('#ads_category').val();
+		var file_type = $('#file_type').val();
 		var ads_name = $('#ads_name').val();
-        var gender = $('#gender').val(); 
-		var age = $('#age').val(); 
-		var parental_status = $('#parental_status').val(); 
+        var gender = $('#gender').val();
+		var age = $('#age').val();
+		var parental_status = $('#parental_status').val();
 		var income = $('#income').val();
 		var location = $('#autocomplete_1').val();
 		var latitude = $('#latitude').val();
@@ -877,7 +745,7 @@ $(document).ready(function(){
 		$.ajax({
 			headers: {
 				'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/saveAds'); ?>',
 			data: form_data,
@@ -913,7 +781,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.promotion-block-detail').html(response);
 			}
-		});	
+		});
 	});
 	$(".promotion-detail-1").click(function () {
 		var promotionId = $(this).attr('relid');
@@ -925,7 +793,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.promotion-block-detail').html(response);
 			}
-		});	
+		});
 	});
 	$(".event-detail").click(function () {
 		var eventId = $(this).attr('relid');
@@ -937,7 +805,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.event-block-detail').html(response);
 			}
-		});	
+		});
 	});
 	$(".event-detail-1").click(function () {
 		var eventId = $(this).attr('relid');
@@ -950,7 +818,7 @@ $(document).ready(function() {
 			success: function(response) {
 				$('.event-block-detail').html(response);
 			}
-		});	
+		});
 	});
 	$(".edit-info").click(function () {
 		var promotionId = $(this).attr('relid');
@@ -972,25 +840,25 @@ $(document).ready(function() {
 				$('#edit_longitude').val(response.longitude);
 				$('#edit_id').val(response.id);
 			}
-		});	
+		});
 	});
 	$("#editadssubmitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		// var totalfiles = document.getElementById('ads_image').files.length;
 		// for (var index = 0; index < totalfiles; index++) {
 		   // form_data.append("ads_image[]",  document.getElementById('ads_image').files[index]);
 		// }
 		// var fileToUpload = $('#ads_image').prop('files')[0];
-		// $('#sortpicture').prop('files')[0];   
+		// $('#sortpicture').prop('files')[0];
 		var fileToUpload = document.getElementById('edit_ads_image').files[0];
-		var ads_category = $('#edit_ads_category').val(); 
-		var file_type = $('#edit_file_type').val(); 
+		var ads_category = $('#edit_ads_category').val();
+		var file_type = $('#edit_file_type').val();
 		var ads_name = $('#edit_ads_name').val();
-        var gender = $('#edit_gender').val(); 
-		var age = $('#edit_age').val(); 
-		var parental_status = $('#parental_status').val(); 
+        var gender = $('#edit_gender').val();
+		var age = $('#edit_age').val();
+		var parental_status = $('#parental_status').val();
 		var income = $('#edit_income').val();
 		var location = $('#edit_autocomplete_1').val();
 		var latitude = $('#edit_latitude').val();
@@ -1011,7 +879,7 @@ $(document).ready(function() {
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
-		},	
+		},
 		type: 'POST',
 		url: '<?php echo url('dashboard/updateAds'); ?>',
 		data: form_data,
@@ -1062,10 +930,10 @@ $(document).ready(function() {
 				//$('#edit_event_tags option:selected').val(["23", "22"]);
 				$('#edit_event_tags').chosen('destroy').val(response.tags).chosen();
 			}
-		});	
+		});
 	});
 });
-function deletePromotion(dealId) 
+function deletePromotion(dealId)
 	{
 		swal({
 			title: 'Do you really want your promotion to be deleted? It cannot be undone once deleted.',
@@ -1086,18 +954,18 @@ function deletePromotion(dealId)
 	$(document).ready(function(){
 	$("#edit_event_submitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		var totalfiles = document.getElementById('event_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("event_image[]",  document.getElementById('event_image').files[index]);
 		}
-		var event_name = $('#edit_event_name').val(); 
-		var event_description = $('#edit_event_description').val(); 
+		var event_name = $('#edit_event_name').val();
+		var event_description = $('#edit_event_description').val();
 		var event_address = $('#edit_event_address').val();
-        var event_country = $('#edit_event_country').val(); 
-		var event_state = $('#edit_event_state').val(); 
-		var event_city = $('#edit_event_city').val(); 
+        var event_country = $('#edit_event_country').val();
+		var event_state = $('#edit_event_state').val();
+		var event_city = $('#edit_event_city').val();
 		var event_zipcode = $('#edit_event_zipcode').val();
 		var event_latitude = $('#edit_event_latitude').val();
 		var event_longitude = $('#edit_event_longitude').val();
@@ -1129,7 +997,7 @@ function deletePromotion(dealId)
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
-		},	
+		},
 		type: 'POST',
 		url: '<?php echo url('dashboard/updateEvent'); ?>',
 		data: form_data,
@@ -1151,7 +1019,7 @@ function deletePromotion(dealId)
 		});
 	});
 });
-function deleteEvent(dealId) 
+function deleteEvent(dealId)
 	{
 		swal({
 			title: 'Do you really want your event to be deleted? It cannot be undone once deleted.',
@@ -1181,15 +1049,17 @@ function deleteEvent(dealId)
 				if(response.status == 1){
 					$('#bookmarkEvent_'+eventId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
 					$('#allbookmarkEvent_'+eventId+'').html('<i class="fa fa-heart" aria-hidden="true"></i>');
+                    location.reload();
 				}else if(response.status == 2){
 					$('#bookmarkEvent_'+eventId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
 					$('#allbookmarkEvent_'+eventId+'').html('<i class="fa fa-heart-o" aria-hidden="true"></i>');
+                    location.reload();
 				}
 			}
 		});
 	});
 	$(document).ready(function(){
-		$(document.body).on('click', '.eventsPhotos' ,function(){ 
+		$(document.body).on('click', '.eventsPhotos' ,function(){
 		    //alert("success");
 			var eventId = $(this).attr('relid');
 			$.ajax({
@@ -1200,9 +1070,9 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('#events-gallery-model').html(response);
 				}
-			});	
+			});
 		});
-		$(document.body).on('click', '.get-payment-list' ,function(){ 
+		$(document.body).on('click', '.get-payment-list' ,function(){
 		    //alert("success");
 			var userId = $(this).attr('relid');
 			$.ajax({
@@ -1211,11 +1081,11 @@ function deleteEvent(dealId)
 				data:{userId : userId, "_token": "{{ csrf_token() }}"},
 				dataType: 'text',
 				success: function(response) {
-					$('#sub-payment-list').html(response); 
+					$('#sub-payment-list').html(response);
 				}
-			});	
+			});
 		});
-	});	
+	});
 	$(".bookmarkBusiness").click(function () {
 		var businessId = $(this).attr('relid');
 		//console.log(businessId);
@@ -1246,7 +1116,7 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('.business-block-detail').html(response);
 				}
-			});	
+			});
 		});
 		$(".business-detail-1").click(function () {
 			var businessId = $(this).attr('relid');
@@ -1258,10 +1128,10 @@ function deleteEvent(dealId)
 				success: function(response) {
 					$('.business-block-detail').html(response);
 				}
-			});	
+			});
 		});
 	});
-	$(document.body).on('click', '.businessPhotos' ,function(){ 
+	$(document.body).on('click', '.businessPhotos' ,function(){
 		//alert("success");
 		var businessId = $(this).attr('relid');
 		$.ajax({
@@ -1272,24 +1142,24 @@ function deleteEvent(dealId)
 			success: function(response) {
 				$('#business-gallery-model').html(response);
 			}
-		});	
+		});
 	});
 $(document).ready(function(){
 	$("#Businesssubmitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		var totalfiles = document.getElementById('business_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("business_image[]",  document.getElementById('business_image').files[index]);
 		}
-		var business_name = $('#business_name').val(); 
-		var name = $('#name').val(); 
-		var business_description = $('#business_description').val(); 
+		var business_name = $('#business_name').val();
+		var name = $('#name').val();
+		var business_description = $('#business_description').val();
 		var business_address = $('#business_address').val();
-        var business_country = $('#business_country').val(); 
-		var business_state = $('#business_state').val(); 
-		var business_city = $('#business_city').val(); 
+        var business_country = $('#business_country').val();
+		var business_state = $('#business_state').val();
+		var business_city = $('#business_city').val();
 		var business_zipcode = $('#business_zipcode').val();
 		var business_latitude = $('#business_latitude').val();
 		var business_longitude = $('#business_longitude').val();
@@ -1318,7 +1188,7 @@ $(document).ready(function(){
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
-		},	
+		},
 		type: 'POST',
 		url: '<?php echo url('dashboard/addBusiness'); ?>',
 		data: form_data,
@@ -1373,23 +1243,23 @@ $(document).ready(function(){
 				$('#edit_business_category').val(response.category);
 				//$('#edit_event_tags').chosen('destroy').val(response.tags).chosen();
 			}
-		});	
+		});
 	});
 	$("#EditBusinesssubmitform").on('submit', function(e){
 		e.preventDefault();
-		//var form_data = new FormData(); 	
-		var form_data = new FormData(); 
+		//var form_data = new FormData();
+		var form_data = new FormData();
 		var totalfiles = document.getElementById('edit_business_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("business_image[]",  document.getElementById('edit_business_image').files[index]);
 		}
-		var business_name = $('#edit_business_name').val(); 
-		var name = $('#edit_name').val(); 
-		var business_description = $('#edit_business_description').val(); 
+		var business_name = $('#edit_business_name').val();
+		var name = $('#edit_name').val();
+		var business_description = $('#edit_business_description').val();
 		var business_address = $('#edit_business_address').val();
-        var business_country = $('#edit_business_country').val(); 
-		var business_state = $('#edit_business_state').val(); 
-		var business_city = $('#edit_business_city').val(); 
+        var business_country = $('#edit_business_country').val();
+		var business_state = $('#edit_business_state').val();
+		var business_city = $('#edit_business_city').val();
 		var business_zipcode = $('#edit_business_zipcode').val();
 		var business_latitude = $('#edit_business_latitude').val();
 		var business_longitude = $('#edit_business_longitude').val();
@@ -1418,7 +1288,7 @@ $(document).ready(function(){
 		$.ajax({
 		headers: {
 		'X-CSRF-TOKEN': "{{ csrf_token() }}"
-		},	
+		},
 		type: 'POST',
 		url: '<?php echo url('dashboard/updateBusiness'); ?>',
 		data: form_data,
@@ -1440,14 +1310,14 @@ $(document).ready(function(){
 		});
 	});
 	$("#Addcat").on('submit', function(e){
-		e.preventDefault();	
-		var form_data = new FormData(); 
-		var cat_name = $('#cat_name').val(); 
+		e.preventDefault();
+		var form_data = new FormData();
+		var cat_name = $('#cat_name').val();
 		form_data.append("cat_name", cat_name);
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/addProductCat'); ?>',
 			data: form_data,
@@ -1492,7 +1362,7 @@ $(document).ready(function(){
 			success: function(response) {
                 $('#product_category').html(response);
 			}
-		});	
+		});
 	});
 	$(".AddAService").click(function () {
 		$("#chooseModel").modal("hide");
@@ -1506,21 +1376,21 @@ $(document).ready(function(){
 			success: function(response) {
                 $('#service_category').html(response);
 			}
-		});	
+		});
 	});
 	$("#addProductForm").on('submit', function(e){
-		e.preventDefault();	
+		e.preventDefault();
 		var form_data = new FormData();
         var totalfiles = document.getElementById('product_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("product_image[]",  document.getElementById('product_image').files[index]);
-		}		
-		var product_category = $('#product_category').val(); 
-		var product_name     = $('#product_name').val(); 
-		var product_price    = $('#product_price').val(); 
-		var product_tags     = $('#product_tags').val(); 
-		var product_description  = $('#product_description').val(); 
-		var listing_id  = $('#listing_id').val(); 
+		}
+		var product_category = $('#product_category').val();
+		var product_name     = $('#product_name').val();
+		var product_price    = $('#product_price').val();
+		var product_tags     = $('#product_tags').val();
+		var product_description  = $('#product_description').val();
+		var listing_id  = $('#listing_id').val();
 		form_data.append("product_category", product_category);
 		form_data.append("product_name", product_name);
 		form_data.append("product_price", product_price);
@@ -1530,7 +1400,7 @@ $(document).ready(function(){
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/addProduct'); ?>',
 			data: form_data,
@@ -1558,18 +1428,18 @@ $(document).ready(function(){
 		});
 	});
 	$("#addServiceForm").on('submit', function(e){
-		e.preventDefault();	
+		e.preventDefault();
 		var form_data = new FormData();
         var totalfiles = document.getElementById('service_image').files.length;
 		for (var index = 0; index < totalfiles; index++) {
 		   form_data.append("service_image[]",  document.getElementById('service_image').files[index]);
-		}		
-		var service_category = $('#service_category').val(); 
-		var service_name     = $('#service_name').val(); 
-		var service_price    = $('#service_price').val(); 
-		var service_tags     = $('#service_tags').val(); 
-		var service_description  = $('#service_description').val(); 
-		var service_listing_id  = $('#service_listing_id').val(); 
+		}
+		var service_category = $('#service_category').val();
+		var service_name     = $('#service_name').val();
+		var service_price    = $('#service_price').val();
+		var service_tags     = $('#service_tags').val();
+		var service_description  = $('#service_description').val();
+		var service_listing_id  = $('#service_listing_id').val();
 		form_data.append("service_category", service_category);
 		form_data.append("service_name", service_name);
 		form_data.append("service_price", service_price);
@@ -1579,7 +1449,7 @@ $(document).ready(function(){
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/addService'); ?>',
 			data: form_data,
@@ -1607,7 +1477,7 @@ $(document).ready(function(){
 		});
 	});
 });
-function deleteBusiness(dealId) 
+function deleteBusiness(dealId)
 {
 	swal({
 		title: 'Do you really want your business to be deleted? It cannot be undone once deleted.',
@@ -1627,14 +1497,14 @@ function deleteBusiness(dealId)
 }
 $(document).ready(function(){
 	$("#invisubmitform").on('submit', function(e){
-		e.preventDefault();	
+		e.preventDefault();
 		var form_data = new FormData();
-		var invi_event_name   = $('#invi_event_name').val(); 
-		var invi_event_user   = $('#invi_event_user').val(); 
-		var invi_price        = $('#invi_price').val(); 
-		var invi_start_time   = $('#invi_start_time').val(); 
-		var invi_end_time     = $('#invi_end_time').val(); 
-		var invi_description     = $('#invi_description').val(); 
+		var invi_event_name   = $('#invi_event_name').val();
+		var invi_event_user   = $('#invi_event_user').val();
+		var invi_price        = $('#invi_price').val();
+		var invi_start_time   = $('#invi_start_time').val();
+		var invi_end_time     = $('#invi_end_time').val();
+		var invi_description     = $('#invi_description').val();
 		form_data.append("invi_event_name", invi_event_name);
 		form_data.append("invi_event_user", invi_event_user);
 		form_data.append("invi_price", invi_price);
@@ -1644,7 +1514,7 @@ $(document).ready(function(){
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/sendInvitation'); ?>',
 			data: form_data,
@@ -1677,19 +1547,19 @@ $(document).ready(function(){
                 $('.BlockData1').html(response.output1);
                 $('.BlockData21').html(response.output2);
 			}
-		});	
+		});
 	});
 	$("#sentCountorOffer").on('submit', function(e){
-		e.preventDefault();	
+		e.preventDefault();
 		var form_data = new FormData();
-		var counter_offer   = $('#counter_offer').val(); 
-		var invi_id   = $('#invi_id').val(); 
+		var counter_offer   = $('#counter_offer').val();
+		var invi_id   = $('#invi_id').val();
 		form_data.append("counter_offer", counter_offer);
 		form_data.append("invi_id", invi_id);
 		$.ajax({
 			headers: {
 			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-			},	
+			},
 			type: 'POST',
 			url: '<?php echo url('dashboard/sendCounterInvitation'); ?>',
 			data: form_data,
@@ -1726,7 +1596,7 @@ $(document).ready(function(){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
 				}
 			}
-		});	
+		});
 	});
 	$(".reject-offer").click(function () {
 		var invi_id = $('#invi_id').val();
@@ -1744,7 +1614,7 @@ $(document).ready(function(){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
 				}
 			}
-		});	
+		});
 	});
 	$(".withdraw-invitation").click(function () {
 		var inviTd = $(this).attr('relid');
@@ -1765,20 +1635,20 @@ $(document).ready(function(){
 					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
 				}
 			}
-		});	
+		});
 	});
 	$("#adsSub").on('submit', function(e){
-		e.preventDefault();	
+		e.preventDefault();
 		var form_data = new FormData();
-		var preferredListing   = $('#preferredListing').val(); 
-		var duration   = $('#duration').val(); 
-		var subId   = $('#subId').val(); 
-		var adsId   = $('#adsId').val(); 
+		var preferredListing   = $('#preferredListing').val();
+		var duration   = $('#duration').val();
+		var subId   = $('#subId').val();
+		var adsId   = $('#adsId').val();
 		var userId   = '<?=session()->get('USERLOGINID')?>';
         window.location.href = "<?=url('dashboard/adspayment/?')?>userId="+userId+"&planId="+subId+"&adsId="+adsId+"&preferredListing="+preferredListing+"&duration="+duration+"";
 	});
 });
-$(document.body).on('click', '.product-details' ,function(){ 
+$(document.body).on('click', '.product-details' ,function(){
 		//alert("success");
 	var productId = $(this).attr('relid');
 	$.ajax({
@@ -1789,9 +1659,9 @@ $(document.body).on('click', '.product-details' ,function(){
 		success: function(response) {
 			$('#product-details-block').html(response);
 		}
-	});	
+	});
 });
-$(document.body).on('click', '.productPhotos' ,function(){ 
+$(document.body).on('click', '.productPhotos' ,function(){
 		//alert("success");
 		var productId = $(this).attr('relid');
 		$.ajax({
@@ -1802,9 +1672,9 @@ $(document.body).on('click', '.productPhotos' ,function(){
 			success: function(response) {
 				$('#product-gallery-model').html(response);
 			}
-		});	
+		});
 	});
-$(document.body).on('click', '.service-details' ,function(){ 
+$(document.body).on('click', '.service-details' ,function(){
 		//alert("success");
 	var serviceId = $(this).attr('relid');
 	$.ajax({
@@ -1815,9 +1685,9 @@ $(document.body).on('click', '.service-details' ,function(){
 		success: function(response) {
 			$('#service-details-block').html(response);
 		}
-	});	
+	});
 });
-$(document.body).on('click', '.servicePhotos' ,function(){ 
+$(document.body).on('click', '.servicePhotos' ,function(){
 		//alert("success");
 		var serviceId = $(this).attr('relid');
 		$.ajax({
@@ -1828,11 +1698,11 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			success: function(response) {
 				$('#service-gallery-model').html(response);
 			}
-		});	
+		});
 	});
   </script>
   <script>
-  // $(document.body).on('click', ".counter" ,function(){ 
+  // $(document.body).on('click', ".counter" ,function(){
     // const counterElement = document.getElementsByClassName("counter")[0];
     // const incrementButton = document.getElementsByClassName("increment")[0];
     // const decrementButton = document.getElementsByClassName("decrement")[0];
@@ -1858,7 +1728,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	   // document.getElementsByClassName('counter').innerHTML = ++x;
 	   $('#counterId').html(++x);
 	});
-	$(document.body).on('click', ".decrement" ,function(){ 
+	$(document.body).on('click', ".decrement" ,function(){
 	    $('#counterId').html(--x);
 	});
   </script>
@@ -1884,9 +1754,9 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			success: function(response) {
 				//$('#service-gallery-model').html(response);
 			}
-		});	
+		});
 	});
-	$(document.body).on('change', '.quantity' ,function(){ 
+	$(document.body).on('change', '.quantity' ,function(){
 		var id = $(this).attr('relid');
 		var action = 'change';
 		var quantity = $(this).val();
@@ -1898,14 +1768,14 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			error:function(){
 			$('#uploadsuccessfully').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
 			},
-			success: function(data){ 
+			success: function(data){
 			    if(data.status = 1){
 					//window.location.href = '<?=url('dashboard/addtoCart');?>';
 				}
 			}
 		});
 	});
-	$(document.body).on('click', '.remove' ,function(){ 
+	$(document.body).on('click', '.remove' ,function(){
 		var id = $(this).attr('relid');
 		var action = 'remove';
 		// console.log(id);
@@ -1918,9 +1788,9 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 			error:function(){
 			$('#uploadsuccessfully').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
 			},
-			success: function(data){ 
+			success: function(data){
 			    if(data.status = 1){
-					//window.location.href = '<?=url('dashboard/addtoCart');?>'; 
+					//window.location.href = '<?=url('dashboard/addtoCart');?>';
 				}
 			}
 		});
@@ -1956,7 +1826,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 				$('#profileUser').html(response.output);
 				$('#Info').html(response.info);
 			}
-		});	
+		});
 	});
   </script>
   <script>
@@ -2001,40 +1871,40 @@ $(document.body).on('click', '.servicePhotos' ,function(){
       selectPlanDetailsBtnBack.addEventListener("click", () => switchSection("advertisement"));
       selectPlanWholeDetailsBtnBack.addEventListener("click", () => switchSection("plan"));
     });
-	
+
 	/*$("#Home").click(function () {
-		window.location.href = '<?=url('dashboard');?>'; 
+		window.location.href = '<?=url('dashboard');?>';
 	});
-	
+
 	$("#ManageSubscription").click(function () {
-	    window.location.href = '<?=url('dashboard/stripe-connect');?>'; 
+	    window.location.href = '<?=url('dashboard/stripe-connect');?>';
 	});
-	
+
 	$("#UpcomingEvents").click(function () {
-	    window.location.href = '<?=url('dashboard/upcoming-event');?>'; 
+	    window.location.href = '<?=url('dashboard/upcoming-event');?>';
 	});
 	$("#ReferralLink").click(function () {
-	    window.location.href = '<?=url('dashboard/refferalLink');?>'; 
+	    window.location.href = '<?=url('dashboard/refferalLink');?>';
 	});
 	$("#Wallet").click(function () {
-	    window.location.href = '<?=url('dashboard/wallet');?>'; 
+	    window.location.href = '<?=url('dashboard/wallet');?>';
 	});
 	$("#TransactionsPayment").click(function () {
-	    window.location.href = '<?=url('dashboard/transaction');?>'; 
+	    window.location.href = '<?=url('dashboard/transaction');?>';
 	});
 	$("#Rewards").click(function () {
-	    window.location.href = '<?=url('dashboard/reward');?>'; 
+	    window.location.href = '<?=url('dashboard/reward');?>';
 	});
 	$("#TermsConditions").click(function () {
-	    window.location.href = '<?=url('dashboard/term-and-condition');?>'; 
+	    window.location.href = '<?=url('dashboard/term-and-condition');?>';
 	});
 	$("#PurchaseHistory").click(function () {
-	    window.location.href = '<?=url('dashboard/purchase-history');?>'; 
+	    window.location.href = '<?=url('dashboard/purchase-history');?>';
 	});
 	$("#SaleList").click(function () {
-	    window.location.href = '<?=url('dashboard/sale-list');?>'; 
+	    window.location.href = '<?=url('dashboard/sale-list');?>';
 	});*/
-	
+
 	$(document).ready(function() {
 		$("#search-box").keyup(function() {
 			$.ajax({
@@ -2055,9 +1925,9 @@ $(document.body).on('click', '.servicePhotos' ,function(){
 	$(document).on("click", ".selectCountry", function () {
 		var search  = $(this).attr("search");
 		var keywork = $(this).attr("keywork");
-		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+''; 
+		window.location.href = '<?=url('dashboard/search?');?>search='+search+'&keyword='+keywork+'';
 	});
-	
+
 	<!-- New Script -->
     document.querySelector('.search').addEventListener('click', function () {
       const modal = document.getElementById('SearchModal');
@@ -2065,7 +1935,7 @@ $(document.body).on('click', '.servicePhotos' ,function(){
         modal.classList.add('SearchModalStyle');
       }
     });
-	
+
   </script>
 </body>
 </html>

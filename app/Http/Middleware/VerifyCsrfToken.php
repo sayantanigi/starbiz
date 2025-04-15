@@ -67,5 +67,16 @@ class VerifyCsrfToken extends Middleware
        '/api/totalCart',
        '/api/cart_list',
        '/api/removeCartList',
+       '/api/addReview',
+       '/api/addReferralCode',
+       '/api/allReadNotification',
+       '/api/countUnreadNotification',
+       '/api/deleteNotification',
+       '/api/contactInvitee',
+       '/api/contactAdmin',
+       '/api/appearanceInitiate',
+       '/api/appearanceEnd',
+       '/api/appearanceNotAttend',
+       '/api/replayMsg',
     ];
 }

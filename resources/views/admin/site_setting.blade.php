@@ -26,7 +26,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            
+
             <form action="{{url('admin/setting/savesite-setting')}}" class="form-horizontal" method="post" enctype="multipart/form-data">
 			@csrf
 	            <div class="row">
@@ -42,29 +42,29 @@
 										{{ session('error') }}
 									</div>
 								@endif
-							
+
 	                            <h4 class="card-title">Site Basic Details</h4>
 	                            <hr>
-	                           
+
 	                            <div class="row mb-3 mt-3">
 	                                <label for="example-text-input" class="col-sm-2 col-form-label">Address</label>
 	                                <div class="col-sm-10">
 	                                   <input type="text" class="form-control" name="address" id="address" value="<?= @$result->address ?>" autocomplete="off" required>
 	                                </div>
 	                            </div>
-	                           
+
 	                            <div class="row mb-3">
 	                                <label for="example-search-input" class="col-sm-2 col-form-label">Email</label>
 	                                <div class="col-sm-10">
 	                                    <input type="email" class="form-control" name="email" id="email" value="<?= @$result->email ?>" autocomplete="off" required>
 	                                </div>
 	                            </div>
-	                            
+
 	                            <div class="row mb-3">
 	                                <label for="example-url-input" class="col-sm-2 col-form-label">Telephone</label>
 	                                <div class="col-sm-10">
 	                                   <input type="text" class="form-control" name="phone" id="phone" value="<?= @$result->phone ?>" autocomplete="off" required="">
-	                                </div>   
+	                                </div>
 	                            </div>
 
 	                        </div>
@@ -87,14 +87,14 @@
 	                                   <input type="text" class="form-control" name="facebook" id="facebook" value="<?= @$result->facebook ?>" autocomplete="off">
 	                                </div>
 	                            </div>
-	                           
+
 	                            <div class="row mb-3">
 	                                <label for="example-text-input" class="col-sm-2 col-form-label">Twitter :</label>
 	                                <div class="col-sm-10">
 	                                  <input type="text" class="form-control" name="twitter" id="twitter" value="<?= @$result->twitter ?>" autocomplete="off">
 	                                </div>
 	                            </div>
-	                            
+
 	                            <div class="row mb-3">
 	                                <label for="example-text-input" class="col-sm-2 col-form-label">Linkedin :</label>
 	                                <div class="col-sm-10">
@@ -116,39 +116,39 @@
 	                                </div>
 	                            </div>
                                 <hr>
-								
-								<div class="row mb-3">
+
+								<!-- <div class="row mb-3 d-none">
 	                                <label for="example-text-input" class="col-sm-2 col-form-label">Admin Share (in percentage)</label>
 	                                <div class="col-sm-10">
 	                                  <input type="text" class="form-control" name="adminshare" id="adminshare" value="<?= @$result->admin_percentage ?>" autocomplete="off" >
 	                                </div>
-	                            </div>
-								
+	                            </div> -->
+
 								<div class="row mb-3">
 	                                <label for="example-text-input" class="col-sm-2 col-form-label">Search Radius</label>
 	                                <div class="col-sm-10">
 	                                  <input type="text" class="form-control" name="radius" id="radius" value="<?= @$result->kilometer ?>" autocomplete="off" >
 	                                </div>
 	                            </div>
-								
+
                                 <div class="row mb-3">
 	                               <div class="col-sm-4 col-sm-offset-4">
 									 <div class="form-group">
 										<input type="submit" class="btn btn-success" name="settings" id="settings" value="Update"/>
 									 </div>
 								  </div>
-								</div>  
+								</div>
 	                        </div>
 	                    </div>
 	                </div> <!-- end col -->
 	            </div>
 	            <!-- end row -->
-		 	</form>    
+		 	</form>
 
         </div> <!-- container-fluid -->
     </div>
     <!-- End Page-content -->
-    
+
     <footer class="footer">
         <div class="container-fluid">
             <div class="row">
@@ -163,7 +163,7 @@
             </div>
         </div>
     </footer>
-    
+
 </div>
 <!-- end main content-->
    @include('admin.footer');

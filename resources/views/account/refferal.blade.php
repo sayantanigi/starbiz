@@ -199,6 +199,7 @@
 
       <div id="MyReferrals" class="row m-0 TabContent active">
 	    <div class="col-lg-12 col-md-12 col-sm-12">
+	    	<div class="table-responsive">
           <table class="table table-striped table-list CustomTable">
             <thead>
               <tr>
@@ -334,7 +335,7 @@
             </tbody>
           </table>
         </div>
-		
+		</div>
 				
       </div>
 
@@ -398,6 +399,7 @@
 		
 		
 		<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="table-responsive">
           <table class="table table-striped table-list CustomTable">
             <thead>
               <tr>
@@ -461,7 +463,7 @@
         </div>
 						
 						
-		
+		</div>
 		
       </div>
 	    <div id="SentInvite" class="row m-0 TabContent">
@@ -480,6 +482,7 @@
 				</div>
 		  </div>-->
 			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="table-responsive">
 			  <table class="table table-striped table-list CustomTable">
 				<thead>
 				  <tr>
@@ -516,6 +519,7 @@
 			  </table>
 			</div>
       </div>
+    </div>
 			
 		
 	    </div>

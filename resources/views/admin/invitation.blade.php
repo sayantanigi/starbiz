@@ -80,12 +80,12 @@
 								      <tr>
 								            <th>#</th>
 											<th style="width:10%">Sender</th>
-											<th>Receiver</th>
-											<th>Event</th>
-											<th>Location</th>
-											<th>Amount</th>
-											<th>Hour</th>
-											<th>Status</th>
+											<th style="width:10%">Receiver</th>
+											<th style="width:10%">Event</th>
+											<th style="width:10%">Location</th>
+											<th style="width:10%">Amount</th>											<th style="width:10%">Comment</th>
+											<!--<th>Hour</th>-->
+											<th style="width:10%">Status</th>
 											<!--<th class="text-center">Action</th>-->
 								      </tr>
 								   </thead>
@@ -101,12 +101,12 @@
 													$eventInfo = DB::table('events')->where(['id' => @$v->event_id])->select('event_name', 'location')->first();
 												?>
 												
-												<td><?=ucfirst(@$senderInfo->first_name); ?> &nbsp; <?=ucfirst(@$senderInfo->last_name); ?></td>
-												<td><?=ucfirst(@$receiverInfo->first_name); ?> &nbsp; <?=ucfirst(@$receiverInfo->last_name); ?></td>
-												<td><?=@$eventInfo->event_name; ?></td>
-												<td><?=@$eventInfo->location; ?></td>
-												<td><?='$'.@$v->amount; ?></td>
-												<td><?=@$v->hour; ?></td>
+												<td style="width:10%"><?=ucfirst(@$senderInfo->first_name); ?> &nbsp; <?=ucfirst(@$senderInfo->last_name); ?></td>
+												<td style="width:10%"><?=ucfirst(@$receiverInfo->first_name); ?> &nbsp; <?=ucfirst(@$receiverInfo->last_name); ?></td>
+												<td style="width:10%"><?=@$eventInfo->event_name; ?></td>
+												<td style="width:10%"><?=@$eventInfo->location; ?></td>
+												<td style="width:10%"><?='$'.@$v->amount; ?></td>												<td style="width:10%"><?=@$v->comment; ?></td>
+												
 												
 												
 												<td>

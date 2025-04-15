@@ -59,23 +59,23 @@ class ProductController extends Controller {
 		$product_name         = $request->product_name;
 		$product_category     = $request->product_category;
 		$product_price        = $request->product_price;
-		$product_special      = $request->product_special;
-		$product_quantity     = $request->product_quantity;
-		$product_availability = $request->product_availability;
+		$product_special      = 0;
+		$product_quantity     = 0;
+		$product_availability = 0;
 		$product_description  = $request->product_description;
 		$product_status       = $request->product_status;
 		$product_listing      = $request->product_listing;
-		$product_subcategory  = $request->product_subcategory;
+		$product_tags      = $request->tags;
+		$product_subcategory  = 0;
 		
 
 		
-		$data = ['name' => $product_name, 'category' => $product_category, 'subcategory' => @$product_subcategory, 'listing_id' => $product_listing, 'price' => $product_price, 'special_price' => @$product_special, 'quantity' => $product_quantity, 'availability' => $product_availability, 'description' => $product_description, 'status' => $product_status, 'user_id' => 0, 'created_at' => date('Y-m-d H:i:s')];
+		$data = ['name' => $product_name, 'category' => $product_category, 'subcategory' => @$product_subcategory, 'listing_id' => $product_listing, 'price' => $product_price, 'special_price' => @$product_special, 'quantity' => $product_quantity, 'availability' => $product_availability, 'description' => $product_description, 'status' => $product_status, 'tags' => $product_tags, 'user_id' => 0, 'created_at' => date('Y-m-d H:i:s')];
 		$result = DB::table('product')->insertGetId($data);
 		if($result){
 			//print_r($_FILES);die;
 		    $image = array();
 		    if($file = $request->file('product_image')){
-				
 			    foreach($file as $file){
 					$image_name = md5(rand(1000,10000));
 					$ext = strtolower($file->getClientOriginalExtension());
@@ -88,7 +88,6 @@ class ProductController extends Controller {
 					DB::table('product_image')->insertGetId($data);
 			    }    
 		    }
-		  
 			return redirect()->intended('admin/product')->with("status", "Your product added successfully!");
 		}else{
 			return redirect()->intended('admin/product')->with("error", "Some error occure, Please try again!");
@@ -105,8 +104,8 @@ class ProductController extends Controller {
 		);
 
 		$data['category'] = DB::table('product_category')->select('*')->orderBy('name', 'ASC')->get();
-		$data['listing'] = DB::table('listing')->select('*')->orderBy('business_name', 'ASC')->get();
-		$data['result'] = $result = DB::table('product')->where(['id' => $id])->select('*')->orderBy('id', 'DESC')->first();
+		$data['listing']  = DB::table('listing')->select('*')->orderBy('business_name', 'ASC')->get();
+		$data['result']   = $result = DB::table('product')->where(['id' => $id])->select('*')->orderBy('id', 'DESC')->first();
 		
 		if($result->category){
 			$data['subcat'] = DB::table('product_subcategory')->where(['category_id' => $result->category])->select('*')->orderBy('name', 'ASC')->get();
@@ -121,17 +120,18 @@ class ProductController extends Controller {
 		$product_name         = $request->product_name;
 		$product_category     = $request->product_category;
 		$product_price        = $request->product_price;
-		$product_special      = $request->product_special;
-		$product_quantity     = $request->product_quantity;
-		$product_availability = $request->product_availability;
+		$product_special      = 0;
+		$product_quantity     = 0;
+		$product_availability = 0;
 		$product_description  = $request->product_description;
 		$product_status       = $request->product_status;
 		$product_listing      = $request->product_listing;
 		$product_id           = $request->product_id;
-		$product_subcategory  = $request->product_subcategory;
+		$product_subcategory  = 0;
+		$product_tags         = @$request->tags;
 
 		
-		$data = ['name' => $product_name, 'category' => $product_category, 'subcategory' => @$product_subcategory, 'listing_id' => $product_listing, 'price' => $product_price, 'special_price' => @$product_special, 'quantity' => $product_quantity, 'availability' => $product_availability, 'description' => $product_description, 'status' => $product_status, 'user_id' => 0, 'created_at' => date('Y-m-d H:i:s')];
+		$data = ['name' => $product_name, 'category' => $product_category, 'subcategory' => @$product_subcategory, 'listing_id' => $product_listing, 'price' => $product_price, 'special_price' => @$product_special, 'quantity' => $product_quantity, 'availability' => $product_availability, 'description' => $product_description, 'status' => $product_status, 'tags' => $product_tags, 'user_id' => 0, 'created_at' => date('Y-m-d H:i:s')];
 		//$result = DB::table('product')->insertGetId($data);
 		$result = DB::table('product')->where('id',$product_id)->update(@$data);
 		if($result){
@@ -202,7 +202,7 @@ class ProductController extends Controller {
 	public function changestatus(Request $request)
 	{
 		if ($request->id) {
-			$id = $request->id;
+			$id     = $request->id;
 			$status = $request->status;
 			
 			if ($status == 1) {
@@ -225,8 +225,8 @@ class ProductController extends Controller {
     { 
 	
         $data = array(
-			'title' => 'View Product Information',
-			'page' => 'product',
+			'title'   => 'View Product Information',
+			'page'    => 'product',
 			'subpage' => 'product'
 		);
 
@@ -241,8 +241,8 @@ class ProductController extends Controller {
     { 
 	
         $data = array(
-			'title' => 'Category Lists',
-			'page' => 'product',
+			'title'   => 'Category Lists',
+			'page'    => 'product',
 			'subpage' => 'product-category'
 		);
 
@@ -254,8 +254,8 @@ class ProductController extends Controller {
     { 
 	
         $data = array(
-			'title' => 'Add Category',
-			'page' => 'product',
+			'title'   => 'Add Category',
+			'page'    => 'product',
 			'subpage' => 'product-category'
 		);
         return view('admin.add_product_category', $data);
@@ -264,10 +264,10 @@ class ProductController extends Controller {
 	public function save_category(Request $request)
     { 
 	
-		$name = $request->name;
+		$name      = $request->name;
 		$pckstatus = $request->pckstatus;
-		$data = ['name' => $name, 'status' => $pckstatus, 'created_at' => date('Y-m-d H:i:s')];
-        $result =  DB::table('product_category')->insertGetId($data);
+		$data      = ['name' => $name, 'status' => $pckstatus, 'created_at' => date('Y-m-d H:i:s')];
+        $result    =  DB::table('product_category')->insertGetId($data);
 		if($result){
 			return redirect()->intended('admin/product/category')->with("status", "Your product category added successfully!");
 		}else{
@@ -282,8 +282,8 @@ class ProductController extends Controller {
 		}
 		
         $data = array(
-			'title' => 'Edit Category',
-			'page' => 'product',
+			'title'   => 'Edit Category',
+			'page'    => 'product',
 			'subpage' => 'product-category'
 		);
 
@@ -293,11 +293,11 @@ class ProductController extends Controller {
 	
 	 public function update_category(Request $request)
     { 
-	    $name = $request->name;
+	    $name      = $request->name;
 		$pckstatus = $request->pckstatus;
-		$catId = $request->catId;
-		$data = ['name' => $name, 'status' => $pckstatus, 'updated_at' => date('Y-m-d H:i:s')];
-		$result = DB::table('product_category')->where('id',$catId)->update(@$data);
+		$catId     = $request->catId;
+		$data      = ['name' => $name, 'status' => $pckstatus, 'updated_at' => date('Y-m-d H:i:s')];
+		$result    = DB::table('product_category')->where('id',$catId)->update(@$data);
 		if($result){
 			return redirect()->intended('admin/product/category')->with("status", "Your product category updated successfully!");
 		}else{
@@ -325,8 +325,8 @@ class ProductController extends Controller {
     { 
 	
         $data = array(
-			'title' => 'Subcategory List',
-			'page' => 'product',
+			'title'   => 'Subcategory List',
+			'page'    => 'product',
 			'subpage' => 'product-subcategory'
 		);
 		$data['result'] = DB::table('product_subcategory')->select('*')->orderBy('id', 'DESC')->get();
@@ -337,8 +337,8 @@ class ProductController extends Controller {
     { 
 	
         $data = array(
-			'title' => 'Add Subcategory',
-			'page' => 'product',
+			'title'   => 'Add Subcategory',
+			'page'    => 'product',
 			'subpage' => 'product-subcategory'
 		);
 		$data['cat'] = DB::table('product_category')->select('*')->orderBy('name', 'ASC')->get();
@@ -368,8 +368,8 @@ class ProductController extends Controller {
 		}
 		
         $data = array(
-			'title' => 'Edit Category',
-			'page' => 'product',
+			'title'   => 'Edit Category',
+			'page'    => 'product',
 			'subpage' => 'product-subcategory'
 		);
 
@@ -409,4 +409,360 @@ class ProductController extends Controller {
 			return redirect()->intended('admin/product/subcategory')->with("error", "Some error occur, Please try again!");
 		}
     }
+	
+	public function uploads_product(){
+		 $data = array(
+			'title'   => 'Upload Bulk Product',
+			'page'    => 'product',
+			'subpage' => 'product'
+		);
+
+		//$data['result'] = DB::table('product')->select('*')->orderBy('id', 'DESC')->get();
+		
+        return view('admin.bulk_product', $data);
+	}
+	
+	public function saveBulkproduct(){
+		$csvMimes = array('application/vnd.ms-excel','text/plain','text/csv','text/tsv','text/xls','text/xlsx', 'text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream',  'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel');
+		
+		if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'],$csvMimes)){
+			if(is_uploaded_file($_FILES['file']['tmp_name'])){
+				
+                $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+                fgetcsv($csvFile);
+				while(($line = fgetcsv($csvFile)) !== FALSE){ 
+				    
+					$proCat = DB::table('product_category')->where(['name' => htmlentities($line[1])])->select('*')->orderBy('name', 'ASC')->first();
+					if($proCat){
+						if($proCat->id){
+							$catName = $proCat->id;
+						}else{
+							$catName = '';
+						}
+					}else{
+						$catName = '';
+					}
+					
+					$proSub = DB::table('product_subcategory')->where(['name' => htmlentities($line[2])])->select('*')->orderBy('name', 'ASC')->first();
+					if($proSub){
+						if($proSub->id){
+							$subName = $proSub->id;
+						}else{
+							$subName = '';
+						}
+					}else{
+						$subName = '';
+					}
+					
+					$listing = DB::table('listing')->where(['business_name' => htmlentities($line[3])])->select('*')->orderBy('name', 'ASC')->first();
+					if($listing){
+						if($listing->id){
+							$listingName = $listing->id;
+						}else{
+							$listingName = '';
+						}
+					}else{
+						$listingName = '';
+					}
+					
+					$data = ['name' => htmlentities($line[0]), 'category' => @$catName, 'subcategory' => @$subName, 'listing_id' => @$listingName, 'price' => htmlentities($line[4]), 'special_price' => htmlentities($line[5]), 'quantity' => htmlentities($line[6]), 'availability' => htmlentities($line[7]), 'description' => htmlentities($line[8]), 'status' => 1, 'user_id' => 0, 'created_at' => date('Y-m-d H:i:s')];
+					$result = DB::table('product')->insertGetId($data);
+				}
+				
+				//close opened csv file
+                fclose($csvFile);
+				return redirect()->intended('admin/product')->with("status", "product uploaded successfully!");
+			}else{
+				return redirect()->intended('admin/product')->with("error", "Some Error Occurred!");
+			}
+		}else{
+			return redirect()->intended('admin/product')->with("error", "Wrong file uploads or file is required.");
+		}
+	}
+	
+	    
+		
+	public function purchaseList(){
+		 $data = array(
+			'title'   => 'Product Purchase List',
+			'page'    => 'product',
+			'subpage' => 'product-purchaselist'
+		);
+
+		if(!empty($_GET['from_date']) && !empty($_GET['to_date'])){
+			$data['result'] = DB::table('transaction')->whereRaw("(DATE(created_at) BETWEEN '".@$_GET['from_date']."' AND '".@$_GET['to_date']."') AND payment_type = 6")->select('*')->get();
+		}else{
+		    $data['result'] = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		}
+		
+        //print_r($data['result']);die;
+		
+        return view('admin.purchase_list', $data);
+	}	
+	
+	public function salesList(){
+		 $data = array(
+			'title'   => 'Product Sales List',
+			'page'    => 'product',
+			'subpage' => 'product-sales-list'
+		);
+
+		/*if(!empty($_GET['from_date']) && !empty($_GET['to_date'])){
+			$data['result'] = DB::table('transaction')->whereRaw("(DATE(created_at) BETWEEN '".@$_GET['from_date']."' AND '".@$_GET['to_date']."') AND payment_type = 6")->select('*')->get();
+		}else{
+		    $data['result'] = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		}*/
+        //print_r($data['result']);die;
+		//echo 1;die;
+		
+		$data['myProList'] = [];
+		
+		
+		if(!empty(@$_GET['from_date']) && !empty(@$_GET['to_date'])){
+			$proList  = DB::table('transaction')->whereRaw("payment_type = 6 AND DATE(created_at) BETWEEN '".@$_GET['from_date']."' AND '".@$_GET['to_date']."'")->select('*')->orderBy('id', 'DESC')->get();
+		}else{
+		    $proList  = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		}
+		//$proList  = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		
+		if(count($proList) > 0){
+			foreach($proList as $k => $v){
+				$productInfo = unserialize($v->product_info);
+				if (is_array($productInfo) || is_object($productInfo))
+                {
+					foreach($productInfo as $proKey => $proVal){
+						
+						if(@$proVal['specipication'] == 'service'){
+							$proList_1 = DB::table('services')->whereRaw("id = ".$proVal['product_id']."")->select('*', DB::raw("'service' as type"))->orderBy('id', 'DESC')->first();
+						}else{
+							$proList_1 = DB::table('product')->whereRaw("id = ".$proVal['product_id']."")->select('*', DB::raw("'product' as type"))->first();
+						}
+						if(!empty(@$proList_1)){
+							$data['myProList'][] =  $proList_1;
+						}
+					}
+				
+			    }
+			}
+		}
+        return view('admin.sales_list', $data);
+	}	
+	
+	public function purlist(){
+		 echo 1;
+	}
+	
+	function orderinfo(Request $request){
+		$newre = '';
+		if(!empty($request->ordid)){
+			//$sql = $this->db->query("SELECT * FROM orders WHERE id = ".$this->input->post('ordid')." ORDER BY id DESC");
+		   // $orders = ($sql->num_rows() > 0) ? $sql->row() : FALSE;
+			
+			$orders = DB::table('transaction')->where(['id' => $request->ordid])->select('*')->orderBy('id', 'DESC')->first();
+			
+			
+			if(!empty($orders)){
+				
+				if(@$orders->status == 'succeeded'){
+					$status = 'succeeded';
+				}elseif(@$orders->status == 2){
+					$status = 'Not Processed';
+				}elseif(@$orders->status == 0){
+					$status = 'Rejected';
+				}
+				
+				//$user_info = $this->Adminmodel->get_single_row_info('first_name, last_name, email, phone, city, address_line_1, address_line_2, zip', 'orders_user_info', 'orderid = '.@$orders->id.'', '', 1);
+				
+				$user_info = DB::table('users')->where(['id' => $orders->user_id])->select('*')->orderBy('id', 'DESC')->first();
+				
+				//print_r($user_info);die;
+				$newre .='
+				
+					<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close closepopup_3" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title" id="myModalLabel" style="margin: 21px 72px;font-size:16px;">Preview <b id="client-name">
+						#'.$orders->order_id.' '.@$status.' 
+						</b></h4>
+						</div>
+						<div class="modal-body" id="preview-info-body">
+							<div class="table-responsive">
+								<table class="table more-info-purchase table_2" >
+									<tbody>
+									
+										<tr>
+											<td><b>Email</b></td>
+											<td><a href="mailto:'.@$user_info->email.'">'.@$user_info->email.'</a></td>
+										</tr>
+										
+										<tr>
+											<td><b>City</b></td>
+											<td>'.@$user_info->city.'</td>
+										</tr>
+										
+										<tr>
+											<td><b>Address</b></td>
+											<td>'.(!empty(@$user_info->address) ? @$user_info->address : '').'</td>
+										</tr>
+										
+										<tr>
+											<td><b>Zipcode</b></td>
+											<td>'.@$user_info->zipcode.'</td>
+										</tr>
+										
+										<!--<tr>
+											<td><b>Notes</b></td>
+											<td></td>
+										</tr>-->
+										
+										<!--<tr>
+											<td><b>Come from site</b></td>
+											<td>
+											<a target="_blank" href="http://localhost/Ecommerce-CodeIgniter-Bootstrap-master/shopping-cart" class="orders-referral">
+											http://localhost/Ecommerce-CodeIgniter-Bootstrap-master/shopping-cart                                                        </a>
+											</td>
+										</tr>-->
+										
+										<!--<tr>
+											<td><b>Payment Type</b></td>
+											<td>'.@$orders->payment_type.'</td>
+										</tr>-->
+										
+										<!--<tr>
+											<td><b>Discount</b></td>
+											<td>-%</td>
+										</tr>-->
+										
+										<tr>
+											<td colspan="2"><b>Products Info</b></td>
+										</tr>
+										
+										<tr>
+											<td colspan="2">
+												'.$this->get_order_product($orders->product_info, $orders->amount).'	
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default closepopup_3" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					
+				';
+			}
+		}
+		$response['html'] = $newre; 
+		echo json_encode($response);
+	}
+	
+	function get_order_product($products = '', $totalAmount = ''){
+		$result = '';
+		//$vendor_id = $this->session->userdata('loguserId');
+		if(!empty($products)){
+			$pro_data = unserialize($products);
+			// print_r($pro_data);
+			// return;
+			foreach($pro_data as $k => $v){
+				    
+					
+				    if(@$v['specipication'] == 'service'){
+						
+						//echo $echo = 1;
+						$productinfo = DB::table('services')->where(['id' => $v['product_id']])->select('*')->orderBy('id', 'DESC')->first();
+						//print_r($productInfo);
+						$productImg = DB::table('services_image')->where(['service_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+						
+						
+						if(!empty(@$productImg->image) && file_exists('public/service/'.@$productImg->image.'')){
+							$proimg = url('service/'.@$productImg->image.'');
+						}else{
+							$proimg = url('noimage.jpg'); 
+						} 
+						
+						if(@$productinfo->user_id == 0){
+							$vendorName = 'Admin';
+						}else{
+							$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
+							$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
+						}
+					
+					}else{
+						//$productinfo = $this->Adminmodel->get_single_row_info('*', 'product', 'product_id = '.@$v['product_id'].'', '', 1);
+						$productinfo = DB::table('product')->where(['id' => @$v['product_id']])->select('*')->orderBy('id', 'DESC')->first();
+						//$vendorinfo = $this->Adminmodel->get_single_row_info('first_name, last_name', 'users', 'id = '.@$v['vendor_id'].'', '', 1);
+						
+						if(@$productinfo->user_id == 0){
+							$vendorName = 'Admin';
+						}else{
+							$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
+							$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
+						}
+					
+					    $productImg = DB::table('product_image')->where(['product_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+					
+						if(!empty(@$productImg->image) && file_exists('./public/product/'.@$productImg->image.'')){
+							$proimg = url('product/'.@$productImg->image.'');
+						}else{
+							$proimg = url('noimage.jpg');
+						}
+					
+			        }
+					//echo $echo;
+					
+					
+				if(!empty(@$productinfo)){
+					
+					/*if(@$productinfo->user_id == 0){
+						$vendorName = 'Admin';
+					}else{
+						$vendorinfo = DB::table('users')->where(['id' => @$productinfo->user_id])->select('*')->orderBy('id', 'DESC')->first();
+						$vendorName = @$vendorinfo->first_name.' '.@$vendorinfo->last_name;
+					}*/
+					
+					/*$productImg = DB::table('product_image')->where(['product_id' => @$productinfo->id])->select('*')->orderBy('id', 'ASC')->first();
+					
+					if(!empty(@$productImg->image) && file_exists('./public/product/'.@$productImg->image.'')){
+						$proimg = url('product/'.@$productImg->image.'');
+					}else{
+						$proimg = url('noimage.jpg');
+					}*/
+					
+					
+					$result .='<div style="word-break: break-all;">
+					<div>
+					<img src="'.@$proimg.'" alt="Product" style="width:100px; margin-right:10px;" class="img-responsive">
+					</div>
+					
+					<div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;">
+					<b>Product Name:</b>
+					'.@$v['product_name'].'
+					</div>
+					<!--<a data-toggle="tooltip" data-placement="top" title="" target="_blank" href="'.url('product/product-details?pId='.base64_encode(@$v['product_id']).'').'" data-original-title="Click to preview">
+					'.url('product/product-details?pId='.base64_encode(@$v['product_id']).'').' -->
+						<div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;">
+							<b>Quantity:</b> '.$v['quantity'].' / 
+							<b>Price: $'.$v['price'].'</b>
+						</div>
+					<!--</a>-->
+					
+					<div style=" background-color: #f1f1f1; border-radius: 2px; padding: 2px 5px;">
+					<b>Vendor:</b>
+					'.@$vendorName.'
+					</div>
+					<div class="clearfix"></div>
+					</div>
+					';
+				
+			    }
+			}
+			
+			$result.='<div style="padding-top:10px; font-size:16px;">Total amount of products: $'.@$totalAmount.'</div>
+			<hr>';
+		}
+		return $result;
+	}
 }	

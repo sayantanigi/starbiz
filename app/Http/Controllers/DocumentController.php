@@ -48,14 +48,12 @@ class DocumentController extends Controller {
 	public function saveDocument(Request $request)
     { 
 		$validator = $request->validate([
-			
 				'documentType' => 'required',
 				'documentNumber'  => 'required',
 				'dob'     => 'required', 
 			]
 		);
-		if($validator){
-			
+		if($validator){			
 			if ($request->profilePhoto) {
 				$img = $request->profilePhoto;
 				$extn = $img->getClientOriginalExtension();
@@ -64,9 +62,7 @@ class DocumentController extends Controller {
 				$img->move($path, $profile);
 			} else {
 			    $profile = '';
-			}
-			
-			
+			}			
 			$image = array();
 			if($file = $request->file('documentPhoto')){
 				foreach($file as $file){
@@ -81,37 +77,26 @@ class DocumentController extends Controller {
 					//DB::table('event_image')->insertGetId($data);
 				}				
 			}
-			
 			if(!empty(@$image)){
 				@$documentPhoto = implode(',', @$image);
 			}else{
 				@$documentPhoto = '';
 			}
-			
-			
-			
-			
 			$data = ['user_id' => session()->get('USERLOGINID'), 'document_type' => $request->documentType, 'document_number' => $request->documentNumber, 'document_photo' => $documentPhoto, 'dob' => date('Y-m-d', strtotime($request->dob)), 'created_at' => date('Y-m-d H:i:s')];
-			
 			$userCount = DB::table('user_document')->where(['user_id' => session()->get('USERLOGINID')])->select('*')->orderBy('id', 'DESC')->count();
 			if(@$userCount > 0){
 				$result = DB::table('user_document')->where(['user_id' => session()->get('USERLOGINID')])->update(@$data);
 			}else{
 				$result = DB::table('user_document')->insertGetId($data);
 			}
-			
 			if($result){
-				
-				$profileData = array('profile_image' => $profile);	
+				$profileData = array('profile_image' => $profile, 'dob' => date('Y-m-d', strtotime($request->dob)));	
 				$where = array('id' => session()->get('USERLOGINID'));
 				DB::table('users')->where($where)->update(@$profileData);
-				
 				return redirect()->intended('document')->with("doc_status", "Your document uploaded successfully.Please wait for admin approval.");
 			}else{
 				return redirect()->intended('document')->with("error", "Some error occurred, Please try again.");
 			}
-			
-			
 		}else{
 			return back()->withErrors('message', $validator);
 		}

@@ -1,4 +1,3 @@
-
 @include('admin.header');
 @include('admin.sidebar');
 <style>
@@ -27,7 +26,7 @@
 		background-color: #146c43 !important;
 		border-color: #146c43 !important;
 	}
-	
+
 	.fade:not(.show) {
 	    opacity: 1;
 	}
@@ -60,23 +59,23 @@
 	                  	<div class="col-sm-9">
 	                     	<h4 class="card-title mb-4"><?=$title?></h4>
 	                    </div>
-					
+
 						<!--<div class="col-sm-2 text-end">
 							<a href="<?=url('admin/product/uploadProduct')?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>&nbsp;Upload bulk product</a>
 							<a href="<?=url('product/productcsvfile.csv')?>" download style="font-size: 12px;margin: 40px;">Sample CSV File</a>
 						</div>
-						
+
 						<div class="col-sm-1 text-end">
 							<a href="<?=url('admin/product/add')?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>&nbsp;Add</a>
 						</div>-->
-	                </div> 
+	                </div>
                     <div class="row">
 					    <div class="col-sm-7">
 						    <div class="row">
-								
+
 							</div>
 						</div>
-					
+
 						<div class="col-sm-5">
 							<form action="" method="GET">
 								<div class="row">
@@ -84,7 +83,7 @@
 										<label>From</label>
 										<input type="date" name="from_date" class="form-control">
 									</div>
-									
+
 									<div class="col-sm-5">
 										<label>To</label>
 										<input type="date" name="to_date" class="form-control">
@@ -94,11 +93,11 @@
 										<button type="submit" style="top: 34px;position: absolute;background: #294ca6;border: 1px solid #294ca6;padding: 3px;color: #fff;border-radius: 4px;">Submit</button>
 									</div>
 								</div>
-							</form>	
-							
-						</div>	
+							</form>
+
+						</div>
 					</div><br/>
-					
+
                      <div class="">
 					    @if (session('status'))
 							<div class="alert alert-success" role="alert">
@@ -119,8 +118,9 @@
 											<th>OrderId</th>
 											<th>TotalAmount</th>
 											<th>Currency</th>
+											<th>Admin Share</th>
+											<th>SP Share</th>
 											<th>PurchaseOn</th>
-											
 											<th class="text-center">Action</th>
 								        </tr>
 								   </thead>
@@ -135,31 +135,37 @@
 												<td><?=@$v->order_id?></td>
 												<td><?="$".@$v->amount?></td>
 												<td><?=@$v->currency?></td>
+												<?php
+												    $getPer = DB::table('settings')->select('product_share')->first();
+													$percentage = $getPer->product_share;
+													$totalWidth = @$v->amount;
+													$adminShare = ($percentage / 100) * $totalWidth;
+                                                    $promoterShare = @$v->amount - $adminShare
+
+												?>
+												<td><?="$".@$adminShare?></td>
+												<td><?="$".@$promoterShare?></td>
+
 												<td><?=date('M d, Y', strtotime(@$v->created_at))?></td>
-												
-												
-												
-												
-												
-												
+
 												<td class="text-center">
-												    
+
 													<a href="javascript:void(0);" onclick="orderinfo(<?=$v->id?>);" class="btn btn-outline-danger btn-sm" data-toggle="tooltip" title="More Info">
 														More Info <i class="fa fa-info-circle"></i>
-													</a>  
-													
+													</a>
+
 													<!--<a href="javascript:void(0);"  onclick="orderinfo(<?=$v->id?>);" class="btn btn-danger">More Info <i class="fa fa-info-circle" aria-hidden="true"></i></a>
-											   
+
 													<a href="<?= url('admin/product/view/'.@$v->id) ?>" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="View">
 														<i class="fa fa-eye"></i>
 													</a>
-												
+
 													<a href="javascript:void(0)" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" title="Delete"  onclick="deleteDeals(<?= @$v->id ?>)">
 														<i class="fa fa-trash"></i>
 													</a>-->
-													
+
 												</td>
-											
+
 											</tr>
 										<?php endforeach ?>
 									<?php } ?>
@@ -167,8 +173,8 @@
 								</table>
 
 								<!-- <div class="container mt-3">
-  
-  
+
+
   <button type="button" class="btn btn-primary hide" data-bs-toggle="modal" data-bs-target="#dealModal">
     Open modal
   </button>
@@ -223,9 +229,9 @@
 
 <div class="modal fade in" id="modalPreviewMoreInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" id="user_order_info">
-	
-		
-		
+
+
+
 	</div>
 </div>
                      </div>
@@ -235,7 +241,7 @@
                <!-- end card -->
             </div>
             <!-- end col -->
-            
+
          </div>
          <!-- end col -->
       </div>
@@ -243,7 +249,7 @@
    <!-- End Page-content -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
 
   <script type="text/javascript">
 var adminUrl = ""
@@ -274,7 +280,7 @@ var adminUrl = ""
             beforeSend: function() {
                 $.blockUI({
 
-                    // blockUI code with custom 
+                    // blockUI code with custom
                     // message and styling
                     message: "<h4>Just a moment...<h4>",
                     css: {
@@ -291,7 +297,7 @@ var adminUrl = ""
         });
     }
 
-	function deleteDeals(dealId) 
+	function deleteDeals(dealId)
 	{
 		swal({
 			title: 'Are You sure want to delete this?',
@@ -309,11 +315,11 @@ var adminUrl = ""
 			}
 		});
 	}
-	
+
 	function generateQr(userId){
-		$.ajax({      
-		url: '<?=url('admin/users/qrcode')?>',       
-		type: 'POST',            
+		$.ajax({
+		url: '<?=url('admin/users/qrcode')?>',
+		type: 'POST',
 		data:{userId:userId},
 		success: function(data){
 			if(data == '1'){
@@ -323,27 +329,27 @@ var adminUrl = ""
 		});
 	}
 	//Article status change function
-	function changeDealStatus(id, thisSwitch) {      
-		var newStatus;      
-		if (thisSwitch.val() == 1) {         
-			thisSwitch.val('0');       
+	function changeDealStatus(id, thisSwitch) {
+		var newStatus;
+		if (thisSwitch.val() == 1) {
+			thisSwitch.val('0');
 			newStatus = '0';
-		} else {      
-			thisSwitch.val('1');       
+		} else {
+			thisSwitch.val('1');
 			newStatus = '1';
 		}
-      
-		$.ajax({         
-			url: '<?php echo url('admin/product/changestatus'); ?>',     
-			type: 'POST',       
-			dataType: 'json',       
-			data: {         
-				id: String(id),        
+
+		$.ajax({
+			url: '<?php echo url('admin/product/changestatus'); ?>',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				id: String(id),
 				status: String(newStatus),
-                "_token": "{{ csrf_token() }}"				
+                "_token": "{{ csrf_token() }}"
 			},
 		})
-		.done(function(data) {  
+		.done(function(data) {
 			// if(subpage == 'deallist'){
 			// var redirectURL = adminUrl+'deals';
 			// }
@@ -353,38 +359,38 @@ var adminUrl = ""
 			// var redirectURL = adminUrl+'unapproved-deals';
 			// }
 
-			// alert_response(data,redirectURL);   
+			// alert_response(data,redirectURL);
 			if(newStatus == 1){
 				swal({title: "Sucess!", text: "<strong>product status is Activate</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}else if(newStatus == 0){
 				swal({title: "Sucess!", text: "<strong>product status is Inctivate</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
 			}
 		})
-		.fail(function(data) {      
-			console.log(data);       
-		}); 
+		.fail(function(data) {
+			console.log(data);
+		});
 	}
 
-	function changeDealApproval(id, thisSwitch,subpage) {      
-		var newStatus;      
-		if (thisSwitch.val() == 1) {         
-			thisSwitch.val('0');       
+	function changeDealApproval(id, thisSwitch,subpage) {
+		var newStatus;
+		if (thisSwitch.val() == 1) {
+			thisSwitch.val('0');
 			newStatus = '0';
-		} else {      
-			thisSwitch.val('1');       
+		} else {
+			thisSwitch.val('1');
 			newStatus = '1';
 		}
-      
-		$.ajax({      
-			url: adminUrl+'deals/approve',       
-			type: 'POST',       
-			dataType: 'json',       
-			data: {         
-				dealId: String(id),        
-				status: String(newStatus)        
+
+		$.ajax({
+			url: adminUrl+'deals/approve',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				dealId: String(id),
+				status: String(newStatus)
 			},
 		})
-		.done(function(data) {  
+		.done(function(data) {
 			if(subpage == 'deallist'){
          	var redirectURL = adminUrl+'deals';
          }
@@ -393,21 +399,21 @@ var adminUrl = ""
          }else{
          	var redirectURL = adminUrl+'unapproved-deals';
          }
-         
-         alert_response(data,redirectURL);   
+
+         alert_response(data,redirectURL);
 		})
-		.fail(function(data) {      
-			console.log(data);       
-		}); 
+		.fail(function(data) {
+			console.log(data);
+		});
 	}
 
 	//Article status change function
-	function changeHotDealStatus(id, currentStatus,subpage) {      
-		var newStatus;     
-		if (currentStatus == 1) {         
+	function changeHotDealStatus(id, currentStatus,subpage) {
+		var newStatus;
+		if (currentStatus == 1) {
 			newStatus = '0';
 			var confirmTxt = 'Remove this Deal from Hot Deals?';
-		} else {      
+		} else {
 			newStatus = '1';
 			var confirmTxt = 'Mark this Deal as a Hot Deal?';
 		}
@@ -424,16 +430,16 @@ var adminUrl = ""
 			closeOnCancel: true
 		}, function(isConfirm){
 			if (isConfirm) {
-				$.ajax({      
-					url: adminUrl+'deals/changehotdealstatus',       
-					type: 'POST',       
-					dataType: 'json',       
-					data: {         
-						dealId: String(id),        
-						hot_deal: String(newStatus)        
+				$.ajax({
+					url: adminUrl+'deals/changehotdealstatus',
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						dealId: String(id),
+						hot_deal: String(newStatus)
 					},
 				})
-				.done(function(data) {      
+				.done(function(data) {
 					if(subpage == 'deallist'){
 					    var redirectURL = adminUrl+'deals';
 					}else if(subpage == 'hotdeallist'){
@@ -444,21 +450,21 @@ var adminUrl = ""
 
 					alert_response(data,redirectURL);
 				})
-				.fail(function(data) {      
-				    console.log(data);       
-				}); 
+				.fail(function(data) {
+				    console.log(data);
+				});
 			}
-		});	
+		});
 	}
 
 	//Article status change function
-	function changeFeaturedDealStatus(id, currentStatus) {      
-		var newStatus;     
+	function changeFeaturedDealStatus(id, currentStatus) {
+		var newStatus;
 
-		if (currentStatus == 1) {         
+		if (currentStatus == 1) {
 			newStatus = '0';
 			var confirmTxt = 'Remove this Deal from Featured Deals?';
-		} else {      
+		} else {
 			newStatus = '1';
 			var confirmTxt = 'Mark this Deal as a Featured Deal?';
 		}
@@ -476,49 +482,49 @@ var adminUrl = ""
 		}, function(isConfirm){
 			if (isConfirm) {
 
-				$.ajax({      
-					url: adminUrl+'deals/changefeatureddealstatus',       
-					type: 'POST',       
-					dataType: 'json',       
-					data: {         
-						dealId: String(id),        
-						featured_deal: String(newStatus)        
+				$.ajax({
+					url: adminUrl+'deals/changefeatureddealstatus',
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						dealId: String(id),
+						featured_deal: String(newStatus)
 					},
 				})
-				.done(function(data) {      
+				.done(function(data) {
 		         var redirectURL = adminUrl+'hotdeals';
 		         alert_response(data,redirectURL);
 				})
-				.fail(function(data) {      
-					console.log(data);       
-				}); 
+				.fail(function(data) {
+					console.log(data);
+				});
 			}
-		});	
+		});
 	}
-	
+
 	function orderinfo(ordid){
 		$.ajax({
-			type: "POST", 
-			url:  '<?= url('admin/product/orderinfo') ?>',  
-			data: {ordid:ordid,  "_token": "{{ csrf_token() }}"	}, 
+			type: "POST",
+			url:  '<?= url('admin/product/orderinfo') ?>',
+			data: {ordid:ordid,  "_token": "{{ csrf_token() }}"	},
 			dataType : 'json',
 			beforeSend: function(){
 			},
 			success: function(response){
-			// console.log(response);          
+			// console.log(response);
 			 $('#user_order_info').html(response.html);
 			 $('#modalPreviewMoreInfo').css('display', 'block');
 			// $('#email').val(response.email);
 			// $('#amount').val(response.distributed_event_price);
 			// $('#id').val(id);
 			// $('#event_id').val('<?=base64_decode(@$_GET['eId'])?>');
-			// $('#exampleModal').css('display', 'block'); 
+			// $('#exampleModal').css('display', 'block');
 			}
-		}); 
+		});
 	}
 
-	$(document.body).on('click', '.closepopup_3' ,function(){ 
-	    $('#modalPreviewMoreInfo').css('display', 'none');  
+	$(document.body).on('click', '.closepopup_3' ,function(){
+	    $('#modalPreviewMoreInfo').css('display', 'none');
 	});
 
  </script>

@@ -109,12 +109,48 @@
         <div class="Pagination TabBar">
             <a href="<?=url('dashboard')?>" ><i class="fa fa-angle-left" aria-hidden="true"></i> Home / Transactions & Payment</a>
             <!--<a href="<?=url('dashboard')?>" ><i class="fa fa-angle-left" aria-hidden="true" style="float:right;"></i> Export</a>-->
-			<a href="<?=url('dashboard/downloadCsvAll')?>" class="btn btn-primary" style="float:right;background: #c5a668;color:#fff;border-color: #c5a668;">Export</a>
+			<!--<a href="<?=url('dashboard/downloadCsvAll')?>" class="btn btn-primary" style="float:right;background: #c5a668;color:#fff;border-color: #c5a668;">Export</a>-->
         </div>
       </div>
 
       <div class="row m-0">
-	  
+	    <div class="col-lg-12 col-md-12 col-sm-12">
+			<form method="GET">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="row">
+						<div class="col-md-4"> 
+						</div>
+						
+							<div class="col-md-2">
+							   <span  class="salelistFormSpan" style="position: relative;margin: 5px -46px;top:30px;">From </span><input type="date" class="form-control" name="from_date" id="from_date" value="<?=(!empty(@$_GET['from_date']) ? date('Y-m-d', strtotime(@$_GET['from_date'])) : '')?>">
+							</div>
+							
+							<div class="col-md-2">
+							   <span  class="salelistFormSpan" style="position: relative;margin: 5px -19px;top:30px;">To</span> <input type="date" class="form-control" name="to_date" id="to_date" value="<?=(!empty(@$_GET['to_date']) ? date('Y-m-d', strtotime(@$_GET['to_date'])) : '')?>">
+							</div>
+							
+							<div class="col-md-2 col-6">
+							   <button class="salelistFormSubmit" type="submit" style="background: #c5a668;color: #fff;border-color: #c5a668;width: 40%;padding: 3px;border-radius: 2px;top: 26px;position: relative;">Search</button>
+							</div>
+						
+						<div class="col-md-2 col-6">
+							<?php
+								if(!empty(@$_GET['from_date']) && !empty(@$_GET['to_date'])){
+									$dateFilter = '?from_date='.@$_GET['from_date'].'&to_date='.@$_GET['to_date'].'';
+								}else{
+									$dateFilter = '';
+								}
+							?>
+							<a href="<?=url('dashboard/downloadCsvAll'.$dateFilter.'')?>" class="btn btn-primary salelistFormExport" style="    float: right;
+							background: #c5a668;color: #fff;border-color: #c5a668;margin-right: 11rem;position: relative;top: 20px;">Export</a>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="col-lg-1 col-md-12 col-sm-12">
+			</div><br/><br/>
+		</div>
+		
 	    <?php
 		    if(@$transactionList){
 				foreach(@$transactionList as $k => $v){

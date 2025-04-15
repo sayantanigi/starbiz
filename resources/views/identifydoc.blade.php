@@ -80,21 +80,13 @@
         <img src="<?=url('assets/home/Logo/Logo.png')?>" alt="Logo">
         <h2>Identification Document</h2>
 		
-		@if ($errors->any())
-		<div class="alert alert-danger" style="color: #993838;
-    background-color: #ffdfdf;
-    border-color: #ffcece;
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;">
-			   <ul>
+	@if ($errors->any())
+		<div class="alert alert-danger" style="color: #993838;background-color: #ffdfdf;border-color: #ffcece;position: relative;padding: 0.75rem 1.25rem;margin-bottom: 1rem;border: 1px solid transparent;border-radius: 0.25rem;">
+			<ul>
 				@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
+				    <li>{{ $error }}</li>
 				@endforeach
-				</ul>
-			
+			</ul>
 		</div>
 	@endif
 	

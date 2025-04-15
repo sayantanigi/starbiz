@@ -260,7 +260,7 @@ img {
 												}
 											?>
 											
-											<div class="mt-3"> <label class="tx-11 font-weight-bold mb-0 "><h6>Subcategory</h6></label><p class="text-muted" id="game_description"><?=@$subName ?></p></div>
+											<!--<div class="mt-3"> <label class="tx-11 font-weight-bold mb-0 "><h6>Subcategory</h6></label><p class="text-muted" id="game_description"><?=@$subName ?></p></div>-->
 											
 											
 											<div class="mt-3"> <label class="tx-11 font-weight-bold mb-0 "><h6>Location</h6></label><p class="text-muted" id="game_name"><?=@$result->address; ?></p></div>

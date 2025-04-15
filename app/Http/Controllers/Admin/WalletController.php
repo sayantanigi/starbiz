@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+
 class WalletController extends Controller {
+	
     public function __construct() {
         $this->middleware(function ($request, $next) {
             $this->userData = session()->get('userData');
@@ -15,13 +18,33 @@ class WalletController extends Controller {
             return $next($request);
         });
     }
+	
     public function index() {
         $data = array(
             'title' => 'Withdraw Wallet Request',
             'page' => 'withdraw_request',
-            'subpage' => 'withdraw_request'
+            'subpage' => 'withdraw_request' 
         );
         $data['result'] = DB::table('withdraw_request')->select('*')->orderBy('id', 'DESC')->get();
         return view('admin.wallet_request', $data);
-    }
+    }		
+	
+	public function status(Request $request){	
+		$status = $request->status;		
+		$id = $request->id;			
+		$result = DB::table('withdraw_request')->where(['id' => $id])->update(['status' => $status]);	
+		if($result){			
+			if($request->status == 1){			
+				$response['status'] = 1;				
+				$response['msg'] = "wallet transaction proceed successfully.";		
+			}else{			
+				$response['status'] = 1;	
+				$response['msg'] = "wallet transaction not proceed.";	
+			}		
+		}else{		
+			$response['status'] = 0;			
+			$response['msg'] = "Some error occurred,Please try again.";		
+		}			
+		echo json_encode($response);	
+	}
 }	

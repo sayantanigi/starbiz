@@ -13,9 +13,7 @@ p strong{
 	background-color: #146c43 !important;
 	border-color: #146c43 !important;
 }
-
 body{margin-top:20px;}
-
 .profile {
 	width: 100%;
 	position: relative;
@@ -24,7 +22,6 @@ body{margin-top:20px;}
 	padding-bottom: 5px;
 	margin-bottom: 20px;
 }
-
 .profile .image {
 	display: block;
 	position: relative;
@@ -33,19 +30,16 @@ body{margin-top:20px;}
 	text-align: center;
 	border: 5px solid #FFF;
 }
-
 .profile .user {
 	position: relative;
 	padding: 0px 5px 5px;
 }
-
 .profile .user .avatar {
 	position: absolute;
 	left: 20px;
 	top: -85px;
 	z-index: 2;
 }
-
 .profile .user h2 {
 	font-size: 16px;
 	line-height: 20px;
@@ -54,30 +48,24 @@ body{margin-top:20px;}
 	margin: 4px 0px 0px 135px;
 	font-weight: bold;
 }
-
 .profile .user .actions {
     float: right;
 }
-
 .profile .user .actions .btn {
     margin-bottom: 0px;
 }
-
 .profile .info {
 	float: left;
 	margin-left: 20px;
 }
-
 .img-profile{
 	height:100px;
 	width:100px;
 }
-
 .img-cover{
 	width:800px;
 	height:300px;
 }
-
 @media (max-width: 768px) {
 	.btn-responsive {
 		padding:2px 4px;
@@ -86,7 +74,6 @@ body{margin-top:20px;}
 		border-radius:3px;
 	}
 }
-
 @media (min-width: 769px) and (max-width: 992px) {
 	.btn-responsive {
 		padding:4px 9px;
@@ -104,20 +91,16 @@ body{margin-top:20px;}
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
                     <h4 class="mb-0"><?= $title ?></h4>
-
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                             <li class="breadcrumb-item active"><?= $title ?></li>
                         </ol>
                     </div>
-
                 </div>
             </div>
            </div>
-
             <div class="row">
-
                 <div class="col-lg-7 mb-3">
                   <div class="card shadow rounded">
                      <div class="card-body">    
@@ -168,13 +151,12 @@ body{margin-top:20px;}
                                 <textarea type="text" class="form-control editor summermote" name="description"  id="description"  autocomplete="off"  required></textarea>
                             </div>-->
 							
-							<div class="form-group mb-2">
+							<!--<div class="form-group mb-2">
 								<label class="fw-semibold  text-black">Select Places<span class="mand">*</span></label><br>
 								<label class="checkbox-inline" style="margin-bottom: 0;">
 									<input type="checkbox" class="category" name="places[]" id="places" value="Home" >
 									Home Screen
 								</label>
-
 								<label class="checkbox-inline" style="margin-bottom: 0;">
 									<input type="checkbox" class="category" name="places[]" id="places" value="Ads" >
 									Ads Screen
@@ -190,8 +172,7 @@ body{margin-top:20px;}
 									Event Screen
 								</label>
 								<div class="error invalid-feedback" id="ads-category" style="margin-top: 0;"></div>
-
-							</div>
+							</div>-->
 							
 							
 							<div class="form-group mb-2" >
@@ -199,12 +180,13 @@ body{margin-top:20px;}
 								<select class="form-control" name="gender" id="gender" required>
 								    <option value="Male">Male</option>
 								    <option value="Female">Female</option>
+								    <option value="All Gender">All Gender</option>
 								</select>
                             </div>
 							
 							<div class="form-group mb-2" >
                                 <label class="fw-semibold  text-black">Age</label>
-								<select class="form-control" name="age" id="age" required>
+								<select class="form-control" name="age[]" id="age" multiple data-placeholder="Select Age">
 								    <option value="">Choose Age</option>
 								    <?php
 									    if(@$age){
@@ -217,13 +199,13 @@ body{margin-top:20px;}
                             </div>
 							
 							
-							<div class="form-group mb-2" >
+							<!--<div class="form-group mb-2" >
                                 <label class="fw-semibold  text-black">Parental Status</label>
 								<select class="form-control" name="parental_status" id="parental_status" required>
 								    <option value="Parent">Parent</option>
 								    <option value="Not a Parent">Not a Parent</option>
 								</select>
-                            </div>
+                            </div>--->
 							
 							
 							<div class="form-group mb-2" >
@@ -291,7 +273,6 @@ body{margin-top:20px;}
 									<div class="mt-3"> <label class="tx-11 font-weight-bold mb-0 "><h6>Subscription Duration</h6> </label><br/><span class="text-muted" id="package-duraction_1"></span> <span class="text-muted" id="package-duraction_2"></span></div>
 									
 									<div class="mt-3"> <label class="tx-11 font-weight-bold mb-0 "><h6>Status</h6></label><p class="text-muted" id="package-status"></p></div>
-
 									</div>
 									</div>
 									
@@ -300,17 +281,16 @@ body{margin-top:20px;}
                             </div>
                         </div>
                     </div>
-
                        
                 </div>-->
-
-
             </div>
         </div>
      </section>
    </div>
  </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script> 
+<link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
+<script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script>
 <script>
 $(document).ready(function(){
 	$("#submitform").on('submit', function(e){
@@ -388,9 +368,7 @@ $(document).ready(function(){
 		}
 		});
 	});
-
 });
-
  $(document).on('keyup','#name',function(e){
         var pck_name = $(this).val();
         
@@ -500,7 +478,6 @@ $(document).ready(function() {
 	});
 });
 </script>
-
 <script type="text/javascript">
     google.maps.event.addDomListener(window, 'load', function () {
         var places = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
@@ -531,7 +508,6 @@ $(document).ready(function() {
         });
     });
 </script>
-
 <script>
 $(document).ready(function() { 
 	var location={
@@ -545,7 +521,6 @@ $(document).ready(function() {
 		//latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
 		//
 	}
-
 	function showPosition(position){ 
 		location.latitude=position.coords.latitude;
 		location.longitude=position.coords.longitude;
@@ -553,11 +528,8 @@ $(document).ready(function() {
 		"<br>Longitude: " + position.coords.longitude; 
 		var geocoder = new google.maps.Geocoder();
 		var latLng = new google.maps.LatLng(location.latitude, location.longitude);
-
 		$('#google_latitude').val(location.latitude);
 		$('#google_longitude').val(location.longitude);
-
-
 		if (geocoder) {
 			geocoder.geocode({ 'latLng': latLng}, function (results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
@@ -572,7 +544,6 @@ $(document).ready(function() {
 		}      
 	} //showPosition
 });
-
 function getlistsgghtate(country_name) {
  
 	 $.ajax({
@@ -586,7 +557,6 @@ function getlistsgghtate(country_name) {
 		}
 	})
 }
-
 function getlistcity(state_name) {
  
 	 $.ajax({
@@ -600,5 +570,13 @@ function getlistcity(state_name) {
 		}
 	})
 }
+
+$(document).ready(function(){
+	$('#sel1').chosen({disable_search_threshold: 10,width:'200px'});
+	$('#sel2').chosen({width:'200px'});
+	$('#sel3').chosen({no_results_text:"Not found",width:'200px'});
+	$('#age').chosen({max_selected_options:10,width:'100%'});
+	$('#sel5').chosen({allow_single_deselect:true,width:'200px'});
+});
 </script>
 @include('admin.footer');

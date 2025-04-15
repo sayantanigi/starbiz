@@ -81,7 +81,7 @@
 											<th>Account No.</th>
 											<th>Sift Code</th>
 											<!--<th>Status</th>-->
-											<th class="text-center">Action</th>
+											<th class="text-center">Status</th>
 								        </tr>
 								   </thead>
 								   <tbody class="text-center">
@@ -110,14 +110,7 @@
 												</td>
 												
 												<td class="text-center">
-												    <a href="#" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Edit">
-														<i class="fas fa-edit"></i>
-													</a>
-													
-													<a href="javascript:void(0)" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" title="Delete"  onclick="deleteDeals(<?= @$v->id ?>)">
-														<i class="fa fa-trash"></i>
-													</a>
-													
+												    <select style="width: 70%;" class="form-control statusClass" data-value="<?=@$v->id?>">													    <option>Select</option>													    <option value="1" <?=((@$v->status == 1) ? 'selected' : '')?>>Proceed</option>													    <option value="0" <?=((@$v->status == 0) ? 'selected' : '')?>>Not Proceed</option>													</select>
 												</td>
 											
 											</tr>
@@ -449,6 +442,6 @@ var adminUrl = ""
 			}
 		});	
 	}
-
+$(document).ready(  function() {			$(".statusClass").change(function(event) {			event.preventDefault();			var id = $(this).data('value');			var status = $(this).val();						console.log(status);			jQuery.ajax({				type: "POST",				url: "<?php echo url('admin/wallet/status'); ?>",				dataType: 'json',				data: {status:status, id:id,  "_token": "{{ csrf_token() }}"},				success: function(response){					if(response.status == 1){						swal({title: "Success!",text: ""+response.msg+"",type: "success",showConfirmButton: true}, function(){window.location.href = " ";});											}else{						swal({title: "Fail!",text: ""+response.msg+"",type: "error",showConfirmButton: true}, function(){window.location.href = " ";});					}				}				});			});		});
  </script>
    @include('admin.footer');

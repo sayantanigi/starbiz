@@ -115,40 +115,109 @@
       </div>
 
       <div class="row m-0">
-	  
-	    <?php
-		    if(@$myProList){
+	    <form method="GET" class="salelistForm">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="row">
+					<div class="col-md-4"> 
+					</div>
+					
+						<div class="col-md-2">
+						   <span class="salelistFormSpan" style="position: relative;margin: 5px -46px;top:30px;">From </span><input type="date" class="form-control" name="from_date" id="from_date" value="<?=(!empty(@$_GET['from_date']) ? date('Y-m-d', strtotime(@$_GET['from_date'])) : '')?>">
+						</div>
+						
+						<div class="col-md-2 ">
+						   <span class="salelistFormSpan" style="position: relative;margin: 5px -19px;top:30px;">To</span> <input type="date" class="form-control" name="to_date" id="to_date" value="<?=(!empty(@$_GET['to_date']) ? date('Y-m-d', strtotime(@$_GET['to_date'])) : '')?>">
+						</div>
+						
+						<div class="col-md-2 col-6">
+						   <button  type="submit" class="salelistFormSubmit" style="background: #c5a668;color: #fff;border-color: #c5a668;width: 40%;padding: 3px;border-radius: 2px;top: 26px;position: relative;">Search</button>
+						</div>
+					
+					<div class="col-md-2 col-6">
+						<?php
+							if(!empty(@$_GET['from_date']) && !empty(@$_GET['to_date'])){
+								$dateFilter = '?from_date='.@$_GET['from_date'].'&to_date='.@$_GET['to_date'].'';
+							}else{
+								$dateFilter = '';
+							}
+						?>
+						<a href="<?=url('dashboard/downloadSalesList'.$dateFilter.'')?>" class="btn btn-primary salelistFormExport" style="    float: right;
+						background: #c5a668;color: #fff;border-color: #c5a668;margin-right: 11rem;position: relative;top: 20px;">Export</a>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	    <div class="col-lg-1 col-md-12 col-sm-12">
+		</div>
+		
+		<div class="col-lg-10 col-md-12 col-sm-12 Section ReferralLink" style="box-shadow: 0 0 0px #ddd;">
+      <div class="table-responsive">
+          <table class="table table-striped table-list CustomTable">
+            <thead>
+              <tr>
+                <th class="hidden-xs">Product Image</th>
+                <th>Product Name</th>
+                <th>Business</th>
+                <th>Amount</th>
+                <th>Admin Share</th>
+                <th>SP Share</th>
+                <th>Sales On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+			  //$myReward = [];
+			if(count(@$myProList)){
 				foreach(@$myProList as $k => $v){
-	
-					$proImg = DB::table('product_image')->where(['product_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
-					if(!empty(@$proImg->image) && file_exists('public/product/'.@$proImg->image.'')){
-						$productImg = url('product/'.@$proImg->image.'');
+					
+					
+					if(@$v->type == 'service'){
+					    $proImg = DB::table('services_image')->where(['service_id' => @$v->id])->select('*')->orderBy('id', 'ASC')->first();
+						if(!empty(@$proImg->image) && file_exists('public/service/'.@$proImg->image.'')){
+							$productImg = url('service/'.@$proImg->image.'');
+						}else{
+							$productImg = url('noimage.jpg');
+						} 
 					}else{
-						$productImg = url('noimage.jpg');
+						$proImg = DB::table('product_image')->where(['product_id' => @$v->id])->select('*')->orderBy('id', 'DESC')->first();
+						if(!empty(@$proImg->image) && file_exists('public/product/'.@$proImg->image.'')){
+							$productImg = url('product/'.@$proImg->image.'');
+						}else{
+							$productImg = url('noimage.jpg');
+						}
 					}
 					
 					$listing = DB::table('listing')->where(['id' => @$v->listing_id])->select('*')->orderBy('id', 'DESC')->first();
+					$getPer = DB::table('settings')->select('product_share')->first();
+					$percentage = $getPer->product_share;
+					$totalWidth = @$v->price;								
+					$adminShare = ($percentage / 100) * $totalWidth;	
+					$promoterShare = @$v->price - $adminShare; 
 					
 					echo '
-						<div class="col-lg-4 col-md-4 mb-4">
-						  <div class="TransactionBlock">
-							<div class="TransactionData">
-							  <img src="'.@$productImg.'" alt="" style="width: 72px;height: 61px;object-fit: unset;">
-							  <div class="TransactionTextdata">
-								<p class="m-0">'.@$listing->business_name.'</p>
-								<p class="m-0">'.@$v->name.'</p>
-							  </div>
-							 
-							</div>
-							<p class="TransactionAmount">$'.@$v->price.'</p>
-						  </div>
-						   <!--<div style="width: 100%;background: #c5a668;height: 28px;margin-top: -28px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"><p style="text-align: center;color: #fff;">20 Products were sold in total</p></div>-->
-						</div>
+						<tr>
+							<td class="hidden-xs"><img src="'.@$productImg.'" alt="" style="width: 72px;height: 61px;object-fit: unset;border-radius: 4px;"></td>
+							<td class="hidden-xs">'.@$v->name.'</td>
+							<td class="hidden-xs">'.@$listing->business_name.'</td>
+							<td class="hidden-xs">$'.@$v->price.'</td>
+							<td class="hidden-xs">$'.@$promoterShare.'</td>
+							<td class="hidden-xs">$'.@$adminShare.'</td>
+							<td class="hidden-xs">'.date('M d, Y', strtotime($v->created_at)).'</td>
+						</tr>
 					';
-				}	
+				}
+			}else{
+				//echo 'Not found any record.';
 			}
 		?>
-       
+              
+            </tbody>
+          </table>
+        </div>
+        </div>
+       <div class="col-lg-1 col-md-12 col-sm-12">
+		</div>
 		
         <!--<div class="col-lg-4 col-md-4 mb-4">
           <div class="TransactionBlock">

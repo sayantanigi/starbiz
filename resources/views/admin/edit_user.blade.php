@@ -337,7 +337,7 @@
 							
 							<div class="mb-2 col-lg-12">
 								<label class="fw-semibold  text-black">Profile Bio</label>
-								<textarea class="form-control editor summermote" name="profile_bio" id="profile_bio"><?php echo !empty($result->bio) ? $result->bio : ''; ?></textarea>
+								<textarea class="form-control summermote" name="profile_bio" id="profile_bio"><?php echo !empty($result->bio) ? $result->bio : ''; ?></textarea>
 								<span id="error_profile_bio" class="text-danger"></span>
 							</div> 
 							

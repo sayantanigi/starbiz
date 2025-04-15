@@ -44,116 +44,188 @@ class PaymentController extends Controller {
     public function proceed_from_cart_web_view_stripe_payment(Request $request) {
         require "vendor/stripe/stripe-php/init.php";
         if($request->stripeToken){
-            $token = $request->stripeToken;
-            $sub_id =  $_POST['sub_id'];
-            $sub_name  =  $_POST['sub_name'];
-            $user_id   =  $_POST['user_id'];
-            $amount    =  $_POST['amount'];
-            $address   =  $_POST['card_address'];
-            $country   =  $_POST['card_country'];
-            $state     =  $_POST['card_state'];
-            $city      =  $_POST['card_city'];
-            $zipcode   =  $_POST['card_zipcode'];
-            $card_name =  $_POST['card_name'];
-            $email     =  $_POST['email'];
-            $itemPrice =  $amount;
-            $currency  =  'usd';
-            $stripe = array(
-                "secret_key"      => STRIPE_SECRET_KEY,
-                "publishable_key" => STRIPE_PUBLISHABLE_KEY
-            );
-            \Stripe\Stripe::setApiKey($stripe['secret_key']);
-            try {
-                $customer = \Stripe\Customer::create(array(
-                    'email'  => $email,
-                    'source' => $token
-                ));
-            } catch(Exception $e) {
-                $api_error = $e->getMessage();
-            }
-            if(empty($api_error) && $customer) {
-                $itemName = @$sub_name;
-                $orderID  = "ORDNO-".$this->generate_otp(6);
-                $itemPriceCents = ($itemPrice*100);
-                $subInfo  = DB::table('sub_plan')->where(['id' => $sub_id])->select('*')->orderBy('id', 'DESC')->first();
-                $stripeSubId = '';
-                if(!empty(@$subInfo)){
-                    if(!empty(@$subInfo->stripe_plan_id)){
-                        try {
-                            $subscription = \Stripe\Subscription::create(array(
-                                "customer" => $customer->id,
-                                "items" => array(
-                                    array(
-                                        "plan" => @$subInfo->stripe_plan_id,
-                                    ),
-                                ),
-                            ));
-                            $stripeSubId = @$subscription['id'];
-                        }catch(Exception $e) {
-                            $api_error = $e->getMessage();
-                        }
-                    }
+			$token     = $request->stripeToken;
+			$user_id   =  $_POST['user_id'];
+			$amount    =  $_POST['amount'];
+			$address   =  $_POST['card_address'];
+			$country   =  $_POST['card_country'];
+			$state     =  $_POST['card_state'];
+			$city      =  $_POST['card_city'];
+			$zipcode   =  $_POST['card_zipcode'];
+			$card_name =  $_POST['card_name'];
+			$email     =  $_POST['email'];
+			$itemPrice =  $amount;
+			$currency  =  'usd';
+			$products_info = [];
+            $i = 0;
+            $productCartDetails = DB::table('add_to_cart')
+                ->join('product', 'add_to_cart.product_id', '=', 'product.id')
+                ->where('add_to_cart.user_id', $user_id)
+                ->where('add_to_cart.type', '1')
+                ->select('product.id as prod_id','product.name','add_to_cart.id as cart_id','add_to_cart.mrp','add_to_cart.quantity','add_to_cart.final_price','add_to_cart.discount','add_to_cart.type')->get();
+            // Fetch service-based cart items
+            $serviceCartDetails = DB::table('add_to_cart')
+                ->join('services', 'add_to_cart.product_id', '=', 'services.id')
+                ->where('add_to_cart.user_id', $user_id)
+                ->where('add_to_cart.type',  '2')
+                ->select('services.id as service_id','services.name','add_to_cart.id as cart_id','add_to_cart.mrp','add_to_cart.quantity','add_to_cart.final_price','add_to_cart.discount','add_to_cart.type')->get();
+            // Combine and format cart details
+            $cartList = [];
+            $totalSaved = 0;
+            $totalAmount = 0;
+            if(!empty($productCartDetails)){
+                foreach ($productCartDetails as $item) {
+                    $getpro_Img = DB::table('product_image')->where('product_id', $item->prod_id)->first();
+                    $cartList[] = [
+                        'product_id' => $item->prod_id,
+                        'item_image' => !empty($getpro_Img->image) ? asset('product/' . $getpro_Img->image) : asset('no_image.png'),
+                        'product_name' => $item->name,
+                        'quantity' => $item->quantity,
+                        'specipication' => 'product',
+                        'price' => number_format($item->final_price, 2),
+                    ];
+                    $totalSaved += $item->mrp - $item->final_price;
+                    $totalAmount += $item->final_price;
                 }
-                if(empty($api_error) && $subscription) {
-                    $subsData = $subscription->jsonSerialize();
-                    if($subsData['status'] == 'active') {
-                        $transactionID = $subscrID = $subsData['id'];
-                        $custID = $subsData['customer'];
-                        $planID = $subsData['plan']['id'];
-                        $planAmount = ($subsData['plan']['amount']/100);
-                        $planCurrency = $subsData['plan']['currency'];
-                        $planinterval = $subsData['plan']['interval'];
-                        $planIntervalCount = $subsData['plan']['interval_count'];
-                        $paymentDate    =  date('Y-m-d H:i:s');
-                        $payment_status = 'succeeded';
-                        $chargeID = '';
-                        if($payment_status == 'succeeded') {
-                            $sub_info = DB::table('sub_plan')->where(['id' => @$sub_id])->select('*')->orderBy('id', 'DESC')->first();
-                            if($sub_info->type == 1){
-                                $current_period_start = date('Y-m-d');
-                                $current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' month'));
-                            }else{
-                                $current_period_start = date('Y-m-d');
-                                $current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' year'));
+            }
+            if(!empty($serviceCartDetails)){
+                foreach ($serviceCartDetails as $sitem) {
+                    $getser_Img = DB::table('services_image')->where('service_id', $sitem->service_id)->first();
+                    $cartList[] = [
+                        'product_id' => $sitem->service_id,
+                        'item_image' => !empty($getser_Img->image) ? asset('service/' . $getser_Img->image) : asset('no_image.png'),
+                        'product_name' => $sitem->name,
+                        'quantity' => $sitem->quantity,
+                        'specipication' => 'service',
+                        'price' => number_format($sitem->final_price, 2),
+                    ];
+                    $totalSaved += $sitem->mrp - $sitem->final_price;
+                    $totalAmount += $sitem->final_price;
+                }
+            }
+            // Response
+            if (!empty($cartList)) {
+                $products_to_order = $cartList;
+				/*$productId = $products_to_order[0]['product_id'];
+				$productUserId = DB::table('product')->where(['id' => $productId])->select('user_id')->first();
+				$stripe  = DB::table('stripe_connect')->where(['userId' => @$productUserId->user_id])->select('*')->first();
+				$stripeAccountId = '';
+				if($stripe){
+					$stripecon = $this->get_stripe_info($stripe->stripe_acc_id);
+					if($stripecon == 1){
+						$stripeAccountId = $stripe->stripe_acc_id;
+					}else{
+						$statusMsg = 'Your stripe not connected.Please connect stripe first.';
+						$payment_status = 0;
+						$txnId = '';
+						return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+						exit();
+					}
+				}else{
+					$statusMsg = 'Your stripe not connected.Please connect stripe first.';
+					$payment_status = 0;
+					$txnId = '';
+					return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+					exit();
+				}*/
+                $stripe = array(
+                    "secret_key"      => STRIPE_SECRET_KEY,
+                    "publishable_key" => STRIPE_PUBLISHABLE_KEY
+                );
+                \Stripe\Stripe::setApiKey($stripe['secret_key']);
+                try {
+                    $customer = \Stripe\Customer::create(array(
+                        'email'  => $email,
+                        'source' => $token
+                    ));
+                } catch(Exception $e) {
+                    $api_error = $e->getMessage();
+                }
+                if(empty($api_error) && $customer) {
+                    $itemName = 'StarBiz Cart Order';
+                    $orderID  = "CART_ORDER-".$this->generate_otp(6);
+                    $itemPriceCents = ($itemPrice*100);
+					/*$percentage = 0.2;
+					$adminPercentage  = DB::table('settings')->select('admin_percentage')->first();
+					if($adminPercentage){
+						if(@$adminPercentage->admin_percentage){
+						    $percentage = $adminPercentage->admin_percentage/100;
+						}
+					}
+					$application_fee = intval($itemPrice * $percentage);*/
+                    try {
+                        $charge = \Stripe\Charge::create(array(
+                            'customer' => $customer->id,
+                            'amount'   => $itemPriceCents,
+                            'currency' => 'usd',
+                            'description' => $itemName,
+							//"destination" => $stripeAccountId,
+							//"application_fee" => $application_fee,
+                            'metadata' => array(
+                                'order_id' => $orderID
+                            )
+                        ));
+                    } catch(Exception $e) {
+                        $api_error = $e->getMessage();
+                    }
+                    if(empty($api_error) && $charge) {
+                        $chargeJson = $charge->jsonSerialize();
+                        if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1) {
+                            $transactionID  =  $chargeJson['balance_transaction'];
+                            $paidAmount     =  $chargeJson['amount'];
+                            $paidAmount     =  ($paidAmount/100);
+                            $paidCurrency   =  $chargeJson['currency'];
+                            $payment_status =  $chargeJson['status'];
+                            $chargeID       =  $chargeJson['id'];
+                            $paymentDate    =  date('Y-m-d H:i:s');
+                            //print_r($chargeJson);
+                            if($payment_status == 'succeeded') {
+                                $statusMsg = 'Your Payment has been Successful!';
+                                $data = ['user_name' => $card_name, 'user_id' => $user_id, 'address' => $address, 'country' => $country, 'state' => @$state, 'city' => @$city, 'zipcode' => $zipcode, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => $transactionID, 'order_id' => $orderID, 'charge_id' => $chargeID, 'status' => $payment_status, 'payment_type' => 6, 'product_info' => serialize($products_to_order), 'created_at' => $paymentDate];
+                                $result = DB::table('transaction')->insertGetId($data);
+                                DB::table('add_to_cart')->where('user_id', '=', $user_id)->delete();
+                                return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$transactionID."&userId=".$user_id."");
+                            } else {
+                                $statusMsg = "Transaction has been failed!";
+                                $payment_status = 'failed';
+                                $txnId = '';
+                                //redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId.""),'refresh');
+                                return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
                             }
-                            $statusMsg = 'Your Payment has been Successful!';
-                            $data = ['user_name' => @$card_name, 'user_id' => @$user_id, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'zipcode' => @$zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => @$transactionID, 'order_id' => @$orderID, 'charge_id' => @$chargeID, 'status' => @$payment_status, 'expiry_date' => @$current_period_end, 'payment_type' => '1', 'created_at' => @$paymentDate];
-                            $result = DB::table('transaction')->insertGetId($data);
-                            return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$transactionID."&userId=".$user_id."");
                         } else {
                             $statusMsg = "Transaction has been failed!";
                             $payment_status = 'failed';
                             $txnId = '';
-                            return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+                            //redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId.""),'refresh');
+                            return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
                         }
-                    }else{
-                        $statusMsg = "Transaction has been failed!";
+                    } else {
+                        $statusMsg = "Charge creation failed! $api_error";
                         $payment_status = 'failed';
                         $txnId = '';
-                        return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+                        //redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id.""),'refresh');
+                        return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
                     }
-                }else{
-                    $statusMsg = "Subscription creation failed! ".$api_error;
+                } else {
+                    $statusMsg = "Invalid card details! $api_error";
                     $payment_status = 'failed';
                     $txnId = '';
-                    return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+                    //redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId.""),'refresh');
+                    return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
                 }
-            }else{
-                $statusMsg = "Invalid card details! $api_error";
+            } else {
+                $statusMsg = "Error on form submission.";
                 $payment_status = 'failed';
                 $txnId = '';
-                return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$user_id."");
+                $userId = '';
+                //redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId.""),'refresh');
+                return redirect()->intended("webview/productPaymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId."");
             }
-        }else{
-            $statusMsg = "Error on form submission.";
-            $payment_status = 'failed';
-            $txnId = '';
-            $userId = '';
-            return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$txnId."&userId=".$userId."");
+        } else {
+            return response()->json(['status' => '0', 'result' => 'No cart data found'], 200);
         }
     }
-	public function web_view_stripe_payment(Request $request)
-    {
+	public function web_view_stripe_payment(Request $request) {
 		require "vendor/stripe/stripe-php/init.php";
         if($request->stripeToken){
 			$token     = $request->stripeToken;
@@ -244,21 +316,71 @@ class PaymentController extends Controller {
 						$payment_status = 'succeeded';
 						$chargeID = '';
 						//print_r($chargeJson);
-						if($payment_status == 'succeeded')
-						{
+						if($payment_status == 'succeeded') {
 							$sub_info = DB::table('sub_plan')->where(['id' => @$sub_id])->select('*')->orderBy('id', 'DESC')->first();
 							if($sub_info->type == 1){
 								$current_period_start = date('Y-m-d');
-								$current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' month'));
+								$current_period_end   = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' month'));
 							}else{
 								$current_period_start = date('Y-m-d');
-								$current_period_end = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' year'));
+								$current_period_end   = date('Y-m-d', strtotime($current_period_start. ' + '.@$sub_info->duration.' year'));
+							}
+							$beforeSubExpire = DB::table('transaction')->whereRaw("user_id = ".@$user_id." AND payment_type = 1 AND expiry_date > '".date('Y-m-d')."'")->select('*')->orderBy('id', 'DESC')->first();
+							if(!empty(@$beforeSubExpire)){
+								$date_1             = date_create(date('Y-m-d'));
+								$date_2             = date_create($beforeSubExpire->expiry_date);
+								$diff               = date_diff($date_1,$date_2);
+								$sub_remaining_days = $diff->format("%a");
+								$subDays            = $sub_remaining_days . 'Days';
+								$subExpiryDate      = date('Y-m-d',strtotime(''.$subDays.'',strtotime($current_period_end))) . PHP_EOL;
+								$userPreviousCount  = DB::table('users')->where(['id' => @$user_id])->select('*')->first();
+								$access_business    = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 3])->select('*')->first();
+								$businessCount = 0;
+								if(!empty(@$access_business)){
+								    $businessCount = @$access_business->number_of + @$userPreviousCount->businessCount;
+								}
+								$access_event = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 5])->select('*')->first();
+								$eventCount = 0;
+								if(!empty(@$access_event)){
+								    $eventCount = @$access_event->number_of + @$userPreviousCount->eventCount;
+								}
+								$access_invitation  = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 4])->select('*')->first();
+								$invitationCount = 0;
+								if(!empty(@$access_invitation)){
+								    $invitationCount = @$access_invitation->number_of + @$userPreviousCount->invitationCount;
+								}
+								$access_promotion   = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 1])->select('*')->first();
+								$promotionCount = 0;
+								if(!empty(@$access_promotion)){
+								    $promotionCount = @$access_promotion->number_of + @$userPreviousCount->promotionCount;
+								}
+							} else {
+								$subExpiryDate = $current_period_end;
+								$access_business = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 3])->select('*')->first();
+								$businessCount = 0;
+								if(!empty(@$access_business)){
+									$businessCount = @$access_business->number_of;
+								}
+								$access_event  = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 5])->select('*')->first();
+								$eventCount = 0;
+								if(!empty(@$access_event)){
+									$eventCount = @$access_event->number_of;
+								}
+								$access_invitation  = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 4])->select('*')->first();
+								$invitationCount = 0;
+								if(!empty(@$access_invitation)){
+									$invitationCount = @$access_invitation->number_of;
+								}
+								$access_promotion   = DB::table('sub_permision_menu')->where(['sub_id' => @$sub_id, 'menu_id' => 1])->select('*')->first();
+								$promotionCount = 0;
+								if(!empty(@$access_promotion)){
+									$promotionCount = @$access_promotion->number_of;
+								}
 							}
 							$statusMsg = 'Your Payment has been Successful!';
-							$data = ['user_name' => @$card_name, 'user_id' => @$user_id, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'zipcode' => @$zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => @$transactionID, 'order_id' => @$orderID, 'charge_id' => @$chargeID, 'status' => @$payment_status, 'expiry_date' => @$current_period_end, 'payment_type' => '1', 'created_at' => @$paymentDate];
+							$data = ['user_name' => @$card_name, 'user_id' => @$user_id, 'address' => @$address, 'country' => @$country, 'state' => @$state, 'city' => @$city, 'zipcode' => @$zipcode, 'sub_id' => @$sub_id, 'amount' => @$itemPrice, 'currency' => @$currency, 'txn_id' => @$transactionID, 'order_id' => @$orderID, 'charge_id' => @$chargeID, 'status' => @$payment_status, 'expiry_date' => @$subExpiryDate, 'payment_type' => '1', 'created_at' => @$paymentDate];
 							$result = DB::table('transaction')->insertGetId($data);
-							//return redirect()->intended('admin/users')->with("status", "Your Payment has been Successful!");
-							//redirect(base_url("paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$vendortxndata->tranId."&userId=".$userId.""),'refresh');
+							DB::table('users')->where('id',@$user_id)->update(['auto_renew_status' => '1', 'eventCount' => @$eventCount, 'businessCount' => @$businessCount, 'invitationCount' => @$invitationCount, 'promotionCount' => @$promotionCount, 'spend_money' => DB::raw('spend_money+'.@$itemPrice)]);
 							return redirect()->intended("webview/paymentStatus?statusMsg=".$statusMsg."&status=".$payment_status."&txnId=".$transactionID."&userId=".$user_id."");
 						}else{
 							$statusMsg = "Transaction has been failed!";

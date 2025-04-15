@@ -35,7 +35,7 @@ class InvitationController extends Controller {
 			'subpage' => 'invitation'
 		);
 
-		$Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status as status1, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id";
+		$Sql = "SELECT invitation.id as invId, invitation.event_id, invitation.status as status1, invitation.comment, repeat_invitation.invitation_id, repeat_invitation.sender_id, repeat_invitation.receiver_id, repeat_invitation.amount, repeat_invitation.hour, repeat_invitation.status FROM invitation INNER JOIN repeat_invitation ON invitation.id = repeat_invitation.invitation_id";
 	    $data['result'] = DB::select($Sql);
 		//print_r($data['result']);
         return view('admin.invitation', $data);

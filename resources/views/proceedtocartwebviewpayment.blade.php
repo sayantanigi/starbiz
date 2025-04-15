@@ -48,9 +48,7 @@
                                 <label for="" class="form-label">NAME OF CARD HOLDER</label>
                                 <input type="text" class="form-control" name="card_name" id="card_name" placeholder="NAME OF CARD HOLDER" value="<?=@$userInfo->first_name . ' ' . @$userInfo->last_name?>" required>
                                 <input type="hidden" name="user_id" id="user_id" value="<?=@$userInfo->id?>">
-                                <input type="hidden" name="sub_id" id="sub_id" value="<?=@$subInfo->id?>">
-                                <input type="hidden" name="amount" id="amount" value="<?=@$subInfo->amount?>">
-                                <input type="hidden" name="sub_name" id="sub_name" value="<?=@$subInfo->name?>">
+                                <input type="hidden" name="amount" id="amount" value="<?=@$amount?>">
                                 <input type="hidden" name="email" id="email" value="<?=@$userInfo->email?>">
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 Block">

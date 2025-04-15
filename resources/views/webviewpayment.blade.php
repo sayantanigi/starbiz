@@ -4,132 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StarBiz</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!--<link rel="stylesheet" href="../assets/style/style.css">-->
 	<link rel="stylesheet" href="<?=url('assets/home/style/style.css')?>">
-
 	<style>
-	    /********************** Payment Details Style **********************/
-
-		.PaymentDetails {
-		  margin-top: 70px;
-		}
-
-		.PaymentDetails .TopSection {
-		  display: flex;
-		  flex-direction: column;
-		  align-items: center;
-		  justify-content: center;
-		  background: #c5a668;
-		  gap: 5px;
-		  padding-top: 15px;
-		  padding-bottom: 15px;
-		  border-top-left-radius: 15px;
-		  border-top-right-radius: 15px;
-		  z-index: 10;
-		}
-
-		.PaymentDetails .TopSection h1 {
-		  font-size: 30px;
-		  font-weight: 600;
-		  color: #fbfbfb;
-		  margin: 0;
-		}
-
-		.PaymentDetails .TopSection p {
-		  font-size: 16px;
-		  margin: 0;
-		  color: #fff;
-		  opacity: 0.8;
-		}
-
-		.PaymentDetails .BottomSection {
-		  padding-top: 15px;
-		  padding-bottom: 15px;
-		  background: #ffffff;
-		  box-shadow: 0 0 10px #ddd;
-		  border-bottom-left-radius: 15px;
-		  border-bottom-right-radius: 15px;
-		}
-
-		.PaymentDetails .BottomSection .Block {
-		  margin-bottom: 15px;
-		}
-
-		.PaymentDetails .BottomSection .Block label {
-		  display: block;
-		  text-align: left;
-		  font-size: 14px;
-		  margin-bottom: 5px;
-		  color: #000000;
-		  font-weight: 600;
-		}
-
-		.PaymentDetails .BottomSection .Block input {
-		  font-size: 16px;
-		  border: 1px solid #ddd;
-		  border-radius: 10px;
-		  outline: none;
-		  background-color: #f5f5f5;
-		  width: 100%;
-		  height: 40px;
-		  padding-left: 15px;
-		  padding-right: 15px;
-		}
-
-		.PaymentDetails .BottomSection .PayNowBtnBlock {
-		  align-items: center;
-		  justify-content: center;
-		  display: flex;
-		}
-
-		.PaymentDetails .BottomSection .PayNowBtn {
-		  height: 40px;
-		  background: #c5a668;
-		  display: flex;
-		  border-radius: 10px;
-		  z-index: 100;
-		  flex-direction: row;
-		  align-items: center;
-		  justify-content: center;
-		  gap: 15px;
-		  border: none;
-		  padding-left: 15px;
-		  padding-right: 15px;
-		  font-size: 15px;
-		  font-weight: 600;
-		  color: #fff;
-		}
-
-		.PaymentDetails .BottomSection .PayNowBtn:hover {
-		  background: linear-gradient(90deg, #b58b42, #7a5a28);
-		}
-
-		@media only screen and (max-width: 480px) {
-		  .PaymentDetails {
-			margin-top: 0;
-		  }
-
-		  .PaymentDetails .TopSection {
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-		  }
-
-		  .PaymentDetails .BottomSection {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
-		  }
-		}
-
-		#paymentResponse > p{
-
-	color:red !important;
-
-}
+        .PaymentDetails{margin-top:70px}.PaymentDetails .TopSection{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#c5a668;gap:5px;padding-top:15px;padding-bottom:15px;border-top-left-radius:15px;border-top-right-radius:15px;z-index:10}.PaymentDetails .TopSection h1{font-size:30px;font-weight:600;color:#fbfbfb;margin:0}.PaymentDetails .TopSection p{font-size:16px;margin:0;color:#fff;opacity:.8}.PaymentDetails .BottomSection{padding-top:15px;padding-bottom:15px;background:#fff;box-shadow:0 0 10px #ddd;border-bottom-left-radius:15px;border-bottom-right-radius:15px}.PaymentDetails .BottomSection .Block{margin-bottom:15px}.PaymentDetails .BottomSection .Block label{display:block;text-align:left;font-size:14px;margin-bottom:5px;color:#000;font-weight:600}.PaymentDetails .BottomSection .Block input{font-size:16px;border:1px solid #ddd;border-radius:10px;outline:0;background-color:#f5f5f5;width:100%;height:40px;padding-left:15px;padding-right:15px}.PaymentDetails .BottomSection .PayNowBtnBlock{align-items:center;justify-content:center;display:flex}.PaymentDetails .BottomSection .PayNowBtn{height:40px;background:#c5a668;display:flex;border-radius:10px;z-index:100;flex-direction:row;align-items:center;justify-content:center;gap:15px;border:none;padding-left:15px;padding-right:15px;font-size:15px;font-weight:600;color:#fff}.PaymentDetails .BottomSection .PayNowBtn:hover{background:linear-gradient(90deg,#b58b42,#7a5a28)}@media only screen and (max-width:480px){.PaymentDetails{margin-top:0}.PaymentDetails .TopSection{border-top-left-radius:0;border-top-right-radius:0}.PaymentDetails .BottomSection{border-bottom-left-radius:0;border-bottom-right-radius:0}}#paymentResponse>p{color:red!important}
 	</style>
 </head>
 <body>
@@ -199,21 +79,18 @@
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 PayNowBtnBlock">
-                            <button type="submit" class="btn btn-primary PayNowBtn">Pay Now</button>
+                            <button type="submit" class="btn btn-primary PayNowBtn" id="payNowBtn">Pay Now</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
-
 <script>
 var stripe = Stripe('<?=STRIPE_PUBLISHABLE_KEY?>');
-
 var elements = stripe.elements();
-
 var style = {
 	base: {
 		fontWeight: 400,
@@ -230,8 +107,6 @@ var style = {
 		color: '#eb1c26',
 	}
 };
-
-
 
 var cardElement = elements.create('cardNumber', {
 	style: style,
@@ -253,10 +128,16 @@ cvc.mount('#card_cvc');
 var resultContainer = document.getElementById('paymentResponse');
 cardElement.addEventListener('change', function(event) {
 	if (event.error) {
-		console.log(event.error)
+		//console.log(event.error)
 		resultContainer.innerHTML = '<p>' + event.error.message + '</p>';
+        var btn = document.getElementById('payNowBtn');
+        btn.disabled = false;
+        btn.textContent = 'Pay Now';
 	} else {
 		resultContainer.innerHTML = '';
+        var btn = document.getElementById('payNowBtn');
+        btn.disabled = false;
+        btn.textContent = 'Pay Now';
 	}
 });
 
@@ -271,8 +152,14 @@ function createToken() {
 	stripe.createToken(cardElement).then(function(result) {
 		if (result.error) {
 			resultContainer.innerHTML = '<p>' + result.error.message + '</p>';
+            var btn = document.getElementById('payNowBtn');
+            btn.disabled = false;
+            btn.textContent = 'Pay Now';
 		} else {
 			stripeTokenHandler(result.token);
+            var btn = document.getElementById('payNowBtn');
+            btn.disabled = true;
+            btn.textContent = 'Please Wait';
 		}
 	});
 }
@@ -308,7 +195,11 @@ $(document).on('keyup','#card_amount',function(e){
 	  $("#card_amount_1").val('');
 	}
 });
-
+// document.getElementById('paymentFrm').addEventListener('submit', function() {
+//     var btn = document.getElementById('payNowBtn');
+//     btn.disabled = true;
+//     btn.textContent = 'Please Wait';
+// });
 </script>
 </body>
 </html>

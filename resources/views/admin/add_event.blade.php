@@ -416,7 +416,7 @@ body{margin-top:20px;}
                                                     </div> 
 													
 													
-                                                    <div class="mb-2 col-lg-6">
+                                                    <div class="mb-2 col-lg-4">
                                                         <label> Date</label>
                                                         <input type="date" class="form-control" name="event_start_date" id="event_start_date" >		
 														<span id="error_event_start_date" class="text-danger"></span>
@@ -428,11 +428,11 @@ body{margin-top:20px;}
 														<span id="error_event_end_date" class="text-danger"></span>
                                                     </div> --->
 													
-													<div class="mb-2 col-lg-6">
-                                                        <label>Time</label>
+													<div class="mb-2 col-lg-4">
+                                                        <label>Start Time</label>
                                                         <input type="time" class="form-control" name="event_start_time" id="event_start_time" >		
 														<span id="error_event_start_time" class="text-danger"></span>
-                                                    </div> 
+                                                    </div> 																										<div class="mb-2 col-lg-4">                                                        <label>End Time</label>                                                        <input type="time" class="form-control" name="event_end_time" id="event_end_time" >																                                                    </div> 
 													<!--<div class="mb-2 col-lg-6">
                                                         <label>End Time</label>
                                                         <input type="time" class="form-control" name="event_end_time" id="event_end_time" >		

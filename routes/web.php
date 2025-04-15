@@ -43,7 +43,6 @@ Route::post('/dashboard/get_promotion_edit_detail','App\Http\Controllers\Dashboa
 Route::post('/dashboard/get_event_detail','App\Http\Controllers\DashboardController@get_event_detail');
 Route::post('/dashboard/get_event_image_gallery','App\Http\Controllers\DashboardController@get_event_image_gallery');
 Route::post('/dashboard/get_payment_list','App\Http\Controllers\DashboardController@get_payment_list');
-
 Route::get('/dashboard/delete-promotion/{id}','App\Http\Controllers\DashboardController@delete_promotion');
 Route::get('/dashboard/delete-event/{id}','App\Http\Controllers\DashboardController@delete_event');
 Route::post('/dashboard/get_event_edit_detail','App\Http\Controllers\DashboardController@get_event_edit_detail');
@@ -93,7 +92,7 @@ Route::get('/dashboard/wallet','App\Http\Controllers\DashboardController@wallet'
 Route::get('/dashboard/transaction','App\Http\Controllers\DashboardController@transaction');
 Route::get('/dashboard/reward','App\Http\Controllers\DashboardController@reward');
 Route::get('/dashboard/term-and-condition','App\Http\Controllers\DashboardController@term');
-Route::get('/dashboard/cancelSubscription','App\Http\Controllers\DashboardController@cancelSubscription');
+Route::post('/dashboard/cancelSubscription','App\Http\Controllers\DashboardController@cancelSubscription');
 Route::post('/dashboard/saveAdvs','App\Http\Controllers\DashboardController@saveAdvs');
 Route::get('/dashboard/advertisement','App\Http\Controllers\AdvertisementController@index');
 Route::post('/dashboard/submitAdvertisepayment','App\Http\Controllers\AdvertisementController@submit_advertisement_payment');
@@ -122,18 +121,20 @@ Route::get('/dashboard/downloadCsvAll','App\Http\Controllers\DashboardController
 Route::get('/dashboard/downloadCsvWallet','App\Http\Controllers\DashboardController@downloadCsvWallet');
 Route::post('/dashboard/resent_referral','App\Http\Controllers\DashboardController@resent_referral');
 Route::get('/dashboard/downloadCsvReferral','App\Http\Controllers\DashboardController@downloadCsvReferral');
+Route::get('/dashboard/downloadPurchasedHistory','App\Http\Controllers\DashboardController@downloadPurchasedHistory');
+Route::get('/dashboard/downloadSalesList','App\Http\Controllers\DashboardController@downloadSalesList');
 Route::get('/dashboard/deleteAccount','App\Http\Controllers\DashboardController@deleteAccount');
-
-
+Route::post('/dashboard/addRating','App\Http\Controllers\DashboardController@addRating');
+Route::post('/dashboard/contact_invitee','App\Http\Controllers\DashboardController@contact_invitee');
+Route::post('/dashboard/contact_admin','App\Http\Controllers\DashboardController@contact_admin');
+Route::post('/dashboard/appearence_start','App\Http\Controllers\DashboardController@appearence_start');
+Route::post('/dashboard/appearence_ended','App\Http\Controllers\DashboardController@appearence_ended');
 Route::get('/subscription/plan','App\Http\Controllers\SubscriptionController@index');
 Route::get('/subscription/payment','App\Http\Controllers\SubscriptionController@payment');
 Route::post('/subscription/sub-payment','App\Http\Controllers\SubscriptionController@sub_payment');
-
 Route::get('/admin','App\Http\Controllers\Admin\LoginController@index');
 Route::get('/admin/dashboard','App\Http\Controllers\Admin\DashboardController@index');
 Route::post('/admin/logincontroller/submitLogin','App\Http\Controllers\Admin\LoginController@submitLogin');
-
-
 
 //admin profile
 Route::get('/admin/profile','App\Http\Controllers\Admin\ProfileController@index');
@@ -149,7 +150,6 @@ Route::post('/admin/setting/savelogo-setting','App\Http\Controllers\Admin\Settin
 //logout
 Route::get('/admin/logout','App\Http\Controllers\Admin\LoginController@logout');
 
-
 //admin user
 Route::get('/admin/user-type','App\Http\Controllers\Admin\UsersController@type');
 Route::get('/admin/add-user-type','App\Http\Controllers\Admin\UsersController@addusertype');
@@ -157,7 +157,8 @@ Route::post('/admin/save-user-type','App\Http\Controllers\Admin\UsersController@
 Route::get('/admin/edit-user-type/{id}','App\Http\Controllers\Admin\UsersController@editusertype');
 Route::post('/admin/update-user-type','App\Http\Controllers\Admin\UsersController@update_user_type');
 Route::get('/admin/delete-user-type/{id}','App\Http\Controllers\Admin\UsersController@delete_user_type');
-
+Route::get('/admin/contact_admin','App\Http\Controllers\Admin\UsersController@contact_admin');
+Route::get('/admin/referral','App\Http\Controllers\Admin\UsersController@reffer');
 
 //admin subscription
 Route::get('/admin/subscription','App\Http\Controllers\Admin\SubscriptionController@index');
@@ -173,6 +174,7 @@ Route::get('/admin/subscription/access-menu-edit/{id}','App\Http\Controllers\Adm
 Route::post('/admin/subscription/updateMenu/','App\Http\Controllers\Admin\SubscriptionController@updateMenu');
 Route::get('/admin/subscription/delete-access-menu/{id}','App\Http\Controllers\Admin\SubscriptionController@delete_access_menu');
 Route::get('/admin/subscription/testPlan','App\Http\Controllers\Admin\SubscriptionController@testPlan');
+
 //admin users
 Route::get('/admin/users','App\Http\Controllers\Admin\UsersController@index');
 Route::get('/admin/inactive-users','App\Http\Controllers\Admin\UsersController@inactive_users');
@@ -183,6 +185,14 @@ Route::post('/admin/users/changestatus','App\Http\Controllers\Admin\UsersControl
 Route::get('/admin/users/edit/{id}','App\Http\Controllers\Admin\UsersController@edit');
 Route::post('/admin/users/update','App\Http\Controllers\Admin\UsersController@update');
 Route::get('/admin/users/delete-user/{id}','App\Http\Controllers\Admin\UsersController@delete_user');
+// Route::get('/admin/users/getUnreadCount/{id}','App\Http\Controllers\Admin\UsersController@getUnreadCount');
+Route::get('/admin/notification/getUnreadCount/{id}','App\Http\Controllers\Admin\NotificationController@getUnreadCount');
+// Route::get('/admin/notifications/all/{admin_id}', 'App\Http\Controllers\Admin\NotificationController@getAllNotifications');
+
+// Route to view all notifications
+Route::get('/admin/notifications/{admin_id}', 'App\Http\Controllers\Admin\NotificationController@fetchAllNotifications')->name('admin.notifications.index');
+Route::post('/admin/notifications/send', 'App\Http\Controllers\Admin\NotificationController@sendNotification')->name('admin.notifications.send');
+//Route::post('admin/notifications/send', [NotificationController::class, 'sendNotification']);
 Route::get('/admin/users/edit-profile/{id}','App\Http\Controllers\Admin\UsersController@edit_profile');
 Route::post('/admin/users/updateProfile','App\Http\Controllers\Admin\UsersController@updateProfile');
 Route::post('/admin/users/delete-academic','App\Http\Controllers\Admin\UsersController@delete_academic');
@@ -191,7 +201,6 @@ Route::post('/admin/users/delete-reference','App\Http\Controllers\Admin\UsersCon
 Route::post('/admin/users/delete-guardian','App\Http\Controllers\Admin\UsersController@delete_guardian');
 Route::get('/admin/users/subscription/{id}','App\Http\Controllers\Admin\UsersController@subscription');
 Route::get('/admin/users/payment','App\Http\Controllers\Admin\UsersController@payment');
-
 Route::post('/admin/users/submit-payment','App\Http\Controllers\Admin\UsersController@submit_payment');
 Route::get('/admin/users/view/{id}','App\Http\Controllers\Admin\UsersController@view');
 
@@ -202,7 +211,6 @@ Route::post('/admin/event/save','App\Http\Controllers\Admin\EventController@save
 Route::post('/admin/event/saveTicket','App\Http\Controllers\Admin\EventController@saveTicket');
 Route::post('/admin/event/saveLocation','App\Http\Controllers\Admin\EventController@saveLocation');
 Route::post('/admin/event/saveEventImage','App\Http\Controllers\Admin\EventController@saveEventImage');
-
 Route::get('/admin/event/edit/{id}','App\Http\Controllers\Admin\EventController@edit');
 Route::post('/admin/event/update','App\Http\Controllers\Admin\EventController@update');
 Route::post('/admin/event/updateTicket','App\Http\Controllers\Admin\EventController@updateTicket');
@@ -210,13 +218,11 @@ Route::post('/admin/event/updateLocation','App\Http\Controllers\Admin\EventContr
 Route::post('/admin/event/updateEventImage','App\Http\Controllers\Admin\EventController@updateEventImage');
 Route::post('/admin/event/deleteGallery','App\Http\Controllers\Admin\EventController@deleteGallery');
 Route::get('/admin/event/delete-event/{id}','App\Http\Controllers\Admin\EventController@delete_event');
-
 Route::get('/admin/event/category','App\Http\Controllers\Admin\EventController@event_category');
 Route::get('/admin/event/add-category','App\Http\Controllers\Admin\EventController@add_category');
 Route::post('/admin/event/save-category','App\Http\Controllers\Admin\EventController@save_category');
 Route::get('/admin/event/edit-category/{id}','App\Http\Controllers\Admin\EventController@edit_category');
 Route::get('/admin/event/delete-category/{id}','App\Http\Controllers\Admin\EventController@delete_category');
-
 Route::post('/admin/event/update-category','App\Http\Controllers\Admin\EventController@update_category');
 Route::post('/admin/event/changestatus','App\Http\Controllers\Admin\EventController@changestatus');
 Route::get('/admin/event/view/{id}','App\Http\Controllers\Admin\EventController@view');
@@ -224,9 +230,7 @@ Route::get('/admin/event/view/{id}','App\Http\Controllers\Admin\EventController@
 //Listing
 Route::get('/admin/listing','App\Http\Controllers\Admin\ListingController@index');
 Route::get('/admin/listing/add','App\Http\Controllers\Admin\ListingController@add');
-
 Route::post('/admin/listing/getlistsubcategory','App\Http\Controllers\Admin\ListingController@getlistsubcategory');
-
 Route::post('/admin/listing/getstate','App\Http\Controllers\Admin\ListingController@getstate');
 Route::post('/admin/listing/getcity','App\Http\Controllers\Admin\ListingController@getcity');
 Route::post('/admin/listing/save','App\Http\Controllers\Admin\ListingController@save');
@@ -236,14 +240,12 @@ Route::post('/admin/listing/deleteGallery','App\Http\Controllers\Admin\ListingCo
 Route::post('/admin/listing/changestatus','App\Http\Controllers\Admin\ListingController@changestatus');
 Route::get('/admin/listing/view/{id}','App\Http\Controllers\Admin\ListingController@view');
 Route::get('/admin/listing/delete-listing/{id}','App\Http\Controllers\Admin\ListingController@delete_listing');
-
 Route::get('/admin/listing/category','App\Http\Controllers\Admin\ListingController@listing_category');
 Route::get('/admin/listing/add-category','App\Http\Controllers\Admin\ListingController@add_category');
 Route::post('/admin/listing/save-category','App\Http\Controllers\Admin\ListingController@save_category');
 Route::get('/admin/listing/edit-category/{id}','App\Http\Controllers\Admin\ListingController@edit_category');
 Route::post('/admin/listing/update-category','App\Http\Controllers\Admin\ListingController@update_category');
 Route::get('/admin/listing/delete-category/{id}','App\Http\Controllers\Admin\ListingController@delete_category');
-
 Route::get('/admin/listing/uploadListing','App\Http\Controllers\Admin\ListingController@uploads_listing');
 Route::post('/admin/listing/saveBulklisting','App\Http\Controllers\Admin\ListingController@saveBulklisting');
 
@@ -255,7 +257,6 @@ Route::get('/admin/listing/edit-subcategory/{id}','App\Http\Controllers\Admin\Li
 Route::post('/admin/listing/update-subcategory','App\Http\Controllers\Admin\ListingController@update_subcategory');
 Route::get('/admin/listing/delete-subcategory/{id}','App\Http\Controllers\Admin\ListingController@delete_subcategory');
 
-
 //listing subcategory sub
 Route::get('/admin/listing/subcategory-sub','App\Http\Controllers\Admin\ListingController@listing_sub_category_sub');
 Route::get('/admin/listing/add-subcategory-sub','App\Http\Controllers\Admin\ListingController@add_subcategory_sub');
@@ -263,7 +264,6 @@ Route::get('/admin/listing/add-subcategory-sub','App\Http\Controllers\Admin\List
 Route::post('/admin/listing/save-subcategory-save','App\Http\Controllers\Admin\ListingController@save_subcategory_save');
 Route::post('/admin/listing/update-subcategory-update','App\Http\Controllers\Admin\ListingController@update_subcategory_update');
 Route::get('/admin/listing/edit-subcategory-sub/{id}','App\Http\Controllers\Admin\ListingController@edit_subcategory_sub');
-
 
 //Discount
 Route::get('/admin/discount/add','App\Http\Controllers\Admin\DiscountController@add');
@@ -305,7 +305,6 @@ Route::get('/admin/access-management/edit-access/{id}','App\Http\Controllers\Adm
 Route::post('/admin/access-management/updateAccess','App\Http\Controllers\Admin\AccessController@updateAccess');
 Route::post('/admin/access-management/changestatus','App\Http\Controllers\Admin\AccessController@changestatus');
 
-
 //promotion
 Route::get('/admin/promotion','App\Http\Controllers\Admin\PromotionController@index');
 Route::get('/admin/promotion/add','App\Http\Controllers\Admin\PromotionController@add');
@@ -314,7 +313,6 @@ Route::get('/admin/promotion/edit/{id}','App\Http\Controllers\Admin\PromotionCon
 Route::post('/admin/promotion/update','App\Http\Controllers\Admin\PromotionController@update');
 Route::get('/admin/promotion/delete/{id}','App\Http\Controllers\Admin\PromotionController@delete_user');
 Route::get('/admin/promotion/view/{id}','App\Http\Controllers\Admin\PromotionController@view');
-
 Route::get('/admin/promotion/category','App\Http\Controllers\Admin\PromotionController@category');
 Route::get('/admin/promotion/category/add','App\Http\Controllers\Admin\PromotionController@add_category');
 Route::post('/admin/promotion/category/save','App\Http\Controllers\Admin\PromotionController@save_category');
@@ -328,7 +326,6 @@ Route::get('/admin/promotion/plan/edit/{id}','App\Http\Controllers\Admin\Promoti
 Route::post('/admin/promotion/plan/update','App\Http\Controllers\Admin\PromotionController@update_plan');
 Route::get('/admin/promotion/plan/delete/{id}','App\Http\Controllers\Admin\PromotionController@delete_plan');
 
-
 //Tags
 Route::get('/admin/tags','App\Http\Controllers\Admin\TagsController@index');
 Route::get('/admin/tags/add','App\Http\Controllers\Admin\TagsController@add');
@@ -336,7 +333,6 @@ Route::post('/admin/tags/save','App\Http\Controllers\Admin\TagsController@save')
 Route::get('/admin/tags/edit/{id}','App\Http\Controllers\Admin\TagsController@edit');
 Route::post('/admin/tags/update','App\Http\Controllers\Admin\TagsController@update');
 Route::get('/admin/tags/delete/{id}','App\Http\Controllers\Admin\TagsController@delete');
-
 
 //Interest
 Route::get('/admin/interest','App\Http\Controllers\Admin\InterestController@index');
@@ -346,10 +342,8 @@ Route::get('/admin/interest/edit/{id}','App\Http\Controllers\Admin\InterestContr
 Route::post('/admin/interest/update','App\Http\Controllers\Admin\InterestController@update');
 Route::get('/admin/interest/delete/{id}','App\Http\Controllers\Admin\InterestController@delete');
 
-
 //Invitation
 Route::get('/admin/invitation','App\Http\Controllers\Admin\InvitationController@index');
-
 
 //Product
 Route::get('/admin/product/category','App\Http\Controllers\Admin\ProductController@category');
@@ -358,14 +352,12 @@ Route::post('/admin/product/category/save_category','App\Http\Controllers\Admin\
 Route::get('/admin/product/category/edit/{id}','App\Http\Controllers\Admin\ProductController@edit_category');
 Route::post('/admin/product/category/update_category','App\Http\Controllers\Admin\ProductController@update_category');
 Route::get('/admin/product/category/delete/{id}','App\Http\Controllers\Admin\ProductController@delete_category');
-
 Route::get('/admin/product/subcategory','App\Http\Controllers\Admin\ProductController@subcategory');
 Route::get('/admin/product/subcategory/add','App\Http\Controllers\Admin\ProductController@add_subcategory');
 Route::post('/admin/product/subcategory/save','App\Http\Controllers\Admin\ProductController@save_subcategory');
 Route::get('/admin/product/subcategory/edit/{id}','App\Http\Controllers\Admin\ProductController@edit_subcategory');
 Route::post('/admin/product/subcategory/update','App\Http\Controllers\Admin\ProductController@update_subcategory');
 Route::get('/admin/product/subcategory/delete/{id}','App\Http\Controllers\Admin\ProductController@delete_subcategory');
-
 Route::get('/admin/product/','App\Http\Controllers\Admin\ProductController@product');
 Route::get('/admin/product/add','App\Http\Controllers\Admin\ProductController@add');
 Route::post('/admin/product/save','App\Http\Controllers\Admin\ProductController@save');
@@ -378,10 +370,11 @@ Route::post('/admin/product/removeImg','App\Http\Controllers\Admin\ProductContro
 Route::post('/admin/product/getSub','App\Http\Controllers\Admin\ProductController@getSub');
 Route::get('/admin/product/uploadProduct','App\Http\Controllers\Admin\ProductController@uploads_product');
 Route::post('/admin/product/saveBulkproduct','App\Http\Controllers\Admin\ProductController@saveBulkproduct');
-
 Route::get('/admin/product/purchaseList','App\Http\Controllers\Admin\ProductController@purchaseList');
+Route::get('/admin/product/purlist','App\Http\Controllers\Admin\ProductController@purlist');
+//Route::get('/admin/product/purchaseList','App\Http\Controllers\Admin\ProductController@purchaseList');
 Route::post('/admin/product/orderinfo','App\Http\Controllers\Admin\ProductController@orderinfo');
-
+Route::get('/admin/product/salesList','App\Http\Controllers\Admin\ProductController@salesList');
 
 //Services
 Route::get('/admin/services','App\Http\Controllers\Admin\ServicesController@index');
@@ -442,7 +435,16 @@ Route::get('/admin/payout/','App\Http\Controllers\Admin\PayoutController@index')
 Route::get('/admin/payout/downloadCsv','App\Http\Controllers\Admin\PayoutController@downloadCsv');
 Route::get('/admin/payout/view/{id}','App\Http\Controllers\Admin\PayoutController@view');
 Route::get('/admin/payout/downloadPayoutReportCsv/{id}','App\Http\Controllers\Admin\PayoutController@downloadPayoutReportCsv');
+Route::get('/admin/payout/productpurchaseList','App\Http\Controllers\Admin\PayoutController@productpurchaseList');
 Route::get('/admin/wallet/withdraw-request','App\Http\Controllers\Admin\WalletController@index');
+Route::post('/admin/wallet/status','App\Http\Controllers\Admin\WalletController@status');
+
+//admin share
+Route::get('/admin/admin_share','App\Http\Controllers\Admin\AdminshareController@index');
+Route::post('/admin/admin_share/saveadmin_share','App\Http\Controllers\Admin\AdminshareController@saveadminshare');
+
+//Adevertimsent
+Route::get('/admin/advertisement','App\Http\Controllers\Admin\AdvertisementController@index');
 
 //API
 Route::get('/api/usertypeList','App\Http\Controllers\Api\ApiController@usertypeList_get');
@@ -524,7 +526,6 @@ Route::post('/api/deleteProduct','App\Http\Controllers\Api\ApiController@deleteP
 Route::post('/api/sendMsg','App\Http\Controllers\Api\ApiController@sendMsg_post');
 Route::post('/api/allChats','App\Http\Controllers\Api\ApiController@allChats_post');
 Route::post('/api/addUserOneSignalId','App\Http\Controllers\Api\ApiController@addUserOneSignalId_post');
-
 Route::post('/api/stripeConnect','App\Http\Controllers\Api\ApiController@stripeConnect_post');
 Route::post('/api/userStripeInfo','App\Http\Controllers\Api\ApiController@userStripeInfo_post');
 Route::get('/api/bannerList','App\Http\Controllers\Api\ApiController@bannerList_get');
@@ -576,7 +577,26 @@ Route::post('/api/totalCart','App\Http\Controllers\Api\ApiController@totalCart_p
 Route::post('/api/cart_list','App\Http\Controllers\Api\ApiController@cart_list_post');
 Route::post('/api/removeCartList','App\Http\Controllers\Api\ApiController@removeCartList_post');
 Route::get('/api/stripeStatus','App\Http\Controllers\Api\ApiController@stripeStatus_get');
-
+Route::get('/api/salesList','App\Http\Controllers\Api\ApiController@salesList_get');
+Route::get('/api/rewardsAll','App\Http\Controllers\Api\ApiController@rewardsAll_get');
+Route::get('/api/rewardsEarned','App\Http\Controllers\Api\ApiController@rewardsEarned_get');
+Route::get('/api/allInvitation','App\Http\Controllers\Api\ApiController@AllInvitation_get');
+Route::get('/api/InvitedPeople','App\Http\Controllers\Api\ApiController@InvitedPeople_get');
+Route::get('/api/rewardsBalance','App\Http\Controllers\Api\ApiController@rewardsBalance_get');
+Route::post('/api/addReview','App\Http\Controllers\Api\ApiController@addReview_post');
+Route::get('/api/reviewList','App\Http\Controllers\Api\ApiController@reviewList_get');
+Route::get('/api/referralInviteUserList','App\Http\Controllers\Api\ApiController@referralInviteUserList_get');
+Route::get('/api/myRewards','App\Http\Controllers\Api\ApiController@myRewards_get');
+Route::post('/api/addReferralCode','App\Http\Controllers\Api\ApiController@addReferralCode_post');
+Route::post('/api/allReadNotification','App\Http\Controllers\Api\ApiController@allReadNotification_post');
+Route::post('/api/countUnreadNotification','App\Http\Controllers\Api\ApiController@countUnreadNotification_post');
+Route::post('/api/deleteNotification','App\Http\Controllers\Api\ApiController@deleteNotification_post');
+Route::post('/api/contactInvitee','App\Http\Controllers\Api\ApiController@contactInvitee_post');
+Route::post('/api/contactAdmin','App\Http\Controllers\Api\ApiController@contactAdmin_post');
+Route::post('/api/appearanceInitiate','App\Http\Controllers\Api\ApiController@appearanceInitiate_post');
+Route::post('/api/appearanceEnd','App\Http\Controllers\Api\ApiController@appearanceEnd_post');
+Route::post('/api/appearanceNotAttend','App\Http\Controllers\Api\ApiController@appearanceNotAttend_post');
+Route::post('/api/replayMsg','App\Http\Controllers\Api\ApiController@replayMsg_post');
 
 //webview api
 Route::get('/webview/paymentPage','App\Http\Controllers\PaymentController@paymentPage');
@@ -584,11 +604,9 @@ Route::get('/webview/proceedfromcartpaymentPage','App\Http\Controllers\PaymentCo
 Route::post('/webview/web_view_stripe_payment','App\Http\Controllers\PaymentController@web_view_stripe_payment');
 Route::post('/webview/proceed_from_cart_web_view_stripe_payment','App\Http\Controllers\PaymentController@proceed_from_cart_web_view_stripe_payment');
 Route::get('/webview/paymentStatus','App\Http\Controllers\PaymentController@paymentStatus');
-
 Route::get('/webview/promotionPaymentPage','App\Http\Controllers\PaymentController@promotionPaymentPage');
 Route::post('/webview/promotion_web_view_stripe_payment','App\Http\Controllers\PaymentController@promotion_web_view_stripe_payment');
 Route::get('/webview/promotionpaymentStatus','App\Http\Controllers\PaymentController@promotionpaymentStatus');
-
 Route::get('/webview/topupPayment','App\Http\Controllers\PaymentController@topupPaymentpage');
 Route::post('/webview/topup_web_view_stripe_payment','App\Http\Controllers\PaymentController@topup_web_view_stripe_payment');
 Route::get('/webview/topupPaymentStatus','App\Http\Controllers\PaymentController@topupPaymentStatus');

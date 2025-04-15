@@ -163,11 +163,11 @@ foreach ($roles as $k => $v) {
                         </a>
                     </li>
                     <?php } } ?>
-                    <li class="<?= (!empty($subpage) && $subpage == 'listing-sub') ? 'mm-active' : ''; ?>">
+                    <!--<li class="<?= (!empty($subpage) && $subpage == 'listing-sub') ? 'mm-active' : ''; ?>">
                         <a href="<?=url('admin/listing/subcategory')?>" class="<?= (!empty($subpage) && $subpage == 'listing-sub') ? 'active' : ''; ?>">
                             <span class="hide-menu">Listing Subcategory</span>
                         </a>
-                    </li>
+                    </li>-->
                     <!--<li class="<?= (!empty($subpage) && $subpage == 'listing-sub-sub') ? 'mm-active' : ''; ?>">
                         <a href="<?=url('admin/listing/subcategory-sub')?>" class="<?= (!empty($subpage) && $subpage == 'listing-sub-sub') ? 'active' : ''; ?>">
                             <span class="hide-menu">Listing Subcategory Sub</span>
@@ -230,6 +230,14 @@ foreach ($roles as $k => $v) {
                             <span class="hide-menu">Purchase List</span>
                         </a>
                     </li>
+
+					<li class="">
+                        <a href="<?=url('admin/product/salesList')?>" class="">
+                            <span class="hide-menu">Sales List</span>
+                        </a>
+                    </li>
+
+
                 </ul>
             </li>
             <?php } ?>
@@ -445,14 +453,22 @@ foreach ($roles as $k => $v) {
                     if (@$payout->view == 1) { ?>
                     <li class="<?= (!empty($subpage) && $subpage == 'payout') ? 'mm-active' : ''; ?>">
                         <a href="<?=url('admin/payout')?>" class="<?= (!empty($subpage) && $subpage == 'payout') ? 'active' : ''; ?>">
-                            <span class="hide-menu">Payout List</span>
+                            <span class="hide-menu">Appearance Payout List</span>
                         </a>
                     </li>
                     <?php } ?>
+					
+					 <li class="<?= (!empty($subpage) && $subpage == 'product-payout') ? 'mm-active' : ''; ?>">
+                        <a href="<?=url('admin/payout/productpurchaseList')?>" class="<?= (!empty($subpage) && $subpage == 'product-payout') ? 'active' : ''; ?>">
+                            <span class="hide-menu">Product & Service Payout List</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <?php } ?>
-
+			
+            <!--<li class="<?= (!empty($page) && $page == 'withdraw_request') ? 'mm-active' : ''; ?>">                <a href="javascript: void(0);" class="has-arrow waves-effect <?= (!empty($page) && $page == 'withdraw_request') ? 'mm-active' : ''; ?>">                    <i class="fa fa-bookmark"></i>                    <span>Wallet </span>                </a>                <ul class="sub-menu" aria-expanded="true">                    <li class="<?= (!empty($subpage) && $subpage == 'withdraw_request') ? 'mm-active' : ''; ?>">                        <a href="<?=url('wallet/withdraw-request')?>" class="<?= (!empty($subpage) && $subpage == 'withdraw_request') ? 'active' : ''; ?>">                            <span class="hide-menu">Withdraw Request</span>                        </a>                    </li>                 </ul>            </li>-->
+			
             <?php if (in_array(17, $menuId)) { ?>
             <li class="<?= (!empty($page) && $page == 'transaction') ? 'mm-active' : ''; ?>">
                 <a href="javascript: void(0);" class="has-arrow waves-effect <?= (!empty($page) && $page == 'transaction') ? 'mm-active' : ''; ?>">
@@ -465,13 +481,14 @@ foreach ($roles as $k => $v) {
                     if (@$tran->view == 1) { ?>
                     <li class="<?= (!empty($subpage) && $subpage == 'transaction') ? 'mm-active' : ''; ?>">
                         <a href="<?=url('admin/transaction')?>" class="<?= (!empty($subpage) && $subpage == 'transaction') ? 'active' : ''; ?>">
-                            <span class="hide-menu">Transaction List</span>
+                            <span class="hide-menu">All Transaction List</span>
                         </a>
                     </li>
                     <?php } ?>
                 </ul>
             </li>
             <?php } ?>
+            <li class="<?= (!empty($page) && $page == 'admin_share') ? 'mm-active' : ''; ?>"><a href="<?=url('admin/admin_share')?>" class="waves-effect"><i class="fa fa-bookmark"></i> Admin Share</a></li>
         </ul>
     </div>
 </div>

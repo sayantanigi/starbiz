@@ -179,12 +179,12 @@
         </a>
       </li>
 	  
-      <li>
+      <!--<li>
         <a href="" id="Wallet">
           <img src="<?=url('assets/home/images/NavIcon7.png')?>" alt="">
           <p>Wallet</p>
         </a>
-      </li>
+      </li>-->
 	  
       <li>
         <a href="" id="TransactionsPayment">

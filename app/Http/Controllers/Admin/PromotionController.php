@@ -65,8 +65,7 @@ class PromotionController extends Controller {
 		$file_type       = $request->file_type;
 		$category        = $request->category;
 		$gender          = $request->gender;
-		$age             = $request->age;
-		$parental_status = $request->parental_status;
+		//$parental_status = $request->parental_status;
 		$income          = $request->income;
 		$location        = $request->location;
 		$latitude        = $request->latitude;
@@ -78,6 +77,18 @@ class PromotionController extends Controller {
 			$places = implode(',', $request->places);
 		}else{
 			$places = '';
+		}	
+
+		if(!empty($request->parental_status)){		
+		    $parental_status = implode(',', $request->parental_status);		
+		}else{			
+		    $parental_status = '';	
+		} 	
+
+		if(!empty($request->age)){	
+		    $age = implode(',', $request->age);	
+		}else{			
+		    $age = '';	
 		}
 		
 		if ($request['ads_image']) {
@@ -155,8 +166,8 @@ class PromotionController extends Controller {
 		$status          = $request->user_status;
 		$category        = $request->category;
 		$gender          = $request->gender;
-		$age             = $request->age;
-		$parental_status = $request->parental_status;
+		//$age             = $request->age;
+		//$parental_status = $request->parental_status;
 		$income          = $request->income;
 		$location        = $request->location;
 		$latitude        = $request->latitude;
@@ -183,6 +194,18 @@ class PromotionController extends Controller {
 			$places = implode(',', $request->places);
 		}else{
 			$places = '';
+		}		
+		
+		if(!empty($request->parental_status)){	
+		    $parental_status = implode(',', $request->parental_status);	
+		}else{		
+		    $parental_status = '';	
+		}
+		
+		if(!empty($request->age)){	
+		    $age = implode(',', $request->age);	
+		}else{			
+		    $age = '';	
 		}
 		 
 		

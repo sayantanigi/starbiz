@@ -78,8 +78,8 @@ class EventController extends Controller {
 		$website             = @$request->event_website;
 		//$frt_image         = $request->frt_image;
 		//$bck_image         = $request->bck_image;
-		$startDate           = date('Y-m-d H:i:s', strtotime($event_start_date.''.$event_start_time));
-		$endDate             = date('Y-m-d H:i:s', strtotime($event_end_date.''.$event_end_time));
+		$startDate           = date('Y-m-d', strtotime($event_start_date));
+		$endDate             = date('Y-m-d', strtotime($event_end_date));
       
 	    if(@$request->event_tags){
 			$tags = @$request->event_tags;
@@ -107,11 +107,11 @@ class EventController extends Controller {
 				// $img->move($path, $bck_image);
 			// } else {
 				// $bck_image = '';
-			// }
+			// }          
 		
-		    //$data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'backgroung_image' => @$bck_image, 'front_image' => @$frt_image, 'created_at' => date('Y-m-d H:i:s')];
+		    //$data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'backgroung_image' => @$bck_image, 'front_image' => @$frt_image, 'created_at' => date('Y-m-d H:i:s')];            			$endTime = $event_end_time;			$end_time = date('H:i:s', strtotime($endTime));			$startTime = $event_start_time;			$start_time = date('H:i:s', strtotime($startTime));
 			
-		    $data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'email' => @$email, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'status' => 1, 'created_at' => date('Y-m-d H:i:s')];
+		    $data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'end_time' => @$end_time, 'start_time' => @$start_time, 'email' => @$email, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'status' => 1, 'created_at' => date('Y-m-d H:i:s')];            //print_r($data);die;  
 			
 		    $result = DB::table('events')->insertGetId($data);
 			if($result){
@@ -125,7 +125,7 @@ class EventController extends Controller {
 			}
 			echo json_encode($response);
 	  }else{
-		  
+		    $endTime = $event_end_time;			$end_time = date('H:i:s', strtotime($endTime));			$startTime = $event_start_time;			$start_time = date('H:i:s', strtotime($startTime));
 		    /*if ($request['frt_image']) {
 				$img = $request['frt_image'];
 				$extn = $img->getClientOriginalExtension();
@@ -148,7 +148,7 @@ class EventController extends Controller {
 		
 		    //$data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'backgroung_image' => @$bck_image, 'front_image' => @$frt_image, 'updated_at' => date('Y-m-d H:i:s')];
 			
-		    $data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'email' => @$email, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'status' => 1, 'updated_at' => date('Y-m-d H:i:s')];
+		    $data = ['event_name' => $event_name, 'description' => $event_description, 'user_id' => '0', 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'end_time' => @$end_time, 'start_time' => @$start_time, 'email' => @$email, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'status' => 1, 'updated_at' => date('Y-m-d H:i:s')];
 			
 		    $result = DB::table('events')->where('id',$request->eventId)->update(@$data);
 			if($result){
@@ -745,8 +745,8 @@ class EventController extends Controller {
 		$event_end_time    = $request->event_end_time;
 		//$frt_image       = $request->frt_image;
 		//$bck_image       = $request->bck_image;
-		$startDate         = date('Y-m-d H:i:s', strtotime($event_start_date.''.$event_start_time));
-		$endDate           = date('Y-m-d H:i:s', strtotime($event_end_date.''.$event_end_time));
+		$startDate         = date('Y-m-d H:i:s', strtotime($event_start_date));
+		$endDate           = date('Y-m-d H:i:s', strtotime($event_end_date));
 		$eventId           = $request->eventId;
 		
 		
@@ -781,10 +781,10 @@ class EventController extends Controller {
 		}else{
 		    $tags = '';
 		}
-		
+		$endTime = $event_end_time;		$end_time = date('H:i:s', strtotime($endTime));		$startTime = $event_start_time;		$start_time = date('H:i:s', strtotime($startTime));
 		//$data = ['event_name' => $event_name, 'description' => $event_description, 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'backgroung_image' => @$bck_image, 'front_image' => @$frt_image, 'updated_at' => date('Y-m-d H:i:s')];
 
-		$data = ['event_name' => $event_name, 'description' => $event_description, 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'email' => @$email, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'updated_at' => date('Y-m-d H:i:s')];
+		$data = ['event_name' => $event_name, 'description' => $event_description, 'category' => @$event_category, 'start_date' => @$startDate, 'end_date' => @$endDate, 'email' => @$email, 'end_time' => @$end_time, 'start_time' => @$start_time, 'phone' => @$phone, 'website' => @$website, 'tags' => $tags, 'updated_at' => date('Y-m-d H:i:s')];        //print_r($data);die;
 		
 		$result = DB::table('events')->where('id',$eventId)->update(@$data);
 		if($result){

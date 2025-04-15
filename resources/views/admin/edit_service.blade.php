@@ -209,11 +209,11 @@ body{margin-top:20px;}
 							<div class="form-group mb-2">
                                 <label class="fw-semibold  text-black">Price *</label>
                                 <input type="number" class="form-control" name="service_price"  id="service_price"  autocomplete="off" value="<?=@$result->price?>" required >
-                            </div>
-							
+                            </div>  
+							                            <?php								$selected_category= array();								$exCat = explode(',', (!empty(@$result->tags) ? @$result->tags : ''));								foreach ($exCat as $cat){								    $selected_category[]= $cat;								}							?>
 							<div class="form-group mb-2">
-                                <label class="fw-semibold  text-black">Special Price *</label>
-                                <input type="number" class="form-control" name="service_special"  id="service_special"  value="<?=@$result->special_price?>" autocomplete="off" required >
+                                <label class="fw-semibold  text-black">Tags *</label>
+                                <!--<input type="number" class="form-control" name="service_special"  id="service_special"  value="<?=@$result->special_price?>" autocomplete="off" required >-->								<select  name="tags[]" id="tags" autocomplete="off" multiple required>									<option disabled value="">Choose a Tags</option>									<?php										if(@$tags){											foreach(@$tags as $k => $v){												echo '<option value="'.@$v->name.'" '.(in_array($v->name,$selected_category) ? 'selected' : '').'>'.@$v->name.'</option>';											}										}									?>								</select>
                             </div>
 							
 							<!--<div class="form-group mb-2">
@@ -304,10 +304,9 @@ body{margin-top:20px;}
         </div>
      </section>
    </div>
- </div>
+ </div><link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'><script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script>
 <script>
-
-	var num = 0;
+var num = 0;
 var dataTransfer = new DataTransfer();
 const input = document.querySelector('#service_image');
 $(document).ready(function(e){
@@ -438,7 +437,7 @@ $(document).ready(function(){
 		}
 		});
 	});
-
+$('#tags').chosen({max_selected_options:10,width:'100%'});
 });
 
  $(document).on('keyup','#name',function(e){

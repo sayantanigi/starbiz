@@ -113,9 +113,76 @@
 
       <div class="row m-0">
 	  
-	    <?php
-		    if(@$purList){
+	    <form method="GET">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="row">
+					<div class="col-md-4">
+					   
+					</div>
+					
+						<div class="col-md-2">
+						   <span class="salelistFormSpan" style="position: relative;margin: 5px -46px;top:30px;">From </span><input type="date" class="form-control" name="from_date" id="from_date" value="<?=(!empty(@$_GET['from_date']) ? date('Y-m-d', strtotime(@$_GET['from_date'])) : '')?>">
+						</div>
+						<div class="col-md-2">
+						   <span class="salelistFormSpan" style="position: relative;margin: 5px -19px;top:30px;">To</span> <input type="date" class="form-control" name="to_date" id="to_date" value="<?=(!empty(@$_GET['to_date']) ? date('Y-m-d', strtotime(@$_GET['to_date'])) : '')?>">
+						</div>
+						<div class="col-md-2 col-6">
+						   <button  type="submit" class="salelistFormSubmit" style="background: #c5a668;color: #fff;border-color: #c5a668;width: 40%;padding: 3px;border-radius: 2px;top: 26px;position: relative;">Search</button>
+						</div>
+					
+					<div class="col-md-2 col-6">
+						<?php
+							if(!empty(@$_GET['from_date']) && !empty(@$_GET['to_date'])){
+								$dateFilter = '?from_date='.@$_GET['from_date'].'&to_date='.@$_GET['to_date'].'';
+							}else{
+								$dateFilter = '';
+							}
+						?>
+						<a href="<?=url('dashboard/downloadPurchasedHistory'.$dateFilter.'')?>" class="btn btn-primary salelistFormExport" style="    float: right;
+						background: #c5a668;color: #fff;border-color: #c5a668;margin-right: 11rem;position: relative;top: 20px;">Export</a>
+					</div>
+				</div>
+				
+				
+			</div>
+		</form>
+		
+		<!--<div class="col-lg-12 col-md-12 col-sm-12">
+			<a href="<?=url('dashboard/downloadPurchasedHistory')?>" class="btn btn-primary" style="    float: right;
+			background: #c5a668;
+			color: #fff;
+			border-color: #c5a668;
+			margin-right: 11rem;">Export</a>
+		</div>-->  
+		
+		<div class="col-lg-1 col-md-12 col-sm-12">
+		</div>
+		
+		<div class="col-lg-10 col-md-12 col-sm-12 Section ReferralLink" style="box-shadow: 0 0 0px #ddd;">
+			<div class="table-responsive">
+          <table class="table table-striped table-list CustomTable">
+            <thead>
+              <tr>
+                <th class="hidden-xs">Product Image</th>
+                <th>Product Name</th>
+                <th>TransactionId</th>
+                <th>OrderId</th>
+                <th>Business</th>
+                <th>Amount</th>
+                <!--<th>Admin Share</th>-->
+                <th>Rating</th>
+                <th>Purchased On</th>
+                <th>Add Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+			  //$myReward = [];
+			  
+			  
+			if(count(@$purList)){
 				foreach(@$purList as $k => $v){
+					
 					
 					if(@$v->product_info){
 						$product = unserialize(@$v->product_info);
@@ -143,35 +210,128 @@
 									$productImg = url('noimage.jpg');
 								}
 							}
-							//$productInfo = DB::table('product')->where(['id' => $proVal['product_id']])->select('*')->orderBy('id', 'DESC')->first();
+							
+							
+							$stars = [];
 							
 							if(!empty(@$productInfo)){
-							
+							    //echo $productInfo->id;
+								$businessName = '--';
+								$listing = DB::table('listing')->where(['id' => @$productInfo->listing_id])->select('*')->orderBy('id', 'DESC')->first();
+								if($listing){
+									if(@$listing->business_name){
+										$businessName = @$listing->business_name;
+									}
+								}
+								
+								$rating = DB::table('business_review')->where(['product_id' => $productInfo->id])->select('*')->orderBy('id', 'DESC')->get();
+								
+								$rate1 = '';
+								if(count($rating) > 0){
+									foreach($rating as $ratingKey => $ratingVal){
+										if($ratingVal->rating){
+										    $stars[] = $ratingVal->rating;
+									    }
+									}
+								}
+								
+								if(count($stars) > 0){
+									//echo count($stars);
+									$total = array_sum($stars);
+									$avg = $total/count($stars);
+									
+									if(!empty($avg)){
+										$totalRating = 5;
+										   $starRating =   $avg;
+										for ($j = 1; $j <= $totalRating; $j++) {
+											 if($starRating < $j ) {
+												if(is_float($starRating) && (round($starRating) == $j)){
+													$rate1.="<i class='fa fa-star-half'></i>";
+												}else{
+													$rate1.="<i class='fa fa-star'></i>";
+												}
+											 }else {
+												$rate1.="<i class='fa fa-star'></i>";
+											 }
+										}
+									}
+								}
+								
+								//echo $avg;
+								
+								$checkrating = DB::table('business_review')->where(['product_id' => $productInfo->id, 'user_id' => session()->get('USERLOGINID')])->select('*')->orderBy('id', 'DESC')->first();
+								if(!empty($checkrating)){
+									$add_rating = '';
+								}else{
+									
+									$add_rating = '<a href="javascript:void(0);" class="add_rating" reproductid="'.$productInfo->id.'">Add Rating</a>';
+								}
 								
 								
 								echo '
-									<div class="col-lg-4 col-md-4 mb-4">
-									  <div class="TransactionBlock">
-										<div class="TransactionData">
-										  <img src="'.@$productImg.'" alt="" style="width: 72px;height: 61px;object-fit: unset;">
-										  <div class="TransactionTextdata">
-											<p class="m-0">Purchased on '.date('M d, Y', strtotime($v->created_at)).'</p>
-											<p class="m-0">'.@$productInfo->name.'</p>
-										  </div>
-										</div>
-										<p class="TransactionAmount">$'.@$proVal['price'].'</p>
-									  </div>
-									</div>
+									<tr>
+										<td class="hidden-xs"><img src="'.@$productImg.'" alt="" style="width: 72px;height: 61px;object-fit: unset;border-radius: 4px;"></td>
+										<td class="hidden-xs">'.@$productInfo->name.'</td>
+										<td class="hidden-xs">'.@$v->txn_id.'</td>
+										<td class="hidden-xs">'.@$v->order_id.'</td>
+										<td class="hidden-xs">'.@$businessName.'</td>
+										<td class="hidden-xs">$'.@$proVal['price'].'</td>
+										<td class="hidden-xs">'.$rate1.'</td>
+										<td class="hidden-xs">'.date('M d, Y', strtotime($v->created_at)).'</td>
+										<td class="hidden-xs">'.@$add_rating.'</td>
+									</tr>
 								';
 						    }
 						}
 					}
 					
 					
+					
 				}
 			}
+			
+			
 		?>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+       <div class="col-lg-1 col-md-12 col-sm-12">
+		</div>
        
+	   
+	   <div class="Section modal fade CustomModal " id="AppearanceModal2RejectModel" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Rating</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body AppearanceData">
+			
+              <form class="row g-3" id="rejectOfferForm" >
+                <div class="col-md-12 col-sm-12 SmallDataBlock">
+                  
+
+                  <div class="col-md-12 col-sm-12">
+                    <label class="form-label">Add Rating</label>
+                    <input  type="number" placeholder="Enter Rating" id="rating" name="rating" required>
+                    <input type="hidden"  id="productid_red" name="productid_red">
+                  </div>
+				  
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+				
+                
+				
+              </form>
+			  
+            </div>
+          </div>
+        </div>
+      </div>
 		
         <!--<div class="col-lg-4 col-md-4 mb-4">
           <div class="TransactionBlock">
@@ -217,6 +377,10 @@
 		
       </div>
     </div>
+	
+	
+	
+	  
     </main>
 	
 	
@@ -226,6 +390,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script>
 <link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
 <script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
+
 
 <script>
 	/*$('.dropdown-toggle').on('click', function (e) {
@@ -1772,6 +1937,45 @@ $(document).ready(function(){
 	});
 	
 	
+	$("#rejectOfferForm").on('submit', function(e){
+		e.preventDefault();	
+		var form_data = new FormData();
+
+		
+		var rating   = $('#rating').val(); 
+		var productid   = $('#productid_red').val(); 
+
+		form_data.append("rating", rating);
+		form_data.append("productId", productid);
+		
+
+
+		$.ajax({
+			headers: {
+			    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+			},	
+			type: 'POST',
+			url: '<?php echo url('dashboard/addRating'); ?>',
+			data: form_data,
+			dataType:"json",
+			contentType: false,
+			cache: false,
+			processData:false,
+			error:function(){
+			$('#uploadsuccessfully').html('<p style="color:#EA4335;">File upload failed, please try again.</p>');
+			},
+			success: function(data){
+                if(data.status == 1){
+					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true}, function(){ window.location.href = ""});
+				}
+				if(data.status == 0){
+					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true}, function(){ window.location.href = " "});
+				}
+			}
+		});
+	});
+	
+	
 	$(".repeat-invitation").click(function () {
 		var inviTd = $(this).attr('relid');
 		$('#invi_id').val(inviTd);
@@ -2238,6 +2442,30 @@ $(document.body).on('click', '.servicePhotos' ,function(){
         modal.classList.add('SearchModalStyle');
       }
     });
+	
+	
+	$(".add_rating").click(function () {
+		var reproductid =  $(this).attr("reproductid");
+		$('#AppearanceModal2RejectModel').modal('show');
+		$('#productid_red').val(reproductid);
+		//console.log(invi_id);
+		
+		/*$.ajax({
+			url: "<?=url('dashboard/reject_invitation')?>",
+			method: "POST",
+			data:{invi_id : invi_id, "_token": "{{ csrf_token() }}"},
+			dataType: 'JSON',
+			success: function(data) {
+                if(data.status == 1){
+					swal({title: "Sucess!", text: "<strong>"+data.msg+"</strong>", type: "success", showConfirmButton: true, html:true});
+				}
+				if(data.status == 0){
+					swal({title: "Fail!", text: "<strong>"+data.msg+"</strong>", type: "error", showConfirmButton: true, html:true});
+				}
+			}
+		});	*/
+	
+	});
 	
   </script>
 </body>

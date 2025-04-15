@@ -122,7 +122,7 @@
         <div class="TabContainer">
           <div class="Tab active" onclick="openTab(event, 'AllReward')">All</div>
           <div class="Tab" onclick="openTab(event, 'EarnedReward')">Earned</div>
-          <div class="Tab" onclick="openTab(event, 'RedeemedReward')">Redeemed</div>
+          <!--<div class="Tab" onclick="openTab(event, 'RedeemedReward')">Redeemed</div>-->
         </div>
       </div>
 
@@ -133,6 +133,8 @@
 					$my_earned_point = '--';
 					if(!empty($v->my_earned_point)){
 					    $my_earned_point = $v->my_earned_point;
+					}else{
+						$my_earned_point = $v->referral_earned_point;
 					}
 					$active_date = '';
 					if(!empty(@$v->created_at) && @$v->created_at != '0000-00-00 00:00:00'){
@@ -237,6 +239,8 @@
 					$my_earned_point = '--';
 					if(!empty($v->my_earned_point)){
 					    $my_earned_point = $v->my_earned_point;
+					}else{
+						$my_earned_point = $v->referral_earned_point;
 					}
 					$active_date = '';
 					if(!empty(@$v->created_at) && @$v->created_at != '0000-00-00 00:00:00'){

@@ -29,31 +29,25 @@ class PayoutController extends Controller {
     public function index()
     { 
         $data = array(
-			'title' => 'Payout List',
+			'title' => 'Appearance Payout List',
 			'page' => 'payout',
 			'subpage' => 'payout'
-		);
-		
+		);		
 		if(!empty(@$_GET['search']) && @$_GET['type'] == 'filter'){
-
 			// $sql = "SELECT * FROM `events` WHERE event_status = '1' and event_id = '".@$_GET['search']."' ORDER BY event_id DESC";
             // $data['list'] = $this->db->query($sql)->result();
 			$data['result'] = DB::table('events')->where(['status' => 1, 'id' => @$_GET['search']])->select('*')->orderBy('id', 'DESC')->get();
-
 		}elseif(!empty(@$_GET['promoter']) && @$_GET['type'] == 'filterPromoter'){
-
 			// $sql = "SELECT * FROM `events` WHERE event_status = '1' and user_id = '".@$_GET['promoter']."' ORDER BY event_id DESC";
             // $data['list'] = $this->db->query($sql)->result();
 			$data['result'] = DB::table('events')->where(['status' => 1, 'user_id' => @$_GET['promoter']])->select('*')->orderBy('id', 'DESC')->get();
-
 		}elseif(@$_GET['promoter'] == 0 && @$_GET['type'] == 'filterPromoter'){
 			$data['result'] = DB::table('events')->where(['status' => 1, 'user_id' => @$_GET['promoter']])->select('*')->orderBy('id', 'DESC')->get();
 		}else{
 			//$data['result'] = DB::table('transaction')->where(['payment_type' => 5, 'status' => 'succeeded'])->select('*')->orderBy('id', 'DESC')->get();
 			$data['result'] = DB::table('events')->where(['status' => 1])->select('*')->orderBy('id', 'DESC')->get();
 		}
-		
-		$data['eventlist'] = DB::table('events')->where(['status' => 1])->select('*')->orderBy('id', 'DESC')->get();
+		$data['result'] = DB::table('transaction')->where(['payment_type' => 5])->select('*')->orderBy('id', 'DESC')->get();		$data['eventlist'] = DB::table('events')->where(['status' => 1])->select('*')->orderBy('id', 'DESC')->get();		//print_r($data['result']);die;
         return view('admin.payout', $data);
     }
 	
@@ -315,6 +309,60 @@ class PayoutController extends Controller {
 		}
 	}
 	
+	public function productpurchaseList(){
+		 $data = array(
+			'title'   => 'Product Payout List',
+			'page'    => 'payout',
+			'subpage' => 'product-payout'
+		);
+
+		// if(!empty($_GET['from_date']) && !empty($_GET['to_date'])){
+			// $data['result'] = DB::table('transaction')->whereRaw("(DATE(created_at) BETWEEN '".@$_GET['from_date']."' AND '".@$_GET['to_date']."') AND payment_type = 6")->select('*')->get();
+		// }else{
+		    // $data['result'] = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		// }
+        //print_r($data['result']);die;
+		
+		$data['myProList'] = [];
+		
+		
+		if(!empty(@$_GET['from_date']) && !empty(@$_GET['to_date'])){
+			$proList  = DB::table('transaction')->whereRaw("payment_type = 6 AND DATE(created_at) BETWEEN '".@$_GET['from_date']."' AND '".@$_GET['to_date']."'")->select('*')->orderBy('id', 'DESC')->get();
+		}else{
+		    $proList  = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		}
+		//$proList  = DB::table('transaction')->where(['payment_type' => 6])->select('*')->orderBy('id', 'DESC')->get();
+		
+		if(count($proList) > 0){
+			foreach($proList as $k => $v){
+				$productInfo = unserialize($v->product_info);
+				if (is_array($productInfo) || is_object($productInfo))
+                {
+					foreach($productInfo as $proKey => $proVal){
+						//print_r($v);
+						if(@$proVal['specipication'] == 'service'){
+							$proList_1 = DB::table('services')->whereRaw("id = ".$proVal['product_id']."")->select('*', DB::raw("'service' as type"))->orderBy('id', 'DESC')->first();
+							if(!empty(@$proList_1)){
+								@$proList_1->purchasedUserName = @$v->user_name;
+							}
+						}else{
+							$proList_1 = DB::table('product')->whereRaw("id = ".$proVal['product_id']."")->select('*', DB::raw("'product' as type"))->first();
+							if(!empty(@$proList_1)){
+								@$proList_1->purchasedUserName = @$v->user_name;
+							}
+						}
+						if(!empty(@$proList_1)){
+							$data['myProList'][] =  $proList_1;
+						}
+					}
+				
+			    }
+			}
+		}
+		
+		//print_r($data['myProList']);die;
+        return view('admin.payout_product', $data);
+	}
 	
 	
 	

@@ -79,7 +79,7 @@
 						
 						</div>
 						
-						<div class="col-sm-4">
+						<!--<div class="col-sm-4">
 	                     	<select class="select common_selector events form-control" id="myselect">
 							    <option value="" selected="selected" disabled>Events</option>
 								<?php
@@ -90,18 +90,20 @@
 									}
 								?>
 							</select><br/>
-	                    </div>
+	                    </div>-->
 						<?php
 							$userIdData = [];
+							if(@$eventlist){
 							foreach ($eventlist as $key => $value){
 								$userIdData[] = @$value->user_id;
+							}
 							}
 							$userIdData = array_unique($userIdData);
 							//print_r($userIdData);
 						?>
-						<div class="col-sm-4">
+						<!--<div class="col-sm-4">
 	                     	<select class="select common_selector events form-control" id="myselectpromoter">
-							    <option value="" selected="selected" disabled>Promoter</option>
+							    <option value="" selected="selected" disabled>Service Provider</option>
 								<?php foreach ($userIdData as $key1 => $value2): ?>
 								    <?php 
 										if(@$value2 == 0){
@@ -111,7 +113,7 @@
 										   
 											$userInfo = DB::table('users')->where(['id' => @$value2])->select('*')->first();
 											if($userInfo){
-												$name = @$userInfo->first_name.' '.@$userInfo->last_name;
+												$name   = @$userInfo->first_name.' '.@$userInfo->last_name;
 												$userId = @$userInfo->id;
 											}else{
 												$name = 'Admin';
@@ -124,9 +126,9 @@
 									</option>
 								<?php endforeach ?>
 							</select><br/>
-	                    </div>
+	                    </div>-->
 						
-						<div class="col-sm-2">
+						<!--<div class="col-sm-2">
 						    <?php if(!empty(@$_GET['search']) && @$_GET['type'] == 'filter'){ ?>
 								<a href="<?= url('admin/payout/downloadCsv?search='.@$_GET['search'].'&type=filter') ?>" class="btn btn-primary btn-xs">
 								    Export as CSV
@@ -144,7 +146,7 @@
 								    Export as CSV
 								</a>
 							<?php } ?>
-						</div>
+						</div>-->
 						
 	                </div>  
 					
@@ -162,13 +164,13 @@
 								   <thead class="thead-light text-center">
 								      <tr>
 								            <th style="width:4%;">#</th>
-											<th style="width:30%;">Event</th>
-											<th style="width:30%;">Promoter Name</th>
-											<th style="width:30%;">Promoter Email</th>
-											<th style="width:30%;">Total Amount</th>
-											<th style="width:30%;">Admin Share</th>
-											<th style="width:30%;">Promoter Share</th>
-											<th class="text-center">Action</th>
+											<th style="width:10%;">Event Name</th>
+											<th style="width:15%;">Service Provider</th>
+											<th style="width:15%;">Athletic</th>
+											<th style="width:10%;">Amount</th>
+											<th style="width:10%;">Admin Share</th>
+											<th style="width:10%;">SP Share</th>
+											<!--<th class="text-center">Action</th>-->
 								      </tr>
 								   </thead>
 								   <tbody class="text-center">
@@ -179,10 +181,17 @@
 												<td style="width:4%;"><?= $key+1 ?></td>
 												
 												<?php
-												    if(@$v->id){
-														$eventInfo = DB::table('events')->where(['id' => @$v->id])->select('event_name', 'user_id')->first();
+												   
+													$eventName = '';
+													$userName  = '';
+													$userEmail = '';
+													
+													if(@$v->event_id){
+														$eventInfo = DB::table('events')->where(['id' => @$v->event_id])->select('event_name', 'user_id')->first();
 														if($eventInfo){
-															$eventName = $eventInfo->event_name;
+															if($eventInfo->event_name){
+															    $eventName = $eventInfo->event_name;
+															}
 															
 															if($eventInfo->user_id == 0){
 																$userName   = 'Admin';
@@ -197,35 +206,37 @@
 																	$userEmail  = '';
 																}
 															}
-															
+														}
+													}
+													
+													if(@$v->user_id){
+														$athaleticInfo = DB::table('users')->where(['id' => $v->user_id])->select('first_name', 'last_name', 'email')->first();
+														if($athaleticInfo){
+															$athaleticuserName  = $athaleticInfo->first_name.' '.$athaleticInfo->last_name;
+															$athaleticuserEmail = $athaleticInfo->email;
 														}else{
-															$eventName = '';
+															$athaleticuserName   = '';
+															$athaleticuserEmail  = '';
 														}
 													}else{
-														$eventName = '';
+														$athaleticuserName   = '';
+														$athaleticuserEmail  = '';
 													}
+													
+													$getPer = DB::table('settings')->select('appearence_share')->first();
+													$percentage = $getPer->appearence_share;
+													$totalWidth = @$v->amount;								
+													$adminShare = ($percentage / 100) * $totalWidth;	
+													$promoterShare = @$v->amount - $adminShare;
 												?>
 												<td><?=@$eventName?></td>
-												<td><?=@$userName?></td>
-												<td><?=@$userEmail?></td>
-												<?php
-												    $payoutAmount = DB::select("select sum(amount) as Totalamount from transaction where event_id = ".@$v->id." AND status = 'succeeded'");
-													//print_r($payoutAmount);
-													//$getPer = $this->db->query("select admin_percentage from settings")->row();
-													$getPer = DB::table('settings')->select('admin_percentage')->first();
-                                                   
-													$percentage = $getPer->admin_percentage;		
-													$totalWidth = @$payoutAmount[0]->Totalamount;								
-													$adminShare = ($percentage / 100) * $totalWidth;	
-                                                    $promoterShare = @$payoutAmount[0]->Totalamount - $adminShare														
-												?>
+												<td><?=@$userName?><br/><?=@$userEmail?></td>
+												<td><?=@$athaleticuserName?><br/><?=@$athaleticuserEmail?></td>
+												<td><?='$'.@$v->amount?></td>
+												<td><?='$'.@$adminShare?></td>
+												<td><?='$'.@$promoterShare?></td>
 												
-												<td><?= !empty(@$payoutAmount[0]->Totalamount) ? 'USD '.@$payoutAmount[0]->Totalamount.'' : 'USD 0'?></td>
-												<td><?='USD '.$adminShare?></td>
-										        <td><?='USD '.$promoterShare?></td>
-												
-												
-												<td>
+												<!--<td>
 												    <a href="<?= url('admin/payout/view/'.$v->id) ?>" class="btn btn-outline-success btn-sm" data-toggle="tooltip" title="Edit">
 														<i class="fas fa-eye"></i>
 													</a>
@@ -233,7 +244,7 @@
 													<a href="javascript:void(0)" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" title="Delete"  onclick="deleteDeals(<?= @$v->id ?>)">
 														<i class="fa fa-trash"></i>
 													</a>
-												</td>
+												</td>-->
 											
 											</tr>
 										<?php endforeach ?>

@@ -218,7 +218,7 @@ body{margin-top:20px;}
 									    </select>
 								    </div>-->
 									
-								    <div class="col-sm-6">
+								    <div class="col-sm-12">
 									<label class="fw-semibold  text-black">Category * </label>
 								        <select class="form-control" name="category" id="category" required onchange="getlistsubcategory($(this).val());">
 											 <?php
@@ -231,7 +231,7 @@ body{margin-top:20px;}
 									    </select>
 								    </div>
 									
-									<div class="col-sm-6">
+									<!--<div class="col-sm-6">
 									    <label class="fw-semibold  text-black">Subategory * </label>
 								        <select class="form-control" name="subcategory" id="subcategory" required >
 											<option value="">Select Subategory</option>
@@ -243,7 +243,7 @@ body{margin-top:20px;}
 												}
 											?>
 									    </select>
-								    </div>
+								    </div>-->
 									
 								</div>
                             </div>
@@ -317,10 +317,27 @@ body{margin-top:20px;}
                                 <label class="fw-semibold  text-black">Description * </label>
                                 <textarea type="text" class="form-control editor summermote" name="description"  id="description"  autocomplete="off"  required><?=@$result->description?></textarea>
                             </div>
-							
+							<?php
+								$selected_category= array();
+								$exCat = explode(',', (!empty(@$result->tags) ? @$result->tags : ''));
+								foreach ($exCat as $cat){
+								    $selected_category[]= $cat;
+								}
+							?>
 							<div class="form-group mb-2">
                                 <label class="fw-semibold  text-black">Tags </label>
-								 <input type="text" class="form-control" name="listing_tags"  id="listing_tags"  autocomplete="off" placeholder="Ex: #SmallBusiness, #ShopSmall" value="<?=@$result->tags?>">
+								 <!--<input type="text" class="form-control" name="listing_tags"  id="listing_tags"  autocomplete="off" placeholder="Ex: #SmallBusiness, #ShopSmall" value="<?=@$result->tags?>">-->
+								 
+								 <select  name="listing_tags[]" id="listing_tags" autocomplete="off" multiple>
+									<option disabled value="">Choose a Tags</option>
+									<?php
+										if(@$tags){
+											foreach(@$tags as $k => $v){
+												echo '<option value="'.@$v->name.'" '.(in_array($v->name,$selected_category) ? 'selected' : '').'>'.@$v->name.'</option>'; 
+											}
+										}
+									?>
+								</select>
                             </div>
 							
 							
@@ -425,6 +442,9 @@ body{margin-top:20px;}
    </div>
  </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtg6oeRPEkRL9_CE-us3QdvXjupbgG14A&libraries=places"></script> 
+<link href='<?php echo url("assets/chosen/chosen.min.css"); ?>' rel='stylesheet' type='text/css'>
+<script src='<?php echo url("assets/chosen/chosen.jquery.min.js"); ?>' type='text/javascript'></script> 
+
 <script>
 $(document).ready(function(){
 	$("#submitform").on('submit', function(e){
@@ -502,7 +522,7 @@ $(document).ready(function(){
 		}
 		});
 	});
-
+    $('#listing_tags').chosen({max_selected_options:10,width:'100%'});
 });
 
  $(document).on('keyup','#name',function(e){
